@@ -1,0 +1,2 @@
+requests >= 2.25.1
+unittest-xml-reporting >= 3.0.2
