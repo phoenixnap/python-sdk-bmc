@@ -1,3 +1,7 @@
+.gitignore
+.gitlab-ci.yml
+.openapi-generator-ignore
+.travis.yml
 README.md
 docs/ApiAction.md
 docs/ApiActionAllOf.md
@@ -7,6 +11,7 @@ docs/Headers.md
 docs/Request.md
 docs/Response.md
 docs/UserInfo.md
+git_push.sh
 pnap_audit_api/__init__.py
 pnap_audit_api/api/__init__.py
 pnap_audit_api/api/events_api.py
@@ -26,4 +31,16 @@ pnap_audit_api/model_utils.py
 pnap_audit_api/models/__init__.py
 pnap_audit_api/rest.py
 requirements.txt
+setup.cfg
 setup.py
+test-requirements.txt
+test/__init__.py
+test/test_api_action.py
+test/test_api_action_all_of.py
+test/test_event.py
+test/test_events_api.py
+test/test_headers.py
+test/test_request.py
+test/test_response.py
+test/test_user_info.py
+tox.ini

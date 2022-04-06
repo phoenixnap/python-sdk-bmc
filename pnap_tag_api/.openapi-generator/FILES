@@ -1,3 +1,7 @@
+.gitignore
+.gitlab-ci.yml
+.openapi-generator-ignore
+.travis.yml
 README.md
 docs/DeleteResult.md
 docs/Error.md
@@ -6,6 +10,7 @@ docs/Tag.md
 docs/TagCreate.md
 docs/TagUpdate.md
 docs/TagsApi.md
+git_push.sh
 pnap_tag_api/__init__.py
 pnap_tag_api/api/__init__.py
 pnap_tag_api/api/tags_api.py
@@ -24,4 +29,15 @@ pnap_tag_api/model_utils.py
 pnap_tag_api/models/__init__.py
 pnap_tag_api/rest.py
 requirements.txt
+setup.cfg
 setup.py
+test-requirements.txt
+test/__init__.py
+test/test_delete_result.py
+test/test_error.py
+test/test_resource_assignment.py
+test/test_tag.py
+test/test_tag_create.py
+test/test_tag_update.py
+test/test_tags_api.py
+tox.ini
