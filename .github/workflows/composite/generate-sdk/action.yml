@@ -1,0 +1,25 @@
+name: 'Generate SDK'
+description: 'Generate SDK for a given API'
+inputs:
+  spec-link: 
+    description: 'Link to the spec file.'
+    required: true
+  package-name:
+    description: 'Name of the python package.'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install node
+      uses: actions/setup-node@v2
+    - name: Install openapi-generator-cli
+      shell: bash
+      run: npm install -g @openapitools/openapi-generator-cli
+    - name: Generate API
+      shell: bash
+      run: openapi-generator-cli generate -i ${{ inputs.spec-link }} -c openapi-generator-config.yaml -o=${{ inputs.package-name }} --additional-properties packageName=${{ inputs.package-name }}
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.package-name }}
+        path: ${{ inputs.package-name }}
