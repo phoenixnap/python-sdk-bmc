@@ -100,7 +100,7 @@ from keycloak import KeycloakOpenID
 
 clientId = "YOUR_CLIENT_ID"
 clientSecret = "YOUR_CLIENT_SECRET"
-serverUrl = "https://auth-dev.phoenixnap.com/auth/"
+serverUrl = "https://auth.phoenixnap.com/auth/"
 realmName = "BMC"
 grantType = "client_credentials"
 
