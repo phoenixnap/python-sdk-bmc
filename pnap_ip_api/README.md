@@ -103,7 +103,7 @@ serverUrl = "https://auth-dev.phoenixnap.com/auth/"
 realmName = "BMC"
 grantType = "client_credentials"
 
-keycloakOpenId =  KeycloakOpenID(server_url=serverUrl
+keycloakOpenId =  KeycloakOpenID(server_url=serverUrl,
                         realm_name=realmName,
                         client_id=clientId,
                         client_secret_key=clientSecret)
