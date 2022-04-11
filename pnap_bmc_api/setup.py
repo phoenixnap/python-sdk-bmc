@@ -46,4 +46,5 @@ setup(
     project_urls={
         'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
     },
+    url='https://phoenixnap.com/bare-metal-cloud'
 )
