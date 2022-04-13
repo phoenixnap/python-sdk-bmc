@@ -1,5 +1,6 @@
 import unittest
 import xmlrunner
+from dateutil.parser import parse
 
 from test_utils import TestUtils
 
@@ -32,6 +33,8 @@ class TestNetworkApi(unittest.TestCase):
 
     result = api_instance.private_networks_get(**opts)
 
+    response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
+
     self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
     self.verify_called_once(expectation_id)
@@ -45,6 +48,8 @@ class TestNetworkApi(unittest.TestCase):
     private_network_create = PrivateNetworkCreate(**TestUtils.extract_request_body(request))
 
     result = api_instance.private_networks_post(private_network_create=private_network_create)
+
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
 
     self.assertEqual(response['body'], model_to_dict(result))
 
@@ -60,6 +65,8 @@ class TestNetworkApi(unittest.TestCase):
 
     result = api_instance.private_networks_network_id_get(network_id)
 
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
+
     self.assertEqual(response['body'], model_to_dict(result))
 
     self.verify_called_once(expectation_id)
@@ -74,6 +81,8 @@ class TestNetworkApi(unittest.TestCase):
     private_network_modify = PrivateNetworkModify(**TestUtils.extract_request_body(request), _spec_property_naming=True)
 
     result = api_instance.private_networks_network_id_put(network_id, private_network_modify=private_network_modify)
+
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
 
     self.assertEqual(response['body'], model_to_dict(result))
 

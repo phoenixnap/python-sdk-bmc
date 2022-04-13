@@ -96,6 +96,7 @@ class PrivateNetwork(ModelNormal):
             'location_default': (bool,),  # noqa: E501
             'cidr': (str,),  # noqa: E501
             'servers': ([PrivateNetworkServer],),  # noqa: E501
+            'created_on': (datetime,),  # noqa: E501
             'description': (str,),  # noqa: E501
         }
 
@@ -113,6 +114,7 @@ class PrivateNetwork(ModelNormal):
         'location_default': 'locationDefault',  # noqa: E501
         'cidr': 'cidr',  # noqa: E501
         'servers': 'servers',  # noqa: E501
+        'created_on': 'createdOn',  # noqa: E501
         'description': 'description',  # noqa: E501
     }
 
@@ -123,7 +125,7 @@ class PrivateNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -135,6 +137,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -203,6 +206,7 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -223,7 +227,7 @@ class PrivateNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -235,6 +239,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -301,6 +306,7 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
