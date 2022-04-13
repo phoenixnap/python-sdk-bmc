@@ -291,7 +291,7 @@ jobs:
       - test-bmcapi
       - test-ipapi
       - test-auditapi
-      # - test-networkapi
+      - test-networkapi
       - test-ranchersolutionapi
       - test-tagapi
     steps:
