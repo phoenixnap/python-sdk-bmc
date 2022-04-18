@@ -5,6 +5,7 @@ docs/IPBlocksApi.md
 docs/IpBlock.md
 docs/IpBlockCreate.md
 docs/IpBlockPatch.md
+docs/TagAssignment.md
 pnap_ip_api/__init__.py
 pnap_ip_api/api/__init__.py
 pnap_ip_api/api/ip_blocks_api.py
@@ -18,6 +19,7 @@ pnap_ip_api/model/error.py
 pnap_ip_api/model/ip_block.py
 pnap_ip_api/model/ip_block_create.py
 pnap_ip_api/model/ip_block_patch.py
+pnap_ip_api/model/tag_assignment.py
 pnap_ip_api/model_utils.py
 pnap_ip_api/models/__init__.py
 pnap_ip_api/rest.py
