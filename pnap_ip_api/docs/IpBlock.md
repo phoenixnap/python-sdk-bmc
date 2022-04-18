@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **assigned_resource_id** | **str** | ID of the resource assigned to the IP Block. | [optional] 
 **assigned_resource_type** | **str** | Type of the resource assigned to the IP Block. | [optional] 
 **description** | **str** | The description of the IP Block. | [optional] 
+**tags** | [**[TagAssignment]**](TagAssignment.md) | The tags assigned if any. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

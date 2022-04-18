@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [IpBlock](docs/IpBlock.md)
  - [IpBlockCreate](docs/IpBlockCreate.md)
  - [IpBlockPatch](docs/IpBlockPatch.md)
+ - [TagAssignment](docs/TagAssignment.md)
 
 
 ## Documentation For Authorization
