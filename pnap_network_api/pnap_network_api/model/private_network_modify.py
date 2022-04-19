@@ -59,6 +59,13 @@ class PrivateNetworkModify(ModelNormal):
     }
 
     validations = {
+        ('name',): {
+            'max_length': 100,
+            'min_length': 1,
+        },
+        ('description',): {
+            'max_length': 250,
+        },
     }
 
     @cached_property
