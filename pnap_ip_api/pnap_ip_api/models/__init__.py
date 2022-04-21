@@ -15,3 +15,4 @@ from pnap_ip_api.model.ip_block import IpBlock
 from pnap_ip_api.model.ip_block_create import IpBlockCreate
 from pnap_ip_api.model.ip_block_patch import IpBlockPatch
 from pnap_ip_api.model.tag_assignment import TagAssignment
+from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest

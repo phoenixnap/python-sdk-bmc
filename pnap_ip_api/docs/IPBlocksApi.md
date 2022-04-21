@@ -395,6 +395,12 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
         location="PHX",
         cidr_block_size="/30",
         description="IP Block #1 used for publicly accessing server #1.",
+        tags=[
+            TagAssignmentRequest(
+                name="Environment",
+                value="PROD",
+            ),
+        ],
     ) # IpBlockCreate |  (optional)
 
     # example passing only required values which don't have defaults set
