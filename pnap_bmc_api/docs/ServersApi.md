@@ -20,7 +20,7 @@ Method | HTTP request | Description
 [**servers_server_id_ip_blocks_post**](ServersApi.md#servers_server_id_ip_blocks_post) | **POST** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks | Assign IP Block to Server.
 [**servers_server_id_patch**](ServersApi.md#servers_server_id_patch) | **PATCH** /servers/{serverId} | Patch a Server.
 [**servers_server_id_private_networks_post**](ServersApi.md#servers_server_id_private_networks_post) | **POST** /servers/{serverId}/network-configuration/private-network-configuration/private-networks | Adds the server to a private network.
-[**servers_server_id_tags_put**](ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Set server tags.
+[**servers_server_id_tags_put**](ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Overwrite tags assigned for Server.
 
 
 # **delete_private_network**
@@ -1523,9 +1523,9 @@ Name | Type | Description  | Notes
 # **servers_server_id_tags_put**
 > Server servers_server_id_tags_put(server_id)
 
-Set server tags.
+Overwrite tags assigned for Server.
 
-Set tags for server.
+Overwrites tags assigned for Server and unassigns any tags not part of the request.
 
 ### Example
 
@@ -1570,7 +1570,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Set server tags.
+        # Overwrite tags assigned for Server.
         api_response = api_instance.servers_server_id_tags_put(server_id)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
@@ -1579,7 +1579,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     # and optional values
     try:
-        # Set server tags.
+        # Overwrite tags assigned for Server.
         api_response = api_instance.servers_server_id_tags_put(server_id, tag_assignment_request=tag_assignment_request)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:

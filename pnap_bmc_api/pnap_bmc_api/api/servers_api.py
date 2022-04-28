@@ -2234,9 +2234,9 @@ class ServersApi(object):
         server_id,
         **kwargs
     ):
-        """Set server tags.  # noqa: E501
+        """Overwrite tags assigned for Server.  # noqa: E501
 
-        Set tags for server.  # noqa: E501
+        Overwrites tags assigned for Server and unassigns any tags not part of the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

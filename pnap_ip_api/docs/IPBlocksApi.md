@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**ip_blocks_ip_block_id_delete**](IPBlocksApi.md#ip_blocks_ip_block_id_delete) | **DELETE** /ip-blocks/{ipBlockId} | Delete IP Block.
 [**ip_blocks_ip_block_id_get**](IPBlocksApi.md#ip_blocks_ip_block_id_get) | **GET** /ip-blocks/{ipBlockId} | Get IP Block.
 [**ip_blocks_ip_block_id_patch**](IPBlocksApi.md#ip_blocks_ip_block_id_patch) | **PATCH** /ip-blocks/{ipBlockId} | Update IP block.
+[**ip_blocks_ip_block_id_tags_put**](IPBlocksApi.md#ip_blocks_ip_block_id_tags_put) | **PUT** /ip-blocks/{ipBlockId}/tags | Overwrite tags assigned for IP Block.
 [**ip_blocks_post**](IPBlocksApi.md#ip_blocks_post) | **POST** /ip-blocks | Create an IP Block.
 
 
@@ -50,11 +51,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ip_blocks_api.IPBlocksApi(api_client)
+    tag = ["env.dev","loc.phx"] # [str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
 
-    # example, this endpoint has no required or optional parameters
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # List IP Blocks.
-        api_response = api_instance.ip_blocks_get()
+        api_response = api_instance.ip_blocks_get(tag=tag)
         pprint(api_response)
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_get: %s\n" % e)
@@ -62,7 +65,10 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag** | **[str]**| List of tags, in the form tagName.tagValue, to filter by. | [optional]
 
 ### Return type
 
@@ -347,6 +353,106 @@ Name | Type | Description  | Notes
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
 **404** | The request failed since the resource could not been found. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ip_blocks_ip_block_id_tags_put**
+> IpBlock ip_blocks_ip_block_id_tags_put(ip_block_id)
+
+Overwrite tags assigned for IP Block.
+
+Overwrites tags assigned for IP Block and unassigns any tags not part of the request.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_ip_api
+from pnap_ip_api.api import ip_blocks_api
+from pnap_ip_api.model.error import Error
+from pnap_ip_api.model.ip_block import IpBlock
+from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_ip_api.Configuration(
+    host = "https://api.phoenixnap.com/ips/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_ip_api.Configuration(
+    host = "https://api.phoenixnap.com/ips/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_ip_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ip_blocks_api.IPBlocksApi(api_client)
+    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
+    tag_assignment_request = [
+        TagAssignmentRequest(
+            name="Environment",
+            value="PROD",
+        ),
+    ] # [TagAssignmentRequest] |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Overwrite tags assigned for IP Block.
+        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id)
+        pprint(api_response)
+    except pnap_ip_api.ApiException as e:
+        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Overwrite tags assigned for IP Block.
+        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request=tag_assignment_request)
+        pprint(api_response)
+    except pnap_ip_api.ApiException as e:
+        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ip_block_id** | **str**| The IP Block identifier. |
+ **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  | [optional]
+
+### Return type
+
+[**IpBlock**](IpBlock.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | IP Blocks tags set. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
