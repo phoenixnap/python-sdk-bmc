@@ -20,6 +20,8 @@ Method | HTTP request | Description
 [**servers_server_id_ip_blocks_post**](ServersApi.md#servers_server_id_ip_blocks_post) | **POST** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks | Assign IP Block to Server.
 [**servers_server_id_patch**](ServersApi.md#servers_server_id_patch) | **PATCH** /servers/{serverId} | Patch a Server.
 [**servers_server_id_private_networks_post**](ServersApi.md#servers_server_id_private_networks_post) | **POST** /servers/{serverId}/network-configuration/private-network-configuration/private-networks | Adds the server to a private network.
+[**servers_server_id_public_networks_delete**](ServersApi.md#servers_server_id_public_networks_delete) | **DELETE** /servers/{serverId}/network-configuration/public-network-configuration/public-networks/{publicNetworkId} | Removes the server from the Public Network
+[**servers_server_id_public_networks_post**](ServersApi.md#servers_server_id_public_networks_post) | **POST** /servers/{serverId}/network-configuration/public-network-configuration/public-networks | Adds the server to a Public Network.
 [**servers_server_id_tags_put**](ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Overwrite tags assigned for Server.
 
 
@@ -28,7 +30,7 @@ Method | HTTP request | Description
 
 Removes the server from private network.
 
-Removes the server from private network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure you are able to access this server over remote console in case of misconfiguration.</b>
+Removes the server from private network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>
 
 ### Example
 
@@ -252,6 +254,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
             ),
         ],
         network_configuration=NetworkConfiguration(
+            gateway_address="182.16.0.145",
             private_network_configuration=PrivateNetworkConfiguration(
                 gateway_address="10.0.0.10",
                 configuration_type="USER_DEFINED",
@@ -268,6 +271,14 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 ip_blocks=[
                     ServerIpBlock(
                         id="60473a6115e34466c9f8f083",
+                    ),
+                ],
+            ),
+            public_network_configuration=PublicNetworkConfiguration(
+                public_networks=[
+                    ServerPublicNetwork(
+                        id="60473c2509268bc77fd06d29",
+                        ips=["182.16.0.146","182.16.0.147"],
                     ),
                 ],
             ),
@@ -771,7 +782,7 @@ Name | Type | Description  | Notes
 
 Reset server.
 
-Reset specific server.
+Deprecated: Reset specific server. Reset only supports network configurations of type 'private network' or 'IP blocks'. As an alternative, the suggested action is to deprovision the server and provision a new one with the same configuration.
 
 ### Example
 
@@ -1132,7 +1143,7 @@ Name | Type | Description  | Notes
 
 Unassign IP Block from Server.
 
-Removes the IP block from the server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure you are able to access this server over remote console in case of misconfiguration.</b>
+Removes the IP block from the server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>
 
 ### Example
 
@@ -1231,7 +1242,7 @@ Name | Type | Description  | Notes
 
 Assign IP Block to Server.
 
-Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server.
+Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required.
 
 ### Example
 
@@ -1516,6 +1527,189 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_public_networks_delete**
+> str servers_server_id_public_networks_delete(server_id, public_network_id)
+
+Removes the server from the Public Network
+
+Removes the server from the Public Network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_bmc_api
+from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = servers_api.ServersApi(api_client)
+    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Removes the server from the Public Network
+        api_response = api_instance.servers_server_id_public_networks_delete(server_id, public_network_id)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_public_networks_delete: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. |
+ **public_network_id** | **str**| The Public Network identifier. |
+
+### Return type
+
+**str**
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | The server is being removed from the specified Public Network. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_public_networks_post**
+> ServerPublicNetwork servers_server_id_public_networks_post(server_id)
+
+Adds the server to a Public Network.
+
+Adds the server to a Public Network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_bmc_api
+from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
+from pnap_bmc_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = servers_api.ServersApi(api_client)
+    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_public_network = ServerPublicNetwork(
+        id="60473c2509268bc77fd06d29",
+        ips=["182.16.0.146","182.16.0.147"],
+    ) # ServerPublicNetwork |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Adds the server to a Public Network.
+        api_response = api_instance.servers_server_id_public_networks_post(server_id)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_public_networks_post: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Adds the server to a Public Network.
+        api_response = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_public_networks_post: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. |
+ **server_public_network** | [**ServerPublicNetwork**](ServerPublicNetwork.md)|  | [optional]
+
+### Return type
+
+[**ServerPublicNetwork**](ServerPublicNetwork.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | The server is being added to the specified Public Network. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

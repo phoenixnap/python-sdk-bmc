@@ -33,8 +33,10 @@ from pnap_bmc_api.exceptions import ApiAttributeError
 def lazy_import():
     from pnap_bmc_api.model.ip_blocks_configuration import IpBlocksConfiguration
     from pnap_bmc_api.model.private_network_configuration import PrivateNetworkConfiguration
+    from pnap_bmc_api.model.public_network_configuration import PublicNetworkConfiguration
     globals()['IpBlocksConfiguration'] = IpBlocksConfiguration
     globals()['PrivateNetworkConfiguration'] = PrivateNetworkConfiguration
+    globals()['PublicNetworkConfiguration'] = PublicNetworkConfiguration
 
 
 class NetworkConfiguration(ModelNormal):
@@ -90,8 +92,10 @@ class NetworkConfiguration(ModelNormal):
         """
         lazy_import()
         return {
+            'gateway_address': (str,),  # noqa: E501
             'private_network_configuration': (PrivateNetworkConfiguration,),  # noqa: E501
             'ip_blocks_configuration': (IpBlocksConfiguration,),  # noqa: E501
+            'public_network_configuration': (PublicNetworkConfiguration,),  # noqa: E501
         }
 
     @cached_property
@@ -100,8 +104,10 @@ class NetworkConfiguration(ModelNormal):
 
 
     attribute_map = {
+        'gateway_address': 'gatewayAddress',  # noqa: E501
         'private_network_configuration': 'privateNetworkConfiguration',  # noqa: E501
         'ip_blocks_configuration': 'ipBlocksConfiguration',  # noqa: E501
+        'public_network_configuration': 'publicNetworkConfiguration',  # noqa: E501
     }
 
     read_only_vars = {
@@ -145,8 +151,10 @@ class NetworkConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            gateway_address (str): The address of the gateway assigned / to assign to the server. When used as part of request body, IP address has to be part of private/public network assigned to this server.. [optional]  # noqa: E501
             private_network_configuration (PrivateNetworkConfiguration): [optional]  # noqa: E501
             ip_blocks_configuration (IpBlocksConfiguration): [optional]  # noqa: E501
+            public_network_configuration (PublicNetworkConfiguration): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -228,8 +236,10 @@ class NetworkConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            gateway_address (str): The address of the gateway assigned / to assign to the server. When used as part of request body, IP address has to be part of private/public network assigned to this server.. [optional]  # noqa: E501
             private_network_configuration (PrivateNetworkConfiguration): [optional]  # noqa: E501
             ip_blocks_configuration (IpBlocksConfiguration): [optional]  # noqa: E501
+            public_network_configuration (PublicNetworkConfiguration): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
