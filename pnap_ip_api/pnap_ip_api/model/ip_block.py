@@ -96,6 +96,8 @@ class IpBlock(ModelNormal):
             'cidr_block_size': (str,),  # noqa: E501
             'cidr': (str,),  # noqa: E501
             'status': (str,),  # noqa: E501
+            'is_bring_your_own': (bool,),  # noqa: E501
+            'created_on': (datetime,),  # noqa: E501
             'assigned_resource_id': (str,),  # noqa: E501
             'assigned_resource_type': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
@@ -113,6 +115,8 @@ class IpBlock(ModelNormal):
         'cidr_block_size': 'cidrBlockSize',  # noqa: E501
         'cidr': 'cidr',  # noqa: E501
         'status': 'status',  # noqa: E501
+        'is_bring_your_own': 'isBringYourOwn',  # noqa: E501
+        'created_on': 'createdOn',  # noqa: E501
         'assigned_resource_id': 'assignedResourceId',  # noqa: E501
         'assigned_resource_type': 'assignedResourceType',  # noqa: E501
         'description': 'description',  # noqa: E501
@@ -126,7 +130,7 @@ class IpBlock(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, location, cidr_block_size, cidr, status, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, location, cidr_block_size, cidr, status, is_bring_your_own, created_on, *args, **kwargs):  # noqa: E501
         """IpBlock - a model defined in OpenAPI
 
         Args:
@@ -135,6 +139,8 @@ class IpBlock(ModelNormal):
             cidr_block_size (str): CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29`, `/28`, `/27`, `/26`, `/25`, `/24`, `/23` or `/22`.
             cidr (str): The IP Block in CIDR notation.
             status (str): The status of the IP Block.
+            is_bring_your_own (bool): True if the IP block is a `bring your own` block.
+            created_on (datetime): Date and time when the IP block was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -203,6 +209,8 @@ class IpBlock(ModelNormal):
         self.cidr_block_size = cidr_block_size
         self.cidr = cidr
         self.status = status
+        self.is_bring_your_own = is_bring_your_own
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -223,7 +231,7 @@ class IpBlock(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, location, cidr_block_size, cidr, status, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, location, cidr_block_size, cidr, status, is_bring_your_own, created_on, *args, **kwargs):  # noqa: E501
         """IpBlock - a model defined in OpenAPI
 
         Args:
@@ -232,6 +240,8 @@ class IpBlock(ModelNormal):
             cidr_block_size (str): CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29`, `/28`, `/27`, `/26`, `/25`, `/24`, `/23` or `/22`.
             cidr (str): The IP Block in CIDR notation.
             status (str): The status of the IP Block.
+            is_bring_your_own (bool): True if the IP block is a `bring your own` block.
+            created_on (datetime): Date and time when the IP block was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -298,6 +308,8 @@ class IpBlock(ModelNormal):
         self.cidr_block_size = cidr_block_size
         self.cidr = cidr
         self.status = status
+        self.is_bring_your_own = is_bring_your_own
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
