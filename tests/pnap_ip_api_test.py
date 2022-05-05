@@ -1,5 +1,6 @@
 import unittest
 import xmlrunner
+from dateutil.parser import parse
 
 from test_utils import TestUtils
 
@@ -33,6 +34,8 @@ class TestIpApi(unittest.TestCase):
 
     result = api_instance.ip_blocks_get()
 
+    response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
+
     self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
     self.verify_called_once(expectation_id)
@@ -48,6 +51,8 @@ class TestIpApi(unittest.TestCase):
 
     result = api_instance.ip_blocks_post(ip_block_create=ip_block_create)
 
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
+
     self.assertEqual(response['body'], model_to_dict(result))
 
     self.verify_called_once(expectation_id)
@@ -61,6 +66,8 @@ class TestIpApi(unittest.TestCase):
     ip_block_id = TestUtils.extract_id_from(request)
 
     result = api_instance.ip_blocks_ip_block_id_get(ip_block_id)
+
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
 
     self.assertEqual(response['body'], model_to_dict(result))
 
@@ -77,6 +84,8 @@ class TestIpApi(unittest.TestCase):
     ip_block_patch = IpBlockPatch(**TestUtils.extract_request_body(request))
     
     result = api_instance.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch=ip_block_patch)
+
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
 
     self.assertEqual(response['body'], model_to_dict(result))
 
