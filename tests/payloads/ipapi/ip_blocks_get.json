@@ -14,7 +14,7 @@
                 "status" : "ASSIGNED",
                 "assignedResourceId" : "fakeId",
                 "assignedResourceType" : "fakeType",
-                "description" : "fakeDescription"
+                "description" : "fakeDescription" 
             }
         ]
     }
