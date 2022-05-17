@@ -1,5 +1,5 @@
 name: Generate workflow
-
+ 
 on:
   pull_request:
     branches:
