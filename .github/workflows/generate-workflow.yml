@@ -71,7 +71,7 @@ jobs:
 
   push-changes:
     name: Push Changes
-    if: startsWith(github.head_ref, 'release') == false && github.head_ref != 'master'
+    if: startsWith(github.head_ref, 'release') == false && github.head_ref != 'master'  && github.event.pull_request.head.repo.full_name == 'phoenixnap/python-sdk-bmc'
     runs-on: ubuntu-latest
     needs:
       - generate-bmcapi
