@@ -31,10 +31,10 @@ from pnap_network_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from pnap_network_api.model.network_membership import NetworkMembership
     from pnap_network_api.model.public_network_ip_block import PublicNetworkIpBlock
-    from pnap_network_api.model.public_network_membership import PublicNetworkMembership
+    globals()['NetworkMembership'] = NetworkMembership
     globals()['PublicNetworkIpBlock'] = PublicNetworkIpBlock
-    globals()['PublicNetworkMembership'] = PublicNetworkMembership
 
 
 class PublicNetwork(ModelNormal):
@@ -99,7 +99,7 @@ class PublicNetwork(ModelNormal):
         return {
             'id': (str,),  # noqa: E501
             'vlan_id': (int,),  # noqa: E501
-            'memberships': ([PublicNetworkMembership],),  # noqa: E501
+            'memberships': ([NetworkMembership],),  # noqa: E501
             'name': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
@@ -136,7 +136,7 @@ class PublicNetwork(ModelNormal):
         Args:
             id (str): The public network identifier.
             vlan_id (int): The VLAN of this public network.
-            memberships ([PublicNetworkMembership]): A list of resources that are members in this public network.
+            memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
             created_on (datetime): Date and time when this public network was created.
@@ -234,7 +234,7 @@ class PublicNetwork(ModelNormal):
         Args:
             id (str): The public network identifier.
             vlan_id (int): The VLAN of this public network.
-            memberships ([PublicNetworkMembership]): A list of resources that are members in this public network.
+            memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
             created_on (datetime): Date and time when this public network was created.

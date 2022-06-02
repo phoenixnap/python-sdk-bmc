@@ -31,7 +31,9 @@ from pnap_network_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from pnap_network_api.model.network_membership import NetworkMembership
     from pnap_network_api.model.private_network_server import PrivateNetworkServer
+    globals()['NetworkMembership'] = NetworkMembership
     globals()['PrivateNetworkServer'] = PrivateNetworkServer
 
 
@@ -103,6 +105,7 @@ class PrivateNetwork(ModelNormal):
             'location_default': (bool,),  # noqa: E501
             'cidr': (str,),  # noqa: E501
             'servers': ([PrivateNetworkServer],),  # noqa: E501
+            'memberships': ([NetworkMembership],),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
             'description': (str,),  # noqa: E501
         }
@@ -121,6 +124,7 @@ class PrivateNetwork(ModelNormal):
         'location_default': 'locationDefault',  # noqa: E501
         'cidr': 'cidr',  # noqa: E501
         'servers': 'servers',  # noqa: E501
+        'memberships': 'memberships',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
         'description': 'description',  # noqa: E501
     }
@@ -132,7 +136,7 @@ class PrivateNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, created_on, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -144,6 +148,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            memberships ([NetworkMembership]): A list of resources that are members of this private network.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
@@ -213,6 +218,7 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.memberships = memberships
         self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
@@ -234,7 +240,7 @@ class PrivateNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, created_on, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -246,6 +252,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            memberships ([NetworkMembership]): A list of resources that are members of this private network.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
@@ -313,6 +320,7 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.memberships = memberships
         self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
