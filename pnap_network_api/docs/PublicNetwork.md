@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The public network identifier. | 
 **vlan_id** | **int** | The VLAN of this public network. | 
-**memberships** | [**[PublicNetworkMembership]**](PublicNetworkMembership.md) | A list of resources that are members in this public network. | 
+**memberships** | [**[NetworkMembership]**](NetworkMembership.md) | A list of resources that are members of this public network. | 
 **name** | **str** | The friendly name of this public network. | 
 **location** | **str** | The location of this public network. Supported values are &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60;, &#x60;SEA&#x60; and &#x60;AUS&#x60;. | 
 **created_on** | **datetime** | Date and time when this public network was created. | 

@@ -1,5 +1,6 @@
 README.md
 docs/Error.md
+docs/NetworkMembership.md
 docs/PrivateNetwork.md
 docs/PrivateNetworkCreate.md
 docs/PrivateNetworkModify.md
@@ -8,7 +9,6 @@ docs/PrivateNetworksApi.md
 docs/PublicNetwork.md
 docs/PublicNetworkCreate.md
 docs/PublicNetworkIpBlock.md
-docs/PublicNetworkMembership.md
 docs/PublicNetworkModify.md
 docs/PublicNetworksApi.md
 pnap_network_api/__init__.py
@@ -21,6 +21,7 @@ pnap_network_api/configuration.py
 pnap_network_api/exceptions.py
 pnap_network_api/model/__init__.py
 pnap_network_api/model/error.py
+pnap_network_api/model/network_membership.py
 pnap_network_api/model/private_network.py
 pnap_network_api/model/private_network_create.py
 pnap_network_api/model/private_network_modify.py
@@ -28,7 +29,6 @@ pnap_network_api/model/private_network_server.py
 pnap_network_api/model/public_network.py
 pnap_network_api/model/public_network_create.py
 pnap_network_api/model/public_network_ip_block.py
-pnap_network_api/model/public_network_membership.py
 pnap_network_api/model/public_network_modify.py
 pnap_network_api/model_utils.py
 pnap_network_api/models/__init__.py
