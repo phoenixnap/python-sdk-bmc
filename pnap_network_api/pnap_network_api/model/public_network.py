@@ -102,6 +102,7 @@ class PublicNetwork(ModelNormal):
             'memberships': ([NetworkMembership],),  # noqa: E501
             'name': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
+            'status': (str,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
             'ip_blocks': ([PublicNetworkIpBlock],),  # noqa: E501
             'description': (str,),  # noqa: E501
@@ -118,6 +119,7 @@ class PublicNetwork(ModelNormal):
         'memberships': 'memberships',  # noqa: E501
         'name': 'name',  # noqa: E501
         'location': 'location',  # noqa: E501
+        'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
         'ip_blocks': 'ipBlocks',  # noqa: E501
         'description': 'description',  # noqa: E501
@@ -130,7 +132,7 @@ class PublicNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, vlan_id, memberships, name, location, created_on, ip_blocks, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, vlan_id, memberships, name, location, status, created_on, ip_blocks, *args, **kwargs):  # noqa: E501
         """PublicNetwork - a model defined in OpenAPI
 
         Args:
@@ -139,6 +141,7 @@ class PublicNetwork(ModelNormal):
             memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
+            status (str): The status of the public network. Can have one of the following values: `BUSY` or `READY`.
             created_on (datetime): Date and time when this public network was created.
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that are associated with this public network.
 
@@ -206,6 +209,7 @@ class PublicNetwork(ModelNormal):
         self.memberships = memberships
         self.name = name
         self.location = location
+        self.status = status
         self.created_on = created_on
         self.ip_blocks = ip_blocks
         for var_name, var_value in kwargs.items():
@@ -228,7 +232,7 @@ class PublicNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, vlan_id, memberships, name, location, created_on, ip_blocks, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, vlan_id, memberships, name, location, status, created_on, ip_blocks, *args, **kwargs):  # noqa: E501
         """PublicNetwork - a model defined in OpenAPI
 
         Args:
@@ -237,6 +241,7 @@ class PublicNetwork(ModelNormal):
             memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
+            status (str): The status of the public network. Can have one of the following values: `BUSY` or `READY`.
             created_on (datetime): Date and time when this public network was created.
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that are associated with this public network.
 
@@ -302,6 +307,7 @@ class PublicNetwork(ModelNormal):
         self.memberships = memberships
         self.name = name
         self.location = location
+        self.status = status
         self.created_on = created_on
         self.ip_blocks = ip_blocks
         for var_name, var_value in kwargs.items():

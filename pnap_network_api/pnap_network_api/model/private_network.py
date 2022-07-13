@@ -106,6 +106,7 @@ class PrivateNetwork(ModelNormal):
             'cidr': (str,),  # noqa: E501
             'servers': ([PrivateNetworkServer],),  # noqa: E501
             'memberships': ([NetworkMembership],),  # noqa: E501
+            'status': (str,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
             'description': (str,),  # noqa: E501
         }
@@ -125,6 +126,7 @@ class PrivateNetwork(ModelNormal):
         'cidr': 'cidr',  # noqa: E501
         'servers': 'servers',  # noqa: E501
         'memberships': 'memberships',  # noqa: E501
+        'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
         'description': 'description',  # noqa: E501
     }
@@ -136,7 +138,7 @@ class PrivateNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, created_on, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -149,6 +151,7 @@ class PrivateNetwork(ModelNormal):
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
+            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
@@ -219,6 +222,7 @@ class PrivateNetwork(ModelNormal):
         self.cidr = cidr
         self.servers = servers
         self.memberships = memberships
+        self.status = status
         self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
@@ -240,7 +244,7 @@ class PrivateNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, created_on, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -253,6 +257,7 @@ class PrivateNetwork(ModelNormal):
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
+            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
@@ -321,6 +326,7 @@ class PrivateNetwork(ModelNormal):
         self.cidr = cidr
         self.servers = servers
         self.memberships = memberships
+        self.status = status
         self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
