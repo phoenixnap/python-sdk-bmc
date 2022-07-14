@@ -1,6 +1,6 @@
 # ServerIpBlock
 
-IP block ID assigned to server
+IP block assigned to server
 
 ## Properties
 Name | Type | Description | Notes
