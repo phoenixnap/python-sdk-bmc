@@ -155,7 +155,7 @@ class IpBlockCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of the IP Block.. [optional]  # noqa: E501
-            tags ([TagAssignmentRequest]): Tags to set to ip-block, if any.. [optional]  # noqa: E501
+            tags ([TagAssignmentRequest]): Tags to set to the ip-block. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -244,7 +244,7 @@ class IpBlockCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of the IP Block.. [optional]  # noqa: E501
-            tags ([TagAssignmentRequest]): Tags to set to ip-block, if any.. [optional]  # noqa: E501
+            tags ([TagAssignmentRequest]): Tags to set to the ip-block. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
