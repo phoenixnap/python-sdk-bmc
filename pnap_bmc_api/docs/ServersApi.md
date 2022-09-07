@@ -246,6 +246,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 rdp_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
             ),
             management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
+            install_os_to_ram=False,
         ),
         tags=[
             TagAssignmentRequest(
