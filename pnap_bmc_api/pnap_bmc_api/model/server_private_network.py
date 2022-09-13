@@ -148,7 +148,7 @@ class ServerPrivateNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            ips ([str]): IPs to configure/configured on the server. Should be null or empty list if DHCP is true.. [optional]  # noqa: E501
+            ips ([str]): IPs to configure/configured on the server. Should be null or empty list if DHCP is true. If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable. These will return a Bad Request (400) if selected.. [optional]  # noqa: E501
             dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if ips is not an empty list. Not supported for proxmox OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
             status_description (str): The status of the network.. [optional]  # noqa: E501
         """
@@ -236,7 +236,7 @@ class ServerPrivateNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            ips ([str]): IPs to configure/configured on the server. Should be null or empty list if DHCP is true.. [optional]  # noqa: E501
+            ips ([str]): IPs to configure/configured on the server. Should be null or empty list if DHCP is true. If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable. These will return a Bad Request (400) if selected.. [optional]  # noqa: E501
             dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if ips is not an empty list. Not supported for proxmox OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
             status_description (str): The status of the network.. [optional]  # noqa: E501
         """
