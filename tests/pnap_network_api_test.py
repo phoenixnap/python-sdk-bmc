@@ -25,7 +25,7 @@ class TestNetworkApi(unittest.TestCase):
 
    def test_get_networks(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('networkapi/networks_get')
+    request, response = TestUtils.generate_payloads_from('networkapi/private_networks_get')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
@@ -41,7 +41,7 @@ class TestNetworkApi(unittest.TestCase):
 
    def test_create_network(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('networkapi/networks_post')
+    request, response = TestUtils.generate_payloads_from('networkapi/private_networks_post')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
@@ -57,7 +57,7 @@ class TestNetworkApi(unittest.TestCase):
 
    def test_get_network_by_id(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('networkapi/networks_get_by_id')
+    request, response = TestUtils.generate_payloads_from('networkapi/private_networks_get_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
 
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
@@ -73,7 +73,7 @@ class TestNetworkApi(unittest.TestCase):
 
    def test_put_network_by_id(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('networkapi/networks_put_by_id')
+    request, response = TestUtils.generate_payloads_from('networkapi/private_networks_put_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
 
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
@@ -90,7 +90,7 @@ class TestNetworkApi(unittest.TestCase):
 
    def test_delete_network_by_id(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('networkapi/networks_delete_by_id')
+    request, response = TestUtils.generate_payloads_from('networkapi/private_networks_delete_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
@@ -105,5 +105,6 @@ class TestNetworkApi(unittest.TestCase):
     self.api_client.close()
 
 if __name__ == '__main__':
-     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
-        failfast=False, buffer=False, catchbreak=False)
+   TestUtils.reset_mockserver()
+   unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
+      failfast=False, buffer=False, catchbreak=False)

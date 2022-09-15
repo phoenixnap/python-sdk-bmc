@@ -443,5 +443,6 @@ class  TestBmcApi(unittest.TestCase):
     self.api_client.close()
 
 if __name__ == '__main__':
-     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
-        failfast=False, buffer=False, catchbreak=False)
+  TestUtils.reset_mockserver()
+  unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
+    failfast=False, buffer=False, catchbreak=False)
