@@ -26,8 +26,17 @@
       "assignedResourceId": "fakeId",
       "assignedResourceType": "fakeType",
       "description": "fakeDescription",
+      "tags": [
+        {
+          "id": "fakeTagId",
+          "name": "tagName",
+          "value": "tagValue",
+          "isBillingTag": true,
+          "createdBy": "SYSTEM"
+        }
+      ],
       "isBringYourOwn": false,
-      "createdOn": "2021-04-29T16:24:57.123Z"
+      "createdOn": "2021-04-27T16:24:57Z"
     }
   }
 }
