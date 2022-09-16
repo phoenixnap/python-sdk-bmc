@@ -109,6 +109,24 @@ class TestIpApi(unittest.TestCase):
 
     self.verify_called_once(expectation)
 
+   def test_ip_block_put_tags_by_id(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('ipapi/ip_blocks_put_tags_by_id')
+    expectation = TestUtils.setup_expectation(request, response, 1)
+    
+    api_instance = ip_blocks_api.IPBlocksApi(self.api_client)
+    ip_block_id = TestUtils.extract_id_from(request)
+    tag_assignment_request = [TagAssignmentRequest(**TestUtils.extract_request_body(request)[0])]
+
+    result = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request=tag_assignment_request)
+
+    # Parsing time for comparison
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+    self.assertEqual(response['body'], model_to_dict(result))
+
+    self.verify_called_once(expectation)
+
    def tearDown(self):
     TestUtils.reset_expectations()
     self.api_client.close()

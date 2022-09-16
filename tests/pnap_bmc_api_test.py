@@ -18,6 +18,7 @@ from pnap_bmc_api.model.tag_assignment_request import TagAssignmentRequest
 from pnap_bmc_api.model.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.model.server_ip_block import ServerIpBlock
 from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
+from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.model.tag_assignment_request import TagAssignmentRequest
 from pnap_bmc_api.model.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.model_utils import model_to_dict
@@ -404,6 +405,21 @@ class  TestBmcApi(unittest.TestCase):
     self.assertEqual(response['body'], model_to_dict(result))
 
     self.verify_called_once(expectation_id)
+  
+  def test_server_create_public_network(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_post_public_networks')
+    expectation_id = TestUtils.setup_expectation(request, response, 1)
+    
+    api_instance = servers_api.ServersApi(self.api_client)
+    server_id = TestUtils.extract_id_from(request)
+    server_public_network = ServerPublicNetwork(**TestUtils.extract_request_body(request))
+
+    result = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network)
+
+    self.assertEqual(response['body'], model_to_dict(result))
+
+    self.verify_called_once(expectation_id)
 
   def test_server_delete_private_network(self):
     # Setting up expectation
@@ -415,6 +431,21 @@ class  TestBmcApi(unittest.TestCase):
     private_network_id = TestUtils.extract_id_from(request, 'networkId')
 
     result = api_instance.delete_private_network(server_id, private_network_id)
+
+    self.assertEqual(response['body'], result)
+
+    self.verify_called_once(expectation_id)
+
+  def test_server_delete_public_network(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_delete_public_network_by_id')
+    expectation_id = TestUtils.setup_expectation(request, response, 1)
+    
+    api_instance = servers_api.ServersApi(self.api_client)
+    server_id = TestUtils.extract_id_from(request)
+    public_network_id = TestUtils.extract_id_from(request, 'networkId')
+
+    result = api_instance.servers_server_id_public_networks_delete(server_id, public_network_id)
 
     self.assertEqual(response['body'], result)
 

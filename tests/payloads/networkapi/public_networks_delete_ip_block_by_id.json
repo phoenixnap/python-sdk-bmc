@@ -1,9 +1,9 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/networks/v1/public-networks/{id}/ip-blocks/{ipId}",
+    "path": "/networks/v1/public-networks/{networkId}/ip-blocks/{ipId}",
     "pathParameters": {
-      "id": [
+      "networkId": [
         "e6afba51-7de8-4080-83ab-0f915570659c"
       ],
       "ipId": [

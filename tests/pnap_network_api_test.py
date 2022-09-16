@@ -6,8 +6,12 @@ from test_utils import TestUtils
 
 import pnap_network_api
 from pnap_network_api.api import private_networks_api
+from pnap_network_api.api import public_networks_api
 from pnap_network_api.model.private_network_create import PrivateNetworkCreate
 from pnap_network_api.model.private_network_modify import PrivateNetworkModify
+from pnap_network_api.model.public_network_create import PublicNetworkCreate
+from pnap_network_api.model.public_network_modify import PublicNetworkModify
+from pnap_network_api.model.public_network_ip_block import PublicNetworkIpBlock
 from pnap_network_api.model_utils import model_to_dict
 
 class TestNetworkApi(unittest.TestCase):
@@ -23,7 +27,7 @@ class TestNetworkApi(unittest.TestCase):
     self.assertEqual(202, verifyResult.status_code)
 
 
-   def test_get_networks(self):
+   def test_get_private_networks(self):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('networkapi/private_networks_get')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
@@ -39,7 +43,7 @@ class TestNetworkApi(unittest.TestCase):
 
     self.verify_called_once(expectation_id)
 
-   def test_create_network(self):
+   def test_create_private_network(self):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('networkapi/private_networks_post')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
@@ -55,7 +59,7 @@ class TestNetworkApi(unittest.TestCase):
 
     self.verify_called_once(expectation_id)
 
-   def test_get_network_by_id(self):
+   def test_get_private_network_by_id(self):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('networkapi/private_networks_get_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
@@ -71,7 +75,7 @@ class TestNetworkApi(unittest.TestCase):
 
     self.verify_called_once(expectation_id)
 
-   def test_put_network_by_id(self):
+   def test_put_private_network_by_id(self):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('networkapi/private_networks_put_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
@@ -88,7 +92,7 @@ class TestNetworkApi(unittest.TestCase):
 
     self.verify_called_once(expectation_id)
 
-   def test_delete_network_by_id(self):
+   def test_delete_private_network_by_id(self):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('networkapi/private_networks_delete_by_id')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
@@ -99,6 +103,114 @@ class TestNetworkApi(unittest.TestCase):
     api_instance.private_networks_network_id_delete(network_id)
 
     self.verify_called_once(expectation_id)
+
+   def test_get_public_networks(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_get')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      opts = TestUtils.generate_query_params(request)
+
+      result = api_instance.public_networks_get(**opts)
+
+      response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
+
+      self.assertEqual(response['body'][0], model_to_dict(result[0]))
+
+      self.verify_called_once(expectation_id)
+
+   def test_create_public_network(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_post')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      public_network_create = PublicNetworkCreate(**TestUtils.extract_request_body(request))
+
+      result = api_instance.public_networks_post(public_network_create=public_network_create)
+
+      response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+      self.assertEqual(response['body'], model_to_dict(result))
+
+      self.verify_called_once(expectation_id)
+
+   def test_delete_public_network_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_delete_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request)
+
+      api_instance.public_networks_network_id_delete(network_id)
+
+      self.verify_called_once(expectation_id)
+
+   def test_get_public_network_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_get_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request)
+
+      result = api_instance.public_networks_network_id_get(network_id)
+
+      response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+      self.assertEqual(response['body'], model_to_dict(result))
+
+      self.verify_called_once(expectation_id)
+
+   def test_public_network_delete_ip_block_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_delete_ip_block_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request, "networkId")
+      ip_id = TestUtils.extract_id_from(request, "ipId")
+
+      api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(network_id, ip_id)
+
+      self.verify_called_once(expectation_id)
+      pass
+
+   def test_public_network_create_ip_block(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_post_ip_block')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request)
+      public_network_ip_block = PublicNetworkIpBlock(**TestUtils.extract_request_body(request))
+
+      result = api_instance.public_networks_network_id_ip_blocks_post(network_id, public_network_ip_block=public_network_ip_block)
+
+      self.assertEqual(response['body'], model_to_dict(result))
+
+      self.verify_called_once(expectation_id)
+
+   def test_patch_public_network_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/public_networks_patch_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = public_networks_api.PublicNetworksApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request)
+      public_network_modify = PublicNetworkModify(**TestUtils.extract_request_body(request))
+
+      result = api_instance.public_networks_network_id_patch(network_id, public_network_modify=public_network_modify)
+
+      response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+      self.assertEqual(response['body'], model_to_dict(result))
+
+      self.verify_called_once(expectation_id)
+
+   
 
    def tearDown(self):
     TestUtils.reset_expectations()
