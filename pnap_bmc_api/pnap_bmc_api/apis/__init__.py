@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.quotas_api import QuotasApi
+#   from pnap_bmc_api.api.quotas_api import QuotasApi
 #
 # or import this package, but before doing it, use:
 #
