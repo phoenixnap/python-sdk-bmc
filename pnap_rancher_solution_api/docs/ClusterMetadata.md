@@ -1,6 +1,5 @@
-# RancherServerMetadata
+# ClusterMetadata
 
-(Read Only) Connection parameters to use to connect to the Rancher Server Administrative GUI.
 
 ## Properties
 Name | Type | Description | Notes
