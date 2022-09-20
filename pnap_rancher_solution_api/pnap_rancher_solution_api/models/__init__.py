@@ -11,6 +11,7 @@
 
 from pnap_rancher_solution_api.model.cluster import Cluster
 from pnap_rancher_solution_api.model.cluster_configuration import ClusterConfiguration
+from pnap_rancher_solution_api.model.cluster_metadata import ClusterMetadata
 from pnap_rancher_solution_api.model.cluster_workload_configuration import ClusterWorkloadConfiguration
 from pnap_rancher_solution_api.model.delete_result import DeleteResult
 from pnap_rancher_solution_api.model.error import Error

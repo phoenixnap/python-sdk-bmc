@@ -125,6 +125,7 @@ Class | Method | HTTP request | Description
 
  - [Cluster](docs/Cluster.md)
  - [ClusterConfiguration](docs/ClusterConfiguration.md)
+ - [ClusterMetadata](docs/ClusterMetadata.md)
  - [ClusterWorkloadConfiguration](docs/ClusterWorkloadConfiguration.md)
  - [DeleteResult](docs/DeleteResult.md)
  - [Error](docs/Error.md)

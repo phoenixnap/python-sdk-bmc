@@ -1,6 +1,7 @@
 README.md
 docs/Cluster.md
 docs/ClusterConfiguration.md
+docs/ClusterMetadata.md
 docs/ClusterWorkloadConfiguration.md
 docs/ClustersApi.md
 docs/DeleteResult.md
@@ -24,6 +25,7 @@ pnap_rancher_solution_api/exceptions.py
 pnap_rancher_solution_api/model/__init__.py
 pnap_rancher_solution_api/model/cluster.py
 pnap_rancher_solution_api/model/cluster_configuration.py
+pnap_rancher_solution_api/model/cluster_metadata.py
 pnap_rancher_solution_api/model/cluster_workload_configuration.py
 pnap_rancher_solution_api/model/delete_result.py
 pnap_rancher_solution_api/model/error.py
