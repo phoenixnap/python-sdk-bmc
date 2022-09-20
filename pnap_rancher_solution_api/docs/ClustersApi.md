@@ -300,11 +300,11 @@ with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
                 name="Rancher Server node pool.",
                 node_count=1,
                 server_type="s0.d1.small",
-                ssh_config=None,
+                ssh_config=NodePoolSshConfig(None),
             ),
         ],
-        configuration=None,
-        workload_configuration=None,
+        configuration=ClusterConfiguration(None),
+        workload_configuration=ClusterWorkloadConfiguration(None),
     ) # Cluster |  (optional)
 
     # example passing only required values which don't have defaults set
