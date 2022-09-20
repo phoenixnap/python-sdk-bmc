@@ -31,14 +31,14 @@ from pnap_rancher_solution_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from pnap_rancher_solution_api.model.cluster_configuration import ClusterConfiguration
+    from pnap_rancher_solution_api.model.cluster_metadata import ClusterMetadata
+    from pnap_rancher_solution_api.model.cluster_workload_configuration import ClusterWorkloadConfiguration
     from pnap_rancher_solution_api.model.node_pool import NodePool
-    from pnap_rancher_solution_api.model.rancher_cluster_config import RancherClusterConfig
-    from pnap_rancher_solution_api.model.rancher_server_metadata import RancherServerMetadata
-    from pnap_rancher_solution_api.model.workload_cluster_config import WorkloadClusterConfig
+    globals()['ClusterConfiguration'] = ClusterConfiguration
+    globals()['ClusterMetadata'] = ClusterMetadata
+    globals()['ClusterWorkloadConfiguration'] = ClusterWorkloadConfiguration
     globals()['NodePool'] = NodePool
-    globals()['RancherClusterConfig'] = RancherClusterConfig
-    globals()['RancherServerMetadata'] = RancherServerMetadata
-    globals()['WorkloadClusterConfig'] = WorkloadClusterConfig
 
 
 class Cluster(ModelNormal):
@@ -104,9 +104,9 @@ class Cluster(ModelNormal):
             'description': (str,),  # noqa: E501
             'initial_cluster_version': (str,),  # noqa: E501
             'node_pools': ([NodePool],),  # noqa: E501
-            'configuration': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
-            'metadata': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
-            'workload_configuration': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'configuration': (ClusterConfiguration,),  # noqa: E501
+            'metadata': (ClusterMetadata,),  # noqa: E501
+            'workload_configuration': (ClusterWorkloadConfiguration,),  # noqa: E501
             'status_description': (str,),  # noqa: E501
         }
 
@@ -131,7 +131,6 @@ class Cluster(ModelNormal):
     read_only_vars = {
         'id',  # noqa: E501
         'initial_cluster_version',  # noqa: E501
-        'metadata',  # noqa: E501
         'status_description',  # noqa: E501
     }
 
@@ -181,14 +180,14 @@ class Cluster(ModelNormal):
             description (str): Cluster description.. [optional]  # noqa: E501
             initial_cluster_version (str): (Read-only) The Rancher version that was installed on the cluster during the first creation process.. [optional]  # noqa: E501
             node_pools ([NodePool]): The node pools associated with the cluster.. [optional]  # noqa: E501
-            configuration (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            metadata (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            workload_configuration (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            configuration (ClusterConfiguration): [optional]  # noqa: E501
+            metadata (ClusterMetadata): [optional]  # noqa: E501
+            workload_configuration (ClusterWorkloadConfiguration): [optional]  # noqa: E501
             status_description (str): The cluster status. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
+        _spec_property_naming = kwargs.pop('_spec_property_naming', True)
         _path_to_item = kwargs.pop('_path_to_item', ())
         _configuration = kwargs.pop('_configuration', None)
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
@@ -196,14 +195,18 @@ class Cluster(ModelNormal):
         self = super(OpenApiModel, cls).__new__(cls)
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type
@@ -275,9 +278,9 @@ class Cluster(ModelNormal):
             description (str): Cluster description.. [optional]  # noqa: E501
             initial_cluster_version (str): (Read-only) The Rancher version that was installed on the cluster during the first creation process.. [optional]  # noqa: E501
             node_pools ([NodePool]): The node pools associated with the cluster.. [optional]  # noqa: E501
-            configuration (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            metadata (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            workload_configuration (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            configuration (ClusterConfiguration): [optional]  # noqa: E501
+            metadata (ClusterMetadata): [optional]  # noqa: E501
+            workload_configuration (ClusterWorkloadConfiguration): [optional]  # noqa: E501
             status_description (str): The cluster status. [optional]  # noqa: E501
         """
 
@@ -288,14 +291,18 @@ class Cluster(ModelNormal):
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type

@@ -1,6 +1,5 @@
-# RancherClusterConfig
+# ClusterConfiguration
 
-(Write-only) Rancher configuration parameters.
 
 ## Properties
 Name | Type | Description | Notes

@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.ip_blocks_api import IPBlocksApi
+#   from pnap_ip_api.api.ip_blocks_api import IPBlocksApi
 #
 # or import this package, but before doing it, use:
 #
