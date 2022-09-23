@@ -18,6 +18,7 @@ import tornado.gen
 from {{packageName}} import rest
 from {{packageName}}.configuration import Configuration
 from {{packageName}}.exceptions import ApiTypeError, ApiValueError, ApiException
+from {{packageName}}.version import VERSION
 from {{packageName}}.model_utils import (
     ModelNormal,
     ModelSimple,
@@ -70,8 +71,11 @@ class ApiClient(object):
         if header_name is not None:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
+
         # Set default User-Agent.
-        self.user_agent = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{{packageVersion}}}/python{{/httpUserAgent}}'
+        self.user_agent = f"PNAP-python-sdk-bmc/{VERSION}"
+        # Set default X-Powered-By.
+        self.powered_by = f"PNAP-python-sdk-bmc/{VERSION}"
 
     def __enter__(self):
         return self
@@ -96,6 +100,15 @@ class ApiClient(object):
             atexit.register(self.close)
             self._pool = ThreadPool(self.pool_threads)
         return self._pool
+
+    @property
+    def powered_by(self):
+        """Powered By for this API client"""
+        return self.default_headers['X-Powered-By']
+
+    @powered_by.setter
+    def powered_by(self, value):
+        self.default_headers['X-Powered-By'] = value
 
     @property
     def user_agent(self):
