@@ -1,7 +1,7 @@
 """
     Bare Metal Cloud API
 
-    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API. Deprovision servers, get or edit SSH key details, and a lot more. Manage your infrastructure more efficiently using just a few simple api calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
+    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API.  Deprovision servers, get or edit SSH key details, assign public IPs, assign servers to networks and a lot more.  Manage your infrastructure more efficiently using just a few simple API calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
 
     The version of the OpenAPI document: 0.1
     Contact: support@phoenixnap.com
@@ -86,9 +86,6 @@ class Server(ModelNormal):
         ('private_ip_addresses',): {
             'min_items': 1,
         },
-        ('public_ip_addresses',): {
-            'min_items': 1,
-        },
         ('description',): {
             'max_length': 250,
         },
@@ -130,10 +127,10 @@ class Server(ModelNormal):
             'ram': (str,),  # noqa: E501
             'storage': (str,),  # noqa: E501
             'private_ip_addresses': ([str],),  # noqa: E501
-            'public_ip_addresses': ([str],),  # noqa: E501
             'pricing_model': (str,),  # noqa: E501
             'network_configuration': (NetworkConfiguration,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'public_ip_addresses': ([str],),  # noqa: E501
             'reservation_id': (str,),  # noqa: E501
             'password': (str,),  # noqa: E501
             'network_type': (str,),  # noqa: E501
@@ -162,10 +159,10 @@ class Server(ModelNormal):
         'ram': 'ram',  # noqa: E501
         'storage': 'storage',  # noqa: E501
         'private_ip_addresses': 'privateIpAddresses',  # noqa: E501
-        'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'pricing_model': 'pricingModel',  # noqa: E501
         'network_configuration': 'networkConfiguration',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'reservation_id': 'reservationId',  # noqa: E501
         'password': 'password',  # noqa: E501
         'network_type': 'networkType',  # noqa: E501
@@ -182,15 +179,15 @@ class Server(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, public_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
             id (str): The unique identifier of the server.
             status (str): The status of the server.
             hostname (str): Hostname of server.
-            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `centos/centos7`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70u2`, `debian/bullseye` or `proxmox/bullseye`.
-            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m2.medium`, `d2.m2.large` or `d2.m2.xlarge`.
+            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70u2`, `debian/bullseye` or `proxmox/bullseye`.
+            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge` or `d2.c4.storage.pliops1`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
             cpu_count (int): The number of CPUs available in the system.
@@ -199,7 +196,6 @@ class Server(ModelNormal):
             ram (str): A description of the machine RAM.
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
-            public_ip_addresses ([str]): Public IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
 
         Keyword Args:
@@ -235,6 +231,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            public_ip_addresses ([str]): Public IP addresses assigned to server. # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Password set for user Admin on Windows server or user root on ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
@@ -246,7 +243,7 @@ class Server(ModelNormal):
 
         pricing_model = kwargs.get('pricing_model', "HOURLY")
         _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
+        _spec_property_naming = kwargs.pop('_spec_property_naming', True)
         _path_to_item = kwargs.pop('_path_to_item', ())
         _configuration = kwargs.pop('_configuration', None)
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
@@ -254,14 +251,18 @@ class Server(ModelNormal):
         self = super(OpenApiModel, cls).__new__(cls)
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type
@@ -283,7 +284,6 @@ class Server(ModelNormal):
         self.ram = ram
         self.storage = storage
         self.private_ip_addresses = private_ip_addresses
-        self.public_ip_addresses = public_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
         for var_name, var_value in kwargs.items():
@@ -306,15 +306,15 @@ class Server(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, public_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
             id (str): The unique identifier of the server.
             status (str): The status of the server.
             hostname (str): Hostname of server.
-            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `centos/centos7`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70u2`, `debian/bullseye` or `proxmox/bullseye`.
-            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m2.medium`, `d2.m2.large` or `d2.m2.xlarge`.
+            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70u2`, `debian/bullseye` or `proxmox/bullseye`.
+            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge` or `d2.c4.storage.pliops1`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
             cpu_count (int): The number of CPUs available in the system.
@@ -323,7 +323,6 @@ class Server(ModelNormal):
             ram (str): A description of the machine RAM.
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
-            public_ip_addresses ([str]): Public IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
 
         Keyword Args:
@@ -359,6 +358,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            public_ip_addresses ([str]): Public IP addresses assigned to server.
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Password set for user Admin on Windows server or user root on ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
@@ -376,14 +376,18 @@ class Server(ModelNormal):
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type
@@ -405,7 +409,6 @@ class Server(ModelNormal):
         self.ram = ram
         self.storage = storage
         self.private_ip_addresses = private_ip_addresses
-        self.public_ip_addresses = public_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
         for var_name, var_value in kwargs.items():
