@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.tags_api import TagsApi
+#   from pnap_tag_api.api.tags_api import TagsApi
 #
 # or import this package, but before doing it, use:
 #

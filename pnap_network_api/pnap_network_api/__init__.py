@@ -11,6 +11,8 @@
 """
 
 
+__version__ = "1.0.0"
+
 # import ApiClient
 from pnap_network_api.api_client import ApiClient
 
@@ -24,7 +26,3 @@ from pnap_network_api.exceptions import ApiTypeError
 from pnap_network_api.exceptions import ApiValueError
 from pnap_network_api.exceptions import ApiKeyError
 from pnap_network_api.exceptions import ApiException
-from pnap_network_api.version import VERSION
-
-
-__version__ = VERSION
