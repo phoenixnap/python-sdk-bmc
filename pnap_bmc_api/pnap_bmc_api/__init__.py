@@ -25,6 +25,4 @@ from pnap_bmc_api.exceptions import ApiValueError
 from pnap_bmc_api.exceptions import ApiKeyError
 from pnap_bmc_api.exceptions import ApiException
 from pnap_bmc_api.version import VERSION
-
-
 __version__ = VERSION

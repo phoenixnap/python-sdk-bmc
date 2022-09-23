@@ -13,6 +13,7 @@ from pnap_network_storage_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "pnap-network-storage-api"
+VERSION = "1.0.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -26,8 +27,8 @@ REQUIRES = [
 ]
 
 def readme():
-    with open('README.md', encoding='utf-8') as f:
-        return f.read()
+	with open('README.md', encoding='utf-8') as f:
+		return f.read()
 
 setup(
     name=NAME,
@@ -35,6 +36,7 @@ setup(
     description="Network Storage API",
     author="PhoenixNAP Team",
     author_email="support@phoenixnap.com",
+    url="https://phoenixnap.com/bare-metal-cloud",
     keywords=["OpenAPI", "OpenAPI-Generator", "Network Storage API"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
@@ -44,7 +46,6 @@ setup(
     long_description_content_type="text/markdown",
     long_description=readme(),
     project_urls={
-        'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
-    },
-    url='https://phoenixnap.com/bare-metal-cloud'
+      'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
+    }
 )
