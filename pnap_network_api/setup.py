@@ -9,6 +9,7 @@
 """
 
 
+from pnap_network_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "pnap-network-api"
@@ -25,20 +26,26 @@ REQUIRES = [
   "python-dateutil",
 ]
 
+def readme():
+	with open('README.md', encoding='utf-8') as f:
+		return f.read()
+
 setup(
     name=NAME,
     version=VERSION,
     description="Networks API",
     author="PhoenixNAP Team",
     author_email="support@phoenixnap.com",
-    url="",
+    url="https://phoenixnap.com/bare-metal-cloud",
     keywords=["OpenAPI", "OpenAPI-Generator", "Networks API"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="Apache 2.0",
-    long_description="""\
-    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.&lt;br&gt; &lt;br&gt; &lt;span class&#x3D;&#39;pnap-api-knowledge-base-link&#39;&gt; Helpful knowledge base articles are available for  &lt;a href&#x3D;&#39;https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api&#39; target&#x3D;&#39;_blank&#39;&gt;multi-private backend networks&lt;/a&gt; and &lt;a href&#x3D;&#39;https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15&#39; target&#x3D;&#39;_blank&#39;&gt;public networks&lt;/a&gt;. &lt;/span&gt;&lt;br&gt; &lt;br&gt; &lt;b&gt;All URLs are relative to (https://api.phoenixnap.com/networks/v1/)&lt;/b&gt;   # noqa: E501
-    """
+    long_description_content_type="text/markdown",
+    long_description=readme(),
+    project_urls={
+      'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
+    }
 )

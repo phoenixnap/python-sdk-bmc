@@ -17,6 +17,7 @@ import urllib3
 
 from http import client as http_client
 from pnap_rancher_solution_api.exceptions import ApiValueError
+from pnap_rancher_solution_api.version import VERSION
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -389,7 +390,7 @@ class Configuration(object):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 0.1\n"\
-               "SDK Package Version: 1.0.0".\
+               "SDK Package Version: " + VERSION.\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

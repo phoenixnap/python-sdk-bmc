@@ -9,6 +9,7 @@
 """
 
 
+from pnap_rancher_solution_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "pnap-rancher-solution-api"
@@ -25,20 +26,26 @@ REQUIRES = [
   "python-dateutil",
 ]
 
+def readme():
+	with open('README.md', encoding='utf-8') as f:
+		return f.read()
+
 setup(
     name=NAME,
     version=VERSION,
     description="Rancher Solution API",
     author="PhoenixNAP Team",
     author_email="support@phoenixnap.com",
-    url="",
+    url="https://phoenixnap.com/bare-metal-cloud",
     keywords=["OpenAPI", "OpenAPI-Generator", "Rancher Solution API"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="Apache 2.0",
-    long_description="""\
-    Simplify enterprise-grade Kubernetes cluster operations and management with Rancher on Bare Metal Cloud. Deploy Kubernetes clusters using a few API calls.&lt;br&gt; &lt;br&gt; &lt;span class&#x3D;&#39;pnap-api-knowledge-base-link&#39;&gt; Knowledge base articles to help you can be found &lt;a href&#x3D;&#39;https://phoenixnap.com/kb/rancher-bmc-integration-kubernetes&#39; target&#x3D;&#39;_blank&#39;&gt;here&lt;/a&gt; &lt;/span&gt;&lt;br&gt; &lt;br&gt; &lt;b&gt;All URLs are relative to (https://api.phoenixnap.com/solutions/rancher/v1beta)&lt;/b&gt;   # noqa: E501
-    """
+    long_description_content_type="text/markdown",
+    long_description=readme(),
+    project_urls={
+      'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
+    }
 )

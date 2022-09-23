@@ -24,6 +24,7 @@ from urllib3.fields import RequestField
 from pnap_network_api import rest
 from pnap_network_api.configuration import Configuration
 from pnap_network_api.exceptions import ApiTypeError, ApiValueError, ApiException
+from pnap_network_api.version import VERSION
 from pnap_network_api.model_utils import (
     ModelNormal,
     ModelSimple,
@@ -76,8 +77,11 @@ class ApiClient(object):
         if header_name is not None:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
+
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.0.0/python'
+        self.user_agent = f"PNAP-python-sdk-bmc/{VERSION}"
+        # Set default X-Powered-By.
+        self.powered_by = f"PNAP-python-sdk-bmc/{VERSION}"
 
     def __enter__(self):
         return self
@@ -102,6 +106,15 @@ class ApiClient(object):
             atexit.register(self.close)
             self._pool = ThreadPool(self.pool_threads)
         return self._pool
+
+    @property
+    def powered_by(self):
+        """Powered By for this API client"""
+        return self.default_headers['X-Powered-By']
+
+    @powered_by.setter
+    def powered_by(self, value):
+        self.default_headers['X-Powered-By'] = value
 
     @property
     def user_agent(self):
