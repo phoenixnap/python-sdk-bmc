@@ -2,6 +2,8 @@
 
 {{>partial_header}}
 
+__version__ = "{{packageVersion}}"
+
 # import ApiClient
 from {{packageName}}.api_client import ApiClient
 
@@ -18,11 +20,7 @@ from {{packageName}}.exceptions import ApiTypeError
 from {{packageName}}.exceptions import ApiValueError
 from {{packageName}}.exceptions import ApiKeyError
 from {{packageName}}.exceptions import ApiException
-from {{packageName}}.version import VERSION
 {{#recursionLimit}}
 
 __import__('sys').setrecursionlimit({{{.}}})
 {{/recursionLimit}}
-
-
-__version__ = VERSION
