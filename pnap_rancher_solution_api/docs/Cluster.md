@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **description** | **str** | Cluster description. | [optional] 
 **initial_cluster_version** | **str** | (Read-only) The Rancher version that was installed on the cluster during the first creation process. | [optional] [readonly] 
 **node_pools** | [**[NodePool]**](NodePool.md) | The node pools associated with the cluster. | [optional] 
-**configuration** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**configuration** | [**ClusterConfiguration**](ClusterConfiguration.md) |  | [optional] 
 **metadata** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] [readonly] 
-**workload_configuration** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**workload_configuration** | [**ClusterWorkloadConfiguration**](ClusterWorkloadConfiguration.md) |  | [optional] 
 **status_description** | **str** | The cluster status | [optional] [readonly] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
