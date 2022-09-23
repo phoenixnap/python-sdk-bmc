@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.clusters_api import ClustersApi
+#   from pnap_rancher_solution_api.api.clusters_api import ClustersApi
 #
 # or import this package, but before doing it, use:
 #
