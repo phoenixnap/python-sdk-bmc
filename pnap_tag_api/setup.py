@@ -9,10 +9,10 @@
 """
 
 
-from pnap_tag_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "pnap-tag-api"
+VERSION = "1.0.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -25,26 +25,20 @@ REQUIRES = [
   "python-dateutil",
 ]
 
-def readme():
-    with open('README.md', encoding='utf-8') as f:
-        return f.read()
-
 setup(
     name=NAME,
     version=VERSION,
     description="Tags API",
     author="PhoenixNAP Team",
     author_email="support@phoenixnap.com",
+    url="",
     keywords=["OpenAPI", "OpenAPI-Generator", "Tags API"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="Apache 2.0",
-    long_description_content_type="text/markdown",
-    long_description=readme(),
-    project_urls={
-        'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
-    },
-    url='https://phoenixnap.com/bare-metal-cloud'
+    long_description="""\
+    Tags are case-sensitive key-value pairs that simplify resource management. The Tag Manager API allows you to create and manage such tags to later assign them to related resources in your Bare Metal Cloud (through the respective resource apis) in order to group and categorize them.&lt;br&gt; &lt;br&gt; &lt;span class&#x3D;&#39;pnap-api-knowledge-base-link&#39;&gt; Knowledge base articles to help you can be found &lt;a href&#x3D;&#39;https://phoenixnap.com/kb/bmc-server-management-via-api#server-tag-manager-api&#39; target&#x3D;&#39;_blank&#39;&gt;here&lt;/a&gt; &lt;/span&gt;&lt;br&gt; &lt;br&gt; &lt;b&gt;All URLs are relative to (https://api.phoenixnap.com/tag-manager/v1/)&lt;/b&gt;   # noqa: E501
+    """
 )
