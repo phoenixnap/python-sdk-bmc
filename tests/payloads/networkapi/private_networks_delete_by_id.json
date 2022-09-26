@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/ips/v1/ip-blocks/{id}",
+    "path": "/networks/v1/private-networks/{id}",
     "pathParameters": {
       "id": [
         "e6afba51-7de8-4080-83ab-0f915570659c"
@@ -9,10 +9,6 @@
     }
   },
   "response": {
-    "statusCode": 200,
-    "body": {
-      "result": "fakeId",
-      "ipBlockId": "e6afba51-7de8-4080-83ab-0f915570659c"
-    }
+    "statusCode": 204
   }
 }

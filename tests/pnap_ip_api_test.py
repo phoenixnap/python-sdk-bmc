@@ -9,6 +9,7 @@ from pnap_ip_api.api import ip_blocks_api
 from pnap_ip_api.model.ip_block import IpBlock
 from pnap_ip_api.model.ip_block_create import IpBlockCreate
 from pnap_ip_api.model.ip_block_patch import IpBlockPatch
+from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
 from pnap_ip_api.model_utils import model_to_dict
 
 
@@ -31,8 +32,9 @@ class TestIpApi(unittest.TestCase):
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     api_instance = ip_blocks_api.IPBlocksApi(self.api_client)
+    opts = TestUtils.generate_query_params(request)
 
-    result = api_instance.ip_blocks_get()
+    result = api_instance.ip_blocks_get(tag=[opts['tag']])
 
     response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
@@ -41,21 +43,23 @@ class TestIpApi(unittest.TestCase):
     self.verify_called_once(expectation_id)
 
    def test_create_ip_block(self):
-    # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('ipapi/ip_blocks_post')
-    expectation_id = TestUtils.setup_expectation(request, response, 1)
-    
-    api_instance = ip_blocks_api.IPBlocksApi(self.api_client)
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('ipapi/ip_blocks_post')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = ip_blocks_api.IPBlocksApi(self.api_client)
 
-    ip_block_create =  IpBlockCreate(**TestUtils.extract_request_body(request), _spec_property_naming=True)
+      ip_block_create_dict = TestUtils.extract_request_body(request)
+      ip_block_create_dict['tags'] = [TagAssignmentRequest(**ip_block_create_dict['tags'][0])]
+      ip_block_create =  IpBlockCreate(**ip_block_create_dict, _spec_property_naming=True)
 
-    result = api_instance.ip_blocks_post(ip_block_create=ip_block_create)
+      result = api_instance.ip_blocks_post(ip_block_create=ip_block_create)
 
-    response['body']['createdOn'] = parse(response['body']['createdOn'])
+      response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], model_to_dict(result))
 
-    self.verify_called_once(expectation_id)
+      self.verify_called_once(expectation_id)
 
    def test_get_ip_block_by_id(self):
     # Setting up expectation
@@ -105,10 +109,29 @@ class TestIpApi(unittest.TestCase):
 
     self.verify_called_once(expectation)
 
+   def test_ip_block_put_tags_by_id(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('ipapi/ip_blocks_put_tags_by_id')
+    expectation = TestUtils.setup_expectation(request, response, 1)
+    
+    api_instance = ip_blocks_api.IPBlocksApi(self.api_client)
+    ip_block_id = TestUtils.extract_id_from(request)
+    tag_assignment_request = [TagAssignmentRequest(**TestUtils.extract_request_body(request)[0])]
+
+    result = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request=tag_assignment_request)
+
+    # Parsing time for comparison
+    response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+    self.assertEqual(response['body'], model_to_dict(result))
+
+    self.verify_called_once(expectation)
+
    def tearDown(self):
     TestUtils.reset_expectations()
     self.api_client.close()
 
 if __name__ == '__main__':
-     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
-        failfast=False, buffer=False, catchbreak=False)
+   TestUtils.reset_mockserver()
+   unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
+      failfast=False, buffer=False, catchbreak=False)
