@@ -56,6 +56,7 @@ import time
 import pnap_audit_api
 from pprint import pprint
 from pnap_audit_api.api import events_api
+from pnap_audit_api.model.error import Error
 from pnap_audit_api.model.event import Event
 # Defining the host is optional and defaults to https://api.phoenixnap.com/audit/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -124,12 +125,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [ApiAction](docs/ApiAction.md)
- - [ApiActionAllOf](docs/ApiActionAllOf.md)
+ - [Error](docs/Error.md)
  - [Event](docs/Event.md)
- - [Headers](docs/Headers.md)
- - [Request](docs/Request.md)
- - [Response](docs/Response.md)
  - [UserInfo](docs/UserInfo.md)
 
 

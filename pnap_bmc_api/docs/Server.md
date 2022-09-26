@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **network_configuration** | [**NetworkConfiguration**](NetworkConfiguration.md) |  | 
 **pricing_model** | **str** | The pricing model this server is being billed. Currently this field should be set to &#x60;HOURLY&#x60;, &#x60;ONE_MONTH_RESERVATION&#x60;, &#x60;TWELVE_MONTHS_RESERVATION&#x60;, &#x60;TWENTY_FOUR_MONTHS_RESERVATION&#x60; or &#x60;THIRTY_SIX_MONTHS_RESERVATION&#x60;. | defaults to "HOURLY"
 **description** | **str** | Description of server. | [optional] 
-**public_ip_addresses** | **[str]** | Public IP addresses assigned to server. | [optional]
+**public_ip_addresses** | **[str]** | Public IP addresses assigned to server. | [optional] 
 **reservation_id** | **str** | The reservation reference id if any. | [optional] 
 **password** | **str** | Password set for user Admin on Windows server or user root on ESXi server which will only be returned in response to provisioning a server. | [optional] 
 **network_type** | **str** | The type of network configuration for this server. Currently this field should be set to &#x60;PUBLIC_AND_PRIVATE&#x60; or &#x60;PRIVATE_ONLY&#x60;. | [optional]  if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"
