@@ -93,7 +93,7 @@ jobs:
     needs:
       - generate-bmcapi
       - generate-ipapi
-      # - generate-auditapi
+      - generate-auditapi
       - generate-networkapi
       - generate-ranchersolutionapi
       - generate-tagapi
