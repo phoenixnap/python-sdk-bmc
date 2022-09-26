@@ -24,7 +24,7 @@ Python >=3.6
 You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install pnap_network_storage_api
+$ pip install pnap_network_storage_api
 ```
 
 Then import the package:
@@ -92,8 +92,8 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_get: %s\n" % e)
 ```
-To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 ```python
 from keycloak import KeycloakOpenID
 
@@ -175,3 +175,4 @@ import pnap_network_storage_api
 from pnap_network_storage_api.apis import *
 from pnap_network_storage_api.models import *
 ```
+

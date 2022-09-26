@@ -32,9 +32,9 @@ from pnap_rancher_solution_api.exceptions import ApiAttributeError
 
 def lazy_import():
     from pnap_rancher_solution_api.model.node import Node
-    from pnap_rancher_solution_api.model.ssh_config import SshConfig
+    from pnap_rancher_solution_api.model.node_pool_ssh_config import NodePoolSshConfig
     globals()['Node'] = Node
-    globals()['SshConfig'] = SshConfig
+    globals()['NodePoolSshConfig'] = NodePoolSshConfig
 
 
 class NodePool(ModelNormal):
@@ -93,7 +93,7 @@ class NodePool(ModelNormal):
             'name': (str,),  # noqa: E501
             'node_count': (int,),  # noqa: E501
             'server_type': (str,),  # noqa: E501
-            'ssh_config': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'ssh_config': (NodePoolSshConfig,),  # noqa: E501
             'nodes': ([Node],),  # noqa: E501
         }
 
@@ -155,12 +155,12 @@ class NodePool(ModelNormal):
             name (str): The name of the node pool.. [optional]  # noqa: E501
             node_count (int): Number of configured nodes, currently only node counts of 1 and 3 are possible.. [optional]  # noqa: E501
             server_type (str): Node server type. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`.. [optional] if omitted the server will use the default value of "s0.d1.small"  # noqa: E501
-            ssh_config (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            ssh_config (NodePoolSshConfig): [optional]  # noqa: E501
             nodes ([Node]): (Read-only) The nodes associated with this node pool.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
+        _spec_property_naming = kwargs.pop('_spec_property_naming', True)
         _path_to_item = kwargs.pop('_path_to_item', ())
         _configuration = kwargs.pop('_configuration', None)
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
@@ -168,14 +168,18 @@ class NodePool(ModelNormal):
         self = super(OpenApiModel, cls).__new__(cls)
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type
@@ -241,7 +245,7 @@ class NodePool(ModelNormal):
             name (str): The name of the node pool.. [optional]  # noqa: E501
             node_count (int): Number of configured nodes, currently only node counts of 1 and 3 are possible.. [optional]  # noqa: E501
             server_type (str): Node server type. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`.. [optional] if omitted the server will use the default value of "s0.d1.small"  # noqa: E501
-            ssh_config (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            ssh_config (NodePoolSshConfig): [optional]  # noqa: E501
             nodes ([Node]): (Read-only) The nodes associated with this node pool.. [optional]  # noqa: E501
         """
 
@@ -252,14 +256,18 @@ class NodePool(ModelNormal):
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type

@@ -22,6 +22,7 @@ Retrieves the event logs for given time period. All date & times are in UTC.
 import time
 import pnap_audit_api
 from pnap_audit_api.api import events_api
+from pnap_audit_api.model.error import Error
 from pnap_audit_api.model.event import Event
 from pprint import pprint
 # Defining the host is optional and defaults to https://api.phoenixnap.com/audit/v1
@@ -96,6 +97,10 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of events recorded. |  -  |
 **206** | The truncated list of events recorded. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

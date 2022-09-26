@@ -9,10 +9,6 @@
 # import sys
 # sys.setrecursionlimit(n)
 
-from pnap_audit_api.model.api_action import ApiAction
-from pnap_audit_api.model.api_action_all_of import ApiActionAllOf
+from pnap_audit_api.model.error import Error
 from pnap_audit_api.model.event import Event
-from pnap_audit_api.model.headers import Headers
-from pnap_audit_api.model.request import Request
-from pnap_audit_api.model.response import Response
 from pnap_audit_api.model.user_info import UserInfo
