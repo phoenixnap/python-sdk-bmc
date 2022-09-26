@@ -89,6 +89,9 @@ class Server(ModelNormal):
         ('description',): {
             'max_length': 250,
         },
+        ('public_ip_addresses',): {
+            'min_items': 0,
+        },
     }
 
     @cached_property
