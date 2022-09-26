@@ -2,6 +2,8 @@ import json
 
 import requests
 
+executed_reset = False
+
 class TestUtils:
     
     def setup_expectation(requestToMock, responseToGet, times):
@@ -39,8 +41,15 @@ class TestUtils:
 
         return response
 
+    def reset_mockserver():
+        global executed_reset
+        if not executed_reset:
+            url = 'http://localhost:1080/reset'
+            executed_reset = True
+        requests.put(url=url)
+
     def reset_expectations():
-        url = 'http://localhost:1080/reset'
+        url = 'http://localhost:1080/clear'
         requests.put(url=url)
 
     def generate_payloads_from(filename, payloadsPath = "./payloads"):
