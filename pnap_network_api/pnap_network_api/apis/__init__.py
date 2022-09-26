@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.private_networks_api import PrivateNetworksApi
+#   from pnap_network_api.api.private_networks_api import PrivateNetworksApi
 #
 # or import this package, but before doing it, use:
 #

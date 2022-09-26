@@ -4,6 +4,7 @@ from {{packageName}}.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "{{{projectName}}}"
+VERSION = "{{packageVersion}}"
 {{#apiInfo}}
 {{#apis}}
 {{#-last}}
@@ -30,8 +31,8 @@ REQUIRES = [
 ]
 
 def readme():
-    with open('README.md', encoding='utf-8') as f:
-        return f.read()
+	with open('README.md', encoding='utf-8') as f:
+		return f.read()
 
 setup(
     name=NAME,
@@ -39,6 +40,7 @@ setup(
     description="{{appName}}",
     author="{{infoName}}{{^infoName}}OpenAPI Generator community{{/infoName}}",
     author_email="{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}",
+    url="https://phoenixnap.com/bare-metal-cloud",
     keywords=["OpenAPI", "OpenAPI-Generator", "{{{appName}}}"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
@@ -49,9 +51,8 @@ setup(
     long_description_content_type="text/markdown",
     long_description=readme(),
     project_urls={
-        'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
-    },
-    url='https://phoenixnap.com/bare-metal-cloud'
+      'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
+    }
 )
 {{/-last}}
 {{/apis}}

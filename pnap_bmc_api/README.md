@@ -26,7 +26,7 @@ Python >=3.6
 You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install pnap_bmc_api
+$ pip install pnap_bmc_api
 ```
 
 Then import the package:
@@ -83,7 +83,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = quotas_api.QuotasApi(api_client)
-    
+
     try:
         # List quotas
         api_response = api_instance.quotas_get()
@@ -91,8 +91,8 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling QuotasApi->quotas_get: %s\n" % e)
 ```
-To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 ```python
 from keycloak import KeycloakOpenID
 
@@ -217,3 +217,4 @@ import pnap_bmc_api
 from pnap_bmc_api.apis import *
 from pnap_bmc_api.models import *
 ```
+
