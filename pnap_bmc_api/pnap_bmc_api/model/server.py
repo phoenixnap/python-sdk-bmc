@@ -86,9 +86,6 @@ class Server(ModelNormal):
         ('private_ip_addresses',): {
             'min_items': 1,
         },
-        ('public_ip_addresses',): {
-            'min_items': 1,
-        },
         ('description',): {
             'max_length': 250,
         },
@@ -130,10 +127,10 @@ class Server(ModelNormal):
             'ram': (str,),  # noqa: E501
             'storage': (str,),  # noqa: E501
             'private_ip_addresses': ([str],),  # noqa: E501
-            'public_ip_addresses': ([str],),  # noqa: E501
             'pricing_model': (str,),  # noqa: E501
             'network_configuration': (NetworkConfiguration,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'public_ip_addresses': ([str],),  # noqa: E501
             'reservation_id': (str,),  # noqa: E501
             'password': (str,),  # noqa: E501
             'network_type': (str,),  # noqa: E501
@@ -162,10 +159,10 @@ class Server(ModelNormal):
         'ram': 'ram',  # noqa: E501
         'storage': 'storage',  # noqa: E501
         'private_ip_addresses': 'privateIpAddresses',  # noqa: E501
-        'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'pricing_model': 'pricingModel',  # noqa: E501
         'network_configuration': 'networkConfiguration',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'reservation_id': 'reservationId',  # noqa: E501
         'password': 'password',  # noqa: E501
         'network_type': 'networkType',  # noqa: E501
@@ -182,7 +179,7 @@ class Server(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, public_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -199,7 +196,6 @@ class Server(ModelNormal):
             ram (str): A description of the machine RAM.
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
-            public_ip_addresses ([str]): Public IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
 
         Keyword Args:
@@ -235,6 +231,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            public_ip_addresses ([str]): Public IP addresses assigned to server. [optional] # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Password set for user Admin on Windows server or user root on ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
@@ -283,7 +280,6 @@ class Server(ModelNormal):
         self.ram = ram
         self.storage = storage
         self.private_ip_addresses = private_ip_addresses
-        self.public_ip_addresses = public_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
         for var_name, var_value in kwargs.items():
@@ -306,7 +302,7 @@ class Server(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, public_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -323,7 +319,6 @@ class Server(ModelNormal):
             ram (str): A description of the machine RAM.
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
-            public_ip_addresses ([str]): Public IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
 
         Keyword Args:
@@ -359,6 +354,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            public_ip_addresses ([str]): Public IP addresses assigned to server. [optional] # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Password set for user Admin on Windows server or user root on ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
@@ -405,7 +401,6 @@ class Server(ModelNormal):
         self.ram = ram
         self.storage = storage
         self.private_ip_addresses = private_ip_addresses
-        self.public_ip_addresses = public_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
         for var_name, var_value in kwargs.items():
