@@ -38,7 +38,7 @@ This SDK allows you to provision and manage Bare Metal Cloud servers via API wit
 
 Bare Metal Cloud Python SDK provides a library of resources and APIs that can be used to interact with the platform. Below is a sample code to create dependancy: 
 
-```
+```python
 import pnap_bmc_api
 from pprint import pprint
 from pnap_bmc_api.api import servers_api

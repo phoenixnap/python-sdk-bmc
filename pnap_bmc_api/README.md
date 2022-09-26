@@ -1,7 +1,7 @@
 # pnap-bmc-api
-Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API.
-Deprovision servers, get or edit SSH key details, and a lot more. Manage your infrastructure more efficiently
-using just a few simple api calls.<br>
+Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API. 
+Deprovision servers, get or edit SSH key details, assign public IPs, assign servers to networks and a lot more. 
+Manage your infrastructure more efficiently using just a few simple API calls.<br>
 <br>
 <span class='pnap-api-knowledge-base-link'>
 Knowledge base articles to help you can be found
@@ -140,7 +140,9 @@ Class | Method | HTTP request | Description
 *ServersApi* | [**servers_server_id_ip_blocks_post**](docs/ServersApi.md#servers_server_id_ip_blocks_post) | **POST** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks | Assign IP Block to Server.
 *ServersApi* | [**servers_server_id_patch**](docs/ServersApi.md#servers_server_id_patch) | **PATCH** /servers/{serverId} | Patch a Server.
 *ServersApi* | [**servers_server_id_private_networks_post**](docs/ServersApi.md#servers_server_id_private_networks_post) | **POST** /servers/{serverId}/network-configuration/private-network-configuration/private-networks | Adds the server to a private network.
-*ServersApi* | [**servers_server_id_tags_put**](docs/ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Set server tags.
+*ServersApi* | [**servers_server_id_public_networks_delete**](docs/ServersApi.md#servers_server_id_public_networks_delete) | **DELETE** /servers/{serverId}/network-configuration/public-network-configuration/public-networks/{publicNetworkId} | Removes the server from the Public Network
+*ServersApi* | [**servers_server_id_public_networks_post**](docs/ServersApi.md#servers_server_id_public_networks_post) | **POST** /servers/{serverId}/network-configuration/public-network-configuration/public-networks | Adds the server to a Public Network.
+*ServersApi* | [**servers_server_id_tags_put**](docs/ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Overwrite tags assigned for Server.
 
 
 ## Documentation For Models
@@ -157,6 +159,7 @@ Class | Method | HTTP request | Description
  - [OsConfigurationMapProxmox](docs/OsConfigurationMapProxmox.md)
  - [OsConfigurationWindows](docs/OsConfigurationWindows.md)
  - [PrivateNetworkConfiguration](docs/PrivateNetworkConfiguration.md)
+ - [PublicNetworkConfiguration](docs/PublicNetworkConfiguration.md)
  - [Quota](docs/Quota.md)
  - [QuotaEditLimitRequest](docs/QuotaEditLimitRequest.md)
  - [QuotaEditLimitRequestDetails](docs/QuotaEditLimitRequestDetails.md)
@@ -168,6 +171,7 @@ Class | Method | HTTP request | Description
  - [ServerIpBlock](docs/ServerIpBlock.md)
  - [ServerPatch](docs/ServerPatch.md)
  - [ServerPrivateNetwork](docs/ServerPrivateNetwork.md)
+ - [ServerPublicNetwork](docs/ServerPublicNetwork.md)
  - [ServerReserve](docs/ServerReserve.md)
  - [ServerReset](docs/ServerReset.md)
  - [SshKey](docs/SshKey.md)

@@ -1,7 +1,7 @@
 """
     Bare Metal Cloud API
 
-    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API. Deprovision servers, get or edit SSH key details, and a lot more. Manage your infrastructure more efficiently using just a few simple api calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
+    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API.  Deprovision servers, get or edit SSH key details, assign public IPs, assign servers to networks and a lot more.  Manage your infrastructure more efficiently using just a few simple API calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
 
     The version of the OpenAPI document: 0.1
     Contact: support@phoenixnap.com
@@ -95,6 +95,7 @@ class OsConfiguration(ModelNormal):
             'root_password': (str,),  # noqa: E501
             'management_ui_url': (str,),  # noqa: E501
             'management_access_allowed_ips': ([str],),  # noqa: E501
+            'install_os_to_ram': (bool,),  # noqa: E501
         }
 
     @cached_property
@@ -107,6 +108,7 @@ class OsConfiguration(ModelNormal):
         'root_password': 'rootPassword',  # noqa: E501
         'management_ui_url': 'managementUiUrl',  # noqa: E501
         'management_access_allowed_ips': 'managementAccessAllowedIps',  # noqa: E501
+        'install_os_to_ram': 'installOsToRam',  # noqa: E501
     }
 
     read_only_vars = {
@@ -156,6 +158,7 @@ class OsConfiguration(ModelNormal):
             root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal.. [optional] if omitted the server will use the default value of False  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -241,6 +244,7 @@ class OsConfiguration(ModelNormal):
             root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal.. [optional] if omitted the server will use the default value of False  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

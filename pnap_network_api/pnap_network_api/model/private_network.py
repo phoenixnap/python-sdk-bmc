@@ -1,7 +1,7 @@
 """
     Networks API
 
-    Use the Networks API to create, list, edit, and delete private networks to best fit your business needs. Private networks allow your servers to communicate without connecting to the public internet, avoiding unnecessary egress data charges.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b>   # noqa: E501
+    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a> and <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b>   # noqa: E501
 
     The version of the OpenAPI document: 1.0
     Contact: support@phoenixnap.com
@@ -31,7 +31,9 @@ from pnap_network_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from pnap_network_api.model.network_membership import NetworkMembership
     from pnap_network_api.model.private_network_server import PrivateNetworkServer
+    globals()['NetworkMembership'] = NetworkMembership
     globals()['PrivateNetworkServer'] = PrivateNetworkServer
 
 
@@ -63,6 +65,13 @@ class PrivateNetwork(ModelNormal):
     }
 
     validations = {
+        ('name',): {
+            'max_length': 100,
+            'min_length': 1,
+        },
+        ('description',): {
+            'max_length': 250,
+        },
     }
 
     @cached_property
@@ -96,6 +105,9 @@ class PrivateNetwork(ModelNormal):
             'location_default': (bool,),  # noqa: E501
             'cidr': (str,),  # noqa: E501
             'servers': ([PrivateNetworkServer],),  # noqa: E501
+            'memberships': ([NetworkMembership],),  # noqa: E501
+            'status': (str,),  # noqa: E501
+            'created_on': (datetime,),  # noqa: E501
             'description': (str,),  # noqa: E501
         }
 
@@ -113,6 +125,9 @@ class PrivateNetwork(ModelNormal):
         'location_default': 'locationDefault',  # noqa: E501
         'cidr': 'cidr',  # noqa: E501
         'servers': 'servers',  # noqa: E501
+        'memberships': 'memberships',  # noqa: E501
+        'status': 'status',  # noqa: E501
+        'created_on': 'createdOn',  # noqa: E501
         'description': 'description',  # noqa: E501
     }
 
@@ -123,7 +138,7 @@ class PrivateNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -135,6 +150,9 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            memberships ([NetworkMembership]): A list of resources that are members of this private network.
+            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
+            created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -203,6 +221,9 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.memberships = memberships
+        self.status = status
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -223,7 +244,7 @@ class PrivateNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -235,6 +256,9 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
+            memberships ([NetworkMembership]): A list of resources that are members of this private network.
+            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
+            created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -301,6 +325,9 @@ class PrivateNetwork(ModelNormal):
         self.location_default = location_default
         self.cidr = cidr
         self.servers = servers
+        self.memberships = memberships
+        self.status = status
+        self.created_on = created_on
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

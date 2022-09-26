@@ -21,6 +21,7 @@ from pnap_bmc_api.model.os_configuration_map_esxi import OsConfigurationMapEsxi
 from pnap_bmc_api.model.os_configuration_map_proxmox import OsConfigurationMapProxmox
 from pnap_bmc_api.model.os_configuration_windows import OsConfigurationWindows
 from pnap_bmc_api.model.private_network_configuration import PrivateNetworkConfiguration
+from pnap_bmc_api.model.public_network_configuration import PublicNetworkConfiguration
 from pnap_bmc_api.model.quota import Quota
 from pnap_bmc_api.model.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.model.quota_edit_limit_request_details import QuotaEditLimitRequestDetails
@@ -32,6 +33,7 @@ from pnap_bmc_api.model.server_create import ServerCreate
 from pnap_bmc_api.model.server_ip_block import ServerIpBlock
 from pnap_bmc_api.model.server_patch import ServerPatch
 from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
+from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.model.server_reserve import ServerReserve
 from pnap_bmc_api.model.server_reset import ServerReset
 from pnap_bmc_api.model.ssh_key import SshKey

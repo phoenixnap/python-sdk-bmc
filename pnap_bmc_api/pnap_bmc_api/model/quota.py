@@ -1,7 +1,7 @@
 """
     Bare Metal Cloud API
 
-    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API. Deprovision servers, get or edit SSH key details, and a lot more. Manage your infrastructure more efficiently using just a few simple api calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
+    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API.  Deprovision servers, get or edit SSH key details, assign public IPs, assign servers to networks and a lot more.  Manage your infrastructure more efficiently using just a few simple API calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
 
     The version of the OpenAPI document: 0.1
     Contact: support@phoenixnap.com
@@ -64,9 +64,6 @@ class Quota(ModelNormal):
             'WITHIN_LIMIT': "WITHIN_LIMIT",
             'OVER_LIMIT': "OVER_LIMIT",
             'ON_LIMIT': "ON_LIMIT",
-        },
-        ('unit',): {
-            'COUNT': "COUNT",
         },
     }
 
@@ -136,7 +133,7 @@ class Quota(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, description, status, limit, used, quota_edit_limit_request_details, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, description, status, limit, unit, used, quota_edit_limit_request_details, *args, **kwargs):  # noqa: E501
         """Quota - a model defined in OpenAPI
 
         Args:
@@ -145,11 +142,11 @@ class Quota(ModelNormal):
             description (str): The Quota description.
             status (str): The status of the quota resource usage.
             limit (int): The limit set for the quota.
+            unit (str): Unit of the quota type. Supported values are 'COUNT' and 'GB'.
             used (int): The quota used expressed as a number.
             quota_edit_limit_request_details ([QuotaEditLimitRequestDetails]):
 
         Keyword Args:
-            unit (str): An enum field describing what the limit is measured in.. defaults to "COUNT", must be one of ["COUNT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -182,7 +179,6 @@ class Quota(ModelNormal):
                                 _visited_composed_classes = (Animal,)
         """
 
-        unit = kwargs.get('unit', "COUNT")
         _check_type = kwargs.pop('_check_type', True)
         _spec_property_naming = kwargs.pop('_spec_property_naming', False)
         _path_to_item = kwargs.pop('_path_to_item', ())
@@ -236,7 +232,7 @@ class Quota(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, description, status, limit, used, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, description, status, limit, unit, used, *args, **kwargs):  # noqa: E501
         """Quota - a model defined in OpenAPI
 
         Args:
@@ -245,9 +241,9 @@ class Quota(ModelNormal):
             description (str): The Quota description.
             status (str): The status of the quota resource usage.
             limit (int): The limit set for the quota.
+            unit (str): Unit of the quota type. Supported values are 'COUNT' and 'GB'.
             used (int): The quota used expressed as a number.
         Keyword Args:
-            unit (str): An enum field describing what the limit is measured in.. defaults to "COUNT", must be one of ["COUNT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -280,7 +276,6 @@ class Quota(ModelNormal):
                                 _visited_composed_classes = (Animal,)
         """
 
-        unit = kwargs.get('unit', "COUNT")
         _check_type = kwargs.pop('_check_type', True)
         _spec_property_naming = kwargs.pop('_spec_property_naming', False)
         _path_to_item = kwargs.pop('_path_to_item', ())

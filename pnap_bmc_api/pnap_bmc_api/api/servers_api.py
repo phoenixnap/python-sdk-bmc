@@ -1,7 +1,7 @@
 """
     Bare Metal Cloud API
 
-    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API. Deprovision servers, get or edit SSH key details, and a lot more. Manage your infrastructure more efficiently using just a few simple api calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
+    Create, power off, power on, reset, reboot, or shut down your server with the Bare Metal Cloud API.  Deprovision servers, get or edit SSH key details, assign public IPs, assign servers to networks and a lot more.  Manage your infrastructure more efficiently using just a few simple API calls.<br> <br> <span class='pnap-api-knowledge-base-link'> Knowledge base articles to help you can be found <a href='https://phoenixnap.com/kb/how-to-deploy-bare-metal-cloud-server' target='_blank'>here</a> </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/bmc/v1/)</b>   # noqa: E501
 
     The version of the OpenAPI document: 0.1
     Contact: support@phoenixnap.com
@@ -32,6 +32,7 @@ from pnap_bmc_api.model.server_create import ServerCreate
 from pnap_bmc_api.model.server_ip_block import ServerIpBlock
 from pnap_bmc_api.model.server_patch import ServerPatch
 from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
+from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.model.server_reserve import ServerReserve
 from pnap_bmc_api.model.server_reset import ServerReset
 from pnap_bmc_api.model.tag_assignment_request import TagAssignmentRequest
@@ -916,6 +917,120 @@ class ServersApi(object):
             },
             api_client=api_client
         )
+        self.servers_server_id_public_networks_delete_endpoint = _Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'OAuth2'
+                ],
+                'endpoint_path': '/servers/{serverId}/network-configuration/public-network-configuration/public-networks/{publicNetworkId}',
+                'operation_id': 'servers_server_id_public_networks_delete',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'server_id',
+                    'public_network_id',
+                ],
+                'required': [
+                    'server_id',
+                    'public_network_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'server_id':
+                        (str,),
+                    'public_network_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'server_id': 'serverId',
+                    'public_network_id': 'publicNetworkId',
+                },
+                'location_map': {
+                    'server_id': 'path',
+                    'public_network_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.servers_server_id_public_networks_post_endpoint = _Endpoint(
+            settings={
+                'response_type': (ServerPublicNetwork,),
+                'auth': [
+                    'OAuth2'
+                ],
+                'endpoint_path': '/servers/{serverId}/network-configuration/public-network-configuration/public-networks',
+                'operation_id': 'servers_server_id_public_networks_post',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'server_id',
+                    'server_public_network',
+                ],
+                'required': [
+                    'server_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'server_id':
+                        (str,),
+                    'server_public_network':
+                        (ServerPublicNetwork,),
+                },
+                'attribute_map': {
+                    'server_id': 'serverId',
+                },
+                'location_map': {
+                    'server_id': 'path',
+                    'server_public_network': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
         self.servers_server_id_tags_put_endpoint = _Endpoint(
             settings={
                 'response_type': (Server,),
@@ -982,7 +1097,7 @@ class ServersApi(object):
     ):
         """Removes the server from private network.  # noqa: E501
 
-        Removes the server from private network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure you are able to access this server over remote console in case of misconfiguration.</b>  # noqa: E501
+        Removes the server from private network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1603,7 +1718,7 @@ class ServersApi(object):
     ):
         """Reset server.  # noqa: E501
 
-        Reset specific server.  # noqa: E501
+        Deprecated: Reset specific server. Reset only supports network configurations of type 'private network' or 'IP blocks'. As an alternative, the suggested action is to deprovision the server and provision a new one with the same configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1917,7 +2032,7 @@ class ServersApi(object):
     ):
         """Unassign IP Block from Server.  # noqa: E501
 
-        Removes the IP block from the server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure you are able to access this server over remote console in case of misconfiguration.</b>  # noqa: E501
+        Removes the IP block from the server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1999,7 +2114,7 @@ class ServersApi(object):
     ):
         """Assign IP Block to Server.  # noqa: E501
 
-        Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. You are expected to perform network configuration changes in the operating system of this server.  # noqa: E501
+        Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/configure-server-with-public-ip-block#ftoc-heading-2' target='_blank'>here</a>.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2157,7 +2272,7 @@ class ServersApi(object):
     ):
         """Adds the server to a private network.  # noqa: E501
 
-        Adds the server to a private network.  # noqa: E501
+        Adds the server to a private network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable. These will return a Bad Request (400) if selected. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/configure-bmc-server-after-adding-to-network#ftoc-heading-3' target='_blank'>here</a>.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2229,14 +2344,175 @@ class ServersApi(object):
             server_id
         return self.servers_server_id_private_networks_post_endpoint.call_with_http_info(**kwargs)
 
+    def servers_server_id_public_networks_delete(
+        self,
+        server_id,
+        public_network_id,
+        **kwargs
+    ):
+        """Removes the server from the Public Network  # noqa: E501
+
+        Removes the server from the Public Network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. <b>This is an advanced network action that can make your server completely unavailable over any network. Make sure this server is reachable over remote console for guaranteed access in case of misconfiguration.</b>  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.servers_server_id_public_networks_delete(server_id, public_network_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            server_id (str): The server's ID.
+            public_network_id (str): The Public Network identifier.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            str
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['server_id'] = \
+            server_id
+        kwargs['public_network_id'] = \
+            public_network_id
+        return self.servers_server_id_public_networks_delete_endpoint.call_with_http_info(**kwargs)
+
+    def servers_server_id_public_networks_post(
+        self,
+        server_id,
+        **kwargs
+    ):
+        """Adds the server to a Public Network.  # noqa: E501
+
+        Adds the server to a Public Network. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/configure-bmc-server-after-adding-to-network#ftoc-heading-3' target='_blank'>here</a>.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.servers_server_id_public_networks_post(server_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            server_id (str): The server's ID.
+
+        Keyword Args:
+            server_public_network (ServerPublicNetwork): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            ServerPublicNetwork
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['server_id'] = \
+            server_id
+        return self.servers_server_id_public_networks_post_endpoint.call_with_http_info(**kwargs)
+
     def servers_server_id_tags_put(
         self,
         server_id,
         **kwargs
     ):
-        """Set server tags.  # noqa: E501
+        """Overwrite tags assigned for Server.  # noqa: E501
 
-        Set tags for server.  # noqa: E501
+        Overwrites tags assigned for Server and unassigns any tags not part of the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

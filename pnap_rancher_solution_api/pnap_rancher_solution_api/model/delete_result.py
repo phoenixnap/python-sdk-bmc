@@ -103,11 +103,12 @@ class DeleteResult(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, result, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, result, cluster_id, *args, **kwargs):  # noqa: E501
         """DeleteResult - a model defined in OpenAPI
 
         Args:
             result (str): Solution cluster has been deleted.
+            cluster_id (str): The unique identifier of the solution cluster.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -140,7 +141,6 @@ class DeleteResult(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            cluster_id (str): The unique identifier of the solution cluster.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -169,6 +169,7 @@ class DeleteResult(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.result = result
+        self.cluster_id = cluster_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -189,11 +190,12 @@ class DeleteResult(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, result, *args, **kwargs):  # noqa: E501
+    def __init__(self, result, cluster_id, *args, **kwargs):  # noqa: E501
         """DeleteResult - a model defined in OpenAPI
 
         Args:
             result (str): Solution cluster has been deleted.
+            cluster_id (str): The unique identifier of the solution cluster.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -226,7 +228,6 @@ class DeleteResult(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            cluster_id (str): The unique identifier of the solution cluster.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -253,6 +254,7 @@ class DeleteResult(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.result = result
+        self.cluster_id = cluster_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

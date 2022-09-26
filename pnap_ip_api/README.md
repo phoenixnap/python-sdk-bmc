@@ -62,6 +62,7 @@ from pnap_ip_api.model.error import Error
 from pnap_ip_api.model.ip_block import IpBlock
 from pnap_ip_api.model.ip_block_create import IpBlockCreate
 from pnap_ip_api.model.ip_block_patch import IpBlockPatch
+from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -84,10 +85,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    
+    tag = ["env.dev","loc.phx"] # [str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
+
     try:
         # List IP Blocks.
-        api_response = api_instance.ip_blocks_get()
+        api_response = api_instance.ip_blocks_get(tag=tag)
         pprint(api_response)
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_get: %s\n" % e)
@@ -121,6 +123,7 @@ Class | Method | HTTP request | Description
 *IPBlocksApi* | [**ip_blocks_ip_block_id_delete**](docs/IPBlocksApi.md#ip_blocks_ip_block_id_delete) | **DELETE** /ip-blocks/{ipBlockId} | Delete IP Block.
 *IPBlocksApi* | [**ip_blocks_ip_block_id_get**](docs/IPBlocksApi.md#ip_blocks_ip_block_id_get) | **GET** /ip-blocks/{ipBlockId} | Get IP Block.
 *IPBlocksApi* | [**ip_blocks_ip_block_id_patch**](docs/IPBlocksApi.md#ip_blocks_ip_block_id_patch) | **PATCH** /ip-blocks/{ipBlockId} | Update IP block.
+*IPBlocksApi* | [**ip_blocks_ip_block_id_tags_put**](docs/IPBlocksApi.md#ip_blocks_ip_block_id_tags_put) | **PUT** /ip-blocks/{ipBlockId}/tags | Overwrite tags assigned for IP Block.
 *IPBlocksApi* | [**ip_blocks_post**](docs/IPBlocksApi.md#ip_blocks_post) | **POST** /ip-blocks | Create an IP Block.
 
 
@@ -131,6 +134,8 @@ Class | Method | HTTP request | Description
  - [IpBlock](docs/IpBlock.md)
  - [IpBlockCreate](docs/IpBlockCreate.md)
  - [IpBlockPatch](docs/IpBlockPatch.md)
+ - [TagAssignment](docs/TagAssignment.md)
+ - [TagAssignmentRequest](docs/TagAssignmentRequest.md)
 
 
 ## Documentation For Authorization
