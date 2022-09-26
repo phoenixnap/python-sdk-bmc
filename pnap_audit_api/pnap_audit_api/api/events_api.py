@@ -22,6 +22,7 @@ from pnap_audit_api.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from pnap_audit_api.model.error import Error
 from pnap_audit_api.model.event import Event
 
 
@@ -177,6 +178,10 @@ class EventsApi(object):
             _host_index (int/None): specifies the index of the server
                 that we want to use.
                 Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
             async_req (bool): execute request asynchronously
 
         Returns:
@@ -208,5 +213,6 @@ class EventsApi(object):
         kwargs['_content_type'] = kwargs.get(
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         return self.events_get_endpoint.call_with_http_info(**kwargs)
 

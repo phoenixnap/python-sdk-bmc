@@ -25,6 +25,4 @@ from pnap_audit_api.exceptions import ApiValueError
 from pnap_audit_api.exceptions import ApiKeyError
 from pnap_audit_api.exceptions import ApiException
 from pnap_audit_api.version import VERSION
-
-
 __version__ = VERSION

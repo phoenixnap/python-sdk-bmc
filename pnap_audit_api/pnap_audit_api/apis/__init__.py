@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.events_api import EventsApi
+#   from pnap_audit_api.api.events_api import EventsApi
 #
 # or import this package, but before doing it, use:
 #
