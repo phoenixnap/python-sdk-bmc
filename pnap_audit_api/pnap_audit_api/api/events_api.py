@@ -22,6 +22,7 @@ from pnap_audit_api.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from pnap_audit_api.model.error import Error
 from pnap_audit_api.model.event import Event
 
 
