@@ -107,7 +107,11 @@ jobs:
           ref: ${{ github.event_name == 'schedule' && 'develop' || github.head_ref }}
       - name: Echo "With"
         run: |
+          echo "Checking refs"
+          echo ${{ github.ref }}
           echo ${{ github.base_ref }}
+          echo ${{ github.head_ref }}
+          echo "Checked refs"
       - name: Download Artifacts
         uses: actions/download-artifact@v2
       - name: Add and Commit files
