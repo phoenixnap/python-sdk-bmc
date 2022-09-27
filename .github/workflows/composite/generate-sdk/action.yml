@@ -15,8 +15,6 @@ runs:
       if: startsWith(github.head_ref, 'release') == false && github.head_ref != 'master'
       id: checkReleaseBranch
       run: |
-        echo ${{ github.head_ref }}
-        echo ${{ github.ref }}
         echo "Release or master source branch. Skipping generation"
         echo "::set-output name=IS_FEATURE_BRANCH::true"
     - name: Install node

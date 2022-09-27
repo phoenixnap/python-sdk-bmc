@@ -105,6 +105,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
           ref: ${{ github.event_name == 'schedule' && 'develop' || github.head_ref }}
+      - name: Echo "With"
+        run: |
+          echo ${{ github.event_name == 'schedule' && 'develop' || github.head_ref }}
       - name: Download Artifacts
         uses: actions/download-artifact@v2
       - name: Add and Commit files
