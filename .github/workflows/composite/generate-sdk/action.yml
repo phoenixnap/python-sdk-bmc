@@ -24,6 +24,10 @@ runs:
       if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
       shell: bash
       run: npm install -g @openapitools/openapi-generator-cli
+    - name: Download spec files
+      if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
+      shell: bash
+      run: wget ${{ inputs.spec-link }} -O ./${{ inputs.package-name }}/${{ inputs.package-name }}.spec.yaml
     - name: Generate API
       if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
       shell: bash
