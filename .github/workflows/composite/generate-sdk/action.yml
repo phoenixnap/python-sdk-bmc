@@ -15,8 +15,8 @@ runs:
       if: startsWith(github.head_ref, 'release') == false && github.head_ref != 'master'
       id: checkReleaseBranch
       run: |
-          echo "Release or master source branch. Skipping generation"
-          echo "::set-output name=IS_FEATURE_BRANCH::true"
+        echo "Release or master source branch. Skipping generation"
+        echo "::set-output name=IS_FEATURE_BRANCH::true"
     - name: Install node
       if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
       uses: actions/setup-node@v2
@@ -24,6 +24,10 @@ runs:
       if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
       shell: bash
       run: npm install -g @openapitools/openapi-generator-cli
+    - name: Download spec files
+      if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
+      shell: bash
+      run: wget ${{ inputs.spec-link }} -O ./${{ inputs.package-name }}/${{ inputs.package-name }}.spec.yaml
     - name: Generate API
       if: ${{ steps.checkReleaseBranch.outputs.IS_FEATURE_BRANCH }}
       shell: bash
