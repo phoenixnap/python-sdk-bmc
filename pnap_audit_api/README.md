@@ -24,7 +24,7 @@ Python >=3.6
 You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install pnap_audit_api
+$ pip install pnap_audit_api
 ```
 
 Then import the package:
@@ -81,12 +81,12 @@ with pnap_audit_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = events_api.EventsApi(api_client)
     _from = dateutil_parser('2021-04-27T16:24:57.123Z') # datetime | From the date and time (inclusive) to filter event log records by. (optional)
-to = dateutil_parser('2021-04-29T16:24:57.123Z') # datetime | To the date and time (inclusive) to filter event log records by. (optional)
-limit = 10 # int | Limit the number of records returned. (optional)
-order = "ASC" # str | Ordering of the event's time. SortBy can be introduced later on. (optional) (default to "ASC")
-username = "johnd@phoenixnap.com" # str | The username that did the actions. (optional)
-verb = "POST" # str | The HTTP verb corresponding to the action. (optional)
-uri = "/ams/v1/clients/12345" # str | The request uri. (optional)
+    to = dateutil_parser('2021-04-29T16:24:57.123Z') # datetime | To the date and time (inclusive) to filter event log records by. (optional)
+    limit = 10 # int | Limit the number of records returned. (optional)
+    order = "ASC" # str | Ordering of the event's time. SortBy can be introduced later on. (optional) (default to "ASC")
+    username = "johnd@phoenixnap.com" # str | The username that did the actions. (optional)
+    verb = "POST" # str | The HTTP verb corresponding to the action. (optional)
+    uri = "/ams/v1/clients/12345" # str | The request uri. (optional)
 
     try:
         # List event logs.
@@ -95,8 +95,8 @@ uri = "/ams/v1/clients/12345" # str | The request uri. (optional)
     except pnap_audit_api.ApiException as e:
         print("Exception when calling EventsApi->events_get: %s\n" % e)
 ```
-To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 ```python
 from keycloak import KeycloakOpenID
 
@@ -165,3 +165,4 @@ import pnap_audit_api
 from pnap_audit_api.apis import *
 from pnap_audit_api.models import *
 ```
+

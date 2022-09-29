@@ -25,7 +25,7 @@ Python >=3.6
 You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install pnap_ip_api
+$ pip install pnap_ip_api
 ```
 
 Then import the package:
@@ -94,8 +94,8 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_get: %s\n" % e)
 ```
-To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 ```python
 from keycloak import KeycloakOpenID
 
@@ -174,3 +174,4 @@ import pnap_ip_api
 from pnap_ip_api.apis import *
 from pnap_ip_api.models import *
 ```
+
