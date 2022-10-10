@@ -25,7 +25,7 @@ Python >=3.6
 You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install pnap_rancher_solution_api
+$ pip install pnap_rancher_solution_api
 ```
 
 Then import the package:
@@ -82,7 +82,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = clusters_api.ClustersApi(api_client)
-    
+
     try:
         # Cluster list.
         api_response = api_instance.clusters_get()
@@ -90,8 +90,8 @@ with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     except pnap_rancher_solution_api.ApiException as e:
         print("Exception when calling ClustersApi->clusters_get: %s\n" % e)
 ```
-To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
 ```python
 from keycloak import KeycloakOpenID
 
@@ -124,12 +124,16 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Cluster](docs/Cluster.md)
+ - [ClusterConfiguration](docs/ClusterConfiguration.md)
+ - [ClusterWorkloadConfiguration](docs/ClusterWorkloadConfiguration.md)
  - [DeleteResult](docs/DeleteResult.md)
  - [Error](docs/Error.md)
  - [Node](docs/Node.md)
  - [NodePool](docs/NodePool.md)
+ - [NodePoolSshConfig](docs/NodePoolSshConfig.md)
  - [RancherClusterCertificates](docs/RancherClusterCertificates.md)
  - [RancherClusterConfig](docs/RancherClusterConfig.md)
+ - [RancherClusterConfigCertificates](docs/RancherClusterConfigCertificates.md)
  - [RancherServerMetadata](docs/RancherServerMetadata.md)
  - [SshConfig](docs/SshConfig.md)
  - [WorkloadClusterConfig](docs/WorkloadClusterConfig.md)
@@ -171,3 +175,4 @@ import pnap_rancher_solution_api
 from pnap_rancher_solution_api.apis import *
 from pnap_rancher_solution_api.models import *
 ```
+

@@ -31,8 +31,8 @@ from pnap_rancher_solution_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from pnap_rancher_solution_api.model.rancher_cluster_certificates import RancherClusterCertificates
-    globals()['RancherClusterCertificates'] = RancherClusterCertificates
+    from pnap_rancher_solution_api.model.rancher_cluster_config_certificates import RancherClusterConfigCertificates
+    globals()['RancherClusterConfigCertificates'] = RancherClusterConfigCertificates
 
 
 class RancherClusterConfig(ModelNormal):
@@ -94,7 +94,7 @@ class RancherClusterConfig(ModelNormal):
             'etcd_snapshot_retention': (int,),  # noqa: E501
             'node_taint': (str,),  # noqa: E501
             'cluster_domain': (str,),  # noqa: E501
-            'certificates': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'certificates': (RancherClusterConfigCertificates,),  # noqa: E501
         }
 
     @cached_property
@@ -159,11 +159,11 @@ class RancherClusterConfig(ModelNormal):
             etcd_snapshot_retention (int): This maps to ranchers `etcd-snapshot-retention`. Number of snapshots to retain.. [optional] if omitted the server will use the default value of 5  # noqa: E501
             node_taint (str): This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.. [optional]  # noqa: E501
             cluster_domain (str): This maps to ranchers `cluster-domain`. Cluster Domain.. [optional]  # noqa: E501
-            certificates (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            certificates (RancherClusterConfigCertificates): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
+        _spec_property_naming = kwargs.pop('_spec_property_naming', True)
         _path_to_item = kwargs.pop('_path_to_item', ())
         _configuration = kwargs.pop('_configuration', None)
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
@@ -171,14 +171,18 @@ class RancherClusterConfig(ModelNormal):
         self = super(OpenApiModel, cls).__new__(cls)
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type
@@ -247,7 +251,7 @@ class RancherClusterConfig(ModelNormal):
             etcd_snapshot_retention (int): This maps to ranchers `etcd-snapshot-retention`. Number of snapshots to retain.. [optional] if omitted the server will use the default value of 5  # noqa: E501
             node_taint (str): This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.. [optional]  # noqa: E501
             cluster_domain (str): This maps to ranchers `cluster-domain`. Cluster Domain.. [optional]  # noqa: E501
-            certificates (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            certificates (RancherClusterConfigCertificates): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -257,14 +261,18 @@ class RancherClusterConfig(ModelNormal):
         _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
 
         if args:
-            raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
-                    args,
-                    self.__class__.__name__,
-                ),
-                path_to_item=_path_to_item,
-                valid_classes=(self.__class__,),
-            )
+            for arg in args:
+                if isinstance(arg, dict):
+                    kwargs.update(arg)
+                else:
+                    raise ApiTypeError(
+                        "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments." % (
+                            args,
+                            self.__class__.__name__,
+                        ),
+                        path_to_item=_path_to_item,
+                        valid_classes=(self.__class__,),
+                    )
 
         self._data_store = {}
         self._check_type = _check_type

@@ -19,6 +19,7 @@ from http import client as http_client
 from pnap_audit_api.exceptions import ApiValueError
 from pnap_audit_api.version import VERSION
 
+
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'multipleOf', 'maximum', 'exclusiveMaximum',
     'minimum', 'exclusiveMinimum', 'maxLength',
@@ -389,7 +390,7 @@ class Configuration(object):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0\n"\
-               "SDK Package Version: " + VERSION .\
+               "SDK Package Version: " + VERSION.\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
