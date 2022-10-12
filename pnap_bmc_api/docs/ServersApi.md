@@ -247,6 +247,9 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
             ),
             management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
             install_os_to_ram=False,
+            cloud_init=OsConfigurationCloudInit(
+                user_data='YQ==',
+            ),
         ),
         tags=[
             TagAssignmentRequest(

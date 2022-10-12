@@ -16,6 +16,7 @@ from pnap_bmc_api.model.error import Error
 from pnap_bmc_api.model.ip_blocks_configuration import IpBlocksConfiguration
 from pnap_bmc_api.model.network_configuration import NetworkConfiguration
 from pnap_bmc_api.model.os_configuration import OsConfiguration
+from pnap_bmc_api.model.os_configuration_cloud_init import OsConfigurationCloudInit
 from pnap_bmc_api.model.os_configuration_map import OsConfigurationMap
 from pnap_bmc_api.model.os_configuration_map_esxi import OsConfigurationMapEsxi
 from pnap_bmc_api.model.os_configuration_map_proxmox import OsConfigurationMapProxmox
