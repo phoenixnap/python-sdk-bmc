@@ -135,7 +135,7 @@ class OsConfigurationCloudInit(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            user_data (str): User data for cloud init configuration in base64 encoding. NoCloud format is supported.. [optional]  # noqa: E501
+            user_data (str): User data for the cloud-init configuration in base64 encoding. NoCloud format is supported.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -221,7 +221,7 @@ class OsConfigurationCloudInit(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            user_data (str): User data for cloud init configuration in base64 encoding. NoCloud format is supported.. [optional]  # noqa: E501
+            user_data (str): User data for the cloud-init configuration in base64 encoding. NoCloud format is supported.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
