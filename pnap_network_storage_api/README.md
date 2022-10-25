@@ -61,6 +61,7 @@ from pnap_network_storage_api.model.storage_network import StorageNetwork
 from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
 from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
 from pnap_network_storage_api.model.volume import Volume
+from pnap_network_storage_api.model.volume_update import VolumeUpdate
 # Defining the host is optional and defaults to https://api.phoenixnap.com/network-storage/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_storage_api.Configuration(
@@ -124,6 +125,7 @@ Class | Method | HTTP request | Description
 *StorageNetworksApi* | [**storage_networks_post**](docs/StorageNetworksApi.md#storage_networks_post) | **POST** /storage-networks | Create a storage network and volume.
 *StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_get) | **GET** /storage-networks/{storageNetworkId}/volumes | Display one or more volumes belonging to a storage network.
 *StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_patch**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
 
 
 ## Documentation For Models
@@ -137,6 +139,7 @@ Class | Method | HTTP request | Description
  - [StorageNetworkUpdate](docs/StorageNetworkUpdate.md)
  - [Volume](docs/Volume.md)
  - [VolumeCreate](docs/VolumeCreate.md)
+ - [VolumeUpdate](docs/VolumeUpdate.md)
 
 
 ## Documentation For Authorization
