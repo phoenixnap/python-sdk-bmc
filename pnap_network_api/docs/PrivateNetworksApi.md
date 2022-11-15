@@ -404,6 +404,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
         description="Further details on the network",
         location="PHX",
         location_default=True,
+        vlan_id=10,
         cidr="10.0.0.0/24",
     ) # PrivateNetworkCreate |  (optional)
 

@@ -66,6 +66,10 @@ class PrivateNetworkCreate(ModelNormal):
         ('description',): {
             'max_length': 250,
         },
+        ('vlan_id',): {
+            'inclusive_maximum': 4094,
+            'inclusive_minimum': 2,
+        },
     }
 
     @cached_property
@@ -94,6 +98,7 @@ class PrivateNetworkCreate(ModelNormal):
             'cidr': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'location_default': (bool,),  # noqa: E501
+            'vlan_id': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -107,6 +112,7 @@ class PrivateNetworkCreate(ModelNormal):
         'cidr': 'cidr',  # noqa: E501
         'description': 'description',  # noqa: E501
         'location_default': 'locationDefault',  # noqa: E501
+        'vlan_id': 'vlanId',  # noqa: E501
     }
 
     read_only_vars = {
@@ -157,6 +163,7 @@ class PrivateNetworkCreate(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this private network.. [optional]  # noqa: E501
             location_default (bool): Identifies network as the default private network for the specified location.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -252,6 +259,7 @@ class PrivateNetworkCreate(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this private network.. [optional]  # noqa: E501
             location_default (bool): Identifies network as the default private network for the specified location.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

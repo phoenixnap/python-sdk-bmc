@@ -70,6 +70,10 @@ class PublicNetworkCreate(ModelNormal):
         ('description',): {
             'max_length': 250,
         },
+        ('vlan_id',): {
+            'inclusive_maximum': 4094,
+            'inclusive_minimum': 2,
+        },
         ('ip_blocks',): {
             'max_items': 10,
         },
@@ -101,6 +105,7 @@ class PublicNetworkCreate(ModelNormal):
             'name': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'vlan_id': (int,),  # noqa: E501
             'ip_blocks': ([PublicNetworkIpBlock],),  # noqa: E501
         }
 
@@ -113,6 +118,7 @@ class PublicNetworkCreate(ModelNormal):
         'name': 'name',  # noqa: E501
         'location': 'location',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'vlan_id': 'vlanId',  # noqa: E501
         'ip_blocks': 'ipBlocks',  # noqa: E501
     }
 
@@ -162,6 +168,7 @@ class PublicNetworkCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this public network.. [optional]  # noqa: E501
+            vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that will be associated with this public network.. [optional]  # noqa: E501
         """
 
@@ -255,6 +262,7 @@ class PublicNetworkCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this public network.. [optional]  # noqa: E501
+            vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that will be associated with this public network.. [optional]  # noqa: E501
         """
 

@@ -586,6 +586,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
         name="Sample Network",
         description="Further details on the network.",
         location="PHX",
+        vlan_id=10,
         ip_blocks=[
             PublicNetworkIpBlock(
                 id="60473a6115e34466c9f8f083",
