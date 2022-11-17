@@ -96,6 +96,7 @@ class Volume(ModelNormal):
             'path': (str,),  # noqa: E501
             'path_suffix': (str,),  # noqa: E501
             'capacity_in_gb': (int,),  # noqa: E501
+            'used_capacity_in_gb': (int,),  # noqa: E501
             'protocol': (str,),  # noqa: E501
             'status': (Status,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
@@ -114,6 +115,7 @@ class Volume(ModelNormal):
         'path': 'path',  # noqa: E501
         'path_suffix': 'pathSuffix',  # noqa: E501
         'capacity_in_gb': 'capacityInGb',  # noqa: E501
+        'used_capacity_in_gb': 'usedCapacityInGb',  # noqa: E501
         'protocol': 'protocol',  # noqa: E501
         'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
@@ -167,6 +169,7 @@ class Volume(ModelNormal):
             path (str): Volume's full path. It is in form of `/{volumeId}/pathSuffix`'.. [optional]  # noqa: E501
             path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
             capacity_in_gb (int): Maximum capacity in GB.. [optional]  # noqa: E501
+            used_capacity_in_gb (int): Used capacity in GB, updated periodically.. [optional]  # noqa: E501
             protocol (str): File system protocol. Currently this field should be set to `NFS`.. [optional]  # noqa: E501
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501
@@ -262,6 +265,7 @@ class Volume(ModelNormal):
             path (str): Volume's full path. It is in form of `/{volumeId}/pathSuffix`'.. [optional]  # noqa: E501
             path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
             capacity_in_gb (int): Maximum capacity in GB.. [optional]  # noqa: E501
+            used_capacity_in_gb (int): Used capacity in GB, updated periodically.. [optional]  # noqa: E501
             protocol (str): File system protocol. Currently this field should be set to `NFS`.. [optional]  # noqa: E501
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501

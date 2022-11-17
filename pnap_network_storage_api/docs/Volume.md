@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **path** | **str** | Volume&#39;s full path. It is in form of &#x60;/{volumeId}/pathSuffix&#x60;&#39;. | [optional] 
 **path_suffix** | **str** | Last part of volume&#39;s path. | [optional] 
 **capacity_in_gb** | **int** | Maximum capacity in GB. | [optional] 
+**used_capacity_in_gb** | **int** | Used capacity in GB, updated periodically. | [optional] 
 **protocol** | **str** | File system protocol. Currently this field should be set to &#x60;NFS&#x60;. | [optional] 
 **status** | [**Status**](Status.md) |  | [optional] 
 **created_on** | **datetime** |  | [optional] 
