@@ -40,6 +40,7 @@ Removes the server from private network. <b>No actual configuration is performed
 import time
 import pnap_bmc_api
 from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -101,6 +102,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | The server is being removed from the specified private network. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -324,7 +330,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Request to create server is accepted. |  -  |
+**202** | Request to create server is accepted. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
