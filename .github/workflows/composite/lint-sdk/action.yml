@@ -7,14 +7,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Check out the repo # Checkout to fetch .pylintrc
-      uses: actions/checkout@v2
-    - name: Download Artifacts
-      uses: actions/download-artifact@v2
-    - name: Install and run pylint
+    - uses: actions/download-artifact@v3
+    - uses: ./.github/workflows/composite/setup-python
+    - name: Run pylint
       shell: bash
       run: |
-          sudo apt-get install python3-dev
           pip install pylint
           pip install --requirement ${{ inputs.package-name }}/requirements.txt
           pylint ${{ inputs.package-name }}/*.py -d R,C,W0511
