@@ -1,9 +1,14 @@
 name: 'Setup Python'
-description: 'Sets up python and generic configuration'
+description: 'Sets up Python'
+inputs:
+  python-version: 
+    description: 'Version of Python to setup.'
+    required: false
+    default: '3.11'
 runs:
   using: "composite"
   steps:
-    - name: Setup Python with Version
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11' 
+        go-version: ${{ inputs.python-version }}

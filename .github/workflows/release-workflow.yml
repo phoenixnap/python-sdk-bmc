@@ -78,6 +78,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -86,6 +89,7 @@ jobs:
           test-dir: tests
           test-file: pnap_bmc_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ipapi:
     name: Test IP API
@@ -97,6 +101,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -105,6 +112,7 @@ jobs:
           test-dir: tests
           test-file: pnap_ip_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-auditapi:
     name: Test Audit API
@@ -116,6 +124,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -124,6 +135,7 @@ jobs:
           test-dir: tests
           test-file: pnap_audit_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkapi:
     name: Test Network API
@@ -135,6 +147,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -143,6 +158,7 @@ jobs:
           test-dir: tests
           test-file: pnap_network_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
@@ -154,6 +170,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -162,6 +181,7 @@ jobs:
           test-dir: tests
           test-file: pnap_rancher_solution_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-tagapi:
     name: Test Tag API
@@ -173,6 +193,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -181,6 +204,7 @@ jobs:
           test-dir: tests
           test-file: pnap_tag_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkstorageapi:
     name: Test Network Storage API
@@ -192,6 +216,9 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -200,6 +227,7 @@ jobs:
           test-dir: tests
           test-file: pnap_network_storage_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   check-release:
     needs:

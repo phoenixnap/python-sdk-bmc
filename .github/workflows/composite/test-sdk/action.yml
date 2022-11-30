@@ -13,11 +13,17 @@ inputs:
   test-report-dir:
     description: 'The location of the test reports'
     required: true
+  python-version: 
+    description: 'Version of Python to run tests on.'
+    required: true
 runs:
   using: "composite"
   steps:
     - uses: actions/download-artifact@v3
-    - uses: ./.github/workflows/composite/setup-python
+    - name: Setup Python
+      uses: ./.github/workflows/composite/setup-python
+      with:
+        python-version: ${{ inputs.python-version }}
     - name: Install package under test
       shell: bash
       run: |
