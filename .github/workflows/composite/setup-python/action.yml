@@ -11,4 +11,4 @@ runs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        go-version: ${{ inputs.python-version }}
+        python-version: ${{ inputs.python-version }}
