@@ -79,6 +79,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -102,6 +103,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -125,6 +127,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -148,6 +151,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -171,6 +175,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -194,6 +199,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
@@ -217,6 +223,7 @@ jobs:
         ports:
           - 1080:1080
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.11' ]
     steps:
