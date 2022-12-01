@@ -12,7 +12,7 @@ jobs:
 
   generate-bmcapi:
     name: Generate BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -22,7 +22,7 @@ jobs:
 
   generate-ipapi:
     name: Generate IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -32,7 +32,7 @@ jobs:
 
   generate-auditapi:
     name: Generate Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -42,7 +42,7 @@ jobs:
 
   generate-networkapi:
     name: Generate Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -52,7 +52,7 @@ jobs:
 
   generate-ranchersolutionapi:
     name: Generate Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -62,7 +62,7 @@ jobs:
 
   generate-tagapi:
     name: Generate Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -72,7 +72,7 @@ jobs:
 
   generate-networkstorageapi:
     name: Generate Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -89,7 +89,7 @@ jobs:
         github.base_ref == 'develop' &&
         github.event.pull_request.head.repo.full_name == 'phoenixnap/python-sdk-bmc'
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
       - generate-ipapi
@@ -124,7 +124,7 @@ jobs:
 
   lint-bmcapi:
     name: Lint BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
     steps:
@@ -135,7 +135,7 @@ jobs:
 
   lint-ipapi:
     name: Lint IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ipapi
     steps:
@@ -146,7 +146,7 @@ jobs:
 
   lint-auditapi:
     name: Lint Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-auditapi
     steps:
@@ -157,7 +157,7 @@ jobs:
 
   lint-networkapi:
     name: Lint Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkapi
     steps:
@@ -168,7 +168,7 @@ jobs:
 
   lint-ranchersolutionapi:
     name: Lint Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ranchersolutionapi
     steps:
@@ -179,7 +179,7 @@ jobs:
 
   lint-tagapi:
     name: Lint Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-tagapi
     steps:
@@ -190,7 +190,7 @@ jobs:
 
   lint-networkstorageapi:
     name: Lint Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkstorageapi
     steps:
@@ -201,7 +201,7 @@ jobs:
 
   test-bmcapi:
     name: Test BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-bmcapi
     services:
@@ -209,6 +209,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -217,10 +221,11 @@ jobs:
           test-dir: tests
           test-file: pnap_bmc_api_test.py
           test-report-dir: tests/test-reports
-
+          python-version: ${{ matrix.python-version }}
+          
   test-ipapi:
     name: Test IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ipapi
     services:
@@ -228,6 +233,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -236,10 +245,11 @@ jobs:
           test-dir: tests
           test-file: pnap_ip_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-auditapi:
     name: Test Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-auditapi
     services:
@@ -247,6 +257,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -255,10 +269,11 @@ jobs:
           test-dir: tests
           test-file: pnap_audit_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkapi:
     name: Test Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkapi
     services:
@@ -266,6 +281,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -274,10 +293,11 @@ jobs:
           test-dir: tests
           test-file: pnap_network_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ranchersolutionapi
     services:
@@ -285,6 +305,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -293,10 +317,11 @@ jobs:
           test-dir: tests
           test-file: pnap_rancher_solution_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-tagapi:
     name: Test Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-tagapi
     services:
@@ -304,6 +329,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -312,10 +341,11 @@ jobs:
           test-dir: tests
           test-file: pnap_tag_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkstorageapi:
     name: Test Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkstorageapi
     services:
@@ -323,6 +353,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -331,6 +365,7 @@ jobs:
           test-dir: tests
           test-file: pnap_network_storage_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   publish-test-results:
     name: Publish Test Results
@@ -342,7 +377,7 @@ jobs:
       - test-ranchersolutionapi
       - test-tagapi
       - test-networkstorageapi
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: always()
     steps:
       - name: Download Artifacts

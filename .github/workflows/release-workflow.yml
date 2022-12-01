@@ -7,7 +7,7 @@ on:
 jobs:
   lint-bmcapi:
     name: Lint BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -16,7 +16,7 @@ jobs:
 
   lint-ipapi:
     name: Lint IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -25,7 +25,7 @@ jobs:
 
   lint-auditapi:
     name: Lint Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -34,7 +34,7 @@ jobs:
 
   lint-networkapi:
     name: Lint Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -43,7 +43,7 @@ jobs:
 
   lint-ranchersolutionapi:
     name: Lint Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -52,7 +52,7 @@ jobs:
 
   lint-tagapi:
     name: Lint Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -61,7 +61,7 @@ jobs:
 
   lint-networkstorageapi:
     name: Lint Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -70,7 +70,7 @@ jobs:
 
   test-bmcapi:
     name: Test BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-bmcapi
     services:
@@ -78,6 +78,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -86,10 +90,11 @@ jobs:
           test-dir: tests
           test-file: pnap_bmc_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ipapi:
     name: Test IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ipapi
     services:
@@ -97,6 +102,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -105,10 +114,11 @@ jobs:
           test-dir: tests
           test-file: pnap_ip_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-auditapi:
     name: Test Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-auditapi
     services:
@@ -116,6 +126,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -124,10 +138,11 @@ jobs:
           test-dir: tests
           test-file: pnap_audit_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkapi:
     name: Test Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkapi
     services:
@@ -135,6 +150,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -143,10 +162,11 @@ jobs:
           test-dir: tests
           test-file: pnap_network_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ranchersolutionapi
     services:
@@ -154,6 +174,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -162,10 +186,11 @@ jobs:
           test-dir: tests
           test-file: pnap_rancher_solution_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-tagapi:
     name: Test Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-tagapi
     services:
@@ -173,6 +198,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -181,10 +210,11 @@ jobs:
           test-dir: tests
           test-file: pnap_tag_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkstorageapi:
     name: Test Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkstorageapi
     services:
@@ -192,6 +222,10 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
@@ -200,6 +234,7 @@ jobs:
           test-dir: tests
           test-file: pnap_network_storage_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   check-release:
     needs:
@@ -211,7 +246,7 @@ jobs:
       - test-tagapi
       - test-networkstorageapi
     name: Check Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     outputs:
       package: ${{ steps.step1.outputs.package }}
     steps:
@@ -235,7 +270,7 @@ jobs:
   publish-package:
     name: Publish to Python Package Index
     if: needs.check-release.outputs.package != 0
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs: check-release
     steps:
       - uses: actions/checkout@v3
