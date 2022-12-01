@@ -12,7 +12,7 @@ jobs:
 
   generate-bmcapi:
     name: Generate BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -22,7 +22,7 @@ jobs:
 
   generate-ipapi:
     name: Generate IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -32,7 +32,7 @@ jobs:
 
   generate-auditapi:
     name: Generate Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -42,7 +42,7 @@ jobs:
 
   generate-networkapi:
     name: Generate Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -52,7 +52,7 @@ jobs:
 
   generate-ranchersolutionapi:
     name: Generate Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -62,7 +62,7 @@ jobs:
 
   generate-tagapi:
     name: Generate Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -72,7 +72,7 @@ jobs:
 
   generate-networkstorageapi:
     name: Generate Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
@@ -89,7 +89,7 @@ jobs:
         github.base_ref == 'develop' &&
         github.event.pull_request.head.repo.full_name == 'phoenixnap/python-sdk-bmc'
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
       - generate-ipapi
@@ -124,7 +124,7 @@ jobs:
 
   lint-bmcapi:
     name: Lint BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
     steps:
@@ -135,7 +135,7 @@ jobs:
 
   lint-ipapi:
     name: Lint IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ipapi
     steps:
@@ -146,7 +146,7 @@ jobs:
 
   lint-auditapi:
     name: Lint Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-auditapi
     steps:
@@ -157,7 +157,7 @@ jobs:
 
   lint-networkapi:
     name: Lint Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkapi
     steps:
@@ -168,7 +168,7 @@ jobs:
 
   lint-ranchersolutionapi:
     name: Lint Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ranchersolutionapi
     steps:
@@ -179,7 +179,7 @@ jobs:
 
   lint-tagapi:
     name: Lint Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-tagapi
     steps:
@@ -190,7 +190,7 @@ jobs:
 
   lint-networkstorageapi:
     name: Lint Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkstorageapi
     steps:
@@ -201,7 +201,7 @@ jobs:
 
   test-bmcapi:
     name: Test BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-bmcapi
     services:
@@ -225,7 +225,7 @@ jobs:
           
   test-ipapi:
     name: Test IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ipapi
     services:
@@ -249,7 +249,7 @@ jobs:
 
   test-auditapi:
     name: Test Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-auditapi
     services:
@@ -273,7 +273,7 @@ jobs:
 
   test-networkapi:
     name: Test Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkapi
     services:
@@ -297,7 +297,7 @@ jobs:
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ranchersolutionapi
     services:
@@ -321,7 +321,7 @@ jobs:
 
   test-tagapi:
     name: Test Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-tagapi
     services:
@@ -345,7 +345,7 @@ jobs:
 
   test-networkstorageapi:
     name: Test Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkstorageapi
     services:
@@ -377,7 +377,7 @@ jobs:
       - test-ranchersolutionapi
       - test-tagapi
       - test-networkstorageapi
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: always()
     steps:
       - name: Download Artifacts

@@ -7,7 +7,7 @@ on:
 jobs:
   lint-bmcapi:
     name: Lint BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -16,7 +16,7 @@ jobs:
 
   lint-ipapi:
     name: Lint IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -25,7 +25,7 @@ jobs:
 
   lint-auditapi:
     name: Lint Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -34,7 +34,7 @@ jobs:
 
   lint-networkapi:
     name: Lint Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -43,7 +43,7 @@ jobs:
 
   lint-ranchersolutionapi:
     name: Lint Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -52,7 +52,7 @@ jobs:
 
   lint-tagapi:
     name: Lint Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -61,7 +61,7 @@ jobs:
 
   lint-networkstorageapi:
     name: Lint Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
@@ -70,7 +70,7 @@ jobs:
 
   test-bmcapi:
     name: Test BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-bmcapi
     services:
@@ -94,7 +94,7 @@ jobs:
 
   test-ipapi:
     name: Test IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ipapi
     services:
@@ -118,7 +118,7 @@ jobs:
 
   test-auditapi:
     name: Test Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-auditapi
     services:
@@ -142,7 +142,7 @@ jobs:
 
   test-networkapi:
     name: Test Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkapi
     services:
@@ -166,7 +166,7 @@ jobs:
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ranchersolutionapi
     services:
@@ -190,7 +190,7 @@ jobs:
 
   test-tagapi:
     name: Test Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-tagapi
     services:
@@ -214,7 +214,7 @@ jobs:
 
   test-networkstorageapi:
     name: Test Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkstorageapi
     services:
@@ -246,7 +246,7 @@ jobs:
       - test-tagapi
       - test-networkstorageapi
     name: Check Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     outputs:
       package: ${{ steps.step1.outputs.package }}
     steps:
@@ -270,7 +270,7 @@ jobs:
   publish-package:
     name: Publish to Python Package Index
     if: needs.check-release.outputs.package != 0
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs: check-release
     steps:
       - uses: actions/checkout@v3
