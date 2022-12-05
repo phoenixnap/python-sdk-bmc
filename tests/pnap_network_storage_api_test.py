@@ -162,7 +162,7 @@ class TestIpApi(unittest.TestCase):
 		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
 		volume_id = TestUtils.extract_id_from(request, "volumeId")
 
-		volume_update = VolumeUpdare(**TestUtils.extract_request_body(request))
+		volume_update = VolumeUpdate(**TestUtils.extract_request_body(request))
 
 		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update=volume_update)
 
@@ -172,7 +172,7 @@ class TestIpApi(unittest.TestCase):
 
 		self.verify_called_once(expectation_id)
 				
-				
+
 if __name__ == '__main__':
 	TestUtils.reset_mockserver()
 	unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
