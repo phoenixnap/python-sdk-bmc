@@ -151,10 +151,28 @@ class TestIpApi(unittest.TestCase):
 		self.assertEqual(response['body'], model_to_dict(result))
 
 		self.verify_called_once(expectation_id)
+
+	def test_network_storage_patch_volume_by_id(self):
+		# Setting up expectation
+		request, response = TestUtils.generate_payloads_from('networkstorageapi/networkstorage_patch_volume_by_id')
+		expectation_id = TestUtils.setup_expectation(request, response, 1)
+
+		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
+
+		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		volume_id = TestUtils.extract_id_from(request, "volumeId")
+
+		volume_update = VolumeUpdare(**TestUtils.extract_request_body(request))
+
+		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update=volume_update)
+
+		response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+		self.assertEqual(response['body'], model_to_dict(result))
+
+		self.verify_called_once(expectation_id)
 				
-
-
-
+				
 if __name__ == '__main__':
 	TestUtils.reset_mockserver()
 	unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
