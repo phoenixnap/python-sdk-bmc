@@ -15,7 +15,7 @@
       "name": "name",
       "description": "description",
       "status": "READY",
-      "location": "PHX",kif thobb tikteb
+      "location": "PHX",
       "networkId": "fakeNetworkId",
       "ips": [
         "1.1.1.1",
