@@ -279,13 +279,13 @@ jobs:
       - name: "Install Python and Dependencies"
         run: |
           sudo apt-get install python3-dev
-          pip install twine
-          pip install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
+          pip3 install twine
+          pip3 install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
         
       - name: "Build Package"
         run: |
           cd ${{ needs.check-release.outputs.package }}
-          python setup.py sdist bdist_wheel
+          python3 setup.py sdist bdist_wheel
       - name: "Publish Package"
         run: |
           cd ${{ needs.check-release.outputs.package }}
