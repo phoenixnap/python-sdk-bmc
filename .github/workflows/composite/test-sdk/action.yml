@@ -34,7 +34,7 @@ runs:
       run: |
         pip install --requirement ${{ inputs.test-dir }}/requirements.txt
         cd ${{ inputs.test-dir }}
-        python ${{ inputs.test-file }}
+        python3 ${{ inputs.test-file }}
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v3
