@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **cidr** | **str** | IP range associated with this private network in CIDR notation. | 
 **description** | **str** | The description of this private network. | [optional] 
 **location_default** | **bool** | Identifies network as the default private network for the specified location. | [optional]  if omitted the server will use the default value of False
+**vlan_id** | **int** | The VLAN that will be assigned to this network. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

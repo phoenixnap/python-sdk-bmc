@@ -12,9 +12,9 @@ jobs:
 
   generate-bmcapi:
     name: Generate BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/bmc/download_spec
@@ -22,9 +22,9 @@ jobs:
 
   generate-ipapi:
     name: Generate IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/ips/download_spec
@@ -32,9 +32,9 @@ jobs:
 
   generate-auditapi:
     name: Generate Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/bmc-audit/download_spec
@@ -42,9 +42,9 @@ jobs:
 
   generate-networkapi:
     name: Generate Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/networks/download_spec
@@ -52,9 +52,9 @@ jobs:
 
   generate-ranchersolutionapi:
     name: Generate Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/rancher/download_spec
@@ -62,9 +62,9 @@ jobs:
 
   generate-tagapi:
     name: Generate Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/tags/download_spec
@@ -72,9 +72,9 @@ jobs:
 
   generate-networkstorageapi:
     name: Generate Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/network-storage/download_spec
@@ -89,7 +89,7 @@ jobs:
         github.base_ref == 'develop' &&
         github.event.pull_request.head.repo.full_name == 'phoenixnap/python-sdk-bmc'
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
       - generate-ipapi
@@ -100,13 +100,13 @@ jobs:
       - generate-networkstorageapi
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
           ref: ${{ github.event_name == 'schedule' && 'develop' || github.head_ref }}
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Move spec files
         run: |
           find . -type f -name "*.spec.yaml" -not -path "./specs/*" -print0 | xargs -0 mv -ft ./specs/
@@ -124,98 +124,84 @@ jobs:
 
   lint-bmcapi:
     name: Lint BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-bmcapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_bmc_api
 
   lint-ipapi:
     name: Lint IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ipapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_ip_api
 
   lint-auditapi:
     name: Lint Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-auditapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_audit_api
 
   lint-networkapi:
     name: Lint Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_network_api
 
   lint-ranchersolutionapi:
     name: Lint Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-ranchersolutionapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_rancher_solution_api
 
   lint-tagapi:
     name: Lint Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-tagapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_tag_api
 
   lint-networkstorageapi:
     name: Lint Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - generate-networkstorageapi
     steps:
-      - uses: actions/checkout@v2
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/lint-sdk
         with:
           package-name: pnap_network_storage_api
 
   test-bmcapi:
     name: Test BMC API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-bmcapi
     services:
@@ -223,18 +209,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_bmc_api
           test-dir: tests
           test-file: pnap_bmc_api_test.py
           test-report-dir: tests/test-reports
-
+          python-version: ${{ matrix.python-version }}
+          
   test-ipapi:
     name: Test IP API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ipapi
     services:
@@ -242,18 +233,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_ip_api
           test-dir: tests
           test-file: pnap_ip_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-auditapi:
     name: Test Audit API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-auditapi
     services:
@@ -261,18 +257,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_audit_api
           test-dir: tests
           test-file: pnap_audit_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkapi:
     name: Test Network API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkapi
     services:
@@ -280,18 +281,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_network_api
           test-dir: tests
           test-file: pnap_network_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-ranchersolutionapi:
     name: Test Rancher Solution API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-ranchersolutionapi
     services:
@@ -299,18 +305,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_rancher_solution_api
           test-dir: tests
           test-file: pnap_rancher_solution_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-tagapi:
     name: Test Tag API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-tagapi
     services:
@@ -318,18 +329,23 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_tag_api
           test-dir: tests
           test-file: pnap_tag_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   test-networkstorageapi:
     name: Test Network Storage API
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs:
       - lint-networkstorageapi
     services:
@@ -337,14 +353,19 @@ jobs:
         image: mockserver/mockserver:5.13.0
         ports:
           - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.11' ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
           package-under-test: ./pnap_network_storage_api
           test-dir: tests
           test-file: pnap_network_storage_api_test.py
           test-report-dir: tests/test-reports
+          python-version: ${{ matrix.python-version }}
 
   publish-test-results:
     name: Publish Test Results
@@ -356,11 +377,11 @@ jobs:
       - test-ranchersolutionapi
       - test-tagapi
       - test-networkstorageapi
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: always()
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: test-reports
       - name: Publish Test Results

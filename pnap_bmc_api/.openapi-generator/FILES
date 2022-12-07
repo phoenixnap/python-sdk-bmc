@@ -6,6 +6,7 @@ docs/Error.md
 docs/IpBlocksConfiguration.md
 docs/NetworkConfiguration.md
 docs/OsConfiguration.md
+docs/OsConfigurationCloudInit.md
 docs/OsConfigurationMap.md
 docs/OsConfigurationMapEsxi.md
 docs/OsConfigurationMapProxmox.md
@@ -51,6 +52,7 @@ pnap_bmc_api/model/error.py
 pnap_bmc_api/model/ip_blocks_configuration.py
 pnap_bmc_api/model/network_configuration.py
 pnap_bmc_api/model/os_configuration.py
+pnap_bmc_api/model/os_configuration_cloud_init.py
 pnap_bmc_api/model/os_configuration_map.py
 pnap_bmc_api/model/os_configuration_map_esxi.py
 pnap_bmc_api/model/os_configuration_map_proxmox.py
