@@ -12,6 +12,6 @@ runs:
     - name: Run pylint
       shell: bash
       run: |
-          pip install pylint
-          pip install --requirement ${{ inputs.package-name }}/requirements.txt
+          pip3 install pylint
+          pip3 install --requirement ${{ inputs.package-name }}/requirements.txt
           pylint ${{ inputs.package-name }}/*.py -d R,C,W0511
