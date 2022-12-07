@@ -276,9 +276,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
             ref: ${{ github.ref }}
-      - name: "Install Python and Dependencies"
+      - uses: ./.github/workflows/composite/setup-python
+      - name: "Install Dependencies for Packaging"
         run: |
-          sudo apt-get install python3-dev
           pip3 install twine
           pip3 install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
         
