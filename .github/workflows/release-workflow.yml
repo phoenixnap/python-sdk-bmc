@@ -280,6 +280,7 @@ jobs:
       - name: "Install Dependencies for Packaging"
         run: |
           pip3 install twine
+          pip3 install wheel
           pip3 install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
         
       - name: "Build Package"
