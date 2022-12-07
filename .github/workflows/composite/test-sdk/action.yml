@@ -27,12 +27,12 @@ runs:
     - name: Install package under test
       shell: bash
       run: |
-        pip install --requirement ${{ inputs.package-under-test }}/requirements.txt
-        pip install ${{ inputs.package-under-test }}
+        pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
+        pip3 install ${{ inputs.package-under-test }}
     - name: Run tests
       shell: bash
       run: |
-        pip install --requirement ${{ inputs.test-dir }}/requirements.txt
+        pip3 install --requirement ${{ inputs.test-dir }}/requirements.txt
         cd ${{ inputs.test-dir }}
         python3 ${{ inputs.test-file }}
     - name: Upload Test Results
