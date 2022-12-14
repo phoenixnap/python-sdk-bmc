@@ -752,6 +752,8 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
     volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
     volume_update = VolumeUpdate(
+        name="New Volume name",
+        description="New Volume description",
         capacity_in_gb=2000,
     ) # VolumeUpdate | Storage network volume to be updated. (optional)
 

@@ -59,6 +59,13 @@ class VolumeUpdate(ModelNormal):
     }
 
     validations = {
+        ('name',): {
+            'max_length': 100,
+            'min_length': 1,
+        },
+        ('description',): {
+            'max_length': 250,
+        },
         ('capacity_in_gb',): {
             'inclusive_minimum': 2000,
         },
@@ -85,6 +92,8 @@ class VolumeUpdate(ModelNormal):
                 and the value is attribute type.
         """
         return {
+            'name': (str,),  # noqa: E501
+            'description': (str,),  # noqa: E501
             'capacity_in_gb': (int,),  # noqa: E501
         }
 
@@ -94,6 +103,8 @@ class VolumeUpdate(ModelNormal):
 
 
     attribute_map = {
+        'name': 'name',  # noqa: E501
+        'description': 'description',  # noqa: E501
         'capacity_in_gb': 'capacityInGb',  # noqa: E501
     }
 
@@ -138,6 +149,8 @@ class VolumeUpdate(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            name (str): Volume friendly name.. [optional]  # noqa: E501
+            description (str): Volume description.. [optional]  # noqa: E501
             capacity_in_gb (int): Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.. [optional]  # noqa: E501
         """
 
@@ -224,6 +237,8 @@ class VolumeUpdate(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            name (str): Volume friendly name.. [optional]  # noqa: E501
+            description (str): Volume description.. [optional]  # noqa: E501
             capacity_in_gb (int): Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.. [optional]  # noqa: E501
         """
 
