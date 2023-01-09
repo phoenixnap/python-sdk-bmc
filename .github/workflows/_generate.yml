@@ -20,4 +20,4 @@ jobs:
       - uses: ./.github/workflows/composite/generate-sdk
         with:
           spec-link: ${{ inputs.spec-link }}
-          package-name: ${{ inputs.module-name }}
+          package-name: ${{ inputs.package-name }}
