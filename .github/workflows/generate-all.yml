@@ -24,12 +24,12 @@ jobs:
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/bmc/download_spec
       package-name: pnap_bmc_api
-  generate-rancherapi:
+  generate-ranchersolutionapi:
     needs: prerequisite
     uses: ./.github/workflows/_generate.yml
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/rancher/download_spec
-      package-name: pnap_rancher_api
+      package-name: pnap_rancher_solution_api
   generate-networkapi:
     needs: prerequisite
     uses: ./.github/workflows/_generate.yml
