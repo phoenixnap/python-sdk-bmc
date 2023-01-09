@@ -14,8 +14,8 @@ jobs:
   build-and-test-rancherapi:
     uses: ./.github/workflows/_common.yml
     with:
-      package-name: pnap_rancher_api
-      test-file: pnap_rancher_api_test.py
+      package-name: pnap_rancher_solution_api
+      test-file: pnap_rancher_solution_api_test.py
   build-and-test-networkapi:
     uses: ./.github/workflows/_common.yml
     with:
