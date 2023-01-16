@@ -31,7 +31,7 @@ jobs:
               VERSION=${array[1]}
 
               echo Is subpackage release. Publishing $PACKAGE v$VERSION to registry.
-              echo "::set-output name=package::$PACKAGE"
+              echo "package=$PACKAGE" >> $GITHUB_OUTPUT
           else
               echo Is main release. Skipping.
           fi
