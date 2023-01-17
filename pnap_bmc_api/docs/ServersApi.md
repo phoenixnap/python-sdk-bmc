@@ -235,6 +235,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_create = ServerCreate(
         hostname="my-server-1",
         description="Server #1 used for computing.",
@@ -299,7 +300,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Create new server.
-        api_response = api_instance.servers_post(server_create=server_create)
+        api_response = api_instance.servers_post(force=force, server_create=server_create)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_post: %s\n" % e)
@@ -310,6 +311,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
  **server_create** | [**ServerCreate**](ServerCreate.md)|  | [optional]
 
 ### Return type
@@ -1483,6 +1485,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
     server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_private_network = ServerPrivateNetwork(
         id="603f3b2cfcaf050643b89a4b",
         ips=["10.1.1.1","10.1.1.2"],
@@ -1501,7 +1504,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Adds the server to a private network.
-        api_response = api_instance.servers_server_id_private_networks_post(server_id, server_private_network=server_private_network)
+        api_response = api_instance.servers_server_id_private_networks_post(server_id, force=force, server_private_network=server_private_network)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_private_networks_post: %s\n" % e)
@@ -1513,6 +1516,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
  **server_private_network** | [**ServerPrivateNetwork**](ServerPrivateNetwork.md)|  | [optional]
 
 ### Return type
