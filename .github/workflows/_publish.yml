@@ -7,9 +7,6 @@ on:
         required: true
         type: string
 
-env:
-  GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-
 jobs:
   check-release:
     name: Check Release
@@ -36,7 +33,7 @@ jobs:
               echo Is main release. Skipping.
           fi
   
-  publish-ruby-gems:
+  publish-python-gems:
     name: Publish to Python Package Index
     if: needs.check-release.outputs.module != 0
     runs-on: ubuntu-18.04
