@@ -169,6 +169,7 @@ class ServersApi(object):
             },
             params_map={
                 'all': [
+                    'force',
                     'server_create',
                 ],
                 'required': [],
@@ -185,12 +186,16 @@ class ServersApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
+                    'force':
+                        (bool,),
                     'server_create':
                         (ServerCreate,),
                 },
                 'attribute_map': {
+                    'force': 'force',
                 },
                 'location_map': {
+                    'force': 'query',
                     'server_create': 'body',
                 },
                 'collection_format_map': {
@@ -874,6 +879,7 @@ class ServersApi(object):
             params_map={
                 'all': [
                     'server_id',
+                    'force',
                     'server_private_network',
                 ],
                 'required': [
@@ -894,14 +900,18 @@ class ServersApi(object):
                 'openapi_types': {
                     'server_id':
                         (str,),
+                    'force':
+                        (bool,),
                     'server_private_network':
                         (ServerPrivateNetwork,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
+                    'force': 'force',
                 },
                 'location_map': {
                     'server_id': 'path',
+                    'force': 'query',
                     'server_private_network': 'body',
                 },
                 'collection_format_map': {
@@ -1270,6 +1280,7 @@ class ServersApi(object):
 
 
         Keyword Args:
+            force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
             server_create (ServerCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -2358,6 +2369,7 @@ class ServersApi(object):
             server_id (str): The server's ID.
 
         Keyword Args:
+            force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
             server_private_network (ServerPrivateNetwork): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
