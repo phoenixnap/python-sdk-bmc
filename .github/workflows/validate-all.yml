@@ -1,0 +1,66 @@
+name: validate-all
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:  
+  # Build stage
+  build-and-test-bmcapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_bmc_api
+      test-file: pnap_bmc_api_test.py
+  build-and-test-rancherapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_rancher_solution_api
+      test-file: pnap_rancher_solution_api_test.py
+  build-and-test-networkapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_network_api
+      test-file: pnap_network_api_test.py
+  build-and-test-ipapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_ip_api
+      test-file: pnap_ip_api_test.py
+  build-and-test-auditapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_audit_api
+      test-file: pnap_audit_api_test.py
+  build-and-test-tagapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_tag_api
+      test-file: pnap_tag_api_test.py
+  build-and-test-networkstorageapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_network_storage_api
+      test-file: pnap_network_storage_api_test.py
+
+  publish-test-results:
+    name: Publish Test Results
+    needs:
+      - build-and-test-bmcapi
+      - build-and-test-rancherapi
+      - build-and-test-networkapi
+      - build-and-test-ipapi
+      - build-and-test-auditapi
+      - build-and-test-tagapi
+      - build-and-test-networkstorageapi
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: test-reports
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          files: test-reports/**/*.xml
+          check_name: "Test Results"
