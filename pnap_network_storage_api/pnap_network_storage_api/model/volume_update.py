@@ -69,6 +69,13 @@ class VolumeUpdate(ModelNormal):
         ('capacity_in_gb',): {
             'inclusive_minimum': 2000,
         },
+        ('path_suffix',): {
+            'max_length': 27,
+            'min_length': 1,
+            'regex': {
+                'pattern': r'^(\/[\w-]+)+$',  # noqa: E501
+            },
+        },
     }
 
     @cached_property
@@ -95,6 +102,7 @@ class VolumeUpdate(ModelNormal):
             'name': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'capacity_in_gb': (int,),  # noqa: E501
+            'path_suffix': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -106,6 +114,7 @@ class VolumeUpdate(ModelNormal):
         'name': 'name',  # noqa: E501
         'description': 'description',  # noqa: E501
         'capacity_in_gb': 'capacityInGb',  # noqa: E501
+        'path_suffix': 'pathSuffix',  # noqa: E501
     }
 
     read_only_vars = {
@@ -152,6 +161,7 @@ class VolumeUpdate(ModelNormal):
             name (str): Volume friendly name.. [optional]  # noqa: E501
             description (str): Volume description.. [optional]  # noqa: E501
             capacity_in_gb (int): Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.. [optional]  # noqa: E501
+            path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -240,6 +250,7 @@ class VolumeUpdate(ModelNormal):
             name (str): Volume friendly name.. [optional]  # noqa: E501
             description (str): Volume description.. [optional]  # noqa: E501
             capacity_in_gb (int): Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.. [optional]  # noqa: E501
+            path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

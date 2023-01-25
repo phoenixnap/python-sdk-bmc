@@ -70,7 +70,7 @@ class VolumeCreate(ModelNormal):
             'max_length': 250,
         },
         ('path_suffix',): {
-            'max_length': 100,
+            'max_length': 27,
             'min_length': 1,
             'regex': {
                 'pattern': r'^(\/[\w-]+)+$',  # noqa: E501
