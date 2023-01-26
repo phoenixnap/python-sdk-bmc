@@ -149,7 +149,7 @@ class ServerPrivateNetwork(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             ips ([str]): IPs to configure/configured on the server.<br> Should be null or empty list if DHCP is true. IPs must be within the network's range.<br> If field is undefined and DHCP is false, next available IP in network will be automatically allocated.<br> If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable.<br> Defining `force` query parameter in combination with an empty array allows a server to be assigned to a network without configuring any IPs.. [optional]  # noqa: E501
-            dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if any IPs are provided. Not supported for proxmox OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if any IPs are provided. Not supported for Proxmox OS and ESXi OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
             status_description (str): The status of the network.. [optional]  # noqa: E501
         """
 
@@ -241,7 +241,7 @@ class ServerPrivateNetwork(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             ips ([str]): IPs to configure/configured on the server.<br> Should be null or empty list if DHCP is true. IPs must be within the network's range.<br> If field is undefined and DHCP is false, next available IP in network will be automatically allocated.<br> If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable.<br> Defining `force` query parameter in combination with an empty array allows a server to be assigned to a network without configuring any IPs.. [optional]  # noqa: E501
-            dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if any IPs are provided. Not supported for proxmox OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            dhcp (bool): Determines whether DHCP is enabled for this server. Should be false if any IPs are provided. Not supported for Proxmox OS and ESXi OS.. [optional] if omitted the server will use the default value of False  # noqa: E501
             status_description (str): The status of the network.. [optional]  # noqa: E501
         """
 
