@@ -114,7 +114,7 @@ class ServerPublicNetwork(ModelNormal):
 
         Args:
             id (str): The network identifier.
-            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.
+            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.<br> Note that at least one IP is required for the gateway to be selected from this network.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -206,7 +206,7 @@ class ServerPublicNetwork(ModelNormal):
 
         Args:
             id (str): The network identifier.
-            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.
+            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.<br> Note that at least one IP is required for the gateway to be selected from this network.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
