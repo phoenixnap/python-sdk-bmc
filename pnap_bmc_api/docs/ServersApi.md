@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Request to create server is accepted. |  -  |
+**200** | Request to create server is accepted. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
@@ -1670,6 +1670,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
     server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_public_network = ServerPublicNetwork(
         id="60473c2509268bc77fd06d29",
         ips=["182.16.0.146","182.16.0.147"],
@@ -1687,7 +1688,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Adds the server to a Public Network.
-        api_response = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network)
+        api_response = api_instance.servers_server_id_public_networks_post(server_id, force=force, server_public_network=server_public_network)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_public_networks_post: %s\n" % e)
@@ -1699,6 +1700,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
  **server_public_network** | [**ServerPublicNetwork**](ServerPublicNetwork.md)|  | [optional]
 
 ### Return type

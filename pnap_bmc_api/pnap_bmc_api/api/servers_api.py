@@ -998,6 +998,7 @@ class ServersApi(object):
             params_map={
                 'all': [
                     'server_id',
+                    'force',
                     'server_public_network',
                 ],
                 'required': [
@@ -1018,14 +1019,18 @@ class ServersApi(object):
                 'openapi_types': {
                     'server_id':
                         (str,),
+                    'force':
+                        (bool,),
                     'server_public_network':
                         (ServerPublicNetwork,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
+                    'force': 'force',
                 },
                 'location_map': {
                     'server_id': 'path',
+                    'force': 'query',
                     'server_public_network': 'body',
                 },
                 'collection_format_map': {
@@ -2541,6 +2546,7 @@ class ServersApi(object):
             server_id (str): The server's ID.
 
         Keyword Args:
+            force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
             server_public_network (ServerPublicNetwork): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
