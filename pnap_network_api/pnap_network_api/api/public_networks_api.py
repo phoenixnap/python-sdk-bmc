@@ -206,6 +206,7 @@ class PublicNetworksApi(object):
                 'all': [
                     'public_network_id',
                     'ip_block_id',
+                    'force',
                 ],
                 'required': [
                     'public_network_id',
@@ -228,14 +229,18 @@ class PublicNetworksApi(object):
                         (str,),
                     'ip_block_id':
                         (str,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'public_network_id': 'publicNetworkId',
                     'ip_block_id': 'ipBlockId',
+                    'force': 'force',
                 },
                 'location_map': {
                     'public_network_id': 'path',
                     'ip_block_id': 'path',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -666,7 +671,7 @@ class PublicNetworksApi(object):
     ):
         """Removes the IP Block from the Public Network.  # noqa: E501
 
-        Removes the IP Block from the Public Network. The result of this is that any traffic addressed to any IP within the block will not be routed to this network anymore. Please ensure that no resource members within this network have any IPs assigned from the IP Block being removed.  # noqa: E501
+        Removes the IP Block from the Public Network.<br> Please ensure that no resource members within this network have any IPs assigned from the IP Block being removed.<br> Defining `force` query parameter allows resource assigned IP block to be removed anyway.  As a result, traffic addressed to any IP within the block will not be routed to this network anymore.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -678,6 +683,7 @@ class PublicNetworksApi(object):
             ip_block_id (str): The IP Block identifier.
 
         Keyword Args:
+            force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
