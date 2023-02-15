@@ -143,7 +143,7 @@ class ServerPublicNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network.. [optional]  # noqa: E501
+            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>. [optional]  # noqa: E501
             status_description (str): The status of the assignment to the network.. [optional]  # noqa: E501
         """
 
@@ -234,7 +234,7 @@ class ServerPublicNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network.. [optional]  # noqa: E501
+            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>. [optional]  # noqa: E501
             status_description (str): The status of the assignment to the network.. [optional]  # noqa: E501
         """
 
