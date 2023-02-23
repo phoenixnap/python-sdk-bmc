@@ -857,7 +857,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
         name="New Volume name",
         description="New Volume description",
         capacity_in_gb=2000,
-        path_suffix="/BAMDT",
+        path_suffix="",
     ) # VolumeUpdate | Storage network volume to be updated. (optional)
 
     # example passing only required values which don't have defaults set

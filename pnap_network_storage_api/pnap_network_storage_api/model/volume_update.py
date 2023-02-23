@@ -71,9 +71,9 @@ class VolumeUpdate(ModelNormal):
         },
         ('path_suffix',): {
             'max_length': 27,
-            'min_length': 1,
+            'min_length': 0,
             'regex': {
-                'pattern': r'^(\/[\w-]+)+$',  # noqa: E501
+                'pattern': r'^(\/[\w-]+)+$|^$',  # noqa: E501
             },
         },
     }
