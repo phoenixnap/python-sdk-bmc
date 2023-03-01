@@ -103,12 +103,12 @@ class PrivateNetwork(ModelNormal):
             'type': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
             'location_default': (bool,),  # noqa: E501
-            'cidr': (str,),  # noqa: E501
             'servers': ([PrivateNetworkServer],),  # noqa: E501
             'memberships': ([NetworkMembership],),  # noqa: E501
             'status': (str,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'cidr': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -123,12 +123,12 @@ class PrivateNetwork(ModelNormal):
         'type': 'type',  # noqa: E501
         'location': 'location',  # noqa: E501
         'location_default': 'locationDefault',  # noqa: E501
-        'cidr': 'cidr',  # noqa: E501
         'servers': 'servers',  # noqa: E501
         'memberships': 'memberships',  # noqa: E501
         'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'cidr': 'cidr',  # noqa: E501
     }
 
     read_only_vars = {
@@ -138,7 +138,7 @@ class PrivateNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, name, vlan_id, type, location, location_default, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -148,7 +148,6 @@ class PrivateNetwork(ModelNormal):
             type (str): The type of the private network.
             location (str): The location of this private network.
             location_default (bool): Identifies network as the default private network for the specified location.
-            cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
             status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
@@ -186,6 +185,7 @@ class PrivateNetwork(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this private network.. [optional]  # noqa: E501
+            cidr (str): IP range associated with this private network in CIDR notation.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -223,7 +223,6 @@ class PrivateNetwork(ModelNormal):
         self.type = type
         self.location = location
         self.location_default = location_default
-        self.cidr = cidr
         self.servers = servers
         self.memberships = memberships
         self.status = status
@@ -248,7 +247,7 @@ class PrivateNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, vlan_id, type, location, location_default, cidr, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, vlan_id, type, location, location_default, servers, memberships, status, created_on, *args, **kwargs):  # noqa: E501
         """PrivateNetwork - a model defined in OpenAPI
 
         Args:
@@ -258,7 +257,6 @@ class PrivateNetwork(ModelNormal):
             type (str): The type of the private network.
             location (str): The location of this private network.
             location_default (bool): Identifies network as the default private network for the specified location.
-            cidr (str): IP range associated with this private network in CIDR notation.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
             status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
@@ -296,6 +294,7 @@ class PrivateNetwork(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): The description of this private network.. [optional]  # noqa: E501
+            cidr (str): IP range associated with this private network in CIDR notation.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -331,7 +330,6 @@ class PrivateNetwork(ModelNormal):
         self.type = type
         self.location = location
         self.location_default = location_default
-        self.cidr = cidr
         self.servers = servers
         self.memberships = memberships
         self.status = status
