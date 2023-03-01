@@ -214,8 +214,9 @@ class  TestBmcApi(unittest.TestCase):
     server_create_dict = TestUtils.extract_request_body(request)
     server_create_dict['tags'] = [TagAssignmentRequest(**server_create_dict['tags'][0])]
     server_create = ServerCreate(**server_create_dict)
+    opts = TestUtils.generate_query_params(request)['force']
 
-    result = api_instance.servers_post(server_create=server_create)
+    result = api_instance.servers_post(server_create=server_create, force=bool(opts))
 
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
@@ -399,8 +400,9 @@ class  TestBmcApi(unittest.TestCase):
     api_instance = servers_api.ServersApi(self.api_client)
     server_id = TestUtils.extract_id_from(request)
     server_private_network = ServerPrivateNetwork(**TestUtils.extract_request_body(request))
+    opts = TestUtils.generate_query_params(request)['force']
 
-    result = api_instance.servers_server_id_private_networks_post(server_id, server_private_network=server_private_network)
+    result = api_instance.servers_server_id_private_networks_post(server_id, server_private_network=server_private_network, force=bool(opts))
 
     self.assertEqual(response['body'], model_to_dict(result))
 
@@ -414,8 +416,9 @@ class  TestBmcApi(unittest.TestCase):
     api_instance = servers_api.ServersApi(self.api_client)
     server_id = TestUtils.extract_id_from(request)
     server_public_network = ServerPublicNetwork(**TestUtils.extract_request_body(request))
+    opts = TestUtils.generate_query_params(request)['force']
 
-    result = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network)
+    result = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network, force=bool(opts))
 
     self.assertEqual(response['body'], model_to_dict(result))
 
