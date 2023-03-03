@@ -24,6 +24,7 @@ docs/SSHKeysApi.md
 docs/Server.md
 docs/ServerCreate.md
 docs/ServerIpBlock.md
+docs/ServerNetworkUpdate.md
 docs/ServerPatch.md
 docs/ServerPrivateNetwork.md
 docs/ServerPublicNetwork.md
@@ -68,6 +69,7 @@ pnap_bmc_api/model/reset_result.py
 pnap_bmc_api/model/server.py
 pnap_bmc_api/model/server_create.py
 pnap_bmc_api/model/server_ip_block.py
+pnap_bmc_api/model/server_network_update.py
 pnap_bmc_api/model/server_patch.py
 pnap_bmc_api/model/server_private_network.py
 pnap_bmc_api/model/server_public_network.py
