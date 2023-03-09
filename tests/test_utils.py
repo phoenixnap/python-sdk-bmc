@@ -69,3 +69,17 @@ class TestUtils:
 
     def extract_request_body(request):
         return request['body']['json']
+    
+    def convert_camel_to_snake_case(request):
+        request_snake_case = {}
+        for key, value in request['body']['json'].items():
+            snake_case_key = ""
+            for i, c in enumerate(key):
+                if c.isupper() and i != 0:
+                    snake_case_key += "_" + c.lower()
+                else:
+                    snake_case_key += c.lower()
+
+            request_snake_case[snake_case_key] = value
+
+        return request_snake_case

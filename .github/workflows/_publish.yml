@@ -1,18 +1,17 @@
 name: (internal) - Publish
 
 on:
-  workflow_call:
-    inputs:
-      package-name:
+  workflow_call:    
+    secrets:
+      PYPI_API_KEY:
         required: true
-        type: string
 
 jobs:
   check-release:
     name: Check Release
     runs-on: ubuntu-18.04
     outputs:
-      module: ${{ inputs.package-name }}
+      package: ${{ steps.step1.outputs.package }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -35,7 +34,7 @@ jobs:
   
   publish-python-gems:
     name: Publish to Python Package Index
-    if: needs.check-release.outputs.module != 0
+    if: needs.check-release.outputs.package != 0
     runs-on: ubuntu-18.04
     needs: check-release
     steps:

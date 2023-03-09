@@ -153,6 +153,24 @@ class TestIpApi(unittest.TestCase):
 
 		self.verify_called_once(expectation_id)
 
+	def test_networkstorage_post_volume(self):
+		# Setting up expectation
+		request, response = TestUtils.generate_payloads_from('networkstorageapi/networkstorage_post_volume')
+		expectation_id = TestUtils.setup_expectation(request, response, 1)
+
+		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
+		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+
+		volume_create = VolumeCreate(**TestUtils.convert_camel_to_snake_case(request))
+
+		result = api_instance.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create=volume_create)
+
+		response['body']['createdOn'] = parse(response['body']['createdOn'])
+
+		self.assertEqual(response['body'], model_to_dict(result))
+
+		self.verify_called_once(expectation_id)
+
 	def test_network_storage_patch_volume_by_id(self):
 		# Setting up expectation
 		request, response = TestUtils.generate_payloads_from('networkstorageapi/networkstorage_patch_volume_by_id')
