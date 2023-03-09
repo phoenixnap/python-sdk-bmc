@@ -6,6 +6,9 @@ on:
       package-name:
         required: true
         type: string
+    secrets:
+      PYPI_API_KEY:
+        required: true
 
 jobs:
   check-release:
