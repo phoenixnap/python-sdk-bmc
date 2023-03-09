@@ -172,8 +172,9 @@ class TestNetworkApi(unittest.TestCase):
       api_instance = public_networks_api.PublicNetworksApi(self.api_client)
       network_id = TestUtils.extract_id_from(request, "networkId")
       ip_id = TestUtils.extract_id_from(request, "ipId")
+      opts = TestUtils.generate_query_params(request)['force']
 
-      api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(network_id, ip_id)
+      api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(network_id, ip_id, force=bool(opts))
 
       self.verify_called_once(expectation_id)
       pass

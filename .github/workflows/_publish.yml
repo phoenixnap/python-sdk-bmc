@@ -1,0 +1,62 @@
+name: (internal) - Publish
+
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        required: true
+        type: string
+    secrets:
+      PYPI_API_KEY:
+        required: true
+
+jobs:
+  check-release:
+    name: Check Release
+    runs-on: ubuntu-18.04
+    outputs:
+      module: ${{ inputs.package-name }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+      - name: Determining release type
+        id: step1
+        run: |
+          TAG=${{ github.ref }}
+          IFS='/' read -r -a array <<< "${TAG#refs/*/}"
+
+          if [ "${#array[@]}" -eq "2" ]; then
+              PACKAGE=${array[0]}
+              VERSION=${array[1]}
+
+              echo Is subpackage release. Publishing $PACKAGE v$VERSION to registry.
+              echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+          else
+              echo Is main release. Skipping.
+          fi
+  
+  publish-python-gems:
+    name: Publish to Python Package Index
+    if: needs.check-release.outputs.module != 0
+    runs-on: ubuntu-18.04
+    needs: check-release
+    steps:
+      - uses: actions/checkout@v3
+        with:
+            ref: ${{ github.ref }}
+      - uses: ./.github/workflows/composite/setup-python
+      - name: "Install Dependencies for Packaging"
+        run: |
+          pip3 install twine
+          pip3 install wheel
+          pip3 install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
+        
+      - name: "Build Package"
+        run: |
+          cd ${{ needs.check-release.outputs.package }}
+          python3 setup.py sdist bdist_wheel
+      - name: "Publish Package"
+        run: |
+          cd ${{ needs.check-release.outputs.package }}
+          twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_KEY }}

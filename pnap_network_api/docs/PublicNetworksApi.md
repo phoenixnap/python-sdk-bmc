@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 Removes the IP Block from the Public Network.
 
-Removes the IP Block from the Public Network. The result of this is that any traffic addressed to any IP within the block will not be routed to this network anymore. Please ensure that no resource members within this network have any IPs assigned from the IP Block being removed.
+Removes the IP Block from the Public Network.<br> Please ensure that no resource members within this network have any IPs assigned from the IP Block being removed.<br> Defining `force` query parameter allows resource assigned IP block to be removed anyway.  As a result, traffic addressed to any IP within the block will not be routed to this network anymore.
 
 ### Example
 
@@ -301,11 +301,21 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     api_instance = public_networks_api.PublicNetworksApi(api_client)
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
     ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Removes the IP Block from the Public Network.
         api_response = api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id)
+        pprint(api_response)
+    except pnap_network_api.ApiException as e:
+        print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_ip_block_id_delete: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Removes the IP Block from the Public Network.
+        api_response = api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id, force=force)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_ip_block_id_delete: %s\n" % e)
@@ -318,6 +328,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_network_id** | **str**| The Public Network identifier. |
  **ip_block_id** | **str**| The IP Block identifier. |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
 
 ### Return type
 

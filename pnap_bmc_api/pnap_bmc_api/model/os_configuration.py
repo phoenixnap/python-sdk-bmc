@@ -162,7 +162,7 @@ class OsConfiguration(ModelNormal):
             root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
             cloud_init (OsConfigurationCloudInit): [optional]  # noqa: E501
         """
 
@@ -253,7 +253,7 @@ class OsConfiguration(ModelNormal):
             root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
             cloud_init (OsConfigurationCloudInit): [optional]  # noqa: E501
         """
 

@@ -129,7 +129,7 @@ class StorageNetworkCreate(ModelNormal):
 
         Args:
             name (str): Storage network friendly name.
-            location (str): Location of storage network. Currently this field should be set to `PHX`.
+            location (str): Location of storage network. Currently this field should be set to `PHX` or `ASH`.
             volumes ([VolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
 
         Keyword Args:
@@ -223,7 +223,7 @@ class StorageNetworkCreate(ModelNormal):
 
         Args:
             name (str): Storage network friendly name.
-            location (str): Location of storage network. Currently this field should be set to `PHX`.
+            location (str): Location of storage network. Currently this field should be set to `PHX` or `ASH`.
             volumes ([VolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
 
         Keyword Args:

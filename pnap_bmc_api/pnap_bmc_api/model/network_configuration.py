@@ -151,7 +151,7 @@ class NetworkConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            gateway_address (str): The address of the gateway assigned / to assign to the server. When used as part of request body, IP address has to be part of private/public network assigned to this server.. [optional]  # noqa: E501
+            gateway_address (str): The address of the gateway assigned / to assign to the server.<br> When used as part of request body, IP address has to be part of a private/public network or an IP block assigned to this server.<br> Gateway address also has to be assigned on an already deployed resource unless the address matches the BMC gateway address in a public network/IP block or the `force` query parameter is true.. [optional]  # noqa: E501
             private_network_configuration (PrivateNetworkConfiguration): [optional]  # noqa: E501
             ip_blocks_configuration (IpBlocksConfiguration): [optional]  # noqa: E501
             public_network_configuration (PublicNetworkConfiguration): [optional]  # noqa: E501
@@ -240,7 +240,7 @@ class NetworkConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            gateway_address (str): The address of the gateway assigned / to assign to the server. When used as part of request body, IP address has to be part of private/public network assigned to this server.. [optional]  # noqa: E501
+            gateway_address (str): The address of the gateway assigned / to assign to the server.<br> When used as part of request body, IP address has to be part of a private/public network or an IP block assigned to this server.<br> Gateway address also has to be assigned on an already deployed resource unless the address matches the BMC gateway address in a public network/IP block or the `force` query parameter is true.. [optional]  # noqa: E501
             private_network_configuration (PrivateNetworkConfiguration): [optional]  # noqa: E501
             ip_blocks_configuration (IpBlocksConfiguration): [optional]  # noqa: E501
             public_network_configuration (PublicNetworkConfiguration): [optional]  # noqa: E501

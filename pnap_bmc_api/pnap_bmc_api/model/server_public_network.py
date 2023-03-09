@@ -59,9 +59,6 @@ class ServerPublicNetwork(ModelNormal):
     }
 
     validations = {
-        ('ips',): {
-            'min_items': 1,
-        },
     }
 
     @cached_property
@@ -109,12 +106,11 @@ class ServerPublicNetwork(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, ips, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, *args, **kwargs):  # noqa: E501
         """ServerPublicNetwork - a model defined in OpenAPI
 
         Args:
             id (str): The network identifier.
-            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -147,6 +143,7 @@ class ServerPublicNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>. [optional]  # noqa: E501
             status_description (str): The status of the assignment to the network.. [optional]  # noqa: E501
         """
 
@@ -180,7 +177,6 @@ class ServerPublicNetwork(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.id = id
-        self.ips = ips
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -201,12 +197,11 @@ class ServerPublicNetwork(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, ips, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, *args, **kwargs):  # noqa: E501
         """ServerPublicNetwork - a model defined in OpenAPI
 
         Args:
             id (str): The network identifier.
-            ips ([str]): IPs to configure/configured on the server. IPs must be within the network's range.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -239,6 +234,7 @@ class ServerPublicNetwork(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            ips ([str]): Configurable/configured IPs on the server.<br> At least 1 IP address is required. All IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>. [optional]  # noqa: E501
             status_description (str): The status of the assignment to the network.. [optional]  # noqa: E501
         """
 
@@ -270,7 +266,6 @@ class ServerPublicNetwork(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.id = id
-        self.ips = ips
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
