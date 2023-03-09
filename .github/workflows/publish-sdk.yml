@@ -52,3 +52,5 @@ jobs:
       - build-and-test-tagapi
       - build-and-test-networkstorageapi
     uses: ./.github/workflows/_publish.yml
+    secrets: 
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
