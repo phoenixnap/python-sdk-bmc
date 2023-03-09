@@ -260,6 +260,7 @@ class PrivateNetworksApi(object):
             },
             params_map={
                 'all': [
+                    'force',
                     'private_network_create',
                 ],
                 'required': [],
@@ -276,12 +277,16 @@ class PrivateNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
+                    'force':
+                        (bool,),
                     'private_network_create':
                         (PrivateNetworkCreate,),
                 },
                 'attribute_map': {
+                    'force': 'force',
                 },
                 'location_map': {
+                    'force': 'query',
                     'private_network_create': 'body',
                 },
                 'collection_format_map': {
@@ -642,6 +647,7 @@ class PrivateNetworksApi(object):
 
 
         Keyword Args:
+            force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
             private_network_create (PrivateNetworkCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.

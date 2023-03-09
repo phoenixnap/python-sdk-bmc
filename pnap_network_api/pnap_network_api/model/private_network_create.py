@@ -95,10 +95,10 @@ class PrivateNetworkCreate(ModelNormal):
         return {
             'name': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
-            'cidr': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'location_default': (bool,),  # noqa: E501
             'vlan_id': (int,),  # noqa: E501
+            'cidr': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -109,10 +109,10 @@ class PrivateNetworkCreate(ModelNormal):
     attribute_map = {
         'name': 'name',  # noqa: E501
         'location': 'location',  # noqa: E501
-        'cidr': 'cidr',  # noqa: E501
         'description': 'description',  # noqa: E501
         'location_default': 'locationDefault',  # noqa: E501
         'vlan_id': 'vlanId',  # noqa: E501
+        'cidr': 'cidr',  # noqa: E501
     }
 
     read_only_vars = {
@@ -122,13 +122,12 @@ class PrivateNetworkCreate(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, name, location, cidr, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, name, location, *args, **kwargs):  # noqa: E501
         """PrivateNetworkCreate - a model defined in OpenAPI
 
         Args:
             name (str): The friendly name of this private network. This name should be unique.
             location (str): The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
-            cidr (str): IP range associated with this private network in CIDR notation.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -164,6 +163,7 @@ class PrivateNetworkCreate(ModelNormal):
             description (str): The description of this private network.. [optional]  # noqa: E501
             location_default (bool): Identifies network as the default private network for the specified location.. [optional] if omitted the server will use the default value of False  # noqa: E501
             vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
+            cidr (str): IP range associated with this private network in CIDR notation.<br> Setting the `force` query parameter to `true` allows you to skip assigning a specific IP range to network.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -197,7 +197,6 @@ class PrivateNetworkCreate(ModelNormal):
 
         self.name = name
         self.location = location
-        self.cidr = cidr
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -218,13 +217,12 @@ class PrivateNetworkCreate(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, name, location, cidr, *args, **kwargs):  # noqa: E501
+    def __init__(self, name, location, *args, **kwargs):  # noqa: E501
         """PrivateNetworkCreate - a model defined in OpenAPI
 
         Args:
             name (str): The friendly name of this private network. This name should be unique.
             location (str): The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
-            cidr (str): IP range associated with this private network in CIDR notation.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -260,6 +258,7 @@ class PrivateNetworkCreate(ModelNormal):
             description (str): The description of this private network.. [optional]  # noqa: E501
             location_default (bool): Identifies network as the default private network for the specified location.. [optional] if omitted the server will use the default value of False  # noqa: E501
             vlan_id (int): The VLAN that will be assigned to this network.. [optional]  # noqa: E501
+            cidr (str): IP range associated with this private network in CIDR notation.<br> Setting the `force` query parameter to `true` allows you to skip assigning a specific IP range to network.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -291,7 +290,6 @@ class PrivateNetworkCreate(ModelNormal):
 
         self.name = name
         self.location = location
-        self.cidr = cidr
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
