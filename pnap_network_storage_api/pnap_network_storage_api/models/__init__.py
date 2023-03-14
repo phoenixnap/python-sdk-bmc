@@ -11,7 +11,9 @@
 
 from pnap_network_storage_api.model.error import Error
 from pnap_network_storage_api.model.nfs_permissions import NfsPermissions
+from pnap_network_storage_api.model.nfs_permissions_update import NfsPermissionsUpdate
 from pnap_network_storage_api.model.permissions import Permissions
+from pnap_network_storage_api.model.permissions_update import PermissionsUpdate
 from pnap_network_storage_api.model.status import Status
 from pnap_network_storage_api.model.storage_network import StorageNetwork
 from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate

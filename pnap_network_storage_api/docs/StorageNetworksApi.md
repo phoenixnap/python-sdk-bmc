@@ -858,6 +858,15 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
         description="New Volume description",
         capacity_in_gb=2000,
         path_suffix="",
+        permissions=PermissionsUpdate(
+            nfs=NfsPermissionsUpdate(
+                read_write=["100.80.0.5","100.80.0.6"],
+                read_only=["100.80.0.5"],
+                root_squash=["100.80.0.5","100.80.0.4/24"],
+                no_squash=["100.80.0.7","100.80.0.*"],
+                all_squash=["100.80.0.5","100.80.0.6"],
+            ),
+        ),
     ) # VolumeUpdate | Storage network volume to be updated. (optional)
 
     # example passing only required values which don't have defaults set
