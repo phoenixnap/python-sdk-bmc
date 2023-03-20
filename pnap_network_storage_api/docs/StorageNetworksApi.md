@@ -407,7 +407,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
         description="My storage network description",
         location="PHX",
         volumes=[
-            VolumeCreate(
+            StorageNetworkVolumeCreate(
                 name="My volume name",
                 description="My volume description",
                 path_suffix="/shared-docs",
@@ -588,6 +588,15 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
         description="My volume description",
         path_suffix="/shared-docs",
         capacity_in_gb=2000,
+        permissions=PermissionsCreate(
+            nfs=NfsPermissionsCreate(
+                read_write=["100.80.0.5","100.80.0.6"],
+                read_only=["100.80.0.5"],
+                root_squash=["100.80.0.5","100.80.0.4/24"],
+                no_squash=["100.80.0.7","100.80.0.*"],
+                all_squash=["100.80.0.5","100.80.0.6"],
+            ),
+        ),
     ) # VolumeCreate |  (optional)
 
     # example passing only required values which don't have defaults set

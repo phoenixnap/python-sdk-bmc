@@ -31,8 +31,8 @@ from pnap_network_storage_api.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from pnap_network_storage_api.model.volume_create import VolumeCreate
-    globals()['VolumeCreate'] = VolumeCreate
+    from pnap_network_storage_api.model.storage_network_volume_create import StorageNetworkVolumeCreate
+    globals()['StorageNetworkVolumeCreate'] = StorageNetworkVolumeCreate
 
 
 class StorageNetworkCreate(ModelNormal):
@@ -101,7 +101,7 @@ class StorageNetworkCreate(ModelNormal):
         return {
             'name': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
-            'volumes': ([VolumeCreate],),  # noqa: E501
+            'volumes': ([StorageNetworkVolumeCreate],),  # noqa: E501
             'description': (str,),  # noqa: E501
         }
 
@@ -130,7 +130,7 @@ class StorageNetworkCreate(ModelNormal):
         Args:
             name (str): Storage network friendly name.
             location (str): Location of storage network. Currently this field should be set to `PHX` or `ASH`.
-            volumes ([VolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
+            volumes ([StorageNetworkVolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -224,7 +224,7 @@ class StorageNetworkCreate(ModelNormal):
         Args:
             name (str): Storage network friendly name.
             location (str): Location of storage network. Currently this field should be set to `PHX` or `ASH`.
-            volumes ([VolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
+            volumes ([StorageNetworkVolumeCreate]): Volume to be created alongside storage. Currently only 1 volume is supported.
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
