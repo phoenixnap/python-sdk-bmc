@@ -2,6 +2,7 @@ name: publish-sdk-test
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   build-and-test-bmcapi:
