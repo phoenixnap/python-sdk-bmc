@@ -15,7 +15,7 @@ on:
 
 jobs:  
   publish-python-gems:
-    name: Publish to Python Package Index
+    name: Publish ${{ inputs.to_publish }} to PyPI
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
