@@ -2,7 +2,6 @@ name: publish-sdk-test
 
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   build-and-test-bmcapi:
@@ -50,7 +49,7 @@ jobs:
       - build-and-test-ipapi
       - build-and-test-auditapi
       - build-and-test-tagapi
-      # - build-and-test-networkstorageapi
+      - build-and-test-networkstorageapi
     uses: ./.github/workflows/_publish_all.yml
     secrets: 
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
