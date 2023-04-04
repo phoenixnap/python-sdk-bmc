@@ -1,42 +1,22 @@
 name: (internal) - Publish
 
 on:
-  workflow_call:    
+  workflow_call:  
+    inputs:
+      test:
+        required: false
+        type: boolean
+      to_publish:
+        required: true
+        type: string
     secrets:
       PYPI_API_KEY:
         required: true
 
-jobs:
-  check-release:
-    name: Check Release
-    runs-on: ubuntu-18.04
-    outputs:
-      package: ${{ steps.step1.outputs.package }}
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-      - name: Determining release type
-        id: step1
-        run: |
-          TAG=${{ github.ref }}
-          IFS='/' read -r -a array <<< "${TAG#refs/*/}"
-
-          if [ "${#array[@]}" -eq "2" ]; then
-              PACKAGE=${array[0]}
-              VERSION=${array[1]}
-
-              echo Is subpackage release. Publishing $PACKAGE v$VERSION to registry.
-              echo "package=$PACKAGE" >> $GITHUB_OUTPUT
-          else
-              echo Is main release. Skipping.
-          fi
-  
+jobs:  
   publish-python-gems:
-    name: Publish to Python Package Index
-    if: needs.check-release.outputs.package != 0
+    name: Publish ${{ inputs.to_publish }} to PyPI
     runs-on: ubuntu-18.04
-    needs: check-release
     steps:
       - uses: actions/checkout@v3
         with:
@@ -46,13 +26,15 @@ jobs:
         run: |
           pip3 install twine
           pip3 install wheel
-          pip3 install --requirement ${{ needs.check-release.outputs.package }}/requirements.txt
+          pip3 install --requirement ${{ inputs.to_publish }}/requirements.txt
         
       - name: "Build Package"
         run: |
-          cd ${{ needs.check-release.outputs.package }}
+          cd ${{ inputs.to_publish }}
           python3 setup.py sdist bdist_wheel
       - name: "Publish Package"
+        if: ${{ !inputs.test }}
         run: |
           cd ${{ needs.check-release.outputs.package }}
-          twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_KEY }}
+          echo PUBLISHING !!!
+          # twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_KEY }}
