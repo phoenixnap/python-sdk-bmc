@@ -11,8 +11,14 @@ on:
         required: true
 
 jobs:
+  validate-all:
+    name: Validate all modules
+    uses: ./.github/workflows/validate-all.yml
+
   publish-audit-api:
     name: Publish Audit API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -22,6 +28,8 @@ jobs:
 
   publish-bmc-api:
     name: Publish BMC API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -31,6 +39,8 @@ jobs:
 
   publish-ip-api:
     name: Publish IP API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -40,6 +50,8 @@ jobs:
 
   publish-network-api:
     name: Publish Network API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -49,6 +61,8 @@ jobs:
 
   publish-network-storage-api:
     name: Publish Network Storage API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -58,6 +72,8 @@ jobs:
 
   publish-rancher-solution-api:
     name: Publish Rancher Solution API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
@@ -67,6 +83,8 @@ jobs:
 
   publish-tag-api:
     name: Publish Tag API
+    needs: 
+      - validate-all
     uses: ./.github/workflows/_publish.yml
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
