@@ -3,10 +3,10 @@ name: (internal) - Publish
 on:
   workflow_call:  
     inputs:
-      test:
+      dry_run:
         required: false
         type: boolean
-      to_publish:
+      package_to_publish:
         required: true
         type: string
     secrets:
@@ -14,8 +14,8 @@ on:
         required: true
 
 jobs:  
-  publish-python-gems:
-    name: Publish ${{ inputs.to_publish }} to PyPI
+  publish-python-packages:
+    name: Publish ${{ inputs.package_to_publish }} to PyPI
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
@@ -26,14 +26,14 @@ jobs:
         run: |
           pip3 install twine
           pip3 install wheel
-          pip3 install --requirement ${{ inputs.to_publish }}/requirements.txt
+          pip3 install --requirement ${{ inputs.package_to_publish }}/requirements.txt
         
       - name: "Build Package"
         run: |
-          cd ${{ inputs.to_publish }}
+          cd ${{ inputs.package_to_publish }}
           python3 setup.py sdist bdist_wheel
       - name: "Publish Package"
-        if: ${{ !inputs.test }}
+        if: ${{ !inputs.dry_run }}
         run: |
           cd ${{ needs.check-release.outputs.package }}
           twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_KEY }}

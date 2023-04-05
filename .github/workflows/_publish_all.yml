@@ -24,7 +24,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_audit_api
+      package_to_publish: pnap_audit_api
 
   publish-bmc-api:
     name: Publish BMC API
@@ -35,7 +35,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_bmc_api
+      package_to_publish: pnap_bmc_api
 
   publish-ip-api:
     name: Publish IP API
@@ -46,7 +46,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_ip_api
+      package_to_publish: pnap_ip_api
 
   publish-network-api:
     name: Publish Network API
@@ -57,7 +57,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_network_api
+      package_to_publish: pnap_network_api
 
   publish-network-storage-api:
     name: Publish Network Storage API
@@ -68,7 +68,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_network_storage_api
+      package_to_publish: pnap_network_storage_api
 
   publish-rancher-solution-api:
     name: Publish Rancher Solution API
@@ -79,7 +79,7 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_rancher_solution_api
+      package_to_publish: pnap_rancher_solution_api
 
   publish-tag-api:
     name: Publish Tag API
@@ -90,4 +90,4 @@ jobs:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       test: ${{ inputs.test }}
-      to_publish: pnap_tag_api
+      package_to_publish: pnap_tag_api
