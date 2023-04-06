@@ -10,4 +10,4 @@ jobs:
     secrets: 
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: true
+      dry_run: true

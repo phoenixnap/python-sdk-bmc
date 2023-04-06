@@ -3,7 +3,7 @@ name: (internal) - Publish All
 on:
   workflow_call:
     inputs:
-      test:
+      dry_run:
         required: false
         type: boolean
     secrets:
@@ -23,7 +23,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_audit_api
 
   publish-bmc-api:
@@ -34,7 +34,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_bmc_api
 
   publish-ip-api:
@@ -45,7 +45,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_ip_api
 
   publish-network-api:
@@ -56,7 +56,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_network_api
 
   publish-network-storage-api:
@@ -67,7 +67,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_network_storage_api
 
   publish-rancher-solution-api:
@@ -78,7 +78,7 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_rancher_solution_api
 
   publish-tag-api:
@@ -89,5 +89,5 @@ jobs:
     secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
-      test: ${{ inputs.test }}
+      dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_tag_api
