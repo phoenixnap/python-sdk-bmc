@@ -16,7 +16,7 @@ jobs:
   prerequisite:
     name: Prerequisite for Generation
     if: github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Prerequisite
         run: |
@@ -68,7 +68,7 @@ jobs:
   # Push generated code
   push-changes:
     name: Push Changes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - generate-bmcapi
       - generate-ranchersolutionapi
