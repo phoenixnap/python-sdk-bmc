@@ -16,7 +16,7 @@ on:
 jobs:  
   publish-python-packages:
     name: Publish ${{ inputs.package_to_publish }} to PyPI
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
