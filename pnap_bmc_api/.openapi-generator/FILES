@@ -10,6 +10,8 @@ docs/OsConfigurationCloudInit.md
 docs/OsConfigurationMap.md
 docs/OsConfigurationMapEsxi.md
 docs/OsConfigurationMapProxmox.md
+docs/OsConfigurationNetrisController.md
+docs/OsConfigurationNetrisSoftgate.md
 docs/OsConfigurationWindows.md
 docs/PrivateNetworkConfiguration.md
 docs/PublicNetworkConfiguration.md
@@ -57,6 +59,8 @@ pnap_bmc_api/model/os_configuration_cloud_init.py
 pnap_bmc_api/model/os_configuration_map.py
 pnap_bmc_api/model/os_configuration_map_esxi.py
 pnap_bmc_api/model/os_configuration_map_proxmox.py
+pnap_bmc_api/model/os_configuration_netris_controller.py
+pnap_bmc_api/model/os_configuration_netris_softgate.py
 pnap_bmc_api/model/os_configuration_windows.py
 pnap_bmc_api/model/private_network_configuration.py
 pnap_bmc_api/model/public_network_configuration.py

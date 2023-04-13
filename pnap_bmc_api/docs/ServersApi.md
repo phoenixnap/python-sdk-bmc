@@ -251,11 +251,18 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
         pricing_model="ONE_MONTH_RESERVATION",
         network_type="PUBLIC_AND_PRIVATE",
         os_configuration=OsConfiguration(
+            netris_controller=OsConfigurationNetrisController(
+            ),
+            netris_softgate=OsConfigurationNetrisSoftgate(
+                controller_address="120.153.203.227",
+                controller_version="3.4.0-003",
+                controller_auth_key="w0OP8TjZaHO17DTwxtN5VYh5Bh1ZVH2s3WK1JRTw",
+            ),
             windows=OsConfigurationWindows(
                 rdp_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
             ),
             management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
-            install_os_to_ram=False,
+            install_os_to_ram=True,
             cloud_init=OsConfigurationCloudInit(
                 user_data='YQ==',
             ),
