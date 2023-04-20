@@ -27,6 +27,7 @@ runs:
     - name: Install package under test
       shell: bash
       run: |
+        pip3 install --upgrade pip
         pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
         echo "This will fail. Reason is unknown."
         pip3 install ${{ inputs.package-under-test }}
