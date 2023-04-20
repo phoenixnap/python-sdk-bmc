@@ -26,13 +26,24 @@ runs:
         python-version: ${{ inputs.python-version }}
     - name: Install package dependencies
       shell: bash
-      run: python -m pip install --upgrade -r ${{ inputs.package-under-test }}/requirements.txt
+      run: python3 -m pip install --upgrade -r ${{ inputs.package-under-test }}/requirements.txt
     - name: Install package under test
       shell: bash
-      run: python -m pip install --upgrade ${{ inputs.package-under-test }}
+      run: python3 -m pip install --upgrade ${{ inputs.package-under-test }}
     - name: Install test dependencies
       shell: bash
       run: pip3 install -r ${{ inputs.test-dir }}/requirements.txt
+
+    # FOR DEBUGGING! REMOVE WHEN DONE!
+    - name: DEBUGGING
+      shell: bash
+      run: |
+        echo PYTHON VERSION!
+        python3 -V
+
+        echo PIP LIST!
+        python -m pip list
+
     - name: Run tests
       shell: bash
       run: |
