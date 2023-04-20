@@ -28,7 +28,7 @@ runs:
       shell: bash
       run: |
         echo ABCDEFGHI
-        pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
+        # pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
         echo JKLMNOPQR
         pip3 install ${{ inputs.package-under-test }}
         echo STUVWXYZ!
