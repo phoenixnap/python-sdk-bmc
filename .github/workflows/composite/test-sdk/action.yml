@@ -27,9 +27,8 @@ runs:
     - name: Install package under test
       shell: bash
       run: |
-        echo ABCDEFGHI
-        # pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
-        echo JKLMNOPQR
+        pip3 install --requirement ${{ inputs.package-under-test }}/requirements.txt
+        echo "This will fail. Reason is unknown."
         pip3 install ${{ inputs.package-under-test }}
         echo STUVWXYZ!
     - name: Run tests
