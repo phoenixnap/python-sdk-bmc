@@ -33,7 +33,7 @@ runs:
       shell: bash
       run: |
         echo CURL ATTEMPT!
-        curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+        curl -sS https://bootstrap.pypa.io/get-pip.py | python${{ inputs.python-version }}
 
         echo PYTHON VERSION!
         python3 -V
