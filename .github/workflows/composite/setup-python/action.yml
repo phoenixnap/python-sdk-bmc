@@ -12,6 +12,8 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
+
+    # Suggested by https://stackoverflow.com/a/70431656 - script will complete the setup for pip, since it's incomplete for some versions.
     - name: Fix PIP (for non-3.6 python)
       if: inputs.python-version != 3.6
       shell: bash
