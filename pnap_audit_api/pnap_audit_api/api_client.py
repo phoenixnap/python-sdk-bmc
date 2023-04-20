@@ -18,7 +18,7 @@ import os
 import re
 import typing
 from urllib.parse import quote
-from urllib.fields import RequestField
+from urllib3.fields import RequestField
 
 
 from pnap_audit_api import rest
