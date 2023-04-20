@@ -12,3 +12,7 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
+    - name: Fix PIP (for non-3.6 python)
+      if: ${{ inputs.python-version == "3.6" }}
+      shell: bash
+      run: curl -sS https://bootstrap.pypa.io/get-pip.py | python${{ inputs.python-version }}

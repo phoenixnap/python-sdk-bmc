@@ -27,20 +27,6 @@ runs:
     - name: Install package dependencies
       shell: bash
       run: python3 -m pip install -r ${{ inputs.package-under-test }}/requirements.txt
-
-    # FOR DEBUGGING! REMOVE WHEN DONE!
-    - name: DEBUGGING
-      shell: bash
-      run: |
-        echo CURL ATTEMPT!
-        curl -sS https://bootstrap.pypa.io/get-pip.py | python${{ inputs.python-version }}
-
-        echo PYTHON VERSION!
-        python3 -V
-
-        echo PIP LIST!
-        python3 -m pip list
-
     - name: Install package under test
       shell: bash
       run: python3 -m pip install ${{ inputs.package-under-test }}
