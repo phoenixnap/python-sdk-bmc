@@ -143,7 +143,7 @@ class OsConfigurationNetrisController(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             host_os (str): (Read-only) Host OS on which the Netris Controller is installed.. [optional]  # noqa: E501
-            netris_web_console_url (str): (Read-only) The URL for the Netris Controller web console. Will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            netris_web_console_url (str): (Read-only) The URL for the Netris Controller web console. It will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             netris_user_password (str): (Read-only) Auto-generated password set for user 'netris' in the web console.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
         """
 
@@ -231,7 +231,7 @@ class OsConfigurationNetrisController(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             host_os (str): (Read-only) Host OS on which the Netris Controller is installed.. [optional]  # noqa: E501
-            netris_web_console_url (str): (Read-only) The URL for the Netris Controller web console. Will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            netris_web_console_url (str): (Read-only) The URL for the Netris Controller web console. It will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             netris_user_password (str): (Read-only) Auto-generated password set for user 'netris' in the web console.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
         """
 
