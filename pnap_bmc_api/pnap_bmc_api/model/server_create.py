@@ -193,7 +193,7 @@ class ServerCreate(ModelNormal):
             ssh_key_ids ([str]): A list of SSH key IDs that will be installed on the server in addition to any SSH keys specified in this request.. [optional]  # noqa: E501
             reservation_id (str): Server reservation ID.. [optional]  # noqa: E501
             pricing_model (str): Server pricing model. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. [optional] if omitted the server will use the default value of "HOURLY"  # noqa: E501
-            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
+            network_type (str): The type of network configuration for this server.<br> Currently this field should be set to `PUBLIC_AND_PRIVATE`, `PRIVATE_ONLY` or `PUBLIC_ONLY`.<br> Setting the `force` query parameter to `true` allows you to configure network configuration type as `NONE`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
             os_configuration (OsConfiguration): [optional]  # noqa: E501
             tags ([TagAssignmentRequest]): Tags to set to the server. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
             network_configuration (NetworkConfiguration): [optional]  # noqa: E501
@@ -298,7 +298,7 @@ class ServerCreate(ModelNormal):
             ssh_key_ids ([str]): A list of SSH key IDs that will be installed on the server in addition to any SSH keys specified in this request.. [optional]  # noqa: E501
             reservation_id (str): Server reservation ID.. [optional]  # noqa: E501
             pricing_model (str): Server pricing model. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. [optional] if omitted the server will use the default value of "HOURLY"  # noqa: E501
-            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
+            network_type (str): The type of network configuration for this server.<br> Currently this field should be set to `PUBLIC_AND_PRIVATE`, `PRIVATE_ONLY` or `PUBLIC_ONLY`.<br> Setting the `force` query parameter to `true` allows you to configure network configuration type as `NONE`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
             os_configuration (OsConfiguration): [optional]  # noqa: E501
             tags ([TagAssignmentRequest]): Tags to set to the server. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
             network_configuration (NetworkConfiguration): [optional]  # noqa: E501
