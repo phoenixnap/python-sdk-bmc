@@ -9,6 +9,7 @@ from pnap_network_storage_api.api import storage_networks_api
 from pnap_network_storage_api.model_utils import model_to_dict
 from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
 from pnap_network_storage_api.model.volume_create import VolumeCreate
+from pnap_network_storage_api.model.storage_network_volume_create import StorageNetworkVolumeCreate
 from pnap_network_storage_api.model.volume_update import VolumeUpdate
 from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
 
@@ -72,7 +73,7 @@ class TestIpApi(unittest.TestCase):
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
 		storage_network_create_dict = TestUtils.extract_request_body(request)
-		storage_network_create_dict['volumes'] = [VolumeCreate(**storage_network_create_dict['volumes'][0], _spec_property_naming=True)]
+		storage_network_create_dict['volumes'] = [StorageNetworkVolumeCreate(**storage_network_create_dict['volumes'][0], _spec_property_naming=True)]
 		storage_network_create = StorageNetworkCreate(**storage_network_create_dict)
 
 		result = api_instance.storage_networks_post(storage_network_create=storage_network_create)
