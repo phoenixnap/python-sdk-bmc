@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **public_ip_addresses** | **[str]** | Public IP addresses assigned to server. | [optional] 
 **reservation_id** | **str** | The reservation reference id if any. | [optional] 
 **password** | **str** | Auto-generated password set for user &#x60;Admin&#x60; on Windows server, user &#x60;root&#x60; on ESXi servers, user &#x60;root&#x60; on Proxmox server and user &#x60;netris&#x60; on Netris servers.&lt;br&gt; The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference. | [optional] 
-**network_type** | **str** | The type of network configuration for this server. Currently this field should be set to &#x60;PUBLIC_AND_PRIVATE&#x60; or &#x60;PRIVATE_ONLY&#x60;. | [optional]  if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"
+**network_type** | **str** | The type of network configuration for this server. Currently this field should be set to &#x60;PUBLIC_AND_PRIVATE&#x60;, &#x60;PRIVATE_ONLY&#x60;, &#x60;PUBLIC_ONLY&#x60; or &#x60;NONE&#x60;. | [optional]  if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"
 **cluster_id** | **str** | The cluster reference id if any. | [optional] 
 **tags** | [**[TagAssignment]**](TagAssignment.md) | The tags assigned if any. | [optional] 
 **provisioned_on** | **datetime** | Date and time when server was provisioned. | [optional] 
