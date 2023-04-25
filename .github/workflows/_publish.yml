@@ -35,5 +35,5 @@ jobs:
       - name: "Publish Package"
         if: ${{ !inputs.dry_run }}
         run: |
-          cd ${{ needs.check-release.outputs.package }}
+          cd ${{ inputs.package_to_publish }}
           twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_KEY }}
