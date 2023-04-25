@@ -74,6 +74,10 @@ class StorageNetworkCreate(ModelNormal):
         ('description',): {
             'max_length': 250,
         },
+        ('client_vlan',): {
+            'inclusive_maximum': 4094,
+            'inclusive_minimum': 2,
+        },
     }
 
     @cached_property
@@ -103,6 +107,7 @@ class StorageNetworkCreate(ModelNormal):
             'location': (str,),  # noqa: E501
             'volumes': ([StorageNetworkVolumeCreate],),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'client_vlan': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -115,6 +120,7 @@ class StorageNetworkCreate(ModelNormal):
         'location': 'location',  # noqa: E501
         'volumes': 'volumes',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'client_vlan': 'clientVlan',  # noqa: E501
     }
 
     read_only_vars = {
@@ -164,6 +170,7 @@ class StorageNetworkCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Storage network description.. [optional]  # noqa: E501
+            client_vlan (int): Custom Client VLAN that the Storage Network will be set to.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -258,6 +265,7 @@ class StorageNetworkCreate(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Storage network description.. [optional]  # noqa: E501
+            client_vlan (int): Custom Client VLAN that the Storage Network will be set to.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

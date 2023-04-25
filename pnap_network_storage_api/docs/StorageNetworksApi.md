@@ -414,6 +414,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 capacity_in_gb=2000,
             ),
         ],
+        client_vlan=2,
     ) # StorageNetworkCreate |  (optional)
 
     # example passing only required values which don't have defaults set
