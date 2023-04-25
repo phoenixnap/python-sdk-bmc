@@ -141,7 +141,7 @@ class ServerIpBlock(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            vlan_id (int): The VLAN on which this IP block has been configured within the network switch.. [optional]  # noqa: E501
+            vlan_id (int): (Read-only) The VLAN on which this IP block has been configured within the network switch.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -231,7 +231,7 @@ class ServerIpBlock(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            vlan_id (int): The VLAN on which this IP block has been configured within the network switch.. [optional]  # noqa: E501
+            vlan_id (int): (Read-only) The VLAN on which this IP block has been configured within the network switch.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

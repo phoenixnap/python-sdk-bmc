@@ -50,8 +50,9 @@ class TestNetworkApi(unittest.TestCase):
     
     api_instance = private_networks_api.PrivateNetworksApi(self.api_client)
     private_network_create = PrivateNetworkCreate(**TestUtils.extract_request_body(request))
+    opts = TestUtils.generate_query_params(request)
 
-    result = api_instance.private_networks_post(private_network_create=private_network_create)
+    result = api_instance.private_networks_post(force=opts['force'] == "true", private_network_create=private_network_create)
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 

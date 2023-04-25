@@ -1,0 +1,14 @@
+name: publish-all-sdks
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish all SDKs
+    uses: ./.github/workflows/_publish_all.yml
+    secrets: 
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false

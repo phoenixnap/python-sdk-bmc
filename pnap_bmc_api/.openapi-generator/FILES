@@ -10,6 +10,8 @@ docs/OsConfigurationCloudInit.md
 docs/OsConfigurationMap.md
 docs/OsConfigurationMapEsxi.md
 docs/OsConfigurationMapProxmox.md
+docs/OsConfigurationNetrisController.md
+docs/OsConfigurationNetrisSoftgate.md
 docs/OsConfigurationWindows.md
 docs/PrivateNetworkConfiguration.md
 docs/PublicNetworkConfiguration.md
@@ -24,6 +26,7 @@ docs/SSHKeysApi.md
 docs/Server.md
 docs/ServerCreate.md
 docs/ServerIpBlock.md
+docs/ServerNetworkUpdate.md
 docs/ServerPatch.md
 docs/ServerPrivateNetwork.md
 docs/ServerPublicNetwork.md
@@ -56,6 +59,8 @@ pnap_bmc_api/model/os_configuration_cloud_init.py
 pnap_bmc_api/model/os_configuration_map.py
 pnap_bmc_api/model/os_configuration_map_esxi.py
 pnap_bmc_api/model/os_configuration_map_proxmox.py
+pnap_bmc_api/model/os_configuration_netris_controller.py
+pnap_bmc_api/model/os_configuration_netris_softgate.py
 pnap_bmc_api/model/os_configuration_windows.py
 pnap_bmc_api/model/private_network_configuration.py
 pnap_bmc_api/model/public_network_configuration.py
@@ -68,6 +73,7 @@ pnap_bmc_api/model/reset_result.py
 pnap_bmc_api/model/server.py
 pnap_bmc_api/model/server_create.py
 pnap_bmc_api/model/server_ip_block.py
+pnap_bmc_api/model/server_network_update.py
 pnap_bmc_api/model/server_patch.py
 pnap_bmc_api/model/server_private_network.py
 pnap_bmc_api/model/server_public_network.py

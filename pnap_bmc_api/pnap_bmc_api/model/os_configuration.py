@@ -32,8 +32,12 @@ from pnap_bmc_api.exceptions import ApiAttributeError
 
 def lazy_import():
     from pnap_bmc_api.model.os_configuration_cloud_init import OsConfigurationCloudInit
+    from pnap_bmc_api.model.os_configuration_netris_controller import OsConfigurationNetrisController
+    from pnap_bmc_api.model.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
     from pnap_bmc_api.model.os_configuration_windows import OsConfigurationWindows
     globals()['OsConfigurationCloudInit'] = OsConfigurationCloudInit
+    globals()['OsConfigurationNetrisController'] = OsConfigurationNetrisController
+    globals()['OsConfigurationNetrisSoftgate'] = OsConfigurationNetrisSoftgate
     globals()['OsConfigurationWindows'] = OsConfigurationWindows
 
 
@@ -93,6 +97,8 @@ class OsConfiguration(ModelNormal):
         """
         lazy_import()
         return {
+            'netris_controller': (OsConfigurationNetrisController,),  # noqa: E501
+            'netris_softgate': (OsConfigurationNetrisSoftgate,),  # noqa: E501
             'windows': (OsConfigurationWindows,),  # noqa: E501
             'root_password': (str,),  # noqa: E501
             'management_ui_url': (str,),  # noqa: E501
@@ -107,6 +113,8 @@ class OsConfiguration(ModelNormal):
 
 
     attribute_map = {
+        'netris_controller': 'netrisController',  # noqa: E501
+        'netris_softgate': 'netrisSoftgate',  # noqa: E501
         'windows': 'windows',  # noqa: E501
         'root_password': 'rootPassword',  # noqa: E501
         'management_ui_url': 'managementUiUrl',  # noqa: E501
@@ -158,11 +166,13 @@ class OsConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            netris_controller (OsConfigurationNetrisController): [optional]  # noqa: E501
+            netris_softgate (OsConfigurationNetrisSoftgate): [optional]  # noqa: E501
             windows (OsConfigurationWindows): [optional]  # noqa: E501
-            root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            root_password (str): (Read-only) Auto-generated password set for user 'root' on an ESXi or Proxmox server.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
+            management_ui_url (str): (Read-only) The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the <a href='https://phoenixnap.com/kb/bmc-custom-os' target='_blank'>instructions</a> on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
             cloud_init (OsConfigurationCloudInit): [optional]  # noqa: E501
         """
 
@@ -249,11 +259,13 @@ class OsConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            netris_controller (OsConfigurationNetrisController): [optional]  # noqa: E501
+            netris_softgate (OsConfigurationNetrisSoftgate): [optional]  # noqa: E501
             windows (OsConfigurationWindows): [optional]  # noqa: E501
-            root_password (str): Password set for user root on an ESXi server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            root_password (str): (Read-only) Auto-generated password set for user 'root' on an ESXi or Proxmox server.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
+            management_ui_url (str): (Read-only) The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
+            install_os_to_ram (bool): If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the <a href='https://phoenixnap.com/kb/bmc-custom-os' target='_blank'>instructions</a> on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy.. [optional] if omitted the server will use the default value of False  # noqa: E501
             cloud_init (OsConfigurationCloudInit): [optional]  # noqa: E501
         """
 

@@ -2,6 +2,7 @@ name: validate-all
 
 on:
   workflow_dispatch:
+  workflow_call:
   push:
 
 jobs:  
@@ -52,7 +53,7 @@ jobs:
       - build-and-test-auditapi
       - build-and-test-tagapi
       - build-and-test-networkstorageapi
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: always()
     steps:
       - name: Download Artifacts

@@ -19,8 +19,10 @@ Method | HTTP request | Description
 [**servers_server_id_ip_blocks_ip_block_id_delete**](ServersApi.md#servers_server_id_ip_blocks_ip_block_id_delete) | **DELETE** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks/{ipBlockId} | Unassign IP Block from Server.
 [**servers_server_id_ip_blocks_post**](ServersApi.md#servers_server_id_ip_blocks_post) | **POST** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks | Assign IP Block to Server.
 [**servers_server_id_patch**](ServersApi.md#servers_server_id_patch) | **PATCH** /servers/{serverId} | Patch a Server.
+[**servers_server_id_private_networks_patch**](ServersApi.md#servers_server_id_private_networks_patch) | **PATCH** /servers/{serverId}/network-configuration/private-network-configuration/private-networks/{privateNetworkId} | Updates the server&#39;s private network&#39;s IP addresses
 [**servers_server_id_private_networks_post**](ServersApi.md#servers_server_id_private_networks_post) | **POST** /servers/{serverId}/network-configuration/private-network-configuration/private-networks | Adds the server to a private network.
 [**servers_server_id_public_networks_delete**](ServersApi.md#servers_server_id_public_networks_delete) | **DELETE** /servers/{serverId}/network-configuration/public-network-configuration/public-networks/{publicNetworkId} | Removes the server from the Public Network
+[**servers_server_id_public_networks_patch**](ServersApi.md#servers_server_id_public_networks_patch) | **PATCH** /servers/{serverId}/network-configuration/public-network-configuration/public-networks/{publicNetworkId} | Updates the server&#39;s public network&#39;s IP addresses.
 [**servers_server_id_public_networks_post**](ServersApi.md#servers_server_id_public_networks_post) | **POST** /servers/{serverId}/network-configuration/public-network-configuration/public-networks | Adds the server to a Public Network.
 [**servers_server_id_tags_put**](ServersApi.md#servers_server_id_tags_put) | **PUT** /servers/{serverId}/tags | Overwrite tags assigned for Server.
 
@@ -249,11 +251,18 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
         pricing_model="ONE_MONTH_RESERVATION",
         network_type="PUBLIC_AND_PRIVATE",
         os_configuration=OsConfiguration(
+            netris_controller=OsConfigurationNetrisController(
+            ),
+            netris_softgate=OsConfigurationNetrisSoftgate(
+                controller_address="120.153.203.227",
+                controller_version="3.4.0-003",
+                controller_auth_key="w0OP8TjZaHO17DTwxtN5VYh5Bh1ZVH2s3WK1JRTw",
+            ),
             windows=OsConfigurationWindows(
                 rdp_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
             ),
             management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
-            install_os_to_ram=False,
+            install_os_to_ram=True,
             cloud_init=OsConfigurationCloudInit(
                 user_data='YQ==',
             ),
@@ -1445,6 +1454,108 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **servers_server_id_private_networks_patch**
+> ServerPrivateNetwork servers_server_id_private_networks_patch(server_id, private_network_id)
+
+Updates the server's private network's IP addresses
+
+IP address changes intended to keep the BMC data up to date with server's operating system. We do not have access to the server's operating system and therefore manual configuration is required to apply the changes on the host. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-6' target='_blank'>here</a>
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_bmc_api
+from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
+from pnap_bmc_api.model.server_network_update import ServerNetworkUpdate
+from pnap_bmc_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = servers_api.ServersApi(api_client)
+    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    private_network_id = "603f3b2cfcaf050643b89a4b" # str | The private network identifier.
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+    server_network_update = ServerNetworkUpdate(
+        ips=["10.1.1.1","10.1.1.2"],
+    ) # ServerNetworkUpdate |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Updates the server's private network's IP addresses
+        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_private_networks_patch: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Updates the server's private network's IP addresses
+        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id, force=force, server_network_update=server_network_update)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_private_networks_patch: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. |
+ **private_network_id** | **str**| The private network identifier. |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
+ **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  | [optional]
+
+### Return type
+
+[**ServerPrivateNetwork**](ServerPrivateNetwork.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated IP addresses assigned to server. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **servers_server_id_private_networks_post**
 > ServerPrivateNetwork servers_server_id_private_networks_post(server_id)
 
@@ -1622,6 +1733,108 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | The server is being removed from the specified Public Network. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_public_networks_patch**
+> ServerPublicNetwork servers_server_id_public_networks_patch(server_id, public_network_id)
+
+Updates the server's public network's IP addresses.
+
+IP address changes intended to keep the BMC data up to date with server's operating system. We do not have access to the server's operating system and therefore manual configuration is required to apply the changes on the host. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-6' target='_blank'>here</a>
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_bmc_api
+from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
+from pnap_bmc_api.model.server_network_update import ServerNetworkUpdate
+from pnap_bmc_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = servers_api.ServersApi(api_client)
+    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+    server_network_update = ServerNetworkUpdate(
+        ips=["10.1.1.1","10.1.1.2"],
+    ) # ServerNetworkUpdate |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Updates the server's public network's IP addresses.
+        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_public_networks_patch: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Updates the server's public network's IP addresses.
+        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id, force=force, server_network_update=server_network_update)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_public_networks_patch: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. |
+ **public_network_id** | **str**| The Public Network identifier. |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
+ **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  | [optional]
+
+### Return type
+
+[**ServerPublicNetwork**](ServerPublicNetwork.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated IP addresses assigned to server. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

@@ -151,7 +151,7 @@ class IpBlocksConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            configuration_type (str): Determines the approach for configuring IP blocks for the server being provisioned. If PURCHASE_NEW is selected, the smallest supported range, depending on the operating system, is allocated to the server.. [optional] if omitted the server will use the default value of "PURCHASE_NEW"  # noqa: E501
+            configuration_type (str): (Write-only) Determines the approach for configuring IP blocks for the server being provisioned. If PURCHASE_NEW is selected, the smallest supported range, depending on the operating system, is allocated to the server.. [optional] if omitted the server will use the default value of "PURCHASE_NEW"  # noqa: E501
             ip_blocks ([ServerIpBlock]): Used to specify the previously purchased IP blocks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType.. [optional]  # noqa: E501
         """
 
@@ -238,7 +238,7 @@ class IpBlocksConfiguration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            configuration_type (str): Determines the approach for configuring IP blocks for the server being provisioned. If PURCHASE_NEW is selected, the smallest supported range, depending on the operating system, is allocated to the server.. [optional] if omitted the server will use the default value of "PURCHASE_NEW"  # noqa: E501
+            configuration_type (str): (Write-only) Determines the approach for configuring IP blocks for the server being provisioned. If PURCHASE_NEW is selected, the smallest supported range, depending on the operating system, is allocated to the server.. [optional] if omitted the server will use the default value of "PURCHASE_NEW"  # noqa: E501
             ip_blocks ([ServerIpBlock]): Used to specify the previously purchased IP blocks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType.. [optional]  # noqa: E501
         """
 

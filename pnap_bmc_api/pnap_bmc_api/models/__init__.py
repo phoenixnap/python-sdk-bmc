@@ -20,6 +20,8 @@ from pnap_bmc_api.model.os_configuration_cloud_init import OsConfigurationCloudI
 from pnap_bmc_api.model.os_configuration_map import OsConfigurationMap
 from pnap_bmc_api.model.os_configuration_map_esxi import OsConfigurationMapEsxi
 from pnap_bmc_api.model.os_configuration_map_proxmox import OsConfigurationMapProxmox
+from pnap_bmc_api.model.os_configuration_netris_controller import OsConfigurationNetrisController
+from pnap_bmc_api.model.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
 from pnap_bmc_api.model.os_configuration_windows import OsConfigurationWindows
 from pnap_bmc_api.model.private_network_configuration import PrivateNetworkConfiguration
 from pnap_bmc_api.model.public_network_configuration import PublicNetworkConfiguration
@@ -32,6 +34,7 @@ from pnap_bmc_api.model.reset_result import ResetResult
 from pnap_bmc_api.model.server import Server
 from pnap_bmc_api.model.server_create import ServerCreate
 from pnap_bmc_api.model.server_ip_block import ServerIpBlock
+from pnap_bmc_api.model.server_network_update import ServerNetworkUpdate
 from pnap_bmc_api.model.server_patch import ServerPatch
 from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
 from pnap_bmc_api.model.server_public_network import ServerPublicNetwork

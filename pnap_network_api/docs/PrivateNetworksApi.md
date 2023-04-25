@@ -399,6 +399,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = private_networks_api.PrivateNetworksApi(api_client)
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     private_network_create = PrivateNetworkCreate(
         name="Sample Network",
         description="Further details on the network",
@@ -412,7 +413,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Create a Private Network.
-        api_response = api_instance.private_networks_post(private_network_create=private_network_create)
+        api_response = api_instance.private_networks_post(force=force, private_network_create=private_network_create)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PrivateNetworksApi->private_networks_post: %s\n" % e)
@@ -423,6 +424,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
  **private_network_create** | [**PrivateNetworkCreate**](PrivateNetworkCreate.md)|  | [optional]
 
 ### Return type

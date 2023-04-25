@@ -144,8 +144,8 @@ class OsConfigurationMapProxmox(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            root_password (str): Password set for user root on a Proxmox server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            root_password (str): (Read-only) Password set for user root on a Proxmox server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            management_ui_url (str): (Read-only) The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
         """
 
@@ -232,8 +232,8 @@ class OsConfigurationMapProxmox(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            root_password (str): Password set for user root on a Proxmox server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
-            management_ui_url (str): The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            root_password (str): (Read-only) Password set for user root on a Proxmox server which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
+            management_ui_url (str): (Read-only) The URL of the management UI which will only be returned in response to provisioning a server.. [optional]  # noqa: E501
             management_access_allowed_ips ([str]): List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.. [optional]  # noqa: E501
         """
 
