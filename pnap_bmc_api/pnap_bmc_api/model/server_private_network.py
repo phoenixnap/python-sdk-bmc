@@ -60,7 +60,7 @@ class ServerPrivateNetwork(ModelNormal):
 
     validations = {
         ('ips',): {
-            'max_items': 10,
+            'max_items': 256,
         },
     }
 
