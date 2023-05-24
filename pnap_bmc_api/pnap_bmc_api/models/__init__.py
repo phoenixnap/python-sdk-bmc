@@ -43,5 +43,7 @@ from pnap_bmc_api.model.server_reset import ServerReset
 from pnap_bmc_api.model.ssh_key import SshKey
 from pnap_bmc_api.model.ssh_key_create import SshKeyCreate
 from pnap_bmc_api.model.ssh_key_update import SshKeyUpdate
+from pnap_bmc_api.model.storage_configuration import StorageConfiguration
+from pnap_bmc_api.model.storage_configuration_root_partition import StorageConfigurationRootPartition
 from pnap_bmc_api.model.tag_assignment import TagAssignment
 from pnap_bmc_api.model.tag_assignment_request import TagAssignmentRequest

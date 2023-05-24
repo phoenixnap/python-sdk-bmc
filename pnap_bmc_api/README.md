@@ -183,6 +183,8 @@ Class | Method | HTTP request | Description
  - [SshKey](docs/SshKey.md)
  - [SshKeyCreate](docs/SshKeyCreate.md)
  - [SshKeyUpdate](docs/SshKeyUpdate.md)
+ - [StorageConfiguration](docs/StorageConfiguration.md)
+ - [StorageConfigurationRootPartition](docs/StorageConfigurationRootPartition.md)
  - [TagAssignment](docs/TagAssignment.md)
  - [TagAssignmentRequest](docs/TagAssignmentRequest.md)
 

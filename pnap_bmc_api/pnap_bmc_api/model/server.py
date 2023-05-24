@@ -33,9 +33,11 @@ from pnap_bmc_api.exceptions import ApiAttributeError
 def lazy_import():
     from pnap_bmc_api.model.network_configuration import NetworkConfiguration
     from pnap_bmc_api.model.os_configuration import OsConfiguration
+    from pnap_bmc_api.model.storage_configuration import StorageConfiguration
     from pnap_bmc_api.model.tag_assignment import TagAssignment
     globals()['NetworkConfiguration'] = NetworkConfiguration
     globals()['OsConfiguration'] = OsConfiguration
+    globals()['StorageConfiguration'] = StorageConfiguration
     globals()['TagAssignment'] = TagAssignment
 
 
@@ -132,6 +134,7 @@ class Server(ModelNormal):
             'private_ip_addresses': ([str],),  # noqa: E501
             'pricing_model': (str,),  # noqa: E501
             'network_configuration': (NetworkConfiguration,),  # noqa: E501
+            'storage_configuration': (StorageConfiguration,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'public_ip_addresses': ([str],),  # noqa: E501
             'reservation_id': (str,),  # noqa: E501
@@ -164,6 +167,7 @@ class Server(ModelNormal):
         'private_ip_addresses': 'privateIpAddresses',  # noqa: E501
         'pricing_model': 'pricingModel',  # noqa: E501
         'network_configuration': 'networkConfiguration',  # noqa: E501
+        'storage_configuration': 'storageConfiguration',  # noqa: E501
         'description': 'description',  # noqa: E501
         'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'reservation_id': 'reservationId',  # noqa: E501
@@ -182,7 +186,7 @@ class Server(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -200,6 +204,7 @@ class Server(ModelNormal):
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
+            storage_configuration (StorageConfiguration):
 
         Keyword Args:
             pricing_model (str): The pricing model this server is being billed. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. defaults to "HOURLY"  # noqa: E501
@@ -289,6 +294,7 @@ class Server(ModelNormal):
         self.private_ip_addresses = private_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
+        self.storage_configuration = storage_configuration
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -309,7 +315,7 @@ class Server(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -327,6 +333,7 @@ class Server(ModelNormal):
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
+            storage_configuration (StorageConfiguration):
 
         Keyword Args:
             pricing_model (str): The pricing model this server is being billed. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. defaults to "HOURLY"  # noqa: E501
@@ -414,6 +421,7 @@ class Server(ModelNormal):
         self.private_ip_addresses = private_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
+        self.storage_configuration = storage_configuration
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

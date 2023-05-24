@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **storage** | **str** | A description of the machine storage. | 
 **private_ip_addresses** | **[str]** | Private IP addresses assigned to server. | 
 **network_configuration** | [**NetworkConfiguration**](NetworkConfiguration.md) |  | 
+**storage_configuration** | [**StorageConfiguration**](StorageConfiguration.md) |  | 
 **pricing_model** | **str** | The pricing model this server is being billed. Currently this field should be set to &#x60;HOURLY&#x60;, &#x60;ONE_MONTH_RESERVATION&#x60;, &#x60;TWELVE_MONTHS_RESERVATION&#x60;, &#x60;TWENTY_FOUR_MONTHS_RESERVATION&#x60; or &#x60;THIRTY_SIX_MONTHS_RESERVATION&#x60;. | defaults to "HOURLY"
 **description** | **str** | Description of server. | [optional] 
 **public_ip_addresses** | **[str]** | Public IP addresses assigned to server. | [optional] 

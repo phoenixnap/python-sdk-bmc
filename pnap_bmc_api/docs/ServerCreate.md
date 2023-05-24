@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **os_configuration** | [**OsConfiguration**](OsConfiguration.md) |  | [optional] 
 **tags** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md) | Tags to set to the server. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview). | [optional] 
 **network_configuration** | [**NetworkConfiguration**](NetworkConfiguration.md) |  | [optional] 
+**storage_configuration** | [**StorageConfiguration**](StorageConfiguration.md) |  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
