@@ -21,6 +21,8 @@ from pnap_network_storage_api.model.storage_network import StorageNetwork
 from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
 from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
 from pnap_network_storage_api.model.storage_network_volume_create import StorageNetworkVolumeCreate
+from pnap_network_storage_api.model.tag_assignment import TagAssignment
+from pnap_network_storage_api.model.tag_assignment_request import TagAssignmentRequest
 from pnap_network_storage_api.model.volume import Volume
 from pnap_network_storage_api.model.volume_create import VolumeCreate
 from pnap_network_storage_api.model.volume_update import VolumeUpdate

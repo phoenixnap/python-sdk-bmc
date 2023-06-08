@@ -412,6 +412,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 description="My volume description",
                 path_suffix="/shared-docs",
                 capacity_in_gb=2000,
+                tags=[
+                    TagAssignmentRequest(
+                        name="Environment",
+                        value="PROD",
+                    ),
+                ],
             ),
         ],
         client_vlan=2,
@@ -598,6 +604,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 all_squash=["100.80.0.5","100.80.0.6"],
             ),
         ),
+        tags=[
+            TagAssignmentRequest(
+                name="Environment",
+                value="PROD",
+            ),
+        ],
     ) # VolumeCreate |  (optional)
 
     # example passing only required values which don't have defaults set
