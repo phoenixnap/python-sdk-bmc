@@ -315,6 +315,7 @@ class StorageNetworksApi(object):
             params_map={
                 'all': [
                     'storage_network_id',
+                    'tag',
                 ],
                 'required': [
                     'storage_network_id',
@@ -334,14 +335,19 @@ class StorageNetworksApi(object):
                 'openapi_types': {
                     'storage_network_id':
                         (str,),
+                    'tag':
+                        ([str],),
                 },
                 'attribute_map': {
                     'storage_network_id': 'storageNetworkId',
+                    'tag': 'tag',
                 },
                 'location_map': {
                     'storage_network_id': 'path',
+                    'tag': 'query',
                 },
                 'collection_format_map': {
+                    'tag': 'multi',
                 }
             },
             headers_map={
@@ -1076,6 +1082,7 @@ class StorageNetworksApi(object):
             storage_network_id (str): ID of storage network.
 
         Keyword Args:
+            tag ([str]): A list of query parameters related to tags in the form of tagName.tagValue. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

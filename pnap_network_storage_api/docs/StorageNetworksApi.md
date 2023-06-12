@@ -508,11 +508,23 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
     storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    tag = [
+        "env.dev",
+    ] # [str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Display one or more volumes belonging to a storage network.
         api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id)
+        pprint(api_response)
+    except pnap_network_storage_api.ApiException as e:
+        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Display one or more volumes belonging to a storage network.
+        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id, tag=tag)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
@@ -524,6 +536,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
+ **tag** | **[str]**| A list of query parameters related to tags in the form of tagName.tagValue | [optional]
 
 ### Return type
 
