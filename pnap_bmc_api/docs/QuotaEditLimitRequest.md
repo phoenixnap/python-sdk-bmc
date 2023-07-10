@@ -5,7 +5,7 @@ A request to change the limit on a quota.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limit** | **int** | The new limit that is requested. | 
+**limit** | **int** | The new limit that is requested. Minimum allowed limit values: - 0 (Server, IPs) - 1000 (Network Storage) | 
 **reason** | **str** | The reason for changing the limit. | 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
