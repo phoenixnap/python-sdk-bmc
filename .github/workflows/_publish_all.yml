@@ -91,3 +91,14 @@ jobs:
     with:
       dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_tag_api
+
+  publish-location-api:
+    name: Publish Location API
+    needs:
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      package_to_publish: pnap_location_api
