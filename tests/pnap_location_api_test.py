@@ -34,9 +34,10 @@ class TestLocationApi(unittest.TestCase):
 
         # Changing values to be enums
         opts['location'] = LocationEnum(opts['location'])
-        opts['productCategory'] = ProductCategoryEnum(opts['productCategory'])
+        opts['product_category'] = ProductCategoryEnum(opts['productCategory'])
+        del opts['productCategory']
 
-        result = api_instance.locations_get(**opts)
+        result = api_instance.get_locations(**opts)
 
         self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
