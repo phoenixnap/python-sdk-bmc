@@ -141,7 +141,7 @@ class PublicNetwork(ModelNormal):
             memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
-            status (str): The status of the public network. Can have one of the following values: `BUSY` or `READY`.
+            status (str): The status of the public network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.
             created_on (datetime): Date and time when this public network was created.
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that are associated with this public network.
 
@@ -245,7 +245,7 @@ class PublicNetwork(ModelNormal):
             memberships ([NetworkMembership]): A list of resources that are members of this public network.
             name (str): The friendly name of this public network.
             location (str): The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.
-            status (str): The status of the public network. Can have one of the following values: `BUSY` or `READY`.
+            status (str): The status of the public network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.
             created_on (datetime): Date and time when this public network was created.
             ip_blocks ([PublicNetworkIpBlock]): A list of IP Blocks that are associated with this public network.
 

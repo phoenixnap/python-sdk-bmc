@@ -305,8 +305,8 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
         ),
         storage_configuration=StorageConfiguration(
             root_partition=StorageConfigurationRootPartition(
-                raid="NO_RAID",
-                size=-1,
+                raid="RAID_1",
+                size=128,
             ),
         ),
     ) # ServerCreate |  (optional)
