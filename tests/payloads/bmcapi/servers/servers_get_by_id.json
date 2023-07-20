@@ -119,6 +119,12 @@
                       }
                     ]
               }
+          },
+          "storageConfiguration": {
+            "rootPartition": {
+              "raid": "RAID_0",
+              "size": 5
+            }
           }
       }
   }

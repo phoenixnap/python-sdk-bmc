@@ -110,7 +110,7 @@ class QuotaEditLimitRequest(ModelNormal):
         """QuotaEditLimitRequest - a model defined in OpenAPI
 
         Args:
-            limit (int): The new limit that is requested.
+            limit (int): The new limit that is requested. Minimum allowed limit values: - 0 (Server, IPs) - 1000 (Network Storage)
             reason (str): The reason for changing the limit.
 
         Keyword Args:
@@ -201,7 +201,7 @@ class QuotaEditLimitRequest(ModelNormal):
         """QuotaEditLimitRequest - a model defined in OpenAPI
 
         Args:
-            limit (int): The new limit that is requested.
+            limit (int): The new limit that is requested. Minimum allowed limit values: - 0 (Server, IPs) - 1000 (Network Storage)
             reason (str): The reason for changing the limit.
 
         Keyword Args:

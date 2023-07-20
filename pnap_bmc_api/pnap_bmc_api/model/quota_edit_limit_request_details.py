@@ -118,7 +118,7 @@ class QuotaEditLimitRequestDetails(ModelComposed):
         """QuotaEditLimitRequestDetails - a model defined in OpenAPI
 
         Keyword Args:
-            limit (int): The new limit that is requested.
+            limit (int): The new limit that is requested. Minimum allowed limit values: - 0 (Server, IPs) - 1000 (Network Storage)
             reason (str): The reason for changing the limit.
             requested_on (datetime): The point in time the request was submitted.
             _check_type (bool): if True, values for parameters in openapi_types
@@ -224,7 +224,7 @@ class QuotaEditLimitRequestDetails(ModelComposed):
         """QuotaEditLimitRequestDetails - a model defined in OpenAPI
 
         Keyword Args:
-            limit (int): The new limit that is requested.
+            limit (int): The new limit that is requested. Minimum allowed limit values: - 0 (Server, IPs) - 1000 (Network Storage)
             reason (str): The reason for changing the limit.
             requested_on (datetime): The point in time the request was submitted.
             _check_type (bool): if True, values for parameters in openapi_types

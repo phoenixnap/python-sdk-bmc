@@ -33,9 +33,11 @@ from pnap_bmc_api.exceptions import ApiAttributeError
 def lazy_import():
     from pnap_bmc_api.model.network_configuration import NetworkConfiguration
     from pnap_bmc_api.model.os_configuration import OsConfiguration
+    from pnap_bmc_api.model.storage_configuration import StorageConfiguration
     from pnap_bmc_api.model.tag_assignment import TagAssignment
     globals()['NetworkConfiguration'] = NetworkConfiguration
     globals()['OsConfiguration'] = OsConfiguration
+    globals()['StorageConfiguration'] = StorageConfiguration
     globals()['TagAssignment'] = TagAssignment
 
 
@@ -132,6 +134,7 @@ class Server(ModelNormal):
             'private_ip_addresses': ([str],),  # noqa: E501
             'pricing_model': (str,),  # noqa: E501
             'network_configuration': (NetworkConfiguration,),  # noqa: E501
+            'storage_configuration': (StorageConfiguration,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'public_ip_addresses': ([str],),  # noqa: E501
             'reservation_id': (str,),  # noqa: E501
@@ -164,6 +167,7 @@ class Server(ModelNormal):
         'private_ip_addresses': 'privateIpAddresses',  # noqa: E501
         'pricing_model': 'pricingModel',  # noqa: E501
         'network_configuration': 'networkConfiguration',  # noqa: E501
+        'storage_configuration': 'storageConfiguration',  # noqa: E501
         'description': 'description',  # noqa: E501
         'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'reservation_id': 'reservationId',  # noqa: E501
@@ -182,7 +186,7 @@ class Server(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -190,7 +194,7 @@ class Server(ModelNormal):
             status (str): The status of the server.
             hostname (str): Hostname of server.
             os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.
-            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.storage.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge` or `d3.m6.xlarge`.
+            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge` or `a1.c5.large`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
             cpu_count (int): The number of CPUs available in the system.
@@ -200,6 +204,7 @@ class Server(ModelNormal):
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
+            storage_configuration (StorageConfiguration):
 
         Keyword Args:
             pricing_model (str): The pricing model this server is being billed. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. defaults to "HOURLY"  # noqa: E501
@@ -237,7 +242,7 @@ class Server(ModelNormal):
             public_ip_addresses ([str]): Public IP addresses assigned to server.. [optional]  # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Auto-generated password set for user `Admin` on Windows server, user `root` on ESXi servers, user `root` on Proxmox server and user `netris` on Netris servers.<br> The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
-            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
+            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE`, `PRIVATE_ONLY`, `PUBLIC_ONLY` or `NONE`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
             cluster_id (str): The cluster reference id if any.. [optional]  # noqa: E501
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
             provisioned_on (datetime): Date and time when server was provisioned.. [optional]  # noqa: E501
@@ -289,6 +294,7 @@ class Server(ModelNormal):
         self.private_ip_addresses = private_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
+        self.storage_configuration = storage_configuration
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -309,7 +315,7 @@ class Server(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
@@ -317,7 +323,7 @@ class Server(ModelNormal):
             status (str): The status of the server.
             hostname (str): Hostname of server.
             os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.
-            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.storage.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge` or `d3.m6.xlarge`.
+            type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge` or `a1.c5.large`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
             cpu_count (int): The number of CPUs available in the system.
@@ -327,6 +333,7 @@ class Server(ModelNormal):
             storage (str): A description of the machine storage.
             private_ip_addresses ([str]): Private IP addresses assigned to server.
             network_configuration (NetworkConfiguration):
+            storage_configuration (StorageConfiguration):
 
         Keyword Args:
             pricing_model (str): The pricing model this server is being billed. Currently this field should be set to `HOURLY`, `ONE_MONTH_RESERVATION`, `TWELVE_MONTHS_RESERVATION`, `TWENTY_FOUR_MONTHS_RESERVATION` or `THIRTY_SIX_MONTHS_RESERVATION`.. defaults to "HOURLY"  # noqa: E501
@@ -364,7 +371,7 @@ class Server(ModelNormal):
             public_ip_addresses ([str]): Public IP addresses assigned to server.. [optional]  # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Auto-generated password set for user `Admin` on Windows server, user `root` on ESXi servers, user `root` on Proxmox server and user `netris` on Netris servers.<br> The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
-            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE` or `PRIVATE_ONLY`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
+            network_type (str): The type of network configuration for this server. Currently this field should be set to `PUBLIC_AND_PRIVATE`, `PRIVATE_ONLY`, `PUBLIC_ONLY` or `NONE`.. [optional] if omitted the server will use the default value of "PUBLIC_AND_PRIVATE"  # noqa: E501
             cluster_id (str): The cluster reference id if any.. [optional]  # noqa: E501
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
             provisioned_on (datetime): Date and time when server was provisioned.. [optional]  # noqa: E501
@@ -414,6 +421,7 @@ class Server(ModelNormal):
         self.private_ip_addresses = private_ip_addresses
         self.pricing_model = pricing_model
         self.network_configuration = network_configuration
+        self.storage_configuration = storage_configuration
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

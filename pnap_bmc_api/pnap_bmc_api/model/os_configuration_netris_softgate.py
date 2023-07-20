@@ -59,6 +59,17 @@ class OsConfigurationNetrisSoftgate(ModelNormal):
     }
 
     validations = {
+        ('controller_address',): {
+            'max_length': 253,
+            'regex': {
+                'pattern': r'^(?!-)[\w\-]{1,63}(?<!-)(\.(?!-)[\w\-]{1,63}(?<!-))*$',  # noqa: E501
+            },
+        },
+        ('controller_auth_key',): {
+            'regex': {
+                'pattern': r'^\S+$',  # noqa: E501
+            },
+        },
     }
 
     @cached_property

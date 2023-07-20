@@ -60,6 +60,7 @@ from pnap_network_storage_api.model.error import Error
 from pnap_network_storage_api.model.storage_network import StorageNetwork
 from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
 from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
+from pnap_network_storage_api.model.tag_assignment_request import TagAssignmentRequest
 from pnap_network_storage_api.model.volume import Volume
 from pnap_network_storage_api.model.volume_create import VolumeCreate
 from pnap_network_storage_api.model.volume_update import VolumeUpdate
@@ -129,6 +130,7 @@ Class | Method | HTTP request | Description
 *StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_delete**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
 *StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
 *StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_patch**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_tags_put**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageNetworkId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
 
 
 ## Documentation For Models
@@ -145,6 +147,8 @@ Class | Method | HTTP request | Description
  - [StorageNetworkCreate](docs/StorageNetworkCreate.md)
  - [StorageNetworkUpdate](docs/StorageNetworkUpdate.md)
  - [StorageNetworkVolumeCreate](docs/StorageNetworkVolumeCreate.md)
+ - [TagAssignment](docs/TagAssignment.md)
+ - [TagAssignmentRequest](docs/TagAssignmentRequest.md)
  - [Volume](docs/Volume.md)
  - [VolumeCreate](docs/VolumeCreate.md)
  - [VolumeUpdate](docs/VolumeUpdate.md)

@@ -32,7 +32,9 @@ from pnap_network_storage_api.exceptions import ApiAttributeError
 
 def lazy_import():
     from pnap_network_storage_api.model.permissions_create import PermissionsCreate
+    from pnap_network_storage_api.model.tag_assignment_request import TagAssignmentRequest
     globals()['PermissionsCreate'] = PermissionsCreate
+    globals()['TagAssignmentRequest'] = TagAssignmentRequest
 
 
 class VolumeCreate(ModelNormal):
@@ -110,6 +112,7 @@ class VolumeCreate(ModelNormal):
             'description': (str,),  # noqa: E501
             'path_suffix': (str,),  # noqa: E501
             'permissions': (PermissionsCreate,),  # noqa: E501
+            'tags': ([TagAssignmentRequest],),  # noqa: E501
         }
 
     @cached_property
@@ -123,6 +126,7 @@ class VolumeCreate(ModelNormal):
         'description': 'description',  # noqa: E501
         'path_suffix': 'pathSuffix',  # noqa: E501
         'permissions': 'permissions',  # noqa: E501
+        'tags': 'tags',  # noqa: E501
     }
 
     read_only_vars = {
@@ -173,6 +177,7 @@ class VolumeCreate(ModelNormal):
             description (str): Volume description.. [optional]  # noqa: E501
             path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
             permissions (PermissionsCreate): [optional]  # noqa: E501
+            tags ([TagAssignmentRequest]): Tags to set to the resource. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -267,6 +272,7 @@ class VolumeCreate(ModelNormal):
             description (str): Volume description.. [optional]  # noqa: E501
             path_suffix (str): Last part of volume's path.. [optional]  # noqa: E501
             permissions (PermissionsCreate): [optional]  # noqa: E501
+            tags ([TagAssignmentRequest]): Tags to set to the resource. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

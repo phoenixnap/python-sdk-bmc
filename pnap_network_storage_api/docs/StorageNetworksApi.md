@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**storage_networks_storage_network_id_volumes_volume_id_delete**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
 [**storage_networks_storage_network_id_volumes_volume_id_get**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
 [**storage_networks_storage_network_id_volumes_volume_id_patch**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
+[**storage_networks_storage_network_id_volumes_volume_id_tags_put**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageNetworkId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
 
 
 # **storage_networks_get**
@@ -412,8 +413,15 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 description="My volume description",
                 path_suffix="/shared-docs",
                 capacity_in_gb=2000,
+                tags=[
+                    TagAssignmentRequest(
+                        name="Environment",
+                        value="PROD",
+                    ),
+                ],
             ),
         ],
+        client_vlan=2,
     ) # StorageNetworkCreate |  (optional)
 
     # example passing only required values which don't have defaults set
@@ -500,11 +508,23 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
     storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    tag = [
+        "env.dev",
+    ] # [str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Display one or more volumes belonging to a storage network.
         api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id)
+        pprint(api_response)
+    except pnap_network_storage_api.ApiException as e:
+        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Display one or more volumes belonging to a storage network.
+        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id, tag=tag)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
@@ -516,6 +536,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
+ **tag** | **[str]**| A list of query parameters related to tags in the form of tagName.tagValue | [optional]
 
 ### Return type
 
@@ -597,6 +618,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 all_squash=["100.80.0.5","100.80.0.6"],
             ),
         ),
+        tags=[
+            TagAssignmentRequest(
+                name="Environment",
+                value="PROD",
+            ),
+        ],
     ) # VolumeCreate |  (optional)
 
     # example passing only required values which don't have defaults set
@@ -925,6 +952,109 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Updated volume details. |  -  |
 **202** | Updating volume details. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **storage_networks_storage_network_id_volumes_volume_id_tags_put**
+> Volume storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id)
+
+Overwrites tags assigned for the volume.
+
+Overwrites tags assigned for the volume.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_network_storage_api
+from pnap_network_storage_api.api import storage_networks_api
+from pnap_network_storage_api.model.volume import Volume
+from pnap_network_storage_api.model.tag_assignment_request import TagAssignmentRequest
+from pnap_network_storage_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/network-storage/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_network_storage_api.Configuration(
+    host = "https://api.phoenixnap.com/network-storage/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_network_storage_api.Configuration(
+    host = "https://api.phoenixnap.com/network-storage/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_network_storage_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = storage_networks_api.StorageNetworksApi(api_client)
+    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
+    tag_assignment_request = [
+        TagAssignmentRequest(
+            name="Environment",
+            value="PROD",
+        ),
+    ] # [TagAssignmentRequest] | Tags to assign to the volume. (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Overwrites tags assigned for the volume.
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id)
+        pprint(api_response)
+    except pnap_network_storage_api.ApiException as e:
+        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_tags_put: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Overwrites tags assigned for the volume.
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request=tag_assignment_request)
+        pprint(api_response)
+    except pnap_network_storage_api.ApiException as e:
+        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_tags_put: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **storage_network_id** | **str**| ID of storage network. |
+ **volume_id** | **str**| ID of volume. |
+ **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)| Tags to assign to the volume. | [optional]
+
+### Return type
+
+[**Volume**](Volume.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Volume tags set. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

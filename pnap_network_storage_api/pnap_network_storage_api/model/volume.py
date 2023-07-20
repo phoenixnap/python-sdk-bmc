@@ -33,8 +33,10 @@ from pnap_network_storage_api.exceptions import ApiAttributeError
 def lazy_import():
     from pnap_network_storage_api.model.permissions import Permissions
     from pnap_network_storage_api.model.status import Status
+    from pnap_network_storage_api.model.tag_assignment import TagAssignment
     globals()['Permissions'] = Permissions
     globals()['Status'] = Status
+    globals()['TagAssignment'] = TagAssignment
 
 
 class Volume(ModelNormal):
@@ -101,6 +103,7 @@ class Volume(ModelNormal):
             'status': (Status,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
             'permissions': (Permissions,),  # noqa: E501
+            'tags': ([TagAssignment],),  # noqa: E501
         }
 
     @cached_property
@@ -120,6 +123,7 @@ class Volume(ModelNormal):
         'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
         'permissions': 'permissions',  # noqa: E501
+        'tags': 'tags',  # noqa: E501
     }
 
     read_only_vars = {
@@ -174,6 +178,7 @@ class Volume(ModelNormal):
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501
             permissions (Permissions): [optional]  # noqa: E501
+            tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -270,6 +275,7 @@ class Volume(ModelNormal):
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501
             permissions (Permissions): [optional]  # noqa: E501
+            tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
