@@ -122,7 +122,6 @@ class Server(ModelNormal):
             'id': (str,),  # noqa: E501
             'status': (str,),  # noqa: E501
             'hostname': (str,),  # noqa: E501
-            'os': (str,),  # noqa: E501
             'type': (str,),  # noqa: E501
             'location': (str,),  # noqa: E501
             'cpu': (str,),  # noqa: E501
@@ -136,6 +135,7 @@ class Server(ModelNormal):
             'network_configuration': (NetworkConfiguration,),  # noqa: E501
             'storage_configuration': (StorageConfiguration,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'os': (str,),  # noqa: E501
             'public_ip_addresses': ([str],),  # noqa: E501
             'reservation_id': (str,),  # noqa: E501
             'password': (str,),  # noqa: E501
@@ -144,6 +144,8 @@ class Server(ModelNormal):
             'tags': ([TagAssignment],),  # noqa: E501
             'provisioned_on': (datetime,),  # noqa: E501
             'os_configuration': (OsConfiguration,),  # noqa: E501
+            'superseded_by': (str,),  # noqa: E501
+            'supersedes': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -155,7 +157,6 @@ class Server(ModelNormal):
         'id': 'id',  # noqa: E501
         'status': 'status',  # noqa: E501
         'hostname': 'hostname',  # noqa: E501
-        'os': 'os',  # noqa: E501
         'type': 'type',  # noqa: E501
         'location': 'location',  # noqa: E501
         'cpu': 'cpu',  # noqa: E501
@@ -169,6 +170,7 @@ class Server(ModelNormal):
         'network_configuration': 'networkConfiguration',  # noqa: E501
         'storage_configuration': 'storageConfiguration',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'os': 'os',  # noqa: E501
         'public_ip_addresses': 'publicIpAddresses',  # noqa: E501
         'reservation_id': 'reservationId',  # noqa: E501
         'password': 'password',  # noqa: E501
@@ -177,6 +179,8 @@ class Server(ModelNormal):
         'tags': 'tags',  # noqa: E501
         'provisioned_on': 'provisionedOn',  # noqa: E501
         'os_configuration': 'osConfiguration',  # noqa: E501
+        'superseded_by': 'supersededBy',  # noqa: E501
+        'supersedes': 'supersedes',  # noqa: E501
     }
 
     read_only_vars = {
@@ -186,14 +190,13 @@ class Server(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, status, hostname, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
             id (str): The unique identifier of the server.
             status (str): The status of the server.
             hostname (str): Hostname of server.
-            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.
             type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge` or `a1.c5.large`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
@@ -239,6 +242,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.. [optional]  # noqa: E501
             public_ip_addresses ([str]): Public IP addresses assigned to server.. [optional]  # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Auto-generated password set for user `Admin` on Windows server, user `root` on ESXi servers, user `root` on Proxmox server and user `netris` on Netris servers.<br> The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
@@ -247,6 +251,8 @@ class Server(ModelNormal):
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
             provisioned_on (datetime): Date and time when server was provisioned.. [optional]  # noqa: E501
             os_configuration (OsConfiguration): [optional]  # noqa: E501
+            superseded_by (str): Unique identifier of the server to which the reservation has been transferred.. [optional]  # noqa: E501
+            supersedes (str): Unique identifier of the server from which the reservation has been transferred.. [optional]  # noqa: E501
         """
 
         pricing_model = kwargs.get('pricing_model', "HOURLY")
@@ -282,7 +288,6 @@ class Server(ModelNormal):
         self.id = id
         self.status = status
         self.hostname = hostname
-        self.os = os
         self.type = type
         self.location = location
         self.cpu = cpu
@@ -315,14 +320,13 @@ class Server(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, id, status, hostname, os, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, status, hostname, type, location, cpu, cpu_count, cores_per_cpu, cpu_frequency, ram, storage, private_ip_addresses, network_configuration, storage_configuration, *args, **kwargs):  # noqa: E501
         """Server - a model defined in OpenAPI
 
         Args:
             id (str): The unique identifier of the server.
             status (str): The status of the server.
             hostname (str): Hostname of server.
-            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.
             type (str): Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.medium`, `d2.m1.large`, `d2.m2.medium`, `d2.m2.large`, `d2.m2.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge` or `a1.c5.large`.
             location (str): Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cpu (str): A description of the machine CPU.
@@ -368,6 +372,7 @@ class Server(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             description (str): Description of server.. [optional]  # noqa: E501
+            os (str): The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `debian/bullseye`, `proxmox/bullseye`, `netris/controller`, `netris/softgate_1g` or `netris/softgate_10g`.. [optional]  # noqa: E501
             public_ip_addresses ([str]): Public IP addresses assigned to server.. [optional]  # noqa: E501
             reservation_id (str): The reservation reference id if any.. [optional]  # noqa: E501
             password (str): Auto-generated password set for user `Admin` on Windows server, user `root` on ESXi servers, user `root` on Proxmox server and user `netris` on Netris servers.<br> The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.. [optional]  # noqa: E501
@@ -376,6 +381,8 @@ class Server(ModelNormal):
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
             provisioned_on (datetime): Date and time when server was provisioned.. [optional]  # noqa: E501
             os_configuration (OsConfiguration): [optional]  # noqa: E501
+            superseded_by (str): Unique identifier of the server to which the reservation has been transferred.. [optional]  # noqa: E501
+            supersedes (str): Unique identifier of the server from which the reservation has been transferred.. [optional]  # noqa: E501
         """
 
         pricing_model = kwargs.get('pricing_model', "HOURLY")
@@ -409,7 +416,6 @@ class Server(ModelNormal):
         self.id = id
         self.status = status
         self.hostname = hostname
-        self.os = os
         self.type = type
         self.location = location
         self.cpu = cpu
