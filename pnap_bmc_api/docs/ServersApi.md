@@ -281,7 +281,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 private_networks=[
                     ServerPrivateNetwork(
                         id="603f3b2cfcaf050643b89a4b",
-                        ips=["10.1.1.1","10.1.1.2"],
+                        ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
                         dhcp=False,
                     ),
                 ],
@@ -298,7 +298,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 public_networks=[
                     ServerPublicNetwork(
                         id="60473c2509268bc77fd06d29",
-                        ips=["182.16.0.146","182.16.0.147"],
+                        ips=["182.16.0.146","182.16.0.148 - 182.16.0.150"],
                     ),
                 ],
             ),
@@ -1504,7 +1504,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     private_network_id = "603f3b2cfcaf050643b89a4b" # str | The private network identifier.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
-        ips=["10.1.1.1","10.1.1.2"],
+        ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
     ) # ServerNetworkUpdate |  (optional)
 
     # example passing only required values which don't have defaults set
@@ -1605,7 +1605,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_private_network = ServerPrivateNetwork(
         id="603f3b2cfcaf050643b89a4b",
-        ips=["10.1.1.1","10.1.1.2"],
+        ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
         dhcp=False,
     ) # ServerPrivateNetwork |  (optional)
 
@@ -1791,7 +1791,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
-        ips=["10.1.1.1","10.1.1.2"],
+        ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
     ) # ServerNetworkUpdate |  (optional)
 
     # example passing only required values which don't have defaults set
@@ -1892,7 +1892,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_public_network = ServerPublicNetwork(
         id="60473c2509268bc77fd06d29",
-        ips=["182.16.0.146","182.16.0.147"],
+        ips=["182.16.0.146","182.16.0.148 - 182.16.0.150"],
     ) # ServerPublicNetwork |  (optional)
 
     # example passing only required values which don't have defaults set
