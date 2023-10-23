@@ -1,6 +1,6 @@
 # ServerPatch
 
-Server patch.
+Patch bare metal server.
 
 ## Properties
 Name | Type | Description | Notes

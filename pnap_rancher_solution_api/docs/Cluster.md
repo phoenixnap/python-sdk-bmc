@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **configuration** | [**ClusterConfiguration**](ClusterConfiguration.md) |  | [optional] 
 **metadata** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] [readonly] 
 **workload_configuration** | [**ClusterWorkloadConfiguration**](ClusterWorkloadConfiguration.md) |  | [optional] 
-**status_description** | **str** | The cluster status | [optional] [readonly] 
+**status_description** | **str** | (Read-Only) The cluster status | [optional] [readonly] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

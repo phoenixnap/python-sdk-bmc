@@ -182,7 +182,7 @@ class Cluster(ModelNormal):
             configuration (ClusterConfiguration): [optional]  # noqa: E501
             metadata (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             workload_configuration (ClusterWorkloadConfiguration): [optional]  # noqa: E501
-            status_description (str): The cluster status. [optional]  # noqa: E501
+            status_description (str): (Read-Only) The cluster status. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -280,7 +280,7 @@ class Cluster(ModelNormal):
             configuration (ClusterConfiguration): [optional]  # noqa: E501
             metadata (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             workload_configuration (ClusterWorkloadConfiguration): [optional]  # noqa: E501
-            status_description (str): The cluster status. [optional]  # noqa: E501
+            status_description (str): (Read-Only) The cluster status. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

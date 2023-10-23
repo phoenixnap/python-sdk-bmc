@@ -65,7 +65,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     private_network_id = "603f3b2cfcaf050643b89a4b" # str | The private network identifier.
 
     # example passing only required values which don't have defaults set
@@ -247,7 +247,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
         install_default_ssh_keys=False,
         ssh_keys=["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF9LdAFElNCi7JoWh6KUcchrJ2Gac1aqGRPpdZNowObpRtmiRCecAMb7bUgNAaNfcmwiQi7tos9TlnFgprIcfMWb8MSs3ABYHmBgqEEt3RWYf0fAc9CsIpJdMCUG28TPGTlRXCEUVNKgLMdcseAlJoGp1CgbHWIN65fB3he3kAZcfpPn5mapV0tsl2p+ZyuAGRYdn5dJv2RZDHUZBkOeUobwsij+weHCKAFmKQKtCP7ybgVHaQjAPrj8MGnk1jBbjDt5ws+Be+9JNjQJee9zCKbAOsIo3i+GcUIkrw5jxPU/RTGlWBcemPaKHdciSzGcjWboapzIy49qypQhZe1U75 user@my_ip"],
         ssh_key_ids=["5fa942e71c16abcfbead275f","5fa94303cc6dc49346404fca","5fa943127bda760ad80c237e"],
-        reservation_id="5f622c8032b458306b40d824",
+        reservation_id="fc8bd49a-59cc-4538-a806-5e46228408ec",
         pricing_model="ONE_MONTH_RESERVATION",
         network_type="PUBLIC_AND_PRIVATE",
         os_configuration=OsConfiguration(
@@ -396,7 +396,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     relinquish_ip_block = RelinquishIpBlock(
         delete_ip_blocks=True,
     ) # RelinquishIpBlock |  (optional)
@@ -493,7 +493,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -577,7 +577,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -661,7 +661,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -746,7 +746,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_reserve = ServerReserve(
         pricing_model="ONE_MONTH_RESERVATION",
     ) # ServerReserve |  (optional)
@@ -844,7 +844,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_reset = ServerReset(
         install_default_ssh_keys=False,
         ssh_keys=["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF9LdAFElNCi7JoWh6KUcchrJ2Gac1aqGRPpdZNowObpRtmiRCecAMb7bUgNAaNfcmwiQi7tos9TlnFgprIcfMWb8MSs3ABYHmBgqEEt3RWYf0fAc9CsIpJdMCUG28TPGTlRXCEUVNKgLMdcseAlJoGp1CgbHWIN65fB3he3kAZcfpPn5mapV0tsl2p+ZyuAGRYdn5dJv2RZDHUZBkOeUobwsij+weHCKAFmKQKtCP7ybgVHaQjAPrj8MGnk1jBbjDt5ws+Be+9JNjQJee9zCKbAOsIo3i+GcUIkrw5jxPU/RTGlWBcemPaKHdciSzGcjWboapzIy49qypQhZe1U75 user@my_ip"],
@@ -954,7 +954,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -1038,7 +1038,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -1121,7 +1121,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -1204,7 +1204,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
     relinquish_ip_block = RelinquishIpBlock(
         delete_ip_blocks=True,
@@ -1303,7 +1303,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_ip_block = ServerIpBlock(
         id="60473a6115e34466c9f8f083",
     ) # ServerIpBlock |  (optional)
@@ -1401,7 +1401,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_patch = ServerPatch(
         description="Server #1 used for computing.",
         hostname="my-server",
@@ -1500,7 +1500,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     private_network_id = "603f3b2cfcaf050643b89a4b" # str | The private network identifier.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
@@ -1601,7 +1601,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_private_network = ServerPrivateNetwork(
         id="603f3b2cfcaf050643b89a4b",
@@ -1700,7 +1700,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
 
     # example passing only required values which don't have defaults set
@@ -1787,7 +1787,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
@@ -1888,7 +1888,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_public_network = ServerPublicNetwork(
         id="60473c2509268bc77fd06d29",
@@ -1989,7 +1989,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    server_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The server's ID.
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     tag_assignment_request = [
         TagAssignmentRequest(
             name="Environment",
