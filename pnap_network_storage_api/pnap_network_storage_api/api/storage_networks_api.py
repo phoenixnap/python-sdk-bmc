@@ -212,6 +212,7 @@ class StorageNetworksApi(object):
                 ],
                 'required': [
                     'storage_network_id',
+                    'storage_network_update',
                 ],
                 'nullable': [
                 ],
@@ -266,7 +267,9 @@ class StorageNetworksApi(object):
                 'all': [
                     'storage_network_create',
                 ],
-                'required': [],
+                'required': [
+                    'storage_network_create',
+                ],
                 'nullable': [
                 ],
                 'enum': [
@@ -376,6 +379,7 @@ class StorageNetworksApi(object):
                 ],
                 'required': [
                     'storage_network_id',
+                    'volume_create',
                 ],
                 'nullable': [
                 ],
@@ -549,6 +553,7 @@ class StorageNetworksApi(object):
                 'required': [
                     'storage_network_id',
                     'volume_id',
+                    'volume_update',
                 ],
                 'nullable': [
                 ],
@@ -612,6 +617,7 @@ class StorageNetworksApi(object):
                 'required': [
                     'storage_network_id',
                     'volume_id',
+                    'tag_assignment_request',
                 ],
                 'nullable': [
                 ],
@@ -904,6 +910,7 @@ class StorageNetworksApi(object):
     def storage_networks_id_patch(
         self,
         storage_network_id,
+        storage_network_update,
         **kwargs
     ):
         """Update storage network details.  # noqa: E501
@@ -912,14 +919,14 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_id_patch(storage_network_id, async_req=True)
+        >>> thread = api.storage_networks_id_patch(storage_network_id, storage_network_update, async_req=True)
         >>> result = thread.get()
 
         Args:
             storage_network_id (str): ID of storage network.
+            storage_network_update (StorageNetworkUpdate): Storage network to be updated.
 
         Keyword Args:
-            storage_network_update (StorageNetworkUpdate): Storage network to be updated.. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -983,10 +990,13 @@ class StorageNetworksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['storage_network_id'] = \
             storage_network_id
+        kwargs['storage_network_update'] = \
+            storage_network_update
         return self.storage_networks_id_patch_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_post(
         self,
+        storage_network_create,
         **kwargs
     ):
         """Create a storage network and volume.  # noqa: E501
@@ -995,12 +1005,13 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_post(async_req=True)
+        >>> thread = api.storage_networks_post(storage_network_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            storage_network_create (StorageNetworkCreate):
 
         Keyword Args:
-            storage_network_create (StorageNetworkCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1062,6 +1073,8 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['storage_network_create'] = \
+            storage_network_create
         return self.storage_networks_post_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_get(
@@ -1151,6 +1164,7 @@ class StorageNetworksApi(object):
     def storage_networks_storage_network_id_volumes_post(
         self,
         storage_network_id,
+        volume_create,
         **kwargs
     ):
         """Create a volume belonging to a storage network.  # noqa: E501
@@ -1159,14 +1173,14 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_post(storage_network_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create, async_req=True)
         >>> result = thread.get()
 
         Args:
             storage_network_id (str): ID of storage network.
+            volume_create (VolumeCreate):
 
         Keyword Args:
-            volume_create (VolumeCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1230,6 +1244,8 @@ class StorageNetworksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['storage_network_id'] = \
             storage_network_id
+        kwargs['volume_create'] = \
+            volume_create
         return self.storage_networks_storage_network_id_volumes_post_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_volume_id_delete(
@@ -1410,6 +1426,7 @@ class StorageNetworksApi(object):
         self,
         storage_network_id,
         volume_id,
+        volume_update,
         **kwargs
     ):
         """Update a storage network's volume details.  # noqa: E501
@@ -1418,15 +1435,15 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update, async_req=True)
         >>> result = thread.get()
 
         Args:
             storage_network_id (str): ID of storage network.
             volume_id (str): ID of volume.
+            volume_update (VolumeUpdate): Storage network volume to be updated.
 
         Keyword Args:
-            volume_update (VolumeUpdate): Storage network volume to be updated.. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1492,12 +1509,15 @@ class StorageNetworksApi(object):
             storage_network_id
         kwargs['volume_id'] = \
             volume_id
+        kwargs['volume_update'] = \
+            volume_update
         return self.storage_networks_storage_network_id_volumes_volume_id_patch_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_volume_id_tags_put(
         self,
         storage_network_id,
         volume_id,
+        tag_assignment_request,
         **kwargs
     ):
         """Overwrites tags assigned for the volume.  # noqa: E501
@@ -1506,15 +1526,15 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             storage_network_id (str): ID of storage network.
             volume_id (str): ID of volume.
+            tag_assignment_request ([TagAssignmentRequest]): Tags to assign to the volume.
 
         Keyword Args:
-            tag_assignment_request ([TagAssignmentRequest]): Tags to assign to the volume.. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1580,5 +1600,7 @@ class StorageNetworksApi(object):
             storage_network_id
         kwargs['volume_id'] = \
             volume_id
+        kwargs['tag_assignment_request'] = \
+            tag_assignment_request
         return self.storage_networks_storage_network_id_volumes_volume_id_tags_put_endpoint.call_with_http_info(**kwargs)
 

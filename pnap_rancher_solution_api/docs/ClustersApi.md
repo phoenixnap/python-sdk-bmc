@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clusters_post**
-> Cluster clusters_post()
+> Cluster clusters_post(cluster)
 
 Create a Rancher Server Deployment.
 
@@ -305,13 +305,12 @@ with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
         ],
         configuration=ClusterConfiguration(None),
         workload_configuration=ClusterWorkloadConfiguration(None),
-    ) # Cluster |  (optional)
+    ) # Cluster | 
 
     # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create a Rancher Server Deployment.
-        api_response = api_instance.clusters_post(cluster=cluster)
+        api_response = api_instance.clusters_post(cluster)
         pprint(api_response)
     except pnap_rancher_solution_api.ApiException as e:
         print("Exception when calling ClustersApi->clusters_post: %s\n" % e)
@@ -322,7 +321,7 @@ with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster** | [**Cluster**](Cluster.md)|  | [optional]
+ **cluster** | [**Cluster**](Cluster.md)|  |
 
 ### Return type
 

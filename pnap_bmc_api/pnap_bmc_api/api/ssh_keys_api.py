@@ -99,7 +99,9 @@ class SSHKeysApi(object):
                 'all': [
                     'ssh_key_create',
                 ],
-                'required': [],
+                'required': [
+                    'ssh_key_create',
+                ],
                 'nullable': [
                 ],
                 'enum': [
@@ -254,6 +256,7 @@ class SSHKeysApi(object):
                 ],
                 'required': [
                     'ssh_key_id',
+                    'ssh_key_update',
                 ],
                 'nullable': [
                 ],
@@ -374,6 +377,7 @@ class SSHKeysApi(object):
 
     def ssh_keys_post(
         self,
+        ssh_key_create,
         **kwargs
     ):
         """Create SSH Key.  # noqa: E501
@@ -382,12 +386,13 @@ class SSHKeysApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.ssh_keys_post(async_req=True)
+        >>> thread = api.ssh_keys_post(ssh_key_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            ssh_key_create (SshKeyCreate):
 
         Keyword Args:
-            ssh_key_create (SshKeyCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -449,6 +454,8 @@ class SSHKeysApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['ssh_key_create'] = \
+            ssh_key_create
         return self.ssh_keys_post_endpoint.call_with_http_info(**kwargs)
 
     def ssh_keys_ssh_key_id_delete(
@@ -620,6 +627,7 @@ class SSHKeysApi(object):
     def ssh_keys_ssh_key_id_put(
         self,
         ssh_key_id,
+        ssh_key_update,
         **kwargs
     ):
         """Edit SSH Key.  # noqa: E501
@@ -628,14 +636,14 @@ class SSHKeysApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.ssh_keys_ssh_key_id_put(ssh_key_id, async_req=True)
+        >>> thread = api.ssh_keys_ssh_key_id_put(ssh_key_id, ssh_key_update, async_req=True)
         >>> result = thread.get()
 
         Args:
             ssh_key_id (str): The SSH Key's ID.
+            ssh_key_update (SshKeyUpdate):
 
         Keyword Args:
-            ssh_key_update (SshKeyUpdate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -699,5 +707,7 @@ class SSHKeysApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['ssh_key_id'] = \
             ssh_key_id
+        kwargs['ssh_key_update'] = \
+            ssh_key_update
         return self.ssh_keys_ssh_key_id_put_endpoint.call_with_http_info(**kwargs)
 

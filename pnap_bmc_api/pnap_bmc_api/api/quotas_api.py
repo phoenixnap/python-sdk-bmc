@@ -100,6 +100,7 @@ class QuotasApi(object):
                 ],
                 'required': [
                     'quota_id',
+                    'quota_edit_limit_request',
                 ],
                 'nullable': [
                 ],
@@ -272,6 +273,7 @@ class QuotasApi(object):
     def quotas_quota_id_actions_request_edit_post(
         self,
         quota_id,
+        quota_edit_limit_request,
         **kwargs
     ):
         """Request quota limit change.  # noqa: E501
@@ -280,14 +282,14 @@ class QuotasApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.quotas_quota_id_actions_request_edit_post(quota_id, async_req=True)
+        >>> thread = api.quotas_quota_id_actions_request_edit_post(quota_id, quota_edit_limit_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             quota_id (str): The ID of the Quota.
+            quota_edit_limit_request (QuotaEditLimitRequest):
 
         Keyword Args:
-            quota_edit_limit_request (QuotaEditLimitRequest): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -351,6 +353,8 @@ class QuotasApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['quota_id'] = \
             quota_id
+        kwargs['quota_edit_limit_request'] = \
+            quota_edit_limit_request
         return self.quotas_quota_id_actions_request_edit_post_endpoint.call_with_http_info(**kwargs)
 
     def quotas_quota_id_get(

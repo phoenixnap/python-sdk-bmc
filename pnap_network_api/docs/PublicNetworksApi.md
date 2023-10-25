@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **public_networks_network_id_ip_blocks_post**
-> PublicNetworkIpBlock public_networks_network_id_ip_blocks_post(public_network_id)
+> PublicNetworkIpBlock public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block)
 
 Adds an IP block to this public network.
 
@@ -399,21 +399,12 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
     public_network_ip_block = PublicNetworkIpBlock(
         id="60473a6115e34466c9f8f083",
-    ) # PublicNetworkIpBlock |  (optional)
+    ) # PublicNetworkIpBlock | 
 
     # example passing only required values which don't have defaults set
     try:
         # Adds an IP block to this public network.
-        api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id)
-        pprint(api_response)
-    except pnap_network_api.ApiException as e:
-        print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Adds an IP block to this public network.
-        api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block=public_network_ip_block)
+        api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_post: %s\n" % e)
@@ -425,7 +416,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_network_id** | **str**| The Public Network identifier. |
- **public_network_ip_block** | [**PublicNetworkIpBlock**](PublicNetworkIpBlock.md)|  | [optional]
+ **public_network_ip_block** | [**PublicNetworkIpBlock**](PublicNetworkIpBlock.md)|  |
 
 ### Return type
 
@@ -455,7 +446,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **public_networks_network_id_patch**
-> PublicNetwork public_networks_network_id_patch(public_network_id)
+> PublicNetwork public_networks_network_id_patch(public_network_id, public_network_modify)
 
 Update Public Network's Details.
 
@@ -498,21 +489,12 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     public_network_modify = PublicNetworkModify(
         name="Sample Network",
         description="Further details on the network.",
-    ) # PublicNetworkModify |  (optional)
+    ) # PublicNetworkModify | 
 
     # example passing only required values which don't have defaults set
     try:
         # Update Public Network's Details.
-        api_response = api_instance.public_networks_network_id_patch(public_network_id)
-        pprint(api_response)
-    except pnap_network_api.ApiException as e:
-        print("Exception when calling PublicNetworksApi->public_networks_network_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update Public Network's Details.
-        api_response = api_instance.public_networks_network_id_patch(public_network_id, public_network_modify=public_network_modify)
+        api_response = api_instance.public_networks_network_id_patch(public_network_id, public_network_modify)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_patch: %s\n" % e)
@@ -524,7 +506,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_network_id** | **str**| The Public Network identifier. |
- **public_network_modify** | [**PublicNetworkModify**](PublicNetworkModify.md)|  | [optional]
+ **public_network_modify** | [**PublicNetworkModify**](PublicNetworkModify.md)|  |
 
 ### Return type
 
@@ -554,7 +536,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **public_networks_post**
-> PublicNetwork public_networks_post()
+> PublicNetwork public_networks_post(public_network_create)
 
 Create a public network.
 
@@ -603,13 +585,12 @@ with pnap_network_api.ApiClient(configuration) as api_client:
                 id="60473a6115e34466c9f8f083",
             ),
         ],
-    ) # PublicNetworkCreate |  (optional)
+    ) # PublicNetworkCreate | 
 
     # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create a public network.
-        api_response = api_instance.public_networks_post(public_network_create=public_network_create)
+        api_response = api_instance.public_networks_post(public_network_create)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PublicNetworksApi->public_networks_post: %s\n" % e)
@@ -620,7 +601,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_create** | [**PublicNetworkCreate**](PublicNetworkCreate.md)|  | [optional]
+ **public_network_create** | [**PublicNetworkCreate**](PublicNetworkCreate.md)|  |
 
 ### Return type
 

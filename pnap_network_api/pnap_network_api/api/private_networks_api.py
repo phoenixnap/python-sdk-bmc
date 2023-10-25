@@ -208,6 +208,7 @@ class PrivateNetworksApi(object):
                 ],
                 'required': [
                     'private_network_id',
+                    'private_network_modify',
                 ],
                 'nullable': [
                 ],
@@ -260,10 +261,12 @@ class PrivateNetworksApi(object):
             },
             params_map={
                 'all': [
+                    'private_network_create',
                     'force',
+                ],
+                'required': [
                     'private_network_create',
                 ],
-                'required': [],
                 'nullable': [
                 ],
                 'enum': [
@@ -277,17 +280,17 @@ class PrivateNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'force':
-                        (bool,),
                     'private_network_create':
                         (PrivateNetworkCreate,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'force': 'force',
                 },
                 'location_map': {
-                    'force': 'query',
                     'private_network_create': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -551,6 +554,7 @@ class PrivateNetworksApi(object):
     def private_networks_network_id_put(
         self,
         private_network_id,
+        private_network_modify,
         **kwargs
     ):
         """Update a Private Network.  # noqa: E501
@@ -559,14 +563,14 @@ class PrivateNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.private_networks_network_id_put(private_network_id, async_req=True)
+        >>> thread = api.private_networks_network_id_put(private_network_id, private_network_modify, async_req=True)
         >>> result = thread.get()
 
         Args:
             private_network_id (str): The private network identifier.
+            private_network_modify (PrivateNetworkModify):
 
         Keyword Args:
-            private_network_modify (PrivateNetworkModify): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -630,10 +634,13 @@ class PrivateNetworksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['private_network_id'] = \
             private_network_id
+        kwargs['private_network_modify'] = \
+            private_network_modify
         return self.private_networks_network_id_put_endpoint.call_with_http_info(**kwargs)
 
     def private_networks_post(
         self,
+        private_network_create,
         **kwargs
     ):
         """Create a Private Network.  # noqa: E501
@@ -642,13 +649,14 @@ class PrivateNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.private_networks_post(async_req=True)
+        >>> thread = api.private_networks_post(private_network_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            private_network_create (PrivateNetworkCreate):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            private_network_create (PrivateNetworkCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -710,5 +718,7 @@ class PrivateNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['private_network_create'] = \
+            private_network_create
         return self.private_networks_post_endpoint.call_with_http_info(**kwargs)
 

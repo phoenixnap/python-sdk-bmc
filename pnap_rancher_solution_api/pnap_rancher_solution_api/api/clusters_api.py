@@ -199,7 +199,9 @@ class ClustersApi(object):
                 'all': [
                     'cluster',
                 ],
-                'required': [],
+                'required': [
+                    'cluster',
+                ],
                 'nullable': [
                 ],
                 'enum': [
@@ -481,6 +483,7 @@ class ClustersApi(object):
 
     def clusters_post(
         self,
+        cluster,
         **kwargs
     ):
         """Create a Rancher Server Deployment.  # noqa: E501
@@ -489,12 +492,13 @@ class ClustersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.clusters_post(async_req=True)
+        >>> thread = api.clusters_post(cluster, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            cluster (Cluster):
 
         Keyword Args:
-            cluster (Cluster): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -556,5 +560,7 @@ class ClustersApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['cluster'] = \
+            cluster
         return self.clusters_post_endpoint.call_with_http_info(**kwargs)
 

@@ -170,10 +170,12 @@ class ServersApi(object):
             },
             params_map={
                 'all': [
+                    'server_create',
                     'force',
+                ],
+                'required': [
                     'server_create',
                 ],
-                'required': [],
                 'nullable': [
                 ],
                 'enum': [
@@ -187,17 +189,17 @@ class ServersApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'force':
-                        (bool,),
                     'server_create':
                         (ServerCreate,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'force': 'force',
                 },
                 'location_map': {
-                    'force': 'query',
                     'server_create': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -230,6 +232,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'relinquish_ip_block',
                 ],
                 'nullable': [
                 ],
@@ -440,6 +443,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'server_reserve',
                 ],
                 'nullable': [
                 ],
@@ -497,6 +501,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'server_reset',
                 ],
                 'nullable': [
                 ],
@@ -709,6 +714,7 @@ class ServersApi(object):
                 'required': [
                     'server_id',
                     'ip_block_id',
+                    'relinquish_ip_block',
                 ],
                 'nullable': [
                 ],
@@ -770,6 +776,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'server_ip_block',
                 ],
                 'nullable': [
                 ],
@@ -827,6 +834,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'server_patch',
                 ],
                 'nullable': [
                 ],
@@ -881,12 +889,13 @@ class ServersApi(object):
                 'all': [
                     'server_id',
                     'private_network_id',
-                    'force',
                     'server_network_update',
+                    'force',
                 ],
                 'required': [
                     'server_id',
                     'private_network_id',
+                    'server_network_update',
                 ],
                 'nullable': [
                 ],
@@ -905,10 +914,10 @@ class ServersApi(object):
                         (str,),
                     'private_network_id':
                         (str,),
-                    'force':
-                        (bool,),
                     'server_network_update':
                         (ServerNetworkUpdate,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
@@ -918,8 +927,8 @@ class ServersApi(object):
                 'location_map': {
                     'server_id': 'path',
                     'private_network_id': 'path',
-                    'force': 'query',
                     'server_network_update': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -948,11 +957,12 @@ class ServersApi(object):
             params_map={
                 'all': [
                     'server_id',
-                    'force',
                     'server_private_network',
+                    'force',
                 ],
                 'required': [
                     'server_id',
+                    'server_private_network',
                 ],
                 'nullable': [
                 ],
@@ -969,10 +979,10 @@ class ServersApi(object):
                 'openapi_types': {
                     'server_id':
                         (str,),
-                    'force':
-                        (bool,),
                     'server_private_network':
                         (ServerPrivateNetwork,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
@@ -980,8 +990,8 @@ class ServersApi(object):
                 },
                 'location_map': {
                     'server_id': 'path',
-                    'force': 'query',
                     'server_private_network': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -1068,12 +1078,13 @@ class ServersApi(object):
                 'all': [
                     'server_id',
                     'public_network_id',
-                    'force',
                     'server_network_update',
+                    'force',
                 ],
                 'required': [
                     'server_id',
                     'public_network_id',
+                    'server_network_update',
                 ],
                 'nullable': [
                 ],
@@ -1092,10 +1103,10 @@ class ServersApi(object):
                         (str,),
                     'public_network_id':
                         (str,),
-                    'force':
-                        (bool,),
                     'server_network_update':
                         (ServerNetworkUpdate,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
@@ -1105,8 +1116,8 @@ class ServersApi(object):
                 'location_map': {
                     'server_id': 'path',
                     'public_network_id': 'path',
-                    'force': 'query',
                     'server_network_update': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -1135,11 +1146,12 @@ class ServersApi(object):
             params_map={
                 'all': [
                     'server_id',
-                    'force',
                     'server_public_network',
+                    'force',
                 ],
                 'required': [
                     'server_id',
+                    'server_public_network',
                 ],
                 'nullable': [
                 ],
@@ -1156,10 +1168,10 @@ class ServersApi(object):
                 'openapi_types': {
                     'server_id':
                         (str,),
-                    'force':
-                        (bool,),
                     'server_public_network':
                         (ServerPublicNetwork,),
+                    'force':
+                        (bool,),
                 },
                 'attribute_map': {
                     'server_id': 'serverId',
@@ -1167,8 +1179,8 @@ class ServersApi(object):
                 },
                 'location_map': {
                     'server_id': 'path',
-                    'force': 'query',
                     'server_public_network': 'body',
+                    'force': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -1201,6 +1213,7 @@ class ServersApi(object):
                 ],
                 'required': [
                     'server_id',
+                    'tag_assignment_request',
                 ],
                 'nullable': [
                 ],
@@ -1409,6 +1422,7 @@ class ServersApi(object):
 
     def servers_post(
         self,
+        server_create,
         **kwargs
     ):
         """Create new server.  # noqa: E501
@@ -1417,13 +1431,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_post(async_req=True)
+        >>> thread = api.servers_post(server_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            server_create (ServerCreate):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            server_create (ServerCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1485,11 +1500,14 @@ class ServersApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['server_create'] = \
+            server_create
         return self.servers_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_actions_deprovision_post(
         self,
         server_id,
+        relinquish_ip_block,
         **kwargs
     ):
         """Deprovision a server.  # noqa: E501
@@ -1498,14 +1516,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_actions_deprovision_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_actions_deprovision_post(server_id, relinquish_ip_block, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            relinquish_ip_block (RelinquishIpBlock):
 
         Keyword Args:
-            relinquish_ip_block (RelinquishIpBlock): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1569,6 +1587,8 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['relinquish_ip_block'] = \
+            relinquish_ip_block
         return self.servers_server_id_actions_deprovision_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_actions_power_off_post(
@@ -1823,6 +1843,7 @@ class ServersApi(object):
     def servers_server_id_actions_reserve_post(
         self,
         server_id,
+        server_reserve,
         **kwargs
     ):
         """Reserve server.  # noqa: E501
@@ -1831,14 +1852,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_actions_reserve_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_actions_reserve_post(server_id, server_reserve, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_reserve (ServerReserve):
 
         Keyword Args:
-            server_reserve (ServerReserve): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1902,11 +1923,14 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_reserve'] = \
+            server_reserve
         return self.servers_server_id_actions_reserve_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_actions_reset_post(
         self,
         server_id,
+        server_reset,
         **kwargs
     ):
         """Reset server.  # noqa: E501
@@ -1915,14 +1939,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_actions_reset_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_actions_reset_post(server_id, server_reset, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_reset (ServerReset):
 
         Keyword Args:
-            server_reset (ServerReset): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1986,6 +2010,8 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_reset'] = \
+            server_reset
         return self.servers_server_id_actions_reset_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_actions_shutdown_post(
@@ -2241,6 +2267,7 @@ class ServersApi(object):
         self,
         server_id,
         ip_block_id,
+        relinquish_ip_block,
         **kwargs
     ):
         """Unassign IP Block from Server.  # noqa: E501
@@ -2249,15 +2276,15 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id, async_req=True)
+        >>> thread = api.servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id, relinquish_ip_block, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
             ip_block_id (str): The IP Block identifier.
+            relinquish_ip_block (RelinquishIpBlock):
 
         Keyword Args:
-            relinquish_ip_block (RelinquishIpBlock): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2323,11 +2350,14 @@ class ServersApi(object):
             server_id
         kwargs['ip_block_id'] = \
             ip_block_id
+        kwargs['relinquish_ip_block'] = \
+            relinquish_ip_block
         return self.servers_server_id_ip_blocks_ip_block_id_delete_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_ip_blocks_post(
         self,
         server_id,
+        server_ip_block,
         **kwargs
     ):
         """Assign IP Block to Server.  # noqa: E501
@@ -2336,14 +2366,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_ip_blocks_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_ip_blocks_post(server_id, server_ip_block, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_ip_block (ServerIpBlock):
 
         Keyword Args:
-            server_ip_block (ServerIpBlock): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2407,11 +2437,14 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_ip_block'] = \
+            server_ip_block
         return self.servers_server_id_ip_blocks_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_patch(
         self,
         server_id,
+        server_patch,
         **kwargs
     ):
         """Patch a Server.  # noqa: E501
@@ -2420,14 +2453,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_patch(server_id, async_req=True)
+        >>> thread = api.servers_server_id_patch(server_id, server_patch, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_patch (ServerPatch):
 
         Keyword Args:
-            server_patch (ServerPatch): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2491,12 +2524,15 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_patch'] = \
+            server_patch
         return self.servers_server_id_patch_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_private_networks_patch(
         self,
         server_id,
         private_network_id,
+        server_network_update,
         **kwargs
     ):
         """Updates the server's private network's IP addresses  # noqa: E501
@@ -2505,16 +2541,16 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_private_networks_patch(server_id, private_network_id, async_req=True)
+        >>> thread = api.servers_server_id_private_networks_patch(server_id, private_network_id, server_network_update, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
             private_network_id (str): The private network identifier.
+            server_network_update (ServerNetworkUpdate):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            server_network_update (ServerNetworkUpdate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2580,11 +2616,14 @@ class ServersApi(object):
             server_id
         kwargs['private_network_id'] = \
             private_network_id
+        kwargs['server_network_update'] = \
+            server_network_update
         return self.servers_server_id_private_networks_patch_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_private_networks_post(
         self,
         server_id,
+        server_private_network,
         **kwargs
     ):
         """Adds the server to a private network.  # noqa: E501
@@ -2593,15 +2632,15 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_private_networks_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_private_networks_post(server_id, server_private_network, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_private_network (ServerPrivateNetwork):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            server_private_network (ServerPrivateNetwork): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2665,6 +2704,8 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_private_network'] = \
+            server_private_network
         return self.servers_server_id_private_networks_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_public_networks_delete(
@@ -2758,6 +2799,7 @@ class ServersApi(object):
         self,
         server_id,
         public_network_id,
+        server_network_update,
         **kwargs
     ):
         """Updates the server's public network's IP addresses.  # noqa: E501
@@ -2766,16 +2808,16 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_public_networks_patch(server_id, public_network_id, async_req=True)
+        >>> thread = api.servers_server_id_public_networks_patch(server_id, public_network_id, server_network_update, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
             public_network_id (str): The Public Network identifier.
+            server_network_update (ServerNetworkUpdate):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            server_network_update (ServerNetworkUpdate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2841,11 +2883,14 @@ class ServersApi(object):
             server_id
         kwargs['public_network_id'] = \
             public_network_id
+        kwargs['server_network_update'] = \
+            server_network_update
         return self.servers_server_id_public_networks_patch_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_public_networks_post(
         self,
         server_id,
+        server_public_network,
         **kwargs
     ):
         """Adds the server to a Public Network.  # noqa: E501
@@ -2854,15 +2899,15 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_public_networks_post(server_id, async_req=True)
+        >>> thread = api.servers_server_id_public_networks_post(server_id, server_public_network, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            server_public_network (ServerPublicNetwork):
 
         Keyword Args:
             force (bool): Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups.. [optional] if omitted the server will use the default value of False
-            server_public_network (ServerPublicNetwork): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -2926,11 +2971,14 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['server_public_network'] = \
+            server_public_network
         return self.servers_server_id_public_networks_post_endpoint.call_with_http_info(**kwargs)
 
     def servers_server_id_tags_put(
         self,
         server_id,
+        tag_assignment_request,
         **kwargs
     ):
         """Overwrite tags assigned for Server.  # noqa: E501
@@ -2939,14 +2987,14 @@ class ServersApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.servers_server_id_tags_put(server_id, async_req=True)
+        >>> thread = api.servers_server_id_tags_put(server_id, tag_assignment_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             server_id (str): The server's ID.
+            tag_assignment_request ([TagAssignmentRequest]):
 
         Keyword Args:
-            tag_assignment_request ([TagAssignmentRequest]): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -3010,5 +3058,7 @@ class ServersApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['server_id'] = \
             server_id
+        kwargs['tag_assignment_request'] = \
+            tag_assignment_request
         return self.servers_server_id_tags_put_endpoint.call_with_http_info(**kwargs)
 

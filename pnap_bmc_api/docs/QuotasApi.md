@@ -89,7 +89,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quotas_quota_id_actions_request_edit_post**
-> quotas_quota_id_actions_request_edit_post(quota_id)
+> quotas_quota_id_actions_request_edit_post(quota_id, quota_edit_limit_request)
 
 Request quota limit change.
 
@@ -131,20 +131,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     quota_edit_limit_request = QuotaEditLimitRequest(
         limit=10,
         reason="I need more servers for my cluster.",
-    ) # QuotaEditLimitRequest |  (optional)
+    ) # QuotaEditLimitRequest | 
 
     # example passing only required values which don't have defaults set
     try:
         # Request quota limit change.
-        api_instance.quotas_quota_id_actions_request_edit_post(quota_id)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling QuotasApi->quotas_quota_id_actions_request_edit_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Request quota limit change.
-        api_instance.quotas_quota_id_actions_request_edit_post(quota_id, quota_edit_limit_request=quota_edit_limit_request)
+        api_instance.quotas_quota_id_actions_request_edit_post(quota_id, quota_edit_limit_request)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling QuotasApi->quotas_quota_id_actions_request_edit_post: %s\n" % e)
 ```
@@ -155,7 +147,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **quota_id** | **str**| The ID of the Quota. |
- **quota_edit_limit_request** | [**QuotaEditLimitRequest**](QuotaEditLimitRequest.md)|  | [optional]
+ **quota_edit_limit_request** | [**QuotaEditLimitRequest**](QuotaEditLimitRequest.md)|  |
 
 ### Return type
 

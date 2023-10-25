@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_post**
-> Server servers_post()
+> Server servers_post(server_create)
 
 Create new server.
 
@@ -237,7 +237,6 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_create = ServerCreate(
         hostname="my-server-1",
         description="Server #1 used for computing.",
@@ -309,13 +308,22 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 size=128,
             ),
         ),
-    ) # ServerCreate |  (optional)
+    ) # ServerCreate | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create new server.
+        api_response = api_instance.servers_post(server_create)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_post: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # Create new server.
-        api_response = api_instance.servers_post(force=force, server_create=server_create)
+        api_response = api_instance.servers_post(server_create, force=force)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_post: %s\n" % e)
@@ -326,8 +334,8 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **server_create** | [**ServerCreate**](ServerCreate.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **server_create** | [**ServerCreate**](ServerCreate.md)|  | [optional]
 
 ### Return type
 
@@ -358,7 +366,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_actions_deprovision_post**
-> str servers_server_id_actions_deprovision_post(server_id)
+> str servers_server_id_actions_deprovision_post(server_id, relinquish_ip_block)
 
 Deprovision a server.
 
@@ -399,21 +407,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     relinquish_ip_block = RelinquishIpBlock(
         delete_ip_blocks=True,
-    ) # RelinquishIpBlock |  (optional)
+    ) # RelinquishIpBlock | 
 
     # example passing only required values which don't have defaults set
     try:
         # Deprovision a server.
-        api_response = api_instance.servers_server_id_actions_deprovision_post(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_actions_deprovision_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Deprovision a server.
-        api_response = api_instance.servers_server_id_actions_deprovision_post(server_id, relinquish_ip_block=relinquish_ip_block)
+        api_response = api_instance.servers_server_id_actions_deprovision_post(server_id, relinquish_ip_block)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_actions_deprovision_post: %s\n" % e)
@@ -425,7 +424,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **relinquish_ip_block** | [**RelinquishIpBlock**](RelinquishIpBlock.md)|  | [optional]
+ **relinquish_ip_block** | [**RelinquishIpBlock**](RelinquishIpBlock.md)|  |
 
 ### Return type
 
@@ -707,7 +706,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_actions_reserve_post**
-> Server servers_server_id_actions_reserve_post(server_id)
+> Server servers_server_id_actions_reserve_post(server_id, server_reserve)
 
 Reserve server.
 
@@ -749,21 +748,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_reserve = ServerReserve(
         pricing_model="ONE_MONTH_RESERVATION",
-    ) # ServerReserve |  (optional)
+    ) # ServerReserve | 
 
     # example passing only required values which don't have defaults set
     try:
         # Reserve server.
-        api_response = api_instance.servers_server_id_actions_reserve_post(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_actions_reserve_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Reserve server.
-        api_response = api_instance.servers_server_id_actions_reserve_post(server_id, server_reserve=server_reserve)
+        api_response = api_instance.servers_server_id_actions_reserve_post(server_id, server_reserve)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_actions_reserve_post: %s\n" % e)
@@ -775,7 +765,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **server_reserve** | [**ServerReserve**](ServerReserve.md)|  | [optional]
+ **server_reserve** | [**ServerReserve**](ServerReserve.md)|  |
 
 ### Return type
 
@@ -805,7 +795,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_actions_reset_post**
-> ResetResult servers_server_id_actions_reset_post(server_id)
+> ResetResult servers_server_id_actions_reset_post(server_id, server_reset)
 
 Reset server.
 
@@ -860,21 +850,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
                 management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
             ),
         ),
-    ) # ServerReset |  (optional)
+    ) # ServerReset | 
 
     # example passing only required values which don't have defaults set
     try:
         # Reset server.
-        api_response = api_instance.servers_server_id_actions_reset_post(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_actions_reset_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Reset server.
-        api_response = api_instance.servers_server_id_actions_reset_post(server_id, server_reset=server_reset)
+        api_response = api_instance.servers_server_id_actions_reset_post(server_id, server_reset)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_actions_reset_post: %s\n" % e)
@@ -886,7 +867,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **server_reset** | [**ServerReset**](ServerReset.md)|  | [optional]
+ **server_reset** | [**ServerReset**](ServerReset.md)|  |
 
 ### Return type
 
@@ -1166,7 +1147,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_ip_blocks_ip_block_id_delete**
-> str servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id)
+> str servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id, relinquish_ip_block)
 
 Unassign IP Block from Server.
 
@@ -1208,21 +1189,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
     relinquish_ip_block = RelinquishIpBlock(
         delete_ip_blocks=True,
-    ) # RelinquishIpBlock |  (optional)
+    ) # RelinquishIpBlock | 
 
     # example passing only required values which don't have defaults set
     try:
         # Unassign IP Block from Server.
-        api_response = api_instance.servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_ip_blocks_ip_block_id_delete: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Unassign IP Block from Server.
-        api_response = api_instance.servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id, relinquish_ip_block=relinquish_ip_block)
+        api_response = api_instance.servers_server_id_ip_blocks_ip_block_id_delete(server_id, ip_block_id, relinquish_ip_block)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_ip_blocks_ip_block_id_delete: %s\n" % e)
@@ -1235,7 +1207,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
  **ip_block_id** | **str**| The IP Block identifier. |
- **relinquish_ip_block** | [**RelinquishIpBlock**](RelinquishIpBlock.md)|  | [optional]
+ **relinquish_ip_block** | [**RelinquishIpBlock**](RelinquishIpBlock.md)|  |
 
 ### Return type
 
@@ -1265,7 +1237,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_ip_blocks_post**
-> ServerIpBlock servers_server_id_ip_blocks_post(server_id)
+> ServerIpBlock servers_server_id_ip_blocks_post(server_id, server_ip_block)
 
 Assign IP Block to Server.
 
@@ -1306,21 +1278,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     server_ip_block = ServerIpBlock(
         id="60473a6115e34466c9f8f083",
-    ) # ServerIpBlock |  (optional)
+    ) # ServerIpBlock | 
 
     # example passing only required values which don't have defaults set
     try:
         # Assign IP Block to Server.
-        api_response = api_instance.servers_server_id_ip_blocks_post(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_ip_blocks_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Assign IP Block to Server.
-        api_response = api_instance.servers_server_id_ip_blocks_post(server_id, server_ip_block=server_ip_block)
+        api_response = api_instance.servers_server_id_ip_blocks_post(server_id, server_ip_block)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_ip_blocks_post: %s\n" % e)
@@ -1332,7 +1295,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **server_ip_block** | [**ServerIpBlock**](ServerIpBlock.md)|  | [optional]
+ **server_ip_block** | [**ServerIpBlock**](ServerIpBlock.md)|  |
 
 ### Return type
 
@@ -1362,7 +1325,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_patch**
-> Server servers_server_id_patch(server_id)
+> Server servers_server_id_patch(server_id, server_patch)
 
 Patch a Server.
 
@@ -1405,21 +1368,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     server_patch = ServerPatch(
         description="Server #1 used for computing.",
         hostname="my-server",
-    ) # ServerPatch |  (optional)
+    ) # ServerPatch | 
 
     # example passing only required values which don't have defaults set
     try:
         # Patch a Server.
-        api_response = api_instance.servers_server_id_patch(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Patch a Server.
-        api_response = api_instance.servers_server_id_patch(server_id, server_patch=server_patch)
+        api_response = api_instance.servers_server_id_patch(server_id, server_patch)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_patch: %s\n" % e)
@@ -1431,7 +1385,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **server_patch** | [**ServerPatch**](ServerPatch.md)|  | [optional]
+ **server_patch** | [**ServerPatch**](ServerPatch.md)|  |
 
 ### Return type
 
@@ -1461,7 +1415,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_private_networks_patch**
-> ServerPrivateNetwork servers_server_id_private_networks_patch(server_id, private_network_id)
+> ServerPrivateNetwork servers_server_id_private_networks_patch(server_id, private_network_id, server_network_update)
 
 Updates the server's private network's IP addresses
 
@@ -1502,15 +1456,15 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     api_instance = servers_api.ServersApi(api_client)
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     private_network_id = "603f3b2cfcaf050643b89a4b" # str | The private network identifier.
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
         ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
-    ) # ServerNetworkUpdate |  (optional)
+    ) # ServerNetworkUpdate | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Updates the server's private network's IP addresses
-        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id)
+        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id, server_network_update)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_private_networks_patch: %s\n" % e)
@@ -1519,7 +1473,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Updates the server's private network's IP addresses
-        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id, force=force, server_network_update=server_network_update)
+        api_response = api_instance.servers_server_id_private_networks_patch(server_id, private_network_id, server_network_update, force=force)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_private_networks_patch: %s\n" % e)
@@ -1532,8 +1486,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
  **private_network_id** | **str**| The private network identifier. |
+ **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  | [optional]
 
 ### Return type
 
@@ -1563,7 +1517,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_private_networks_post**
-> ServerPrivateNetwork servers_server_id_private_networks_post(server_id)
+> ServerPrivateNetwork servers_server_id_private_networks_post(server_id, server_private_network)
 
 Adds the server to a private network.
 
@@ -1602,17 +1556,17 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_private_network = ServerPrivateNetwork(
         id="603f3b2cfcaf050643b89a4b",
         ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
         dhcp=False,
-    ) # ServerPrivateNetwork |  (optional)
+    ) # ServerPrivateNetwork | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Adds the server to a private network.
-        api_response = api_instance.servers_server_id_private_networks_post(server_id)
+        api_response = api_instance.servers_server_id_private_networks_post(server_id, server_private_network)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_private_networks_post: %s\n" % e)
@@ -1621,7 +1575,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Adds the server to a private network.
-        api_response = api_instance.servers_server_id_private_networks_post(server_id, force=force, server_private_network=server_private_network)
+        api_response = api_instance.servers_server_id_private_networks_post(server_id, server_private_network, force=force)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_private_networks_post: %s\n" % e)
@@ -1633,8 +1587,8 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
+ **server_private_network** | [**ServerPrivateNetwork**](ServerPrivateNetwork.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **server_private_network** | [**ServerPrivateNetwork**](ServerPrivateNetwork.md)|  | [optional]
 
 ### Return type
 
@@ -1748,7 +1702,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_public_networks_patch**
-> ServerPublicNetwork servers_server_id_public_networks_patch(server_id, public_network_id)
+> ServerPublicNetwork servers_server_id_public_networks_patch(server_id, public_network_id, server_network_update)
 
 Updates the server's public network's IP addresses.
 
@@ -1789,15 +1743,15 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     api_instance = servers_api.ServersApi(api_client)
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
     public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_network_update = ServerNetworkUpdate(
         ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
-    ) # ServerNetworkUpdate |  (optional)
+    ) # ServerNetworkUpdate | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Updates the server's public network's IP addresses.
-        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id)
+        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id, server_network_update)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_public_networks_patch: %s\n" % e)
@@ -1806,7 +1760,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Updates the server's public network's IP addresses.
-        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id, force=force, server_network_update=server_network_update)
+        api_response = api_instance.servers_server_id_public_networks_patch(server_id, public_network_id, server_network_update, force=force)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_public_networks_patch: %s\n" % e)
@@ -1819,8 +1773,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
  **public_network_id** | **str**| The Public Network identifier. |
+ **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **server_network_update** | [**ServerNetworkUpdate**](ServerNetworkUpdate.md)|  | [optional]
 
 ### Return type
 
@@ -1850,7 +1804,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_public_networks_post**
-> ServerPublicNetwork servers_server_id_public_networks_post(server_id)
+> ServerPublicNetwork servers_server_id_public_networks_post(server_id, server_public_network)
 
 Adds the server to a Public Network.
 
@@ -1889,16 +1843,16 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = servers_api.ServersApi(api_client)
     server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     server_public_network = ServerPublicNetwork(
         id="60473c2509268bc77fd06d29",
         ips=["182.16.0.146","182.16.0.148 - 182.16.0.150"],
-    ) # ServerPublicNetwork |  (optional)
+    ) # ServerPublicNetwork | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Adds the server to a Public Network.
-        api_response = api_instance.servers_server_id_public_networks_post(server_id)
+        api_response = api_instance.servers_server_id_public_networks_post(server_id, server_public_network)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_public_networks_post: %s\n" % e)
@@ -1907,7 +1861,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Adds the server to a Public Network.
-        api_response = api_instance.servers_server_id_public_networks_post(server_id, force=force, server_public_network=server_public_network)
+        api_response = api_instance.servers_server_id_public_networks_post(server_id, server_public_network, force=force)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_public_networks_post: %s\n" % e)
@@ -1919,8 +1873,8 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
+ **server_public_network** | [**ServerPublicNetwork**](ServerPublicNetwork.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **server_public_network** | [**ServerPublicNetwork**](ServerPublicNetwork.md)|  | [optional]
 
 ### Return type
 
@@ -1950,7 +1904,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_tags_put**
-> Server servers_server_id_tags_put(server_id)
+> Server servers_server_id_tags_put(server_id, tag_assignment_request)
 
 Overwrite tags assigned for Server.
 
@@ -1995,21 +1949,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
             name="Environment",
             value="PROD",
         ),
-    ] # [TagAssignmentRequest] |  (optional)
+    ] # [TagAssignmentRequest] | 
 
     # example passing only required values which don't have defaults set
     try:
         # Overwrite tags assigned for Server.
-        api_response = api_instance.servers_server_id_tags_put(server_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling ServersApi->servers_server_id_tags_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Overwrite tags assigned for Server.
-        api_response = api_instance.servers_server_id_tags_put(server_id, tag_assignment_request=tag_assignment_request)
+        api_response = api_instance.servers_server_id_tags_put(server_id, tag_assignment_request)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling ServersApi->servers_server_id_tags_put: %s\n" % e)
@@ -2021,7 +1966,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. |
- **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  | [optional]
+ **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  |
 
 ### Return type
 

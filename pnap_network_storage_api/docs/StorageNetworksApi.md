@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_id_patch**
-> StorageNetwork storage_networks_id_patch(storage_network_id)
+> StorageNetwork storage_networks_id_patch(storage_network_id, storage_network_update)
 
 Update storage network details.
 
@@ -309,21 +309,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     storage_network_update = StorageNetworkUpdate(
         name="My storage network",
         description="My storage network description",
-    ) # StorageNetworkUpdate | Storage network to be updated. (optional)
+    ) # StorageNetworkUpdate | Storage network to be updated.
 
     # example passing only required values which don't have defaults set
     try:
         # Update storage network details.
-        api_response = api_instance.storage_networks_id_patch(storage_network_id)
-        pprint(api_response)
-    except pnap_network_storage_api.ApiException as e:
-        print("Exception when calling StorageNetworksApi->storage_networks_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update storage network details.
-        api_response = api_instance.storage_networks_id_patch(storage_network_id, storage_network_update=storage_network_update)
+        api_response = api_instance.storage_networks_id_patch(storage_network_id, storage_network_update)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_id_patch: %s\n" % e)
@@ -335,7 +326,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
- **storage_network_update** | [**StorageNetworkUpdate**](StorageNetworkUpdate.md)| Storage network to be updated. | [optional]
+ **storage_network_update** | [**StorageNetworkUpdate**](StorageNetworkUpdate.md)| Storage network to be updated. |
 
 ### Return type
 
@@ -364,7 +355,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_post**
-> StorageNetwork storage_networks_post()
+> StorageNetwork storage_networks_post(storage_network_create)
 
 Create a storage network and volume.
 
@@ -422,13 +413,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
             ),
         ],
         client_vlan=2,
-    ) # StorageNetworkCreate |  (optional)
+    ) # StorageNetworkCreate | 
 
     # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create a storage network and volume.
-        api_response = api_instance.storage_networks_post(storage_network_create=storage_network_create)
+        api_response = api_instance.storage_networks_post(storage_network_create)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_post: %s\n" % e)
@@ -439,7 +429,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_create** | [**StorageNetworkCreate**](StorageNetworkCreate.md)|  | [optional]
+ **storage_network_create** | [**StorageNetworkCreate**](StorageNetworkCreate.md)|  |
 
 ### Return type
 
@@ -564,7 +554,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_post**
-> Volume storage_networks_storage_network_id_volumes_post(storage_network_id)
+> Volume storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create)
 
 Create a volume belonging to a storage network.
 
@@ -624,21 +614,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 value="PROD",
             ),
         ],
-    ) # VolumeCreate |  (optional)
+    ) # VolumeCreate | 
 
     # example passing only required values which don't have defaults set
     try:
         # Create a volume belonging to a storage network.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_post(storage_network_id)
-        pprint(api_response)
-    except pnap_network_storage_api.ApiException as e:
-        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_post: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Create a volume belonging to a storage network.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create=volume_create)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_post: %s\n" % e)
@@ -650,7 +631,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
- **volume_create** | [**VolumeCreate**](VolumeCreate.md)|  | [optional]
+ **volume_create** | [**VolumeCreate**](VolumeCreate.md)|  |
 
 ### Return type
 
@@ -848,7 +829,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_patch**
-> Volume storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id)
+> Volume storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update)
 
 Update a storage network's volume details.
 
@@ -903,21 +884,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
                 all_squash=["100.80.0.5","100.80.0.6"],
             ),
         ),
-    ) # VolumeUpdate | Storage network volume to be updated. (optional)
+    ) # VolumeUpdate | Storage network volume to be updated.
 
     # example passing only required values which don't have defaults set
     try:
         # Update a storage network's volume details.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id)
-        pprint(api_response)
-    except pnap_network_storage_api.ApiException as e:
-        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update a storage network's volume details.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update=volume_update)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_patch: %s\n" % e)
@@ -930,7 +902,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
  **volume_id** | **str**| ID of volume. |
- **volume_update** | [**VolumeUpdate**](VolumeUpdate.md)| Storage network volume to be updated. | [optional]
+ **volume_update** | [**VolumeUpdate**](VolumeUpdate.md)| Storage network volume to be updated. |
 
 ### Return type
 
@@ -961,7 +933,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_tags_put**
-> Volume storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id)
+> Volume storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request)
 
 Overwrites tags assigned for the volume.
 
@@ -1007,21 +979,12 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
             name="Environment",
             value="PROD",
         ),
-    ] # [TagAssignmentRequest] | Tags to assign to the volume. (optional)
+    ] # [TagAssignmentRequest] | Tags to assign to the volume.
 
     # example passing only required values which don't have defaults set
     try:
         # Overwrites tags assigned for the volume.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id)
-        pprint(api_response)
-    except pnap_network_storage_api.ApiException as e:
-        print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_tags_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Overwrites tags assigned for the volume.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request=tag_assignment_request)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_tags_put: %s\n" % e)
@@ -1034,7 +997,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storage_network_id** | **str**| ID of storage network. |
  **volume_id** | **str**| ID of volume. |
- **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)| Tags to assign to the volume. | [optional]
+ **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)| Tags to assign to the volume. |
 
 ### Return type
 

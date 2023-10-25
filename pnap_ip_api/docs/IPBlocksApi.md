@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_ip_block_id_patch**
-> IpBlock ip_blocks_ip_block_id_patch(ip_block_id)
+> IpBlock ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch)
 
 Update IP block.
 
@@ -302,21 +302,12 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
     ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
     ip_block_patch = IpBlockPatch(
         description="Ip Block allocation.",
-    ) # IpBlockPatch |  (optional)
+    ) # IpBlockPatch | 
 
     # example passing only required values which don't have defaults set
     try:
         # Update IP block.
-        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id)
-        pprint(api_response)
-    except pnap_ip_api.ApiException as e:
-        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update IP block.
-        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch=ip_block_patch)
+        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch)
         pprint(api_response)
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_patch: %s\n" % e)
@@ -328,7 +319,7 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ip_block_id** | **str**| The IP Block identifier. |
- **ip_block_patch** | [**IpBlockPatch**](IpBlockPatch.md)|  | [optional]
+ **ip_block_patch** | [**IpBlockPatch**](IpBlockPatch.md)|  |
 
 ### Return type
 
@@ -358,7 +349,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_ip_block_id_tags_put**
-> IpBlock ip_blocks_ip_block_id_tags_put(ip_block_id)
+> IpBlock ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request)
 
 Overwrite tags assigned for IP Block.
 
@@ -403,21 +394,12 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
             name="Environment",
             value="PROD",
         ),
-    ] # [TagAssignmentRequest] |  (optional)
+    ] # [TagAssignmentRequest] | 
 
     # example passing only required values which don't have defaults set
     try:
         # Overwrite tags assigned for IP Block.
-        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id)
-        pprint(api_response)
-    except pnap_ip_api.ApiException as e:
-        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Overwrite tags assigned for IP Block.
-        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request=tag_assignment_request)
+        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request)
         pprint(api_response)
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
@@ -429,7 +411,7 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ip_block_id** | **str**| The IP Block identifier. |
- **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  | [optional]
+ **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  |
 
 ### Return type
 
@@ -458,7 +440,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_post**
-> IpBlock ip_blocks_post()
+> IpBlock ip_blocks_post(ip_block_create)
 
 Create an IP Block.
 
@@ -507,13 +489,12 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
                 value="PROD",
             ),
         ],
-    ) # IpBlockCreate |  (optional)
+    ) # IpBlockCreate | 
 
     # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create an IP Block.
-        api_response = api_instance.ip_blocks_post(ip_block_create=ip_block_create)
+        api_response = api_instance.ip_blocks_post(ip_block_create)
         pprint(api_response)
     except pnap_ip_api.ApiException as e:
         print("Exception when calling IPBlocksApi->ip_blocks_post: %s\n" % e)
@@ -524,7 +505,7 @@ with pnap_ip_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_create** | [**IpBlockCreate**](IpBlockCreate.md)|  | [optional]
+ **ip_block_create** | [**IpBlockCreate**](IpBlockCreate.md)|  |
 
 ### Return type
 

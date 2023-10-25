@@ -90,7 +90,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ssh_keys_post**
-> SshKey ssh_keys_post()
+> SshKey ssh_keys_post(ssh_key_create)
 
 Create SSH Key.
 
@@ -133,13 +133,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
         default=True,
         name="sshkey-name-01",
         key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF9LdAFElNCi7JoWh6KUcchrJ2Gac1aqGRPpdZNowObpRtmiRCecAMb7bUgNAaNfcmwiQi7tos9TlnFgprIcfMWb8MSs3ABYHmBgqEEt3RWYf0fAc9CsIpJdMCUG28TPGTlRXCEUVNKgLMdcseAlJoGp1CgbHWIN65fB3he3kAZcfpPn5mapV0tsl2p+ZyuAGRYdn5dJv2RZDHUZBkOeUobwsij+weHCKAFmKQKtCP7ybgVHaQjAPrj8MGnk1jBbjDt5ws+Be+9JNjQJee9zCKbAOsIo3i+GcUIkrw5jxPU/RTGlWBcemPaKHdciSzGcjWboapzIy49qypQhZe1U75 user@my_ip",
-    ) # SshKeyCreate |  (optional)
+    ) # SshKeyCreate | 
 
     # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create SSH Key.
-        api_response = api_instance.ssh_keys_post(ssh_key_create=ssh_key_create)
+        api_response = api_instance.ssh_keys_post(ssh_key_create)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling SSHKeysApi->ssh_keys_post: %s\n" % e)
@@ -150,7 +149,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ssh_key_create** | [**SshKeyCreate**](SshKeyCreate.md)|  | [optional]
+ **ssh_key_create** | [**SshKeyCreate**](SshKeyCreate.md)|  |
 
 ### Return type
 
@@ -346,7 +345,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ssh_keys_ssh_key_id_put**
-> SshKey ssh_keys_ssh_key_id_put(ssh_key_id)
+> SshKey ssh_keys_ssh_key_id_put(ssh_key_id, ssh_key_update)
 
 Edit SSH Key.
 
@@ -389,21 +388,12 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     ssh_key_update = SshKeyUpdate(
         default=True,
         name="sshkey-name-01",
-    ) # SshKeyUpdate |  (optional)
+    ) # SshKeyUpdate | 
 
     # example passing only required values which don't have defaults set
     try:
         # Edit SSH Key.
-        api_response = api_instance.ssh_keys_ssh_key_id_put(ssh_key_id)
-        pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
-        print("Exception when calling SSHKeysApi->ssh_keys_ssh_key_id_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Edit SSH Key.
-        api_response = api_instance.ssh_keys_ssh_key_id_put(ssh_key_id, ssh_key_update=ssh_key_update)
+        api_response = api_instance.ssh_keys_ssh_key_id_put(ssh_key_id, ssh_key_update)
         pprint(api_response)
     except pnap_bmc_api.ApiException as e:
         print("Exception when calling SSHKeysApi->ssh_keys_ssh_key_id_put: %s\n" % e)
@@ -415,7 +405,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ssh_key_id** | **str**| The SSH Key&#39;s ID. |
- **ssh_key_update** | [**SshKeyUpdate**](SshKeyUpdate.md)|  | [optional]
+ **ssh_key_update** | [**SshKeyUpdate**](SshKeyUpdate.md)|  |
 
 ### Return type
 

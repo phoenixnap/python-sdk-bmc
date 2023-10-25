@@ -211,6 +211,7 @@ class IPBlocksApi(object):
                 ],
                 'required': [
                     'ip_block_id',
+                    'ip_block_patch',
                 ],
                 'nullable': [
                 ],
@@ -268,6 +269,7 @@ class IPBlocksApi(object):
                 ],
                 'required': [
                     'ip_block_id',
+                    'tag_assignment_request',
                 ],
                 'nullable': [
                 ],
@@ -322,7 +324,9 @@ class IPBlocksApi(object):
                 'all': [
                     'ip_block_create',
                 ],
-                'required': [],
+                'required': [
+                    'ip_block_create',
+                ],
                 'nullable': [
                 ],
                 'enum': [
@@ -606,6 +610,7 @@ class IPBlocksApi(object):
     def ip_blocks_ip_block_id_patch(
         self,
         ip_block_id,
+        ip_block_patch,
         **kwargs
     ):
         """Update IP block.  # noqa: E501
@@ -614,14 +619,14 @@ class IPBlocksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.ip_blocks_ip_block_id_patch(ip_block_id, async_req=True)
+        >>> thread = api.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch, async_req=True)
         >>> result = thread.get()
 
         Args:
             ip_block_id (str): The IP Block identifier.
+            ip_block_patch (IpBlockPatch):
 
         Keyword Args:
-            ip_block_patch (IpBlockPatch): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -685,11 +690,14 @@ class IPBlocksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['ip_block_id'] = \
             ip_block_id
+        kwargs['ip_block_patch'] = \
+            ip_block_patch
         return self.ip_blocks_ip_block_id_patch_endpoint.call_with_http_info(**kwargs)
 
     def ip_blocks_ip_block_id_tags_put(
         self,
         ip_block_id,
+        tag_assignment_request,
         **kwargs
     ):
         """Overwrite tags assigned for IP Block.  # noqa: E501
@@ -698,14 +706,14 @@ class IPBlocksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.ip_blocks_ip_block_id_tags_put(ip_block_id, async_req=True)
+        >>> thread = api.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             ip_block_id (str): The IP Block identifier.
+            tag_assignment_request ([TagAssignmentRequest]):
 
         Keyword Args:
-            tag_assignment_request ([TagAssignmentRequest]): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -769,10 +777,13 @@ class IPBlocksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['ip_block_id'] = \
             ip_block_id
+        kwargs['tag_assignment_request'] = \
+            tag_assignment_request
         return self.ip_blocks_ip_block_id_tags_put_endpoint.call_with_http_info(**kwargs)
 
     def ip_blocks_post(
         self,
+        ip_block_create,
         **kwargs
     ):
         """Create an IP Block.  # noqa: E501
@@ -781,12 +792,13 @@ class IPBlocksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.ip_blocks_post(async_req=True)
+        >>> thread = api.ip_blocks_post(ip_block_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            ip_block_create (IpBlockCreate):
 
         Keyword Args:
-            ip_block_create (IpBlockCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -848,5 +860,7 @@ class IPBlocksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['ip_block_create'] = \
+            ip_block_create
         return self.ip_blocks_post_endpoint.call_with_http_info(**kwargs)
 

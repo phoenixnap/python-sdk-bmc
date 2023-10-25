@@ -271,6 +271,7 @@ class PublicNetworksApi(object):
                 ],
                 'required': [
                     'public_network_id',
+                    'public_network_ip_block',
                 ],
                 'nullable': [
                 ],
@@ -328,6 +329,7 @@ class PublicNetworksApi(object):
                 ],
                 'required': [
                     'public_network_id',
+                    'public_network_modify',
                 ],
                 'nullable': [
                 ],
@@ -382,7 +384,9 @@ class PublicNetworksApi(object):
                 'all': [
                     'public_network_create',
                 ],
-                'required': [],
+                'required': [
+                    'public_network_create',
+                ],
                 'nullable': [
                 ],
                 'enum': [
@@ -754,6 +758,7 @@ class PublicNetworksApi(object):
     def public_networks_network_id_ip_blocks_post(
         self,
         public_network_id,
+        public_network_ip_block,
         **kwargs
     ):
         """Adds an IP block to this public network.  # noqa: E501
@@ -762,14 +767,14 @@ class PublicNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.public_networks_network_id_ip_blocks_post(public_network_id, async_req=True)
+        >>> thread = api.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block, async_req=True)
         >>> result = thread.get()
 
         Args:
             public_network_id (str): The Public Network identifier.
+            public_network_ip_block (PublicNetworkIpBlock):
 
         Keyword Args:
-            public_network_ip_block (PublicNetworkIpBlock): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -833,11 +838,14 @@ class PublicNetworksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['public_network_id'] = \
             public_network_id
+        kwargs['public_network_ip_block'] = \
+            public_network_ip_block
         return self.public_networks_network_id_ip_blocks_post_endpoint.call_with_http_info(**kwargs)
 
     def public_networks_network_id_patch(
         self,
         public_network_id,
+        public_network_modify,
         **kwargs
     ):
         """Update Public Network's Details.  # noqa: E501
@@ -846,14 +854,14 @@ class PublicNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.public_networks_network_id_patch(public_network_id, async_req=True)
+        >>> thread = api.public_networks_network_id_patch(public_network_id, public_network_modify, async_req=True)
         >>> result = thread.get()
 
         Args:
             public_network_id (str): The Public Network identifier.
+            public_network_modify (PublicNetworkModify):
 
         Keyword Args:
-            public_network_modify (PublicNetworkModify): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -917,10 +925,13 @@ class PublicNetworksApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['public_network_id'] = \
             public_network_id
+        kwargs['public_network_modify'] = \
+            public_network_modify
         return self.public_networks_network_id_patch_endpoint.call_with_http_info(**kwargs)
 
     def public_networks_post(
         self,
+        public_network_create,
         **kwargs
     ):
         """Create a public network.  # noqa: E501
@@ -929,12 +940,13 @@ class PublicNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.public_networks_post(async_req=True)
+        >>> thread = api.public_networks_post(public_network_create, async_req=True)
         >>> result = thread.get()
 
+        Args:
+            public_network_create (PublicNetworkCreate):
 
         Keyword Args:
-            public_network_create (PublicNetworkCreate): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -996,5 +1008,7 @@ class PublicNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['public_network_create'] = \
+            public_network_create
         return self.public_networks_post_endpoint.call_with_http_info(**kwargs)
 

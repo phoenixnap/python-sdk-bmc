@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **private_networks_network_id_put**
-> PrivateNetwork private_networks_network_id_put(private_network_id)
+> PrivateNetwork private_networks_network_id_put(private_network_id, private_network_modify)
 
 Update a Private Network.
 
@@ -304,21 +304,12 @@ with pnap_network_api.ApiClient(configuration) as api_client:
         name="Sample network",
         description="Further details on the network.",
         location_default=True,
-    ) # PrivateNetworkModify |  (optional)
+    ) # PrivateNetworkModify | 
 
     # example passing only required values which don't have defaults set
     try:
         # Update a Private Network.
-        api_response = api_instance.private_networks_network_id_put(private_network_id)
-        pprint(api_response)
-    except pnap_network_api.ApiException as e:
-        print("Exception when calling PrivateNetworksApi->private_networks_network_id_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update a Private Network.
-        api_response = api_instance.private_networks_network_id_put(private_network_id, private_network_modify=private_network_modify)
+        api_response = api_instance.private_networks_network_id_put(private_network_id, private_network_modify)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PrivateNetworksApi->private_networks_network_id_put: %s\n" % e)
@@ -330,7 +321,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **private_network_id** | **str**| The private network identifier. |
- **private_network_modify** | [**PrivateNetworkModify**](PrivateNetworkModify.md)|  | [optional]
+ **private_network_modify** | [**PrivateNetworkModify**](PrivateNetworkModify.md)|  |
 
 ### Return type
 
@@ -360,7 +351,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **private_networks_post**
-> PrivateNetwork private_networks_post()
+> PrivateNetwork private_networks_post(private_network_create)
 
 Create a Private Network.
 
@@ -399,7 +390,6 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = private_networks_api.PrivateNetworksApi(api_client)
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
     private_network_create = PrivateNetworkCreate(
         name="Sample Network",
         description="Further details on the network",
@@ -407,13 +397,22 @@ with pnap_network_api.ApiClient(configuration) as api_client:
         location_default=True,
         vlan_id=10,
         cidr="10.0.0.0/24",
-    ) # PrivateNetworkCreate |  (optional)
+    ) # PrivateNetworkCreate | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create a Private Network.
+        api_response = api_instance.private_networks_post(private_network_create)
+        pprint(api_response)
+    except pnap_network_api.ApiException as e:
+        print("Exception when calling PrivateNetworksApi->private_networks_post: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # Create a Private Network.
-        api_response = api_instance.private_networks_post(force=force, private_network_create=private_network_create)
+        api_response = api_instance.private_networks_post(private_network_create, force=force)
         pprint(api_response)
     except pnap_network_api.ApiException as e:
         print("Exception when calling PrivateNetworksApi->private_networks_post: %s\n" % e)
@@ -424,8 +423,8 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **private_network_create** | [**PrivateNetworkCreate**](PrivateNetworkCreate.md)|  |
  **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
- **private_network_create** | [**PrivateNetworkCreate**](PrivateNetworkCreate.md)|  | [optional]
 
 ### Return type
 
