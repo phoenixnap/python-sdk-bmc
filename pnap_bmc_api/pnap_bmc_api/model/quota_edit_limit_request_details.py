@@ -68,6 +68,11 @@ class QuotaEditLimitRequestDetails(ModelComposed):
         ('limit',): {
             'inclusive_minimum': 0,
         },
+        ('reason',): {
+            'regex': {
+                'pattern': r'^(?!\s*$).+',  # noqa: E501
+            },
+        },
     }
 
     @cached_property

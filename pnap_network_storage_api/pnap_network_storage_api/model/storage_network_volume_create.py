@@ -66,6 +66,9 @@ class StorageNetworkVolumeCreate(ModelNormal):
         ('name',): {
             'max_length': 100,
             'min_length': 1,
+            'regex': {
+                'pattern': r'^(?!\s*$).+',  # noqa: E501
+            },
         },
         ('capacity_in_gb',): {
             'inclusive_minimum': 1000,
