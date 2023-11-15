@@ -102,6 +102,7 @@ class Volume(ModelNormal):
             'protocol': (str,),  # noqa: E501
             'status': (Status,),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
+            'delete_requested_on': (datetime,),  # noqa: E501
             'permissions': (Permissions,),  # noqa: E501
             'tags': ([TagAssignment],),  # noqa: E501
         }
@@ -122,6 +123,7 @@ class Volume(ModelNormal):
         'protocol': 'protocol',  # noqa: E501
         'status': 'status',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
+        'delete_requested_on': 'deleteRequestedOn',  # noqa: E501
         'permissions': 'permissions',  # noqa: E501
         'tags': 'tags',  # noqa: E501
     }
@@ -177,6 +179,7 @@ class Volume(ModelNormal):
             protocol (str): File system protocol. Currently this field should be set to `NFS`.. [optional]  # noqa: E501
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501
+            delete_requested_on (datetime): Date and time of the initial request for volume deletion.. [optional]  # noqa: E501
             permissions (Permissions): [optional]  # noqa: E501
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
         """
@@ -274,6 +277,7 @@ class Volume(ModelNormal):
             protocol (str): File system protocol. Currently this field should be set to `NFS`.. [optional]  # noqa: E501
             status (Status): [optional]  # noqa: E501
             created_on (datetime): [optional]  # noqa: E501
+            delete_requested_on (datetime): Date and time of the initial request for volume deletion.. [optional]  # noqa: E501
             permissions (Permissions): [optional]  # noqa: E501
             tags ([TagAssignment]): The tags assigned if any.. [optional]  # noqa: E501
         """

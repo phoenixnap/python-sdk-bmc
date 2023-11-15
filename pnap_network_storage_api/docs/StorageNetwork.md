@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **network_id** | **str** | Id of network the storage belongs to. | [optional] 
 **ips** | **[str]** | IP of the storage network. | [optional] 
 **created_on** | **datetime** | Date and time when this storage network was created. | [optional] 
+**delete_requested_on** | **datetime** | Date and time of the initial request for storage network deletion. | [optional] 
 **volumes** | [**[Volume]**](Volume.md) | Volume for a storage network. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 

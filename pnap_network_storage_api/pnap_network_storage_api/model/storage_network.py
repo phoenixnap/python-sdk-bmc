@@ -98,6 +98,7 @@ class StorageNetwork(ModelNormal):
             'network_id': (str,),  # noqa: E501
             'ips': ([str],),  # noqa: E501
             'created_on': (datetime,),  # noqa: E501
+            'delete_requested_on': (datetime,),  # noqa: E501
             'volumes': ([Volume],),  # noqa: E501
         }
 
@@ -115,6 +116,7 @@ class StorageNetwork(ModelNormal):
         'network_id': 'networkId',  # noqa: E501
         'ips': 'ips',  # noqa: E501
         'created_on': 'createdOn',  # noqa: E501
+        'delete_requested_on': 'deleteRequestedOn',  # noqa: E501
         'volumes': 'volumes',  # noqa: E501
     }
 
@@ -167,6 +169,7 @@ class StorageNetwork(ModelNormal):
             network_id (str): Id of network the storage belongs to.. [optional]  # noqa: E501
             ips ([str]): IP of the storage network.. [optional]  # noqa: E501
             created_on (datetime): Date and time when this storage network was created.. [optional]  # noqa: E501
+            delete_requested_on (datetime): Date and time of the initial request for storage network deletion.. [optional]  # noqa: E501
             volumes ([Volume]): Volume for a storage network.. [optional]  # noqa: E501
         """
 
@@ -261,6 +264,7 @@ class StorageNetwork(ModelNormal):
             network_id (str): Id of network the storage belongs to.. [optional]  # noqa: E501
             ips ([str]): IP of the storage network.. [optional]  # noqa: E501
             created_on (datetime): Date and time when this storage network was created.. [optional]  # noqa: E501
+            delete_requested_on (datetime): Date and time of the initial request for storage network deletion.. [optional]  # noqa: E501
             volumes ([Volume]): Volume for a storage network.. [optional]  # noqa: E501
         """
 

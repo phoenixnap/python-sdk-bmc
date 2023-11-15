@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **protocol** | **str** | File system protocol. Currently this field should be set to &#x60;NFS&#x60;. | [optional] 
 **status** | [**Status**](Status.md) |  | [optional] 
 **created_on** | **datetime** |  | [optional] 
+**delete_requested_on** | **datetime** | Date and time of the initial request for volume deletion. | [optional] 
 **permissions** | [**Permissions**](Permissions.md) |  | [optional] 
 **tags** | [**[TagAssignment]**](TagAssignment.md) | The tags assigned if any. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]

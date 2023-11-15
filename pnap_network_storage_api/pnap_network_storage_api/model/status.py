@@ -55,6 +55,7 @@ class Status(ModelSimple):
         ('value',): {
             'READY': "READY",
             'BUSY': "BUSY",
+            'DELETING': "DELETING",
             'ERROR': "ERROR",
         },
     }
@@ -107,10 +108,10 @@ class Status(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Status of the resource. Currently this field should be set to `READY`, `BUSY` or `ERROR`.., must be one of ["READY", "BUSY", "ERROR", ]  # noqa: E501
+            args[0] (str): Status of the resource. Currently this field should be set to `READY`, `BUSY`, `DELETING` or `ERROR`.., must be one of ["READY", "BUSY", "DELETING", "ERROR", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Status of the resource. Currently this field should be set to `READY`, `BUSY` or `ERROR`.., must be one of ["READY", "BUSY", "ERROR", ]  # noqa: E501
+            value (str): Status of the resource. Currently this field should be set to `READY`, `BUSY`, `DELETING` or `ERROR`.., must be one of ["READY", "BUSY", "DELETING", "ERROR", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -201,10 +202,10 @@ class Status(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Status of the resource. Currently this field should be set to `READY`, `BUSY` or `ERROR`.., must be one of ["READY", "BUSY", "ERROR", ]  # noqa: E501
+            args[0] (str): Status of the resource. Currently this field should be set to `READY`, `BUSY`, `DELETING` or `ERROR`.., must be one of ["READY", "BUSY", "DELETING", "ERROR", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Status of the resource. Currently this field should be set to `READY`, `BUSY` or `ERROR`.., must be one of ["READY", "BUSY", "ERROR", ]  # noqa: E501
+            value (str): Status of the resource. Currently this field should be set to `READY`, `BUSY`, `DELETING` or `ERROR`.., must be one of ["READY", "BUSY", "DELETING", "ERROR", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
