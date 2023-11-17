@@ -37,6 +37,7 @@ from pnap_bmc_api.model.server_ip_block import ServerIpBlock
 from pnap_bmc_api.model.server_network_update import ServerNetworkUpdate
 from pnap_bmc_api.model.server_patch import ServerPatch
 from pnap_bmc_api.model.server_private_network import ServerPrivateNetwork
+from pnap_bmc_api.model.server_provision import ServerProvision
 from pnap_bmc_api.model.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.model.server_reserve import ServerReserve
 from pnap_bmc_api.model.server_reset import ServerReset

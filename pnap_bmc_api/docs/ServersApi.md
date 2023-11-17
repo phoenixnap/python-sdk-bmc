@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**servers_server_id_actions_deprovision_post**](ServersApi.md#servers_server_id_actions_deprovision_post) | **POST** /servers/{serverId}/actions/deprovision | Deprovision a server.
 [**servers_server_id_actions_power_off_post**](ServersApi.md#servers_server_id_actions_power_off_post) | **POST** /servers/{serverId}/actions/power-off | Power off server.
 [**servers_server_id_actions_power_on_post**](ServersApi.md#servers_server_id_actions_power_on_post) | **POST** /servers/{serverId}/actions/power-on | Power on server.
+[**servers_server_id_actions_provision_post**](ServersApi.md#servers_server_id_actions_provision_post) | **POST** /servers/{serverId}/actions/provision | Provision server.
 [**servers_server_id_actions_reboot_post**](ServersApi.md#servers_server_id_actions_reboot_post) | **POST** /servers/{serverId}/actions/reboot | Reboot server.
 [**servers_server_id_actions_reserve_post**](ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
 [**servers_server_id_actions_reset_post**](ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
@@ -616,6 +617,172 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_actions_provision_post**
+> Server servers_server_id_actions_provision_post(server_id, server_provision)
+
+Provision server.
+
+Provision reserved server. Server DNS will be configured to access Google's public DNS at 8.8.8.8.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import pnap_bmc_api
+from pnap_bmc_api.api import servers_api
+from pnap_bmc_api.model.server import Server
+from pnap_bmc_api.model.server_provision import ServerProvision
+from pnap_bmc_api.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: OAuth2
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = servers_api.ServersApi(api_client)
+    server_id = "60473a6115e34466c9f8f083" # str | The server's ID.
+    server_provision = ServerProvision(
+        hostname="my-server-1",
+        description="Server #1 used for computing.",
+        os="ubuntu/bionic",
+        install_default_ssh_keys=False,
+        ssh_keys=["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF9LdAFElNCi7JoWh6KUcchrJ2Gac1aqGRPpdZNowObpRtmiRCecAMb7bUgNAaNfcmwiQi7tos9TlnFgprIcfMWb8MSs3ABYHmBgqEEt3RWYf0fAc9CsIpJdMCUG28TPGTlRXCEUVNKgLMdcseAlJoGp1CgbHWIN65fB3he3kAZcfpPn5mapV0tsl2p+ZyuAGRYdn5dJv2RZDHUZBkOeUobwsij+weHCKAFmKQKtCP7ybgVHaQjAPrj8MGnk1jBbjDt5ws+Be+9JNjQJee9zCKbAOsIo3i+GcUIkrw5jxPU/RTGlWBcemPaKHdciSzGcjWboapzIy49qypQhZe1U75 user@my_ip"],
+        ssh_key_ids=["5fa942e71c16abcfbead275f","5fa94303cc6dc49346404fca","5fa943127bda760ad80c237e"],
+        network_type="PUBLIC_AND_PRIVATE",
+        os_configuration=OsConfiguration(
+            netris_controller=OsConfigurationNetrisController(
+            ),
+            netris_softgate=OsConfigurationNetrisSoftgate(
+                controller_address="120.153.203.227",
+                controller_version="3.4.0-003",
+                controller_auth_key="w0OP8TjZaHO17DTwxtN5VYh5Bh1ZVH2s3WK1JRTw",
+            ),
+            windows=OsConfigurationWindows(
+                rdp_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
+            ),
+            management_access_allowed_ips=["172.217.22.14","10.111.14.40/29","10.111.14.66 - 10.111.14.71"],
+            install_os_to_ram=True,
+            cloud_init=OsConfigurationCloudInit(
+                user_data='YQ==',
+            ),
+        ),
+        tags=[
+            TagAssignmentRequest(
+                name="Environment",
+                value="PROD",
+            ),
+        ],
+        network_configuration=NetworkConfiguration(
+            gateway_address="182.16.0.145",
+            private_network_configuration=PrivateNetworkConfiguration(
+                gateway_address="10.0.0.10",
+                configuration_type="USER_DEFINED",
+                private_networks=[
+                    ServerPrivateNetwork(
+                        id="603f3b2cfcaf050643b89a4b",
+                        ips=["10.1.1.1","10.1.1.20 - 10.1.1.25"],
+                        dhcp=False,
+                    ),
+                ],
+            ),
+            ip_blocks_configuration=IpBlocksConfiguration(
+                configuration_type="PURCHASE_NEW",
+                ip_blocks=[
+                    ServerIpBlock(
+                        id="60473a6115e34466c9f8f083",
+                    ),
+                ],
+            ),
+            public_network_configuration=PublicNetworkConfiguration(
+                public_networks=[
+                    ServerPublicNetwork(
+                        id="60473c2509268bc77fd06d29",
+                        ips=["182.16.0.146","182.16.0.148 - 182.16.0.150"],
+                    ),
+                ],
+            ),
+        ),
+        storage_configuration=StorageConfiguration(
+            root_partition=StorageConfigurationRootPartition(
+                raid="RAID_1",
+                size=128,
+            ),
+        ),
+    ) # ServerProvision | 
+    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Provision server.
+        api_response = api_instance.servers_server_id_actions_provision_post(server_id, server_provision)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_actions_provision_post: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Provision server.
+        api_response = api_instance.servers_server_id_actions_provision_post(server_id, server_provision, force=force)
+        pprint(api_response)
+    except pnap_bmc_api.ApiException as e:
+        print("Exception when calling ServersApi->servers_server_id_actions_provision_post: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. |
+ **server_provision** | [**ServerProvision**](ServerProvision.md)|  |
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
+
+### Return type
+
+[**Server**](Server.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Request to provision server is accepted. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**406** | No server available of type server.type. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 

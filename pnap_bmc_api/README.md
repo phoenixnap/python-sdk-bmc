@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
 *ServersApi* | [**servers_server_id_actions_deprovision_post**](docs/ServersApi.md#servers_server_id_actions_deprovision_post) | **POST** /servers/{serverId}/actions/deprovision | Deprovision a server.
 *ServersApi* | [**servers_server_id_actions_power_off_post**](docs/ServersApi.md#servers_server_id_actions_power_off_post) | **POST** /servers/{serverId}/actions/power-off | Power off server.
 *ServersApi* | [**servers_server_id_actions_power_on_post**](docs/ServersApi.md#servers_server_id_actions_power_on_post) | **POST** /servers/{serverId}/actions/power-on | Power on server.
+*ServersApi* | [**servers_server_id_actions_provision_post**](docs/ServersApi.md#servers_server_id_actions_provision_post) | **POST** /servers/{serverId}/actions/provision | Provision server.
 *ServersApi* | [**servers_server_id_actions_reboot_post**](docs/ServersApi.md#servers_server_id_actions_reboot_post) | **POST** /servers/{serverId}/actions/reboot | Reboot server.
 *ServersApi* | [**servers_server_id_actions_reserve_post**](docs/ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
 *ServersApi* | [**servers_server_id_actions_reset_post**](docs/ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
@@ -177,6 +178,7 @@ Class | Method | HTTP request | Description
  - [ServerNetworkUpdate](docs/ServerNetworkUpdate.md)
  - [ServerPatch](docs/ServerPatch.md)
  - [ServerPrivateNetwork](docs/ServerPrivateNetwork.md)
+ - [ServerProvision](docs/ServerProvision.md)
  - [ServerPublicNetwork](docs/ServerPublicNetwork.md)
  - [ServerReserve](docs/ServerReserve.md)
  - [ServerReset](docs/ServerReset.md)
