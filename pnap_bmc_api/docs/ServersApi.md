@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**406** | No server available of type server.type. |  -  |
+**406** | No server available of type server type. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
@@ -782,7 +782,7 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**406** | No server available of type server.type. |  -  |
+**406** | No server available of type server type. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
