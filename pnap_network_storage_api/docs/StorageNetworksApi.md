@@ -657,6 +657,7 @@ Name | Type | Description  | Notes
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+**503** | The request failed because service is currently unavailable. Please try again later. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -929,6 +930,7 @@ Name | Type | Description  | Notes
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+**503** | The request failed because service is currently unavailable. Please try again later. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
