@@ -98,17 +98,17 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}',
+                'endpoint_path': '/storage-networks/{storageId}',
                 'operation_id': 'storage_networks_id_delete',
                 'http_method': 'DELETE',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                 ],
                 'nullable': [
                 ],
@@ -123,14 +123,14 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                 },
                 'collection_format_map': {
                 }
@@ -149,17 +149,17 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}',
+                'endpoint_path': '/storage-networks/{storageId}',
                 'operation_id': 'storage_networks_id_get',
                 'http_method': 'GET',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                 ],
                 'nullable': [
                 ],
@@ -174,14 +174,14 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                 },
                 'collection_format_map': {
                 }
@@ -200,18 +200,18 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}',
+                'endpoint_path': '/storage-networks/{storageId}',
                 'operation_id': 'storage_networks_id_patch',
                 'http_method': 'PATCH',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'storage_network_update',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'storage_network_update',
                 ],
                 'nullable': [
@@ -227,16 +227,16 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'storage_network_update':
                         (StorageNetworkUpdate,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'storage_network_update': 'body',
                 },
                 'collection_format_map': {
@@ -310,18 +310,18 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes',
+                'endpoint_path': '/storage-networks/{storageId}/volumes',
                 'operation_id': 'storage_networks_storage_network_id_volumes_get',
                 'http_method': 'GET',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'tag',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                 ],
                 'nullable': [
                 ],
@@ -336,17 +336,17 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'tag':
                         ([str],),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                     'tag': 'tag',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'tag': 'query',
                 },
                 'collection_format_map': {
@@ -367,18 +367,18 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes',
+                'endpoint_path': '/storage-networks/{storageId}/volumes',
                 'operation_id': 'storage_networks_storage_network_id_volumes_post',
                 'http_method': 'POST',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_create',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_create',
                 ],
                 'nullable': [
@@ -394,16 +394,16 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'volume_create':
                         (VolumeCreate,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'volume_create': 'body',
                 },
                 'collection_format_map': {
@@ -425,18 +425,18 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes/{volumeId}',
+                'endpoint_path': '/storage-networks/{storageId}/volumes/{volumeId}',
                 'operation_id': 'storage_networks_storage_network_id_volumes_volume_id_delete',
                 'http_method': 'DELETE',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                 ],
                 'nullable': [
@@ -452,17 +452,17 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'volume_id':
                         (str,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                     'volume_id': 'volumeId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'volume_id': 'path',
                 },
                 'collection_format_map': {
@@ -482,18 +482,18 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes/{volumeId}',
+                'endpoint_path': '/storage-networks/{storageId}/volumes/{volumeId}',
                 'operation_id': 'storage_networks_storage_network_id_volumes_volume_id_get',
                 'http_method': 'GET',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                 ],
                 'nullable': [
@@ -509,17 +509,17 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'volume_id':
                         (str,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                     'volume_id': 'volumeId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'volume_id': 'path',
                 },
                 'collection_format_map': {
@@ -539,19 +539,19 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes/{volumeId}',
+                'endpoint_path': '/storage-networks/{storageId}/volumes/{volumeId}',
                 'operation_id': 'storage_networks_storage_network_id_volumes_volume_id_patch',
                 'http_method': 'PATCH',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                     'volume_update',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                     'volume_update',
                 ],
@@ -568,7 +568,7 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'volume_id':
                         (str,),
@@ -576,11 +576,11 @@ class StorageNetworksApi(object):
                         (VolumeUpdate,),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                     'volume_id': 'volumeId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'volume_id': 'path',
                     'volume_update': 'body',
                 },
@@ -603,19 +603,19 @@ class StorageNetworksApi(object):
                 'auth': [
                     'OAuth2'
                 ],
-                'endpoint_path': '/storage-networks/{storageNetworkId}/volumes/{volumeId}/tags',
+                'endpoint_path': '/storage-networks/{storageId}/volumes/{volumeId}/tags',
                 'operation_id': 'storage_networks_storage_network_id_volumes_volume_id_tags_put',
                 'http_method': 'PUT',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                     'tag_assignment_request',
                 ],
                 'required': [
-                    'storage_network_id',
+                    'storage_id',
                     'volume_id',
                     'tag_assignment_request',
                 ],
@@ -632,7 +632,7 @@ class StorageNetworksApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'storage_network_id':
+                    'storage_id':
                         (str,),
                     'volume_id':
                         (str,),
@@ -640,11 +640,11 @@ class StorageNetworksApi(object):
                         ([TagAssignmentRequest],),
                 },
                 'attribute_map': {
-                    'storage_network_id': 'storageNetworkId',
+                    'storage_id': 'storageId',
                     'volume_id': 'volumeId',
                 },
                 'location_map': {
-                    'storage_network_id': 'path',
+                    'storage_id': 'path',
                     'volume_id': 'path',
                     'tag_assignment_request': 'body',
                 },
@@ -743,7 +743,7 @@ class StorageNetworksApi(object):
 
     def storage_networks_id_delete(
         self,
-        storage_network_id,
+        storage_id,
         **kwargs
     ):
         """Delete a storage network and its volume.  # noqa: E501
@@ -752,11 +752,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_id_delete(storage_network_id, async_req=True)
+        >>> thread = api.storage_networks_id_delete(storage_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -820,13 +820,13 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         return self.storage_networks_id_delete_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_id_get(
         self,
-        storage_network_id,
+        storage_id,
         **kwargs
     ):
         """Get storage network details.  # noqa: E501
@@ -835,11 +835,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_id_get(storage_network_id, async_req=True)
+        >>> thread = api.storage_networks_id_get(storage_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -903,13 +903,13 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         return self.storage_networks_id_get_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_id_patch(
         self,
-        storage_network_id,
+        storage_id,
         storage_network_update,
         **kwargs
     ):
@@ -919,11 +919,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_id_patch(storage_network_id, storage_network_update, async_req=True)
+        >>> thread = api.storage_networks_id_patch(storage_id, storage_network_update, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             storage_network_update (StorageNetworkUpdate): Storage network to be updated.
 
         Keyword Args:
@@ -988,8 +988,8 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['storage_network_update'] = \
             storage_network_update
         return self.storage_networks_id_patch_endpoint.call_with_http_info(**kwargs)
@@ -1079,7 +1079,7 @@ class StorageNetworksApi(object):
 
     def storage_networks_storage_network_id_volumes_get(
         self,
-        storage_network_id,
+        storage_id,
         **kwargs
     ):
         """Display one or more volumes belonging to a storage network.  # noqa: E501
@@ -1088,11 +1088,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_get(storage_network_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_get(storage_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
 
         Keyword Args:
             tag ([str]): A list of query parameters related to tags in the form of tagName.tagValue. [optional]
@@ -1157,13 +1157,13 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         return self.storage_networks_storage_network_id_volumes_get_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_post(
         self,
-        storage_network_id,
+        storage_id,
         volume_create,
         **kwargs
     ):
@@ -1173,11 +1173,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_post(storage_id, volume_create, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             volume_create (VolumeCreate):
 
         Keyword Args:
@@ -1242,15 +1242,15 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['volume_create'] = \
             volume_create
         return self.storage_networks_storage_network_id_volumes_post_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_volume_id_delete(
         self,
-        storage_network_id,
+        storage_id,
         volume_id,
         **kwargs
     ):
@@ -1260,11 +1260,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_delete(storage_network_id, volume_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_delete(storage_id, volume_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             volume_id (str): ID of volume.
 
         Keyword Args:
@@ -1329,15 +1329,15 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['volume_id'] = \
             volume_id
         return self.storage_networks_storage_network_id_volumes_volume_id_delete_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_volume_id_get(
         self,
-        storage_network_id,
+        storage_id,
         volume_id,
         **kwargs
     ):
@@ -1347,11 +1347,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_get(storage_network_id, volume_id, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_get(storage_id, volume_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             volume_id (str): ID of volume.
 
         Keyword Args:
@@ -1416,15 +1416,15 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['volume_id'] = \
             volume_id
         return self.storage_networks_storage_network_id_volumes_volume_id_get_endpoint.call_with_http_info(**kwargs)
 
     def storage_networks_storage_network_id_volumes_volume_id_patch(
         self,
-        storage_network_id,
+        storage_id,
         volume_id,
         volume_update,
         **kwargs
@@ -1435,11 +1435,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_patch(storage_id, volume_id, volume_update, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             volume_id (str): ID of volume.
             volume_update (VolumeUpdate): Storage network volume to be updated.
 
@@ -1505,8 +1505,8 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['volume_id'] = \
             volume_id
         kwargs['volume_update'] = \
@@ -1515,7 +1515,7 @@ class StorageNetworksApi(object):
 
     def storage_networks_storage_network_id_volumes_volume_id_tags_put(
         self,
-        storage_network_id,
+        storage_id,
         volume_id,
         tag_assignment_request,
         **kwargs
@@ -1526,11 +1526,11 @@ class StorageNetworksApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request, async_req=True)
+        >>> thread = api.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_id, volume_id, tag_assignment_request, async_req=True)
         >>> result = thread.get()
 
         Args:
-            storage_network_id (str): ID of storage network.
+            storage_id (str): ID of the storage.
             volume_id (str): ID of volume.
             tag_assignment_request ([TagAssignmentRequest]): Tags to assign to the volume.
 
@@ -1596,8 +1596,8 @@ class StorageNetworksApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['storage_network_id'] = \
-            storage_network_id
+        kwargs['storage_id'] = \
+            storage_id
         kwargs['volume_id'] = \
             volume_id
         kwargs['tag_assignment_request'] = \

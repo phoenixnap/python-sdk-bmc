@@ -5,16 +5,16 @@ All URIs are relative to *https://api.phoenixnap.com/network-storage/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**storage_networks_get**](StorageNetworksApi.md#storage_networks_get) | **GET** /storage-networks | List all storage networks.
-[**storage_networks_id_delete**](StorageNetworksApi.md#storage_networks_id_delete) | **DELETE** /storage-networks/{storageNetworkId} | Delete a storage network and its volume.
-[**storage_networks_id_get**](StorageNetworksApi.md#storage_networks_id_get) | **GET** /storage-networks/{storageNetworkId} | Get storage network details.
-[**storage_networks_id_patch**](StorageNetworksApi.md#storage_networks_id_patch) | **PATCH** /storage-networks/{storageNetworkId} | Update storage network details.
+[**storage_networks_id_delete**](StorageNetworksApi.md#storage_networks_id_delete) | **DELETE** /storage-networks/{storageId} | Delete a storage network and its volume.
+[**storage_networks_id_get**](StorageNetworksApi.md#storage_networks_id_get) | **GET** /storage-networks/{storageId} | Get storage network details.
+[**storage_networks_id_patch**](StorageNetworksApi.md#storage_networks_id_patch) | **PATCH** /storage-networks/{storageId} | Update storage network details.
 [**storage_networks_post**](StorageNetworksApi.md#storage_networks_post) | **POST** /storage-networks | Create a storage network and volume.
-[**storage_networks_storage_network_id_volumes_get**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_get) | **GET** /storage-networks/{storageNetworkId}/volumes | Display one or more volumes belonging to a storage network.
-[**storage_networks_storage_network_id_volumes_post**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_post) | **POST** /storage-networks/{storageNetworkId}/volumes | Create a volume belonging to a storage network.
-[**storage_networks_storage_network_id_volumes_volume_id_delete**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
-[**storage_networks_storage_network_id_volumes_volume_id_get**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
-[**storage_networks_storage_network_id_volumes_volume_id_patch**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
-[**storage_networks_storage_network_id_volumes_volume_id_tags_put**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageNetworkId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
+[**storage_networks_storage_network_id_volumes_get**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_get) | **GET** /storage-networks/{storageId}/volumes | Display one or more volumes belonging to a storage network.
+[**storage_networks_storage_network_id_volumes_post**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_post) | **POST** /storage-networks/{storageId}/volumes | Create a volume belonging to a storage network.
+[**storage_networks_storage_network_id_volumes_volume_id_delete**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
+[**storage_networks_storage_network_id_volumes_volume_id_get**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
+[**storage_networks_storage_network_id_volumes_volume_id_patch**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
+[**storage_networks_storage_network_id_volumes_volume_id_tags_put**](StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
 
 
 # **storage_networks_get**
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_id_delete**
-> storage_networks_id_delete(storage_network_id)
+> storage_networks_id_delete(storage_id)
 
 Delete a storage network and its volume.
 
@@ -139,12 +139,12 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
 
     # example passing only required values which don't have defaults set
     try:
         # Delete a storage network and its volume.
-        api_instance.storage_networks_id_delete(storage_network_id)
+        api_instance.storage_networks_id_delete(storage_id)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_id_delete: %s\n" % e)
 ```
@@ -154,7 +154,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
 
 ### Return type
 
@@ -185,7 +185,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_id_get**
-> StorageNetwork storage_networks_id_get(storage_network_id)
+> StorageNetwork storage_networks_id_get(storage_id)
 
 Get storage network details.
 
@@ -223,12 +223,12 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
 
     # example passing only required values which don't have defaults set
     try:
         # Get storage network details.
-        api_response = api_instance.storage_networks_id_get(storage_network_id)
+        api_response = api_instance.storage_networks_id_get(storage_id)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_id_get: %s\n" % e)
@@ -239,7 +239,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
 
 ### Return type
 
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_id_patch**
-> StorageNetwork storage_networks_id_patch(storage_network_id, storage_network_update)
+> StorageNetwork storage_networks_id_patch(storage_id, storage_network_update)
 
 Update storage network details.
 
@@ -306,7 +306,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     storage_network_update = StorageNetworkUpdate(
         name="My storage network",
         description="My storage network description",
@@ -315,7 +315,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Update storage network details.
-        api_response = api_instance.storage_networks_id_patch(storage_network_id, storage_network_update)
+        api_response = api_instance.storage_networks_id_patch(storage_id, storage_network_update)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_id_patch: %s\n" % e)
@@ -326,7 +326,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **storage_network_update** | [**StorageNetworkUpdate**](StorageNetworkUpdate.md)| Storage network to be updated. |
 
 ### Return type
@@ -460,7 +460,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_get**
-> [Volume] storage_networks_storage_network_id_volumes_get(storage_network_id)
+> [Volume] storage_networks_storage_network_id_volumes_get(storage_id)
 
 Display one or more volumes belonging to a storage network.
 
@@ -498,7 +498,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     tag = [
         "env.dev",
     ] # [str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
@@ -506,7 +506,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Display one or more volumes belonging to a storage network.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_id)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
@@ -515,7 +515,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Display one or more volumes belonging to a storage network.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id, tag=tag)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_get(storage_id, tag=tag)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_get: %s\n" % e)
@@ -526,7 +526,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **tag** | **[str]**| A list of query parameters related to tags in the form of tagName.tagValue | [optional]
 
 ### Return type
@@ -555,7 +555,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_post**
-> Volume storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create)
+> Volume storage_networks_storage_network_id_volumes_post(storage_id, volume_create)
 
 Create a volume belonging to a storage network.
 
@@ -594,7 +594,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     volume_create = VolumeCreate(
         name="My volume name",
         description="My volume description",
@@ -620,7 +620,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Create a volume belonging to a storage network.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_post(storage_network_id, volume_create)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_post(storage_id, volume_create)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_post: %s\n" % e)
@@ -631,7 +631,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **volume_create** | [**VolumeCreate**](VolumeCreate.md)|  |
 
 ### Return type
@@ -663,7 +663,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_delete**
-> storage_networks_storage_network_id_volumes_volume_id_delete(storage_network_id, volume_id)
+> storage_networks_storage_network_id_volumes_volume_id_delete(storage_id, volume_id)
 
 Delete a Storage Network's Volume
 
@@ -700,13 +700,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
 
     # example passing only required values which don't have defaults set
     try:
         # Delete a Storage Network's Volume
-        api_instance.storage_networks_storage_network_id_volumes_volume_id_delete(storage_network_id, volume_id)
+        api_instance.storage_networks_storage_network_id_volumes_volume_id_delete(storage_id, volume_id)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_delete: %s\n" % e)
 ```
@@ -716,7 +716,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **volume_id** | **str**| ID of volume. |
 
 ### Return type
@@ -747,7 +747,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_get**
-> Volume storage_networks_storage_network_id_volumes_volume_id_get(storage_network_id, volume_id)
+> Volume storage_networks_storage_network_id_volumes_volume_id_get(storage_id, volume_id)
 
 Get a storage network's volume details.
 
@@ -785,13 +785,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
 
     # example passing only required values which don't have defaults set
     try:
         # Get a storage network's volume details.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_get(storage_network_id, volume_id)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_get(storage_id, volume_id)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_get: %s\n" % e)
@@ -802,7 +802,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **volume_id** | **str**| ID of volume. |
 
 ### Return type
@@ -831,7 +831,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_patch**
-> Volume storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update)
+> Volume storage_networks_storage_network_id_volumes_volume_id_patch(storage_id, volume_id, volume_update)
 
 Update a storage network's volume details.
 
@@ -870,7 +870,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
     volume_update = VolumeUpdate(
         name="New Volume name",
@@ -891,7 +891,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Update a storage network's volume details.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_id, volume_id, volume_update)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_patch: %s\n" % e)
@@ -902,7 +902,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **volume_id** | **str**| ID of volume. |
  **volume_update** | [**VolumeUpdate**](VolumeUpdate.md)| Storage network volume to be updated. |
 
@@ -936,7 +936,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **storage_networks_storage_network_id_volumes_volume_id_tags_put**
-> Volume storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request)
+> Volume storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_id, volume_id, tag_assignment_request)
 
 Overwrites tags assigned for the volume.
 
@@ -975,7 +975,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = storage_networks_api.StorageNetworksApi(api_client)
-    storage_network_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of storage network.
+    storage_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of the storage.
     volume_id = "50dc434c-9bba-427b-bcd6-0bdba45c4dd2" # str | ID of volume.
     tag_assignment_request = [
         TagAssignmentRequest(
@@ -987,7 +987,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Overwrites tags assigned for the volume.
-        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_network_id, volume_id, tag_assignment_request)
+        api_response = api_instance.storage_networks_storage_network_id_volumes_volume_id_tags_put(storage_id, volume_id, tag_assignment_request)
         pprint(api_response)
     except pnap_network_storage_api.ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_storage_network_id_volumes_volume_id_tags_put: %s\n" % e)
@@ -998,7 +998,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_network_id** | **str**| ID of storage network. |
+ **storage_id** | **str**| ID of the storage. |
  **volume_id** | **str**| ID of volume. |
  **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)| Tags to assign to the volume. |
 

@@ -121,16 +121,16 @@ All URIs are relative to *https://api.phoenixnap.com/network-storage/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *StorageNetworksApi* | [**storage_networks_get**](docs/StorageNetworksApi.md#storage_networks_get) | **GET** /storage-networks | List all storage networks.
-*StorageNetworksApi* | [**storage_networks_id_delete**](docs/StorageNetworksApi.md#storage_networks_id_delete) | **DELETE** /storage-networks/{storageNetworkId} | Delete a storage network and its volume.
-*StorageNetworksApi* | [**storage_networks_id_get**](docs/StorageNetworksApi.md#storage_networks_id_get) | **GET** /storage-networks/{storageNetworkId} | Get storage network details.
-*StorageNetworksApi* | [**storage_networks_id_patch**](docs/StorageNetworksApi.md#storage_networks_id_patch) | **PATCH** /storage-networks/{storageNetworkId} | Update storage network details.
+*StorageNetworksApi* | [**storage_networks_id_delete**](docs/StorageNetworksApi.md#storage_networks_id_delete) | **DELETE** /storage-networks/{storageId} | Delete a storage network and its volume.
+*StorageNetworksApi* | [**storage_networks_id_get**](docs/StorageNetworksApi.md#storage_networks_id_get) | **GET** /storage-networks/{storageId} | Get storage network details.
+*StorageNetworksApi* | [**storage_networks_id_patch**](docs/StorageNetworksApi.md#storage_networks_id_patch) | **PATCH** /storage-networks/{storageId} | Update storage network details.
 *StorageNetworksApi* | [**storage_networks_post**](docs/StorageNetworksApi.md#storage_networks_post) | **POST** /storage-networks | Create a storage network and volume.
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_get) | **GET** /storage-networks/{storageNetworkId}/volumes | Display one or more volumes belonging to a storage network.
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_post**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_post) | **POST** /storage-networks/{storageNetworkId}/volumes | Create a volume belonging to a storage network.
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_delete**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_patch**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageNetworkId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
-*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_tags_put**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageNetworkId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_get) | **GET** /storage-networks/{storageId}/volumes | Display one or more volumes belonging to a storage network.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_post**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_post) | **POST** /storage-networks/{storageId}/volumes | Create a volume belonging to a storage network.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_delete**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_delete) | **DELETE** /storage-networks/{storageId}/volumes/{volumeId} | Delete a Storage Network&#39;s Volume
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_get**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_get) | **GET** /storage-networks/{storageId}/volumes/{volumeId} | Get a storage network&#39;s volume details.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_patch**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_patch) | **PATCH** /storage-networks/{storageId}/volumes/{volumeId} | Update a storage network&#39;s volume details.
+*StorageNetworksApi* | [**storage_networks_storage_network_id_volumes_volume_id_tags_put**](docs/StorageNetworksApi.md#storage_networks_storage_network_id_volumes_volume_id_tags_put) | **PUT** /storage-networks/{storageId}/volumes/{volumeId}/tags | Overwrites tags assigned for the volume.
 
 
 ## Documentation For Models
