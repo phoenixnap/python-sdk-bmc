@@ -1491,7 +1491,7 @@ class ServersApi(object):
     ):
         """Create new server.  # noqa: E501
 
-        Create (request) new server for account. Server DNS will be configured to access Google's public DNS at 8.8.8.8 .  # noqa: E501
+        Create (request) a new server for the account. Server DNS will be configured to access Google's public DNS at 8.8.8.8 . Note that the product availability API can be used prior to doing the provision request. Refer to https://developers.phoenixnap.com/docs/bmc-billing/1/routes/product-availability/get.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 Create new server.
 
-Create (request) new server for account. Server DNS will be configured to access Google's public DNS at 8.8.8.8 .
+Create (request) a new server for the account. Server DNS will be configured to access Google's public DNS at 8.8.8.8 . Note that the product availability API can be used prior to doing the provision request. Refer to https://developers.phoenixnap.com/docs/bmc-billing/1/routes/product-availability/get.
 
 ### Example
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**406** | No server available of type server type. |  -  |
+**406** | There are currently no servers available for the selected instance type. Check the availability of instance types at specific locations by using the &#39;product availability API GET&#39; call. Refer to https://developers.phoenixnap.com/docs/bmc-billing/1/routes/product-availability/get. |  -  |
 **409** | The resource is in an incompatible state. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
