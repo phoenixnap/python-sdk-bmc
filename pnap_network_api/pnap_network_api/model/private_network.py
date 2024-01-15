@@ -150,7 +150,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
-            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
+            status (str): The status of the private network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:
@@ -259,7 +259,7 @@ class PrivateNetwork(ModelNormal):
             location_default (bool): Identifies network as the default private network for the specified location.
             servers ([PrivateNetworkServer]):
             memberships ([NetworkMembership]): A list of resources that are members of this private network.
-            status (str): The status of the private network. Can have one of the following values: `BUSY` or `READY`.
+            status (str): The status of the private network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.
             created_on (datetime): Date and time when this private network was created.
 
         Keyword Args:

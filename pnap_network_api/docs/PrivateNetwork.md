@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **location_default** | **bool** | Identifies network as the default private network for the specified location. | 
 **servers** | [**[PrivateNetworkServer]**](PrivateNetworkServer.md) |  | 
 **memberships** | [**[NetworkMembership]**](NetworkMembership.md) | A list of resources that are members of this private network. | 
-**status** | **str** | The status of the private network. Can have one of the following values: &#x60;BUSY&#x60; or &#x60;READY&#x60;. | 
+**status** | **str** | The status of the private network. Can have one of the following values: &#x60;BUSY&#x60;, &#x60;READY&#x60;, &#x60;DELETING&#x60; or &#x60;ERROR&#x60;. | 
 **created_on** | **datetime** | Date and time when this private network was created. | 
 **description** | **str** | The description of this private network. | [optional] 
 **cidr** | **str** | IP range associated with this private network in CIDR notation. | [optional] 

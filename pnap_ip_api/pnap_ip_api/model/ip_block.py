@@ -138,7 +138,7 @@ class IpBlock(ModelNormal):
             location (str): IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cidr_block_size (str): CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29`, `/28`, `/27`, `/26`, `/25`, `/24`, `/23` or `/22`.
             cidr (str): The IP Block in CIDR notation.
-            status (str): The status of the IP Block.
+            status (str): The status of the IP Block. Can have one of the following values: `creating` , `assigning` , `error assigning` , `assigned` , `unassigning` , `error unassigning` or `unassigned`.
             is_bring_your_own (bool): True if the IP block is a `bring your own` block.
             created_on (datetime): Date and time when the IP block was created.
 
@@ -243,7 +243,7 @@ class IpBlock(ModelNormal):
             location (str): IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.
             cidr_block_size (str): CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29`, `/28`, `/27`, `/26`, `/25`, `/24`, `/23` or `/22`.
             cidr (str): The IP Block in CIDR notation.
-            status (str): The status of the IP Block.
+            status (str): The status of the IP Block. Can have one of the following values: `creating` , `assigning` , `error assigning` , `assigned` , `unassigning` , `error unassigning` or `unassigned`.
             is_bring_your_own (bool): True if the IP block is a `bring your own` block.
             created_on (datetime): Date and time when the IP block was created.
 
