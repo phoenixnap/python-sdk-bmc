@@ -65,6 +65,13 @@ class NodePool(ModelNormal):
     }
 
     validations = {
+        ('name',): {
+            'max_length': 100,
+            'min_length': 1,
+            'regex': {
+                'pattern': r'^(?=.*[a-zA-Z])([a-zA-Z0-9().-])+$',  # noqa: E501
+            },
+        },
     }
 
     @cached_property

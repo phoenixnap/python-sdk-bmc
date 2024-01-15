@@ -297,7 +297,7 @@ with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
         location="PHX",
         node_pools=[
             NodePool(
-                name="Rancher Server node pool.",
+                name="rancher-server-node-pool",
                 node_count=1,
                 server_type="s0.d1.small",
                 ssh_config=NodePoolSshConfig(None),
