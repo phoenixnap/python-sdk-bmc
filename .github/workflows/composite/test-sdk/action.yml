@@ -29,7 +29,7 @@ runs:
       run: python3 -m pip install -r ${{ inputs.package-under-test }}/requirements.txt
     - name: Install package under test
       shell: bash
-      run: pip3 install ${{ inputs.package-under-test }}
+      run: python3 -m pip install ${{ inputs.package-under-test }}
     - name: Install test dependencies
       shell: bash
       run: pip3 install -r ${{ inputs.test-dir }}/requirements.txt
