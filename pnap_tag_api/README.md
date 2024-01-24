@@ -56,18 +56,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 import time
 import pnap_tag_api
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
-from pnap_tag_api.api import tags_api
-from pydantic import Field
-from typing_extensions import Annotated
-from pydantic import StrictStr
 
-from typing import List, Optional
-
-from pnap_tag_api.models.delete_result import DeleteResult
-from pnap_tag_api.models.tag import Tag
-from pnap_tag_api.models.tag_create import TagCreate
-from pnap_tag_api.models.tag_update import TagUpdate
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -85,15 +76,17 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
+    api_instance = pnap_tag_api.TagsApi(api_client)
     name = 'env' # str | Query a tag by its name. (optional)
 
     try:
         # List tags.
         api_response = api_instance.tags_get(name=name)
+        print("The response of TagsApi->tags_get:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except ApiException as e:
         print("Exception when calling TagsApi->tags_get: %s\n" % e)
+
 ```
 
 To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
@@ -137,10 +130,13 @@ Class | Method | HTTP request | Description
  - [TagUpdate](docs/TagUpdate.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
-## OAuth2
+Authentication schemes defined for the API:
+<a id="OAuth2"></a>
+### OAuth2
 
 - **Type**: OAuth
 - **Flow**: application
@@ -153,24 +149,4 @@ Class | Method | HTTP request | Description
 ## Author
 
 support@phoenixnap.com
-
-
-## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in pnap_tag_api.apis and pnap_tag_api.models may fail with a
-RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
-
-Solution 1:
-Use specific imports for apis and models like:
-- `from pnap_tag_api.api.default_api import DefaultApi`
-- `from pnap_tag_api.model.pet import Pet`
-
-Solution 2:
-Before importing the package, adjust the maximum recursion limit as shown below:
-```
-import sys
-sys.setrecursionlimit(1500)
-import pnap_tag_api
-from pnap_tag_api.apis import *
-from pnap_tag_api.models import *
-```
 

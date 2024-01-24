@@ -46,15 +46,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 import time
 import pnap_location_api
+from pnap_location_api.rest import ApiException
 from pprint import pprint
-from pnap_location_api.api import locations_api
-from pydantic import Field
-from typing_extensions import Annotated
-from typing import List, Optional
 
-from pnap_location_api.models.location import Location
-from pnap_location_api.models.location_enum import LocationEnum
-from pnap_location_api.models.product_category_enum import ProductCategoryEnum
 # Defining the host is optional and defaults to https://api.phoenixnap.com/location-api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_location_api.Configuration(
@@ -66,16 +60,18 @@ configuration = pnap_location_api.Configuration(
 # Enter a context with an instance of the API client
 with pnap_location_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = locations_api.LocationsApi(api_client)
+    api_instance = pnap_location_api.LocationsApi(api_client)
     location = pnap_location_api.LocationEnum() # LocationEnum | Location of interest (optional)
     product_category = pnap_location_api.ProductCategoryEnum() # ProductCategoryEnum | Product category of interest (optional)
 
     try:
         # Get All Locations
         api_response = api_instance.get_locations(location=location, product_category=product_category)
+        print("The response of LocationsApi->get_locations:\n")
         pprint(api_response)
-    except pnap_location_api.ApiException as e:
+    except ApiException as e:
         print("Exception when calling LocationsApi->get_locations: %s\n" % e)
+
 ```
 
 To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
@@ -114,31 +110,13 @@ Class | Method | HTTP request | Description
  - [ProductCategoryEnum](docs/ProductCategoryEnum.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
- All endpoints do not require authorization.
+Endpoints do not require authorization.
+
 
 ## Author
 
 support@phoenixnap.com
-
-
-## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in pnap_location_api.apis and pnap_location_api.models may fail with a
-RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
-
-Solution 1:
-Use specific imports for apis and models like:
-- `from pnap_location_api.api.default_api import DefaultApi`
-- `from pnap_location_api.model.pet import Pet`
-
-Solution 2:
-Before importing the package, adjust the maximum recursion limit as shown below:
-```
-import sys
-sys.setrecursionlimit(1500)
-import pnap_location_api
-from pnap_location_api.apis import *
-from pnap_location_api.models import *
-```
 
