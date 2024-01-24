@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # flake8: noqa
 
 """
@@ -13,18 +15,23 @@
 """  # noqa: E501
 
 
+__version__ = "1.0.0"
+
+# import apis into sdk package
+from pnap_audit_api.api.events_api import EventsApi
+
 # import ApiClient
+from pnap_audit_api.api_response import ApiResponse
 from pnap_audit_api.api_client import ApiClient
-
-# import Configuration
 from pnap_audit_api.configuration import Configuration
-
-# import exceptions
 from pnap_audit_api.exceptions import OpenApiException
-from pnap_audit_api.exceptions import ApiAttributeError
 from pnap_audit_api.exceptions import ApiTypeError
 from pnap_audit_api.exceptions import ApiValueError
 from pnap_audit_api.exceptions import ApiKeyError
+from pnap_audit_api.exceptions import ApiAttributeError
 from pnap_audit_api.exceptions import ApiException
-from pnap_audit_api.version import VERSION
-__version__ = VERSION
+
+# import models into sdk package
+from pnap_audit_api.models.error import Error
+from pnap_audit_api.models.event import Event
+from pnap_audit_api.models.user_info import UserInfo

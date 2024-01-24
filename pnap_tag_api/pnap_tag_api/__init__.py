@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # flake8: noqa
 
 """
@@ -13,18 +15,26 @@
 """  # noqa: E501
 
 
+__version__ = "1.0.0"
+
+# import apis into sdk package
+from pnap_tag_api.api.tags_api import TagsApi
+
 # import ApiClient
+from pnap_tag_api.api_response import ApiResponse
 from pnap_tag_api.api_client import ApiClient
-
-# import Configuration
 from pnap_tag_api.configuration import Configuration
-
-# import exceptions
 from pnap_tag_api.exceptions import OpenApiException
-from pnap_tag_api.exceptions import ApiAttributeError
 from pnap_tag_api.exceptions import ApiTypeError
 from pnap_tag_api.exceptions import ApiValueError
 from pnap_tag_api.exceptions import ApiKeyError
+from pnap_tag_api.exceptions import ApiAttributeError
 from pnap_tag_api.exceptions import ApiException
-from pnap_tag_api.version import VERSION
-__version__ = VERSION
+
+# import models into sdk package
+from pnap_tag_api.models.delete_result import DeleteResult
+from pnap_tag_api.models.error import Error
+from pnap_tag_api.models.resource_assignment import ResourceAssignment
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.models.tag_create import TagCreate
+from pnap_tag_api.models.tag_update import TagUpdate
