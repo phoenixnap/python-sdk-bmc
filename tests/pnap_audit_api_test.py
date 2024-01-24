@@ -6,7 +6,7 @@ from pnap_audit_api.pnap_audit_api.model_utils import model_to_dict
 
 from test_utils import TestUtils
 
-import pnap_audit_api
+import pnap_audit_api.pnap_audit_api
 
 class  TestAuditApi(unittest.TestCase):
   configuration = pnap_audit_api.Configuration(host = "127.0.0.1:1080/audit/v1")
