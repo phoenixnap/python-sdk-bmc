@@ -1,3 +1,6 @@
-# do not import all apis into this module because that uses a lot of memory and stack frames
-# if you need the ability to import all apis from one package, import them with
-# from pnap_network_api.apis import PrivateNetworksApi
+# flake8: noqa
+
+# import apis into api package
+from pnap_network_api.api.private_networks_api import PrivateNetworksApi
+from pnap_network_api.api.public_networks_api import PublicNetworksApi
+

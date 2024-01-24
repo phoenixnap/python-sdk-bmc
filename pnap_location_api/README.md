@@ -8,7 +8,7 @@ For more information, please visit [https://phoenixnap.com](https://phoenixnap.c
 
 ## Requirements.
 
-Python >=3.6
+Python 3.7+
 
 ## Installation & Usage
 ### pip install
@@ -48,10 +48,13 @@ import time
 import pnap_location_api
 from pprint import pprint
 from pnap_location_api.api import locations_api
-from pnap_location_api.model.error import Error
-from pnap_location_api.model.location import Location
-from pnap_location_api.model.location_enum import LocationEnum
-from pnap_location_api.model.product_category_enum import ProductCategoryEnum
+from pydantic import Field
+from typing_extensions import Annotated
+from typing import List, Optional
+
+from pnap_location_api.models.location import Location
+from pnap_location_api.models.location_enum import LocationEnum
+from pnap_location_api.models.product_category_enum import ProductCategoryEnum
 # Defining the host is optional and defaults to https://api.phoenixnap.com/location-api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_location_api.Configuration(
@@ -64,8 +67,8 @@ configuration = pnap_location_api.Configuration(
 with pnap_location_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = locations_api.LocationsApi(api_client)
-    location = LocationEnum("ASH") # LocationEnum | Location of interest (optional)
-    product_category = ProductCategoryEnum("SERVER") # ProductCategoryEnum | Product category of interest (optional)
+    location = pnap_location_api.LocationEnum() # LocationEnum | Location of interest (optional)
+    product_category = pnap_location_api.ProductCategoryEnum() # ProductCategoryEnum | Product category of interest (optional)
 
     try:
         # Get All Locations
