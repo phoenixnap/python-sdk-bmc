@@ -1,32 +1,38 @@
+# coding: utf-8
+
 {{>partial_header}}
 
 from {{packageName}}.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "{{{projectName}}}"
-{{#apiInfo}}
-{{#apis}}
-{{#-last}}
 # To install the library, run the following
 #
 # python setup.py install
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-
+NAME = "{{{projectName}}}"
+VERSION = "{{packageVersion}}"
+PYTHON_REQUIRES = ">=3.7"
+{{#apiInfo}}
+{{#apis}}
+{{#-last}}
 REQUIRES = [
-  "urllib3 >= 1.25.3",
-  "python-dateutil",
+    "urllib3 >= 1.25.3, < 2.1.0",
+    "python-dateutil",
 {{#asyncio}}
-  "aiohttp >= 3.0.0",
+    "aiohttp >= 3.0.0",
+    "aiohttp-retry >= 2.8.3",
 {{/asyncio}}
 {{#tornado}}
-  "tornado>=4.2,<5",
+    "tornado>=4.2,<5",
 {{/tornado}}
 {{#hasHttpSignatureMethods}}
-  "pem>=19.3.0",
-  "pycryptodome>=3.9.0",
+    "pem>=19.3.0",
+    "pycryptodome>=3.9.0",
 {{/hasHttpSignatureMethods}}
+    "pydantic >= 2",
+    "typing-extensions >= 4.7.1",
 ]
 
 def readme():
