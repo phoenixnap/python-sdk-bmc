@@ -18,7 +18,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python >=3.6
+Python 3.7+
 
 ## Installation & Usage
 ### pip install
@@ -58,11 +58,16 @@ import time
 import pnap_tag_api
 from pprint import pprint
 from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.delete_result import DeleteResult
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.tag import Tag
-from pnap_tag_api.model.tag_create import TagCreate
-from pnap_tag_api.model.tag_update import TagUpdate
+from pydantic import Field
+from typing_extensions import Annotated
+from pydantic import StrictStr
+
+from typing import List, Optional
+
+from pnap_tag_api.models.delete_result import DeleteResult
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.models.tag_create import TagCreate
+from pnap_tag_api.models.tag_update import TagUpdate
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -74,18 +79,14 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = tags_api.TagsApi(api_client)
-    name = "env" # str | Query a tag by its name. (optional)
+    name = 'env' # str | Query a tag by its name. (optional)
 
     try:
         # List tags.

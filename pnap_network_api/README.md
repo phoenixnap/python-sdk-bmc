@@ -19,7 +19,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python >=3.6
+Python 3.7+
 
 ## Installation & Usage
 ### pip install
@@ -59,10 +59,15 @@ import time
 import pnap_network_api
 from pprint import pprint
 from pnap_network_api.api import private_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.private_network import PrivateNetwork
-from pnap_network_api.model.private_network_create import PrivateNetworkCreate
-from pnap_network_api.model.private_network_modify import PrivateNetworkModify
+from pydantic import Field
+from typing_extensions import Annotated
+from pydantic import StrictBool, StrictStr
+
+from typing import List, Optional
+
+from pnap_network_api.models.private_network import PrivateNetwork
+from pnap_network_api.models.private_network_create import PrivateNetworkCreate
+from pnap_network_api.models.private_network_modify import PrivateNetworkModify
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -74,18 +79,14 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = private_networks_api.PrivateNetworksApi(api_client)
-    location = "PHX" # str | If present will filter the result by the given location of the Private Networks. (optional)
+    location = 'PHX' # str | If present will filter the result by the given location of the Private Networks. (optional)
 
     try:
         # List Private Networks.

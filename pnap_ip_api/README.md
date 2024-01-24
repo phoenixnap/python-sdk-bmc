@@ -17,7 +17,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python >=3.6
+Python 3.7+
 
 ## Installation & Usage
 ### pip install
@@ -57,12 +57,17 @@ import time
 import pnap_ip_api
 from pprint import pprint
 from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.delete_ip_block_result import DeleteIpBlockResult
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
-from pnap_ip_api.model.ip_block_create import IpBlockCreate
-from pnap_ip_api.model.ip_block_patch import IpBlockPatch
-from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
+from pydantic import Field
+from typing_extensions import Annotated
+from pydantic import StrictStr
+
+from typing import List, Optional
+
+from pnap_ip_api.models.delete_ip_block_result import DeleteIpBlockResult
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.models.ip_block_create import IpBlockCreate
+from pnap_ip_api.models.ip_block_patch import IpBlockPatch
+from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -74,18 +79,14 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    tag = ["env.dev","loc.phx"] # [str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
+    tag = ['[\"env.dev\",\"loc.phx\"]'] # List[str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
 
     try:
         # List IP Blocks.

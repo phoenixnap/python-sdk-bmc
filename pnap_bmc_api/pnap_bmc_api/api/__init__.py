@@ -1,3 +1,7 @@
-# do not import all apis into this module because that uses a lot of memory and stack frames
-# if you need the ability to import all apis from one package, import them with
-# from pnap_bmc_api.apis import QuotasApi
+# flake8: noqa
+
+# import apis into api package
+from pnap_bmc_api.api.quotas_api import QuotasApi
+from pnap_bmc_api.api.ssh_keys_api import SSHKeysApi
+from pnap_bmc_api.api.servers_api import ServersApi
+

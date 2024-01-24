@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_locations**
-> [Location] get_locations()
+> List[Location] get_locations(location=location, product_category=product_category)
 
 Get All Locations
 
@@ -19,13 +19,14 @@ Retrieve the locations info.
 
 ```python
 import time
+import os
 import pnap_location_api
-from pnap_location_api.api import locations_api
-from pnap_location_api.model.error import Error
-from pnap_location_api.model.location_enum import LocationEnum
-from pnap_location_api.model.location import Location
-from pnap_location_api.model.product_category_enum import ProductCategoryEnum
+from pnap_location_api.models.location import Location
+from pnap_location_api.models.location_enum import LocationEnum
+from pnap_location_api.models.product_category_enum import ProductCategoryEnum
+from pnap_location_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/location-api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_location_api.Configuration(
@@ -34,33 +35,34 @@ configuration = pnap_location_api.Configuration(
 
 
 # Enter a context with an instance of the API client
-with pnap_location_api.ApiClient() as api_client:
+with pnap_location_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = locations_api.LocationsApi(api_client)
-    location = LocationEnum("ASH") # LocationEnum | Location of interest (optional)
-    product_category = ProductCategoryEnum("SERVER") # ProductCategoryEnum | Product category of interest (optional)
+    api_instance = pnap_location_api.LocationsApi(api_client)
+    location = pnap_location_api.LocationEnum() # LocationEnum | Location of interest (optional)
+    product_category = pnap_location_api.ProductCategoryEnum() # ProductCategoryEnum | Product category of interest (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Get All Locations
         api_response = api_instance.get_locations(location=location, product_category=product_category)
+        print("The response of LocationsApi->get_locations:\n")
         pprint(api_response)
-    except pnap_location_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling LocationsApi->get_locations: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **location** | **LocationEnum**| Location of interest | [optional]
- **product_category** | **ProductCategoryEnum**| Product category of interest | [optional]
+ **location** | [**LocationEnum**](.md)| Location of interest | [optional] 
+ **product_category** | [**ProductCategoryEnum**](.md)| Product category of interest | [optional] 
 
 ### Return type
 
-[**[Location]**](Location.md)
+[**List[Location]**](Location.md)
 
 ### Authorization
 
@@ -70,7 +72,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
