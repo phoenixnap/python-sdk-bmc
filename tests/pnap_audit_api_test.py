@@ -1,12 +1,12 @@
 import unittest
 import xmlrunner
 from dateutil.parser import parse
+from pnap_audit_api.pnap_audit_api.api.events_api import EventsApi
+from pnap_audit_api.pnap_audit_api.model_utils import model_to_dict
 
 from test_utils import TestUtils
 
 import pnap_audit_api
-from pnap_audit_api.api import events_api
-from pnap_audit_api.model_utils import model_to_dict
 
 class  TestAuditApi(unittest.TestCase):
   configuration = pnap_audit_api.Configuration(host = "127.0.0.1:1080/audit/v1")
@@ -27,7 +27,7 @@ class  TestAuditApi(unittest.TestCase):
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     # Creating new instance
-    api_instance = events_api.EventsApi(self.api_client)
+    api_instance = EventsApi.EventsApi(self.api_client)
     opts = TestUtils.generate_query_params(request)
 
     # Changing key from `_from` to 'from'
