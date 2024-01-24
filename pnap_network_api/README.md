@@ -57,17 +57,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 import time
 import pnap_network_api
+from pnap_network_api.rest import ApiException
 from pprint import pprint
-from pnap_network_api.api import private_networks_api
-from pydantic import Field
-from typing_extensions import Annotated
-from pydantic import StrictBool, StrictStr
 
-from typing import List, Optional
-
-from pnap_network_api.models.private_network import PrivateNetwork
-from pnap_network_api.models.private_network_create import PrivateNetworkCreate
-from pnap_network_api.models.private_network_modify import PrivateNetworkModify
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -85,15 +77,17 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = private_networks_api.PrivateNetworksApi(api_client)
+    api_instance = pnap_network_api.PrivateNetworksApi(api_client)
     location = 'PHX' # str | If present will filter the result by the given location of the Private Networks. (optional)
 
     try:
         # List Private Networks.
         api_response = api_instance.private_networks_get(location=location)
+        print("The response of PrivateNetworksApi->private_networks_get:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except ApiException as e:
         print("Exception when calling PrivateNetworksApi->private_networks_get: %s\n" % e)
+
 ```
 
 To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
@@ -148,10 +142,13 @@ Class | Method | HTTP request | Description
  - [PublicNetworkModify](docs/PublicNetworkModify.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
-## OAuth2
+Authentication schemes defined for the API:
+<a id="OAuth2"></a>
+### OAuth2
 
 - **Type**: OAuth
 - **Flow**: application
@@ -164,24 +161,4 @@ Class | Method | HTTP request | Description
 ## Author
 
 support@phoenixnap.com
-
-
-## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in pnap_network_api.apis and pnap_network_api.models may fail with a
-RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
-
-Solution 1:
-Use specific imports for apis and models like:
-- `from pnap_network_api.api.default_api import DefaultApi`
-- `from pnap_network_api.model.pet import Pet`
-
-Solution 2:
-Before importing the package, adjust the maximum recursion limit as shown below:
-```
-import sys
-sys.setrecursionlimit(1500)
-import pnap_network_api
-from pnap_network_api.apis import *
-from pnap_network_api.models import *
-```
 

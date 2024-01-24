@@ -54,21 +54,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 import time
 import pnap_network_storage_api
+from pnap_network_storage_api.rest import ApiException
 from pprint import pprint
-from pnap_network_storage_api.api import storage_networks_api
-from pydantic import Field
-from typing_extensions import Annotated
-from pydantic import StrictStr
 
-from typing import List, Optional
-
-from pnap_network_storage_api.models.storage_network import StorageNetwork
-from pnap_network_storage_api.models.storage_network_create import StorageNetworkCreate
-from pnap_network_storage_api.models.storage_network_update import StorageNetworkUpdate
-from pnap_network_storage_api.models.tag_assignment_request import TagAssignmentRequest
-from pnap_network_storage_api.models.volume import Volume
-from pnap_network_storage_api.models.volume_create import VolumeCreate
-from pnap_network_storage_api.models.volume_update import VolumeUpdate
 # Defining the host is optional and defaults to https://api.phoenixnap.com/network-storage/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_storage_api.Configuration(
@@ -86,15 +74,17 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 # Enter a context with an instance of the API client
 with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = storage_networks_api.StorageNetworksApi(api_client)
+    api_instance = pnap_network_storage_api.StorageNetworksApi(api_client)
     location = 'PHX' # str | If present will filter the result by the given location. (optional)
 
     try:
         # List all storage networks.
         api_response = api_instance.storage_networks_get(location=location)
+        print("The response of StorageNetworksApi->storage_networks_get:\n")
         pprint(api_response)
-    except pnap_network_storage_api.ApiException as e:
+    except ApiException as e:
         print("Exception when calling StorageNetworksApi->storage_networks_get: %s\n" % e)
+
 ```
 
 To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
@@ -155,10 +145,13 @@ Class | Method | HTTP request | Description
  - [VolumeUpdate](docs/VolumeUpdate.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
-## OAuth2
+Authentication schemes defined for the API:
+<a id="OAuth2"></a>
+### OAuth2
 
 - **Type**: OAuth
 - **Flow**: application
@@ -171,24 +164,4 @@ Class | Method | HTTP request | Description
 ## Author
 
 support@phoenixnap.com
-
-
-## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in pnap_network_storage_api.apis and pnap_network_storage_api.models may fail with a
-RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
-
-Solution 1:
-Use specific imports for apis and models like:
-- `from pnap_network_storage_api.api.default_api import DefaultApi`
-- `from pnap_network_storage_api.model.pet import Pet`
-
-Solution 2:
-Before importing the package, adjust the maximum recursion limit as shown below:
-```
-import sys
-sys.setrecursionlimit(1500)
-import pnap_network_storage_api
-from pnap_network_storage_api.apis import *
-from pnap_network_storage_api.models import *
-```
 

@@ -54,17 +54,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 import time
 import pnap_audit_api
+from pnap_audit_api.rest import ApiException
 from pprint import pprint
-from pnap_audit_api.api import events_api
-from pydantic import Field
-from typing_extensions import Annotated
-from datetime import datetime
 
-from pydantic import StrictInt, StrictStr, field_validator
-
-from typing import List, Optional
-
-from pnap_audit_api.models.event import Event
 # Defining the host is optional and defaults to https://api.phoenixnap.com/audit/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_audit_api.Configuration(
@@ -82,7 +74,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 # Enter a context with an instance of the API client
 with pnap_audit_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = events_api.EventsApi(api_client)
+    api_instance = pnap_audit_api.EventsApi(api_client)
     var_from = '2021-04-27T16:24:57.123Z' # datetime | From the date and time (inclusive) to filter event log records by. (optional)
     to = '2021-04-29T16:24:57.123Z' # datetime | To the date and time (inclusive) to filter event log records by. (optional)
     limit = 10 # int | Limit the number of records returned. (optional)
@@ -94,9 +86,11 @@ with pnap_audit_api.ApiClient(configuration) as api_client:
     try:
         # List event logs.
         api_response = api_instance.events_get(var_from=var_from, to=to, limit=limit, order=order, username=username, verb=verb, uri=uri)
+        print("The response of EventsApi->events_get:\n")
         pprint(api_response)
-    except pnap_audit_api.ApiException as e:
+    except ApiException as e:
         print("Exception when calling EventsApi->events_get: %s\n" % e)
+
 ```
 
 To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
@@ -133,10 +127,13 @@ Class | Method | HTTP request | Description
  - [UserInfo](docs/UserInfo.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
-## OAuth2
+Authentication schemes defined for the API:
+<a id="OAuth2"></a>
+### OAuth2
 
 - **Type**: OAuth
 - **Flow**: application
@@ -148,24 +145,4 @@ Class | Method | HTTP request | Description
 ## Author
 
 support@phoenixnap.com
-
-
-## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in pnap_audit_api.apis and pnap_audit_api.models may fail with a
-RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
-
-Solution 1:
-Use specific imports for apis and models like:
-- `from pnap_audit_api.api.default_api import DefaultApi`
-- `from pnap_audit_api.model.pet import Pet`
-
-Solution 2:
-Before importing the package, adjust the maximum recursion limit as shown below:
-```
-import sys
-sys.setrecursionlimit(1500)
-import pnap_audit_api
-from pnap_audit_api.apis import *
-from pnap_audit_api.models import *
-```
 
