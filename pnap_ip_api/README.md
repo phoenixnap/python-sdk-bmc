@@ -24,12 +24,11 @@ Python 3.7+
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+You can install this package directly from the [Python Package Index](https://pypi.org/) using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+$ pip install pnap_ip_api
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
 ```python
@@ -50,17 +49,12 @@ Then import the package:
 import pnap_ip_api
 ```
 
-### Tests
-
-Execute `pytest` to run the tests.
-
 ## Getting Started
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
 
-import time
 import pnap_ip_api
 from pnap_ip_api.rest import ApiException
 from pprint import pprint
@@ -139,4 +133,3 @@ Authentication schemes defined for the API:
 ## Author
 
 support@phoenixnap.com
-
