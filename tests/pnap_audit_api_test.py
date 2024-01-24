@@ -9,8 +9,8 @@ from test_utils import TestUtils
 import pnap_audit_api.pnap_audit_api
 
 class  TestAuditApi(unittest.TestCase):
-  configuration = pnap_audit_api.Configuration(host = "127.0.0.1:1080/audit/v1")
-  api_client = pnap_audit_api.ApiClient(configuration)
+  configuration = pnap_audit_api.pnap_audit_api.Configuration(host = "127.0.0.1:1080/audit/v1")
+  api_client = pnap_audit_api.pnap_audit_api.ApiClient(configuration)
 
 
   def verify_called_once(self, expectation_id):
