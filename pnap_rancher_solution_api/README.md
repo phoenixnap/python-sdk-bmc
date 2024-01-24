@@ -17,7 +17,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python >=3.6
+Python 3.7+
 
 ## Installation & Usage
 ### pip install
@@ -57,9 +57,14 @@ import time
 import pnap_rancher_solution_api
 from pprint import pprint
 from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.cluster import Cluster
-from pnap_rancher_solution_api.model.delete_result import DeleteResult
-from pnap_rancher_solution_api.model.error import Error
+from pydantic import Field
+from typing_extensions import Annotated
+from pydantic import StrictStr
+
+from typing import List
+
+from pnap_rancher_solution_api.models.cluster import Cluster
+from pnap_rancher_solution_api.models.delete_result import DeleteResult
 # Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
@@ -71,11 +76,7 @@ configuration = pnap_rancher_solution_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 
 # Enter a context with an instance of the API client
@@ -124,16 +125,12 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Cluster](docs/Cluster.md)
- - [ClusterConfiguration](docs/ClusterConfiguration.md)
- - [ClusterWorkloadConfiguration](docs/ClusterWorkloadConfiguration.md)
  - [DeleteResult](docs/DeleteResult.md)
  - [Error](docs/Error.md)
  - [Node](docs/Node.md)
  - [NodePool](docs/NodePool.md)
- - [NodePoolSshConfig](docs/NodePoolSshConfig.md)
  - [RancherClusterCertificates](docs/RancherClusterCertificates.md)
  - [RancherClusterConfig](docs/RancherClusterConfig.md)
- - [RancherClusterConfigCertificates](docs/RancherClusterConfigCertificates.md)
  - [RancherServerMetadata](docs/RancherServerMetadata.md)
  - [SshConfig](docs/SshConfig.md)
  - [WorkloadClusterConfig](docs/WorkloadClusterConfig.md)

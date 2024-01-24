@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **quotas_get**
-> [Quota] quotas_get()
+> List[Quota] quotas_get()
 
 List quotas
 
@@ -22,11 +22,12 @@ Get account quota details.
 
 ```python
 import time
+import os
 import pnap_bmc_api
-from pnap_bmc_api.api import quotas_api
-from pnap_bmc_api.model.quota import Quota
-from pnap_bmc_api.model.error import Error
+from pnap_bmc_api.models.quota import Quota
+from pnap_bmc_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_bmc_api.Configuration(
@@ -38,33 +39,31 @@ configuration = pnap_bmc_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_bmc_api.Configuration(
-    host = "https://api.phoenixnap.com/bmc/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = quotas_api.QuotasApi(api_client)
+    api_instance = pnap_bmc_api.QuotasApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         # List quotas
         api_response = api_instance.quotas_get()
+        print("The response of QuotasApi->quotas_get:\n")
         pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling QuotasApi->quotas_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**[Quota]**](Quota.md)
+[**List[Quota]**](Quota.md)
 
 ### Authorization
 
@@ -74,7 +73,6 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -101,11 +99,12 @@ Sends a request to edit the limit of a quota.
 
 ```python
 import time
+import os
 import pnap_bmc_api
-from pnap_bmc_api.api import quotas_api
-from pnap_bmc_api.model.quota_edit_limit_request import QuotaEditLimitRequest
-from pnap_bmc_api.model.error import Error
+from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
+from pnap_bmc_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_bmc_api.Configuration(
@@ -117,37 +116,31 @@ configuration = pnap_bmc_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_bmc_api.Configuration(
-    host = "https://api.phoenixnap.com/bmc/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = quotas_api.QuotasApi(api_client)
-    quota_id = "bmc.servers.max_count" # str | The ID of the Quota.
-    quota_edit_limit_request = QuotaEditLimitRequest(
-        limit=10,
-        reason="I need more servers for my cluster.",
-    ) # QuotaEditLimitRequest | 
+    api_instance = pnap_bmc_api.QuotasApi(api_client)
+    quota_id = 'bmc.servers.max_count' # str | The ID of the Quota.
+    quota_edit_limit_request = pnap_bmc_api.QuotaEditLimitRequest() # QuotaEditLimitRequest | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Request quota limit change.
         api_instance.quotas_quota_id_actions_request_edit_post(quota_id, quota_edit_limit_request)
-    except pnap_bmc_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling QuotasApi->quotas_quota_id_actions_request_edit_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quota_id** | **str**| The ID of the Quota. |
- **quota_edit_limit_request** | [**QuotaEditLimitRequest**](QuotaEditLimitRequest.md)|  |
+ **quota_id** | **str**| The ID of the Quota. | 
+ **quota_edit_limit_request** | [**QuotaEditLimitRequest**](QuotaEditLimitRequest.md)|  | 
 
 ### Return type
 
@@ -161,7 +154,6 @@ void (empty response body)
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -188,11 +180,12 @@ Get account quota details.
 
 ```python
 import time
+import os
 import pnap_bmc_api
-from pnap_bmc_api.api import quotas_api
-from pnap_bmc_api.model.quota import Quota
-from pnap_bmc_api.model.error import Error
+from pnap_bmc_api.models.quota import Quota
+from pnap_bmc_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_bmc_api.Configuration(
@@ -204,33 +197,31 @@ configuration = pnap_bmc_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_bmc_api.Configuration(
-    host = "https://api.phoenixnap.com/bmc/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = quotas_api.QuotasApi(api_client)
-    quota_id = "bmc.servers.max_count" # str | The ID of the Quota.
+    api_instance = pnap_bmc_api.QuotasApi(api_client)
+    quota_id = 'bmc.servers.max_count' # str | The ID of the Quota.
 
-    # example passing only required values which don't have defaults set
     try:
         # Get a quota.
         api_response = api_instance.quotas_quota_id_get(quota_id)
+        print("The response of QuotasApi->quotas_quota_id_get:\n")
         pprint(api_response)
-    except pnap_bmc_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling QuotasApi->quotas_quota_id_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quota_id** | **str**| The ID of the Quota. |
+ **quota_id** | **str**| The ID of the Quota. | 
 
 ### Return type
 
@@ -244,7 +235,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
