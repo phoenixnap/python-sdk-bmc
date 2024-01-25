@@ -96,6 +96,14 @@ class ApiClient:
     def __exit__(self, exc_type, exc_value, traceback):
         pass
 
+    def close(self):
+        if self._pool:
+            self._pool.close()
+            self._pool.join()
+            self._pool = None
+            if hasattr(atexit, 'unregister'):
+                atexit.unregister(self.close)
+
     @property
     def user_agent(self):
         """User agent for this API client"""
