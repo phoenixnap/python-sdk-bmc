@@ -1,4 +1,5 @@
 import unittest
+from pnap_network_api.model_utils import model_to_dict
 import xmlrunner
 from dateutil.parser import parse
 
@@ -6,12 +7,11 @@ from test_utils import TestUtils
 
 import pnap_network_storage_api
 from pnap_network_storage_api.api import storage_networks_api
-from pnap_network_storage_api.model_utils import model_to_dict
-from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
-from pnap_network_storage_api.model.volume_create import VolumeCreate
-from pnap_network_storage_api.model.storage_network_volume_create import StorageNetworkVolumeCreate
-from pnap_network_storage_api.model.volume_update import VolumeUpdate
-from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
+from pnap_network_storage_api.models.storage_network_create import StorageNetworkCreate
+from pnap_network_storage_api.models.volume_create import VolumeCreate
+from pnap_network_storage_api.models.storage_network_volume_create import StorageNetworkVolumeCreate
+from pnap_network_storage_api.models.volume_update import VolumeUpdate
+from pnap_network_storage_api.models.storage_network_update import StorageNetworkUpdate
 
 class TestIpApi(unittest.TestCase):
 	configuration = pnap_network_storage_api.Configuration(host = "127.0.0.1:1080/network-storage/v1")
