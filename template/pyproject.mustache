@@ -1,10 +1,11 @@
 [tool.poetry]
 
-from {{packageName}}.version import VERSION
+name = "{{{packageName}}}"
+version = "{{{packageVersion}}}"
 description = "{{{appName}}}"
 authors = ["{{infoName}}{{^infoName}}OpenAPI Generator Community{{/infoName}} <{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}>"]
 license = "{{{licenseInfo}}}{{^licenseInfo}}NoLicense{{/licenseInfo}}"
-readme = readme()
+readme = "README.md"
 repository = "https://github.com/phoenixnap/python-sdk-bmc"
 keywords = ["OpenAPI", "OpenAPI-Generator", "{{{appName}}}"]
 include = ["{{packageName}}/py.typed"]
@@ -12,11 +13,8 @@ include = ["{{packageName}}/py.typed"]
 [tool.poetry.dependencies]
 python = "^3.7"
 
-NAME = "{{{projectName}}}"
 
-def readme():
-	with open('README.md', encoding='utf-8') as f:
-		return f.read()
+
 
 urllib3 = ">= 1.25.3"
 python-dateutil = ">=2.8.2"
