@@ -25,10 +25,10 @@ from setuptools import setup, find_packages  # noqa: H301
 NAME = "pnap-tag-api"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
+  "urllib3 >= 1.25.3, < 2.1.0",
   "python-dateutil",
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
+  "pydantic >= 2",
+  "typing-extensions >= 4.7.1",
 ]
 
 def readme():
@@ -49,6 +49,7 @@ setup(
     license="Apache 2.0",
     long_description_content_type="text/markdown",
     long_description=readme(),
+    package_data={"pnap_tag_api": ["py.typed"]},
     project_urls={
       'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
     }

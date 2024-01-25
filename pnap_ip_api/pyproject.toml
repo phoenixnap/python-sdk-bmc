@@ -1,16 +1,22 @@
 [tool.poetry]
-name = "pnap_ip_api"
-version = "1.0.0"
+
+from pnap_ip_api.version import VERSION
 description = "IP Addresses API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
-readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+readme = readme()
+repository = "https://github.com/phoenixnap/python-sdk-bmc"
 keywords = ["OpenAPI", "OpenAPI-Generator", "IP Addresses API"]
 include = ["pnap_ip_api/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+
+NAME = "pnap-ip-api"
+
+def readme():
+	with open('README.md', encoding='utf-8') as f:
+		return f.read()
 
 urllib3 = ">= 1.25.3"
 python-dateutil = ">=2.8.2"
