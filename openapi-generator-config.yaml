@@ -1,3 +1,2 @@
 generatorName: python
 ignoreFileOverride: ".openapi-generator-ignore"
-templateDir: "template"
