@@ -1,5 +1,4 @@
 import unittest
-from pnap_network_api.model_utils import model_to_dict
 import xmlrunner
 from dateutil.parser import parse
 
