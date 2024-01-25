@@ -17,11 +17,11 @@ PYTHON_REQUIRES = ">=3.7"
 {{#apis}}
 {{#-last}}
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
+  "urllib3 >= 1.25.3, < 2.1.0",
   "python-dateutil",
 {{#asyncio}}
   "aiohttp >= 3.0.0",
-    "aiohttp-retry >= 2.8.3",
+  "aiohttp-retry >= 2.8.3",
 {{/asyncio}}
 {{#tornado}}
   "tornado>=4.2,<5",
@@ -30,8 +30,8 @@ REQUIRES = [
   "pem>=19.3.0",
   "pycryptodome>=3.9.0",
 {{/hasHttpSignatureMethods}}
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
+  "pydantic >= 2",
+  "typing-extensions >= 4.7.1",
 ]
 
 def readme():
@@ -53,6 +53,7 @@ setup(
     {{/licenseInfo}}
     long_description_content_type="text/markdown",
     long_description=readme(),
+    package_data={"{{{packageName}}}": ["py.typed"]},
     project_urls={
       'Repository': 'https://github.com/phoenixnap/python-sdk-bmc'
     }
