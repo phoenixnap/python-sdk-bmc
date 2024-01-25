@@ -4,7 +4,7 @@ inputs:
   python-version: 
     description: 'Version of Python to setup.'
     required: false
-    default: '3.6'
+    default: '3.7'
 runs:
   using: "composite"
   steps:
@@ -14,7 +14,7 @@ runs:
         python-version: ${{ inputs.python-version }}
 
     # Suggested by https://stackoverflow.com/a/70431656 - script will complete the setup for pip, since it's incomplete for some versions.
-    - name: Fix PIP (for non-3.6 python)
-      if: inputs.python-version != 3.6
-      shell: bash
-      run: curl -sS https://bootstrap.pypa.io/get-pip.py | python${{ inputs.python-version }}
+    # - name: Fix PIP (for non-3.6 python)
+    #   if: inputs.python-version != 3.6
+    #   shell: bash
+    #   run: curl -sS https://bootstrap.pypa.io/get-pip.py | python${{ inputs.python-version }}
