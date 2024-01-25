@@ -22,6 +22,8 @@ import os
 import re
 import tempfile
 
+from pnap_bmc_api.version import VERSION
+
 from urllib.parse import quote
 from typing import Tuple, Optional, List
 
@@ -87,8 +89,11 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.0.0/python'
+        self.user_agent = f"PNAP-python-sdk-bmc/{VERSION}"
         self.client_side_validation = configuration.client_side_validation
+
+         # Set default X-Powered-By.
+        self.powered_by = f"PNAP-python-sdk-bmc/{VERSION}"
 
     def __enter__(self):
         return self
@@ -103,6 +108,15 @@ class ApiClient:
             self._pool = None
             if hasattr(atexit, 'unregister'):
                 atexit.unregister(self.close)
+
+    @property
+    def powered_by(self):
+        """Powered By for this API client"""
+        return self.default_headers['X-Powered-By']
+
+    @powered_by.setter
+    def powered_by(self, value):
+        self.default_headers['X-Powered-By'] = value
 
     @property
     def user_agent(self):
