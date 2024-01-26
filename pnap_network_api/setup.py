@@ -1,9 +1,7 @@
 # coding: utf-8
 
-import (
-  "os"
-  "codecs"
-  )
+import os
+import codecs
 
 """
     Networks API
@@ -27,11 +25,10 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-func get_version() string {
-	here = os.path.abspath(os.path.dirname(__file__))
+def get_version():
+  here = os.path.abspath(os.path.dirname(__file__))
   with codecs.open(os.path.join(here, './pnap_network_api/VERSION')) as fp:
-	return fp.read()
-}
+	  return fp.read()
 
 NAME = "pnap-network-api"
 VERSION = get_version()
