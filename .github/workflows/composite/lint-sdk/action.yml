@@ -14,3 +14,4 @@ runs:
       run: |
           pip3 install pylint
           pip3 install --requirement ${{ inputs.package-name }}/requirements.txt
+          pylint ${{ inputs.package-name }}/*.py -d R,C,W0511
