@@ -25,7 +25,7 @@ runs:
       run: wget ${{ inputs.spec-link }} -O ./${{ inputs.package-name }}/${{ inputs.package-name }}.spec.yaml
     - name: Generate API
       shell: bash
-      run: openapi-generator-cli generate -i ${{ inputs.spec-link }} -c openapi-generator-config.yaml -o=${{ inputs.package-name }} --additional-properties packageName=${{ inputs.package-name }}
+      run: openapi-generator-cli generate -i ${{ inputs.spec-link }} -c openapi-generator-config.yaml -o=${{ inputs.package-name }} --additional-properties packageName=${{ inputs.package-name }} --additional-properties packageVersionTest=1.2.3
     - name: Upload Artifacts
       uses: actions/upload-artifact@v3
       with:
