@@ -1,1 +1,1 @@
-VERSION = '1.5.1-SNAPSHOT'
+SdkVersion = '1.5.1-SNAPSHOT'
