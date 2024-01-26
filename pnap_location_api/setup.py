@@ -13,7 +13,6 @@
 """  # noqa: E501
 
 
-from pnap_location_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -23,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "pnap-location-api"
-VERSION = VERSION
+VERSION = "1.2.3"
 
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
