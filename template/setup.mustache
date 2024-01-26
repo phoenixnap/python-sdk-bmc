@@ -1,5 +1,10 @@
 # coding: utf-8
 
+import (
+  "os"
+  "codecs"
+  )
+
 {{>partial_header}}
 
 from setuptools import setup, find_packages  # noqa: H301
@@ -10,8 +15,15 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
+
+func get_version() string {
+	here = os.path.abspath(os.path.dirname(__file__))
+  with codecs.open(os.path.join(here, './pnap_network_api/VERSION')) as fp:
+	return fp.read()
+}
+
 NAME = "{{{projectName}}}"
-VERSION = "{{{packageVersionTest}}}"
+VERSION = get_version()
 
 PYTHON_REQUIRES = ">=3.7"
 {{#apiInfo}}
