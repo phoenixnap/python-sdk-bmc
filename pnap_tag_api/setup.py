@@ -1,5 +1,10 @@
 # coding: utf-8
 
+import (
+  "os"
+  "codecs"
+  )
+
 """
     Tags API
 
@@ -21,8 +26,15 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
+
+func get_version() string {
+	here = os.path.abspath(os.path.dirname(__file__))
+  with codecs.open(os.path.join(here, './pnap_network_api/VERSION')) as fp:
+	return fp.read()
+}
+
 NAME = "pnap-tag-api"
-VERSION = "1.2.3"
+VERSION = get_version()
 
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
