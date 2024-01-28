@@ -8,8 +8,7 @@
         "body": {
             "type": "JSON",
             "json": {
-                "id": "60473a6115e34466c9f8f083",
-                "vlanId": 100
+                "id": "60473a6115e34466c9f8f083"
             },
             "matchType": "STRICT"
         }

@@ -17,10 +17,11 @@
             "type": "JSON",
             "json": {
                 "id": "60473a6115e34466c9f8f083",
-                "ips": [ "10.1.1.1" ],
-                "dhcp": false,
-                "statusDescription": "assigned"
-            },
+                "ips": [
+                  "10.1.1.1"
+                ],
+                "dhcp": false
+              },
             "matchType": "STRICT"
         }
     },

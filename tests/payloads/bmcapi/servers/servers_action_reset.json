@@ -9,24 +9,30 @@
             "type": "JSON",
             "json": {
                 "installDefaultSshKeys": true,
-                "sshKeys": [ "ssh-rsa KEY" ],
-                "sshKeyIds": [ "5fa942e71c16abcfbead275f" ],
+                "sshKeys": [
+                  "ssh-rsa KEY"
+                ],
+                "sshKeyIds": [
+                  "5fa942e71c16abcfbead275f"
+                ],
                 "osConfiguration": {
-                    "windows": {
-                        "rdpAllowedIps": [ "172.217.22.14" ]
-                    },
-                    "esxi": {
-                        "rootPassword": "MyP@ssw0rd_01",
-                        "managementUiUrl": "https://172.217.22.14",
-                        "managementAccessAllowedIps": [ "172.217.22.14" ]
-                    },
-                    "proxmox": {
-                        "rootPassword": "MyP@ssw0rd_01",
-                        "managementUiUrl": "https://172.217.22.14",
-                        "managementAccessAllowedIps": [ "172.217.22.14" ]
-                    }
+                  "windows": {
+                    "rdpAllowedIps": [
+                      "172.217.22.14"
+                    ]
+                  },
+                  "esxi": {
+                    "managementAccessAllowedIps": [
+                      "172.217.22.14"
+                    ]
+                  },
+                  "proxmox": {
+                    "managementAccessAllowedIps": [
+                      "172.217.22.14"
+                    ]
+                  }
                 }
-            },
+              },
             "matchType": "STRICT"
         }
     },
