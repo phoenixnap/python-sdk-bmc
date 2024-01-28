@@ -42,8 +42,8 @@ class PublicNetworkModify(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^(?!\s*$).+", value):
-            raise ValueError(r"must validate the regular expression /^(?!\s*$).+/")
+        if not re.match(r"^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$", value):
+            raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$/")
         return value
 
     model_config = {

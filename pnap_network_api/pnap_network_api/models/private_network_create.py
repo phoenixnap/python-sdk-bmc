@@ -43,8 +43,8 @@ class PrivateNetworkCreate(BaseModel):
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^(?!\s*$).+", value):
-            raise ValueError(r"must validate the regular expression /^(?!\s*$).+/")
+        if not re.match(r"^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$", value):
+            raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$/")
         return value
 
     model_config = {
