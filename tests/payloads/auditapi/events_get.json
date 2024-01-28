@@ -4,45 +4,26 @@
     "path": "/audit/v1/events",
     "queryStringParameters": [
       {
-        "name": "from",
-        "values": [
-          "2021-04-27T16:24:57.123000+00:00"
-        ]
-      },
-      {
-        "name": "to",
-        "values": [
-          "2021-04-29T16:24:57.123000+00:00"
-        ]
-      },
-      {
-        "name": "limit",
-        "values": [
-          "10"
-        ]
-      },
-      {
-        "name": "order",
-        "values": [
-          "ASC"
-        ]
-      },
-      {
-        "name": "username",
-        "values": [
-          "johnd@phoenixnap.com"
-        ]
-      },
-      {
-        "name": "verb",
-        "values": [
+        "verb": [
           "POST"
-        ]
-      },
-      {
-        "name": "uri",
-        "values": [
+        ],
+        "username": [
+          "johnd@phoenixnap.com"
+        ],
+        "uri": [
           "/ams/v1/clients/12345"
+        ],
+        "to": [
+          "2021-04-29T16:24:57.123000+0000"
+        ],
+        "order": [
+          "ASC"
+        ],
+        "limit": [
+          "10"
+        ],
+        "from": [
+          "2021-04-27T16:24:57.123000+0000"
         ]
       }
     ]
