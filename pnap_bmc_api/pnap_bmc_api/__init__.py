@@ -15,8 +15,6 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0"
-
 # import apis into sdk package
 from pnap_bmc_api.api.quotas_api import QuotasApi
 from pnap_bmc_api.api.ssh_keys_api import SSHKeysApi

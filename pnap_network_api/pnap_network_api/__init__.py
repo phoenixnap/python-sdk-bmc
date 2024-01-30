@@ -15,8 +15,6 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0"
-
 # import apis into sdk package
 from pnap_network_api.api.private_networks_api import PrivateNetworksApi
 from pnap_network_api.api.public_networks_api import PublicNetworksApi
