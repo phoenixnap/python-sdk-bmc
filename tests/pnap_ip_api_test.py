@@ -36,7 +36,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -55,7 +55,7 @@ class TestIpApi(unittest.TestCase):
 
       response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-      # self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -71,7 +71,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -89,7 +89,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -103,7 +103,7 @@ class TestIpApi(unittest.TestCase):
 
     result = api_instance.ip_blocks_ip_block_id_delete(ip_block_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation)
 
@@ -121,7 +121,7 @@ class TestIpApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation)
 
