@@ -42,7 +42,7 @@ class TestIpApi(unittest.TestCase):
 		response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 		response['body'][0]['volumes'][0]['createdOn'] = parse(response['body'][0]['volumes'][0]['createdOn'])
 
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
+		self.assertEqual(response['body'][0], result[0].to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -60,7 +60,7 @@ class TestIpApi(unittest.TestCase):
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
 
-		#self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -80,7 +80,7 @@ class TestIpApi(unittest.TestCase):
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
 
-		# self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -97,7 +97,7 @@ class TestIpApi(unittest.TestCase):
 
 		response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
+		self.assertEqual(response['body'][0], result[0].to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -115,7 +115,7 @@ class TestIpApi(unittest.TestCase):
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-		# self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -129,8 +129,6 @@ class TestIpApi(unittest.TestCase):
 		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
 
 		result = api_instance.storage_networks_id_delete(storage_network_id)
-
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
 		self.verify_called_once(expectation_id)
 
@@ -149,7 +147,7 @@ class TestIpApi(unittest.TestCase):
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
 
-		# self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -167,7 +165,7 @@ class TestIpApi(unittest.TestCase):
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-		# self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -187,7 +185,7 @@ class TestIpApi(unittest.TestCase):
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-		# self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -202,8 +200,6 @@ class TestIpApi(unittest.TestCase):
 		volume_id = TestUtils.extract_id_from(request, "volumeId")
 
 		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_delete(storage_network_id, volume_id)
-
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
 		self.verify_called_once(expectation_id)	
 
