@@ -1,3 +1,14 @@
+[tool.poetry]
+name = "pnap_tag_api"
+version = "1.0.0"
+description = "Tags API"
+authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+keywords = ["OpenAPI", "OpenAPI-Generator", "Tags API"]
+include = ["pnap_tag_api/py.typed"]
+
 [tool.poetry.dependencies]
 python = "^3.7"
 
