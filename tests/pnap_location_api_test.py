@@ -36,7 +36,7 @@ class TestLocationApi(unittest.TestCase):
 
         result = api_instance.get_locations(**opts)
 
-        # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+        self.assertEqual(response['body'][0], result[0].to_dict())
 
         self.verify_called_once(expectation_id)
 
