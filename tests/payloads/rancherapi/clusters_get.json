@@ -7,14 +7,12 @@
     "statusCode": 200,
     "body": [
       {
-        "id": "60a773b89fd9035858ce8903",
         "name": "Rancher Deployment",
         "description": "A Rancher Server deployment in Phoenix.",
         "location": "PHX",
-        "initialClusterVersion": "v2.5.9",
         "nodePools": [
           {
-            "name": "Rancher",
+            "name": "Rancher-Server-Node-Pool",
             "nodeCount": 1,
             "serverType": "s0.d1.small",
             "sshConfig": {
@@ -46,18 +44,12 @@
             "certificateKey": "certificateKey"
           }
         },
-        "metadata": {
-          "url": "rancher.com",
-          "username": "username",
-          "password": "password"
-        },
         "workloadConfiguration": {
           "name": "Workload Cluster",
           "serverCount": 1,
           "serverType": "s0.d1.small",
           "location": "PHX"
-        },
-        "statusDescription": "STATUS"
+        }
       }
     ]
   }
