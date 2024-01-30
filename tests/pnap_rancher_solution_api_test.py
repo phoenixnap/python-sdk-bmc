@@ -31,7 +31,10 @@ class  TestAuditApi(unittest.TestCase):
     
     result = api_instance.clusters_get()
 
-    self.assertEqual(response['body'][0], result[0].to_dict())
+    result_dict = Cluster.from_dict(result[0])
+    response_dict = Cluster.from_dict(response['body'][0])
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -45,12 +48,8 @@ class  TestAuditApi(unittest.TestCase):
     cluster = TestUtils.extract_request_body(request)
     
     result = api_instance.clusters_post(cluster=cluster)
-    result_dict = Cluster.from_dict(result)
-    print(result)
-    print("!!!!!!!")
-    print(result_dict)
 
-    
+    result_dict = Cluster.from_dict(result)
     response_dict = Cluster.from_dict(response['body'])
 
     self.assertEqual(response_dict, result_dict)
@@ -68,7 +67,10 @@ class  TestAuditApi(unittest.TestCase):
     
     result = api_instance.clusters_id_get(id)
 
-    self.assertEqual(response['body'], result.to_dict())
+    result_dict = Cluster.from_dict(result)
+    response_dict = Cluster.from_dict(response['body'])
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
