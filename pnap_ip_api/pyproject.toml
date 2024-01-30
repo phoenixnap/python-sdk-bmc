@@ -1,14 +1,3 @@
-[tool.poetry]
-name = "pnap_ip_api"
-version = "1.0.0"
-description = "IP Addresses API"
-authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
-license = "Apache 2.0"
-readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "IP Addresses API"]
-include = ["pnap_ip_api/py.typed"]
-
 [tool.poetry.dependencies]
 python = "^3.7"
 
