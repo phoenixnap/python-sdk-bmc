@@ -38,7 +38,7 @@ class  TestAuditApi(unittest.TestCase):
     # Parsing time for comparison
     response['body'][0]['timestamp'] = parse(response['body'][0]['timestamp'])
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
