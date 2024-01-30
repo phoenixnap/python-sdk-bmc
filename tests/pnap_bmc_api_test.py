@@ -1,3 +1,4 @@
+import json
 import unittest
 import xmlrunner
 from dateutil.parser import parse
@@ -21,6 +22,9 @@ from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
+from pnap_bmc_api.models.server import Server
+from pnap_bmc_api.models.ssh_key import SshKey
+from pnap_bmc_api.models.reset_result import ResetResult
 
 class  TestBmcApi(unittest.TestCase):
   configuration = pnap_bmc_api.Configuration(host = "127.0.0.1:1080/bmc/v1")
@@ -47,7 +51,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body'][0]['quotaEditLimitRequestDetails'][0]['requestedOn'] = parse(response['body'][0]['quotaEditLimitRequestDetails'][0]['requestedOn'])
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -64,7 +68,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['quotaEditLimitRequestDetails'][0]['requestedOn'] = parse(response['body']['quotaEditLimitRequestDetails'][0]['requestedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -94,7 +98,7 @@ class  TestBmcApi(unittest.TestCase):
     response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
     response['body'][0]['lastUpdatedOn'] = parse(response['body'][0]['lastUpdatedOn'])
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -113,7 +117,7 @@ class  TestBmcApi(unittest.TestCase):
     response['body']['createdOn'] = parse(response['body']['createdOn'])
     response['body']['lastUpdatedOn'] = parse(response['body']['lastUpdatedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -125,13 +129,19 @@ class  TestBmcApi(unittest.TestCase):
     api_instance = ssh_keys_api.SSHKeysApi(self.api_client)
 
     ssh_key_create = SshKeyCreate(**TestUtils.extract_request_body(request))
-    result = api_instance.ssh_keys_post(ssh_key_create=ssh_key_create)
+    result = api_instance.ssh_keys_post_with_http_info(ssh_key_create=ssh_key_create)
+
+    # Load the JSON string into a dictionary
+    json_data = json.loads(result.raw_data.decode('utf-8'))
 
     # Parsing time for comparison
     response['body']['createdOn'] = parse(response['body']['createdOn'])
     response['body']['lastUpdatedOn'] = parse(response['body']['lastUpdatedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    response_dict = SshKey.from_dict(response['body'])
+    result_dict = SshKey.from_dict(json_data)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -151,7 +161,7 @@ class  TestBmcApi(unittest.TestCase):
     response['body']['createdOn'] = parse(response['body']['createdOn'])
     response['body']['lastUpdatedOn'] = parse(response['body']['lastUpdatedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -166,7 +176,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.ssh_keys_ssh_key_id_delete(ssh_key_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -183,7 +193,8 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body'][0]['provisionedOn'] = parse(response['body'][0]['provisionedOn'])
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -200,7 +211,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -220,7 +231,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -234,7 +245,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_delete(server_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -252,7 +263,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -281,7 +292,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_actions_power_off_post(server_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -295,7 +306,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_actions_power_on_post(server_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -309,7 +320,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_actions_reboot_post(server_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -327,7 +338,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -342,7 +356,10 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_actions_reset_post(server_id, server_reset=server_reset)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    response_dict = ResetResult.from_dict(response['body'])
+    result_dict = ResetResult.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -356,7 +373,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_actions_shutdown_post(server_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -371,7 +388,10 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_ip_blocks_post(server_id, server_ip_block=server_ip_block)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    response_dict = ServerIpBlock.from_dict(response['body'])
+    result_dict = ServerIpBlock.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -403,7 +423,10 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_private_networks_post(server_id, server_private_network=server_private_network, force=bool(opts))
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    result_dict = ServerPrivateNetwork.from_dict(response['body'])
+    response_dict = ServerPrivateNetwork.from_dict(result)
+    
+    self.assertEqual(result_dict, response_dict)
 
     self.verify_called_once(expectation_id)
   
@@ -419,7 +442,10 @@ class  TestBmcApi(unittest.TestCase):
 
     result = api_instance.servers_server_id_public_networks_post(server_id, server_public_network=server_public_network, force=bool(opts))
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    response_dict = ServerPublicNetwork.from_dict(response['body'])
+    result_dict = ServerPublicNetwork.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -467,7 +493,7 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
