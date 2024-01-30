@@ -236,7 +236,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    self.assertEqual(response['body'], result.to_dict())
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -268,7 +271,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    self.assertEqual(response['body'], result.to_dict())
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
