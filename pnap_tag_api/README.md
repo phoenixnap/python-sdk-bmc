@@ -85,6 +85,24 @@ with pnap_tag_api.ApiClient(configuration) as api_client:
 
 ```
 
+To generate a token using the [python-keycloak](https://pypi.org/project/python-keycloak/) library:
+```python
+from keycloak import KeycloakOpenID
+
+clientId = "YOUR_CLIENT_ID"
+clientSecret = "YOUR_CLIENT_SECRET"
+serverUrl = "https://auth.phoenixnap.com/auth/"
+realmName = "BMC"
+grantType = "client_credentials"
+
+keycloakOpenId =  KeycloakOpenID(server_url=serverUrl,
+                        realm_name=realmName,
+                        client_id=clientId,
+                        client_secret_key=clientSecret)
+
+ACCESS_TOKEN = keycloakOpenId.token(grant_type=grantType)['access_token']
+
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://api.phoenixnap.com/tag-manager/v1*
@@ -127,4 +145,3 @@ Authentication schemes defined for the API:
 ## Author
 
 support@phoenixnap.com
-
