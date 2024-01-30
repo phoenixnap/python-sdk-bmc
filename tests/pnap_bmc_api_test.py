@@ -193,8 +193,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body'][0]['provisionedOn'] = parse(response['body'][0]['provisionedOn'])
 
+    response_dict = Server.from_dict(response['body'][0])
+    result_dict = Server.from_dict(result[0])
 
-    self.assertEqual(response['body'][0], result[0].to_dict())
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -211,7 +213,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    self.assertEqual(response['body'], result.to_dict())
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -425,7 +430,7 @@ class  TestBmcApi(unittest.TestCase):
 
     result_dict = ServerPrivateNetwork.from_dict(response['body'])
     response_dict = ServerPrivateNetwork.from_dict(result)
-    
+
     self.assertEqual(result_dict, response_dict)
 
     self.verify_called_once(expectation_id)
@@ -493,7 +498,10 @@ class  TestBmcApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['provisionedOn'] = parse(response['body']['provisionedOn'])
 
-    self.assertEqual(response['body'], result.to_dict())
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
