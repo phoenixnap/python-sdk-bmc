@@ -47,6 +47,11 @@ jobs:
     with:
       package-name: pnap_location_api
       test-file: pnap_location_api_test.py
+  build-and-test-locationapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_invoicing_api
+      test-file: pnap_invoicing_api_test.py
 
   publish-test-results:
     name: Publish Test Results
@@ -59,6 +64,7 @@ jobs:
       - build-and-test-tagapi
       - build-and-test-networkstorageapi
       - build-and-test-locationapi
+      - build-and-test-invoicingapi
     runs-on: ubuntu-20.04
     if: always()
     steps:
