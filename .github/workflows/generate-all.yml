@@ -90,6 +90,7 @@ jobs:
       - generate-tagapi
       - generate-networkstorageapi
       - generate-locationapi
+      - generate-invoicingapi
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
