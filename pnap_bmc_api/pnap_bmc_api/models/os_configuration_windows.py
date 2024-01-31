@@ -84,7 +84,6 @@ class OsConfigurationWindows(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "rdpAllowedIps": obj.get("rdpAllowedIps")
         })
         return _obj
 

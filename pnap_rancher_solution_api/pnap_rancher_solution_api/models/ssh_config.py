@@ -86,8 +86,6 @@ class SshConfig(BaseModel):
 
         _obj = cls.model_validate({
             "installDefaultKeys": obj.get("installDefaultKeys") if obj.get("installDefaultKeys") is not None else True,
-            "keys": obj.get("keys"),
-            "keyIds": obj.get("keyIds")
         })
         return _obj
 

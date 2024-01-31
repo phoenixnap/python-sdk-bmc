@@ -116,7 +116,13 @@ class NodePool(BaseModel):
             "nodeCount": obj.get("nodeCount"),
             "serverType": obj.get("serverType") if obj.get("serverType") is not None else 's0.d1.small',
             "sshConfig": SshConfig.from_dict(obj.get("sshConfig")) if obj.get("sshConfig") is not None else None,
-            "nodes": [Node.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None
+            # override the default output from pydantic by calling `to_dict()` of each item in nodes (list)
+            _items = []
+            if self.nodes:
+                for _item in self.nodes:
+                    if _item:
+                        _items.append(_item.to_dict())
+                _dict['nodes'] = _items
         })
         return _obj
 

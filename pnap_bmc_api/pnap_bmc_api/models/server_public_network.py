@@ -88,7 +88,6 @@ class ServerPublicNetwork(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "ips": obj.get("ips"),
             "statusDescription": obj.get("statusDescription")
         })
         return _obj

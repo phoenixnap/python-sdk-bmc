@@ -90,7 +90,6 @@ class ServerPrivateNetwork(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "ips": obj.get("ips"),
             "dhcp": obj.get("dhcp") if obj.get("dhcp") is not None else False,
             "statusDescription": obj.get("statusDescription")
         })

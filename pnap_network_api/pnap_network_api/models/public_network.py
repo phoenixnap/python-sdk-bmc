@@ -110,13 +110,25 @@ class PublicNetwork(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "vlanId": obj.get("vlanId"),
-            "memberships": [NetworkMembership.from_dict(_item) for _item in obj.get("memberships")] if obj.get("memberships") is not None else None,
+            # override the default output from pydantic by calling `to_dict()` of each item in memberships (list)
+            _items = []
+            if self.memberships:
+                for _item in self.memberships:
+                    if _item:
+                        _items.append(_item.to_dict())
+                _dict['memberships'] = _items
             "name": obj.get("name"),
             "location": obj.get("location"),
             "description": obj.get("description"),
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn"),
-            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
+            # override the default output from pydantic by calling `to_dict()` of each item in ip_blocks (list)
+            _items = []
+            if self.ip_blocks:
+                for _item in self.ip_blocks:
+                    if _item:
+                        _items.append(_item.to_dict())
+                _dict['ipBlocks'] = _items
         })
         return _obj
 

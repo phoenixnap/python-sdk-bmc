@@ -116,7 +116,6 @@ class OsConfiguration(BaseModel):
             "windows": OsConfigurationWindows.from_dict(obj.get("windows")) if obj.get("windows") is not None else None,
             "rootPassword": obj.get("rootPassword"),
             "managementUiUrl": obj.get("managementUiUrl"),
-            "managementAccessAllowedIps": obj.get("managementAccessAllowedIps"),
             "installOsToRam": obj.get("installOsToRam") if obj.get("installOsToRam") is not None else False,
             "cloudInit": OsConfigurationCloudInit.from_dict(obj.get("cloudInit")) if obj.get("cloudInit") is not None else None
         })

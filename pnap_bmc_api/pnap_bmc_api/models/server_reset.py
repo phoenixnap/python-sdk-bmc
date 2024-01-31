@@ -91,8 +91,6 @@ class ServerReset(BaseModel):
 
         _obj = cls.model_validate({
             "installDefaultSshKeys": obj.get("installDefaultSshKeys") if obj.get("installDefaultSshKeys") is not None else True,
-            "sshKeys": obj.get("sshKeys"),
-            "sshKeyIds": obj.get("sshKeyIds"),
             "osConfiguration": OsConfigurationMap.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None
         })
         return _obj

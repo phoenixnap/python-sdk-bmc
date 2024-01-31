@@ -96,7 +96,13 @@ class Location(BaseModel):
         _obj = cls.model_validate({
             "location": obj.get("location"),
             "locationDescription": obj.get("locationDescription"),
-            "productCategories": [ProductCategory.from_dict(_item) for _item in obj.get("productCategories")] if obj.get("productCategories") is not None else None
+            # override the default output from pydantic by calling `to_dict()` of each item in product_categories (list)
+            _items = []
+            if self.product_categories:
+                for _item in self.product_categories:
+                    if _item:
+                        _items.append(_item.to_dict())
+                _dict['productCategories'] = _items
         })
         return _obj
 

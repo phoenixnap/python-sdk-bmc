@@ -85,7 +85,6 @@ class PrivateNetworkServer(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "ips": obj.get("ips")
         })
         return _obj
 

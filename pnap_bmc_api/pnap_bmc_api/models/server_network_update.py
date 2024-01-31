@@ -83,7 +83,6 @@ class ServerNetworkUpdate(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "ips": obj.get("ips")
         })
         return _obj
 

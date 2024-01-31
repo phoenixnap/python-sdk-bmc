@@ -125,11 +125,15 @@ class ServerProvision(BaseModel):
             "description": obj.get("description"),
             "os": obj.get("os"),
             "installDefaultSshKeys": obj.get("installDefaultSshKeys") if obj.get("installDefaultSshKeys") is not None else True,
-            "sshKeys": obj.get("sshKeys"),
-            "sshKeyIds": obj.get("sshKeyIds"),
             "networkType": obj.get("networkType") if obj.get("networkType") is not None else 'PUBLIC_AND_PRIVATE',
             "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
-            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None,
+            # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
+            _items = []
+            if self.tags:
+                for _item in self.tags:
+                    if _item:
+                        _items.append(_item.to_dict())
+                _dict['tags'] = _items
             "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,
             "storageConfiguration": StorageConfiguration.from_dict(obj.get("storageConfiguration")) if obj.get("storageConfiguration") is not None else None
         })
