@@ -47,7 +47,7 @@ jobs:
     with:
       package-name: pnap_location_api
       test-file: pnap_location_api_test.py
-  build-and-test-locationapi:
+  build-and-test-invoicingapi:
     uses: ./.github/workflows/_common.yml
     with:
       package-name: pnap_invoicing_api
