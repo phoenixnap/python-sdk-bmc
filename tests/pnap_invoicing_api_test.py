@@ -4,6 +4,8 @@ from test_utils import TestUtils
 from dateutil.parser import parse
 
 import pnap_invoicing_api
+from pnap_invoicing_api.models.paginated_invoices import PaginatedInvoices
+from pnap_invoicing_api.models.invoice import Invoice
 
 class TestInvoicingApi(unittest.TestCase):
     configuration = pnap_invoicing_api.Configuration(host = "127.0.0.1:1080/invoicing/v1")
@@ -33,17 +35,62 @@ class TestInvoicingApi(unittest.TestCase):
 
         opts['limit'] = int(opts['limit'])
         opts['offset'] = int(opts['offset'])
-
-        print(response)
+        opts['sent_on_from'] = opts.pop('sentOnFrom')
+        opts['sent_on_to'] = opts.pop('sentOnTo')
+        opts['sort_direction'] = opts.pop('sortDirection')
+        opts['sort_field'] = opts.pop('sortField')
 
         result = api_instance.invoices_get(**opts)
 
-        # response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
-        # response['body'][0]['volumes'][0]['createdOn'] = parse(response['body'][0]['volumes'][0]['createdOn'])
+        result_dict = PaginatedInvoices.from_dict(result)
+        response_dict = PaginatedInvoices.from_dict(response['body'])
 
-        # self.assertEqual(response['body'][0], result[0].to_dict())
+        self.assertEqual(response_dict, result_dict)
 
-        # self.verify_called_once(expectation_id)
+        self.verify_called_once(expectation_id)
+
+    def test_get_invoice_by_id(self):
+		# Setting up expectation
+        request, response = TestUtils.generate_payloads_from('invoicing/invoices_get_by_id')
+        expectation_id = TestUtils.setup_expectation(request, response, 1)
+        api_instance = pnap_invoicing_api.InvoicesApi(self.api_client)
+
+        invoice_id = TestUtils.extract_id_from(request, "id")
+
+        result = api_instance.invoices_invoice_id_get(invoice_id)
+
+        result_dict = Invoice.from_dict(result)
+        response_dict = Invoice.from_dict(response['body'])
+
+        self.assertEqual(response_dict, result_dict)
+
+        self.verify_called_once(expectation_id)
+
+    def test_invoices_invoice_id_pay_post(self):
+		# Setting up expectation
+        request, response = TestUtils.generate_payloads_from('invoicing/invoices_pay_post')
+        expectation_id = TestUtils.setup_expectation(request, response, 1)
+        api_instance = pnap_invoicing_api.InvoicesApi(self.api_client)
+
+        invoice_id = TestUtils.extract_id_from(request, "id")
+
+        result = api_instance.invoices_invoice_id_pay_post(invoice_id)
+
+        self.assertEqual(result, response['body'])
+
+        self.verify_called_once(expectation_id)
+
+    def test_invoices_igenerate_pdf_post(self):
+		# Setting up expectation
+        request, response = TestUtils.generate_payloads_from('invoicing/invoices_generate_pdf_post')
+        expectation_id = TestUtils.setup_expectation(request, response, 1)
+        api_instance = pnap_invoicing_api.InvoicesApi(self.api_client)
+
+        invoice_id = TestUtils.extract_id_from(request, "id")
+
+        result = api_instance.invoices_invoice_id_generate_pdf_post(invoice_id)
+
+        self.verify_called_once(expectation_id)
 
 if __name__ == '__main__':
 	TestUtils.reset_mockserver()

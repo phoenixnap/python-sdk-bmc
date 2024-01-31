@@ -15,7 +15,18 @@
                     "PAID"
                 ]
             },
-
+            {
+                "name": "sentOnFrom",
+                "values": [
+                    "2022-04-13T00:00:00.000000+0000"
+                ]
+            },
+            {
+                "name": "sentOnTo",
+                "values": [
+                    "2022-04-13T00:00:00.000000+0000"
+                ]
+            },
             {
                 "name": "limit",
                 "values": [
@@ -26,6 +37,18 @@
                 "name": "offset",
                 "values": [
                     "0"
+                ]
+            },
+            {
+                "name": "sortField",
+                "values": [
+                    "sentOn"
+                ]
+            },
+            {
+                "name": "sortDirection",
+                "values": [
+                    "DESC"
                 ]
             }
         ]
@@ -45,7 +68,7 @@
                     "dueDate": "2022-04-13T00:00:00Z"
                 }
             ],
-            "limit": 101,
+            "limit": 100,
             "offset": 0,
             "total": 999
         }
