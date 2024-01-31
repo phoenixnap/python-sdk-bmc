@@ -87,6 +87,7 @@ class PaginatedInvoices(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "results": [Invoice.from_dict(_item) for _item in obj.get("results")] if obj.get("results") is not None else None,
             "limit": obj.get("limit"),
             "offset": obj.get("offset"),
             "total": obj.get("total")
