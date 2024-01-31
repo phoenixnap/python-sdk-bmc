@@ -109,15 +109,10 @@ class Tag(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "values": obj.get("values"),
             "description": obj.get("description"),
             "isBillingTag": obj.get("isBillingTag"),
-            # override the default output from pydantic by calling `to_dict()` of each item in resource_assignments (list)
-            _items = []
-            if self.resource_assignments:
-                for _item in self.resource_assignments:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['resourceAssignments'] = _items
+            "resourceAssignments": [ResourceAssignment.from_dict(_item) for _item in obj.get("resourceAssignments")] if obj.get("resourceAssignments") is not None else None,
             "createdBy": obj.get("createdBy") if obj.get("createdBy") is not None else 'USER'
         })
         return _obj

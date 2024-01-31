@@ -88,6 +88,11 @@ class NfsPermissionsUpdate(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "readWrite": obj.get("readWrite"),
+            "readOnly": obj.get("readOnly"),
+            "rootSquash": obj.get("rootSquash"),
+            "noSquash": obj.get("noSquash"),
+            "allSquash": obj.get("allSquash")
         })
         return _obj
 

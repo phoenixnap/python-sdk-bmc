@@ -115,13 +115,7 @@ class Quota(BaseModel):
             "limit": obj.get("limit"),
             "unit": obj.get("unit"),
             "used": obj.get("used"),
-            # override the default output from pydantic by calling `to_dict()` of each item in quota_edit_limit_request_details (list)
-            _items = []
-            if self.quota_edit_limit_request_details:
-                for _item in self.quota_edit_limit_request_details:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['quotaEditLimitRequestDetails'] = _items
+            "quotaEditLimitRequestDetails": [QuotaEditLimitRequestDetails.from_dict(_item) for _item in obj.get("quotaEditLimitRequestDetails")] if obj.get("quotaEditLimitRequestDetails") is not None else None
         })
         return _obj
 

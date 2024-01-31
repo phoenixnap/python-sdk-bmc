@@ -107,13 +107,7 @@ class PublicNetworkCreate(BaseModel):
             "description": obj.get("description"),
             "location": obj.get("location"),
             "vlanId": obj.get("vlanId"),
-            # override the default output from pydantic by calling `to_dict()` of each item in ip_blocks (list)
-            _items = []
-            if self.ip_blocks:
-                for _item in self.ip_blocks:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['ipBlocks'] = _items
+            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
         })
         return _obj
 

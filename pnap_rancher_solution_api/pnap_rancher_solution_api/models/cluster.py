@@ -126,13 +126,7 @@ class Cluster(BaseModel):
             "description": obj.get("description"),
             "location": obj.get("location"),
             "initialClusterVersion": obj.get("initialClusterVersion"),
-            # override the default output from pydantic by calling `to_dict()` of each item in node_pools (list)
-            _items = []
-            if self.node_pools:
-                for _item in self.node_pools:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['nodePools'] = _items
+            "nodePools": [NodePool.from_dict(_item) for _item in obj.get("nodePools")] if obj.get("nodePools") is not None else None,
             "configuration": RancherClusterConfig.from_dict(obj.get("configuration")) if obj.get("configuration") is not None else None,
             "metadata": RancherServerMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
             "workloadConfiguration": WorkloadClusterConfig.from_dict(obj.get("workloadConfiguration")) if obj.get("workloadConfiguration") is not None else None,

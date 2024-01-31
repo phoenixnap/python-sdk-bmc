@@ -85,6 +85,7 @@ class Error(BaseModel):
 
         _obj = cls.model_validate({
             "message": obj.get("message"),
+            "validationErrors": obj.get("validationErrors")
         })
         return _obj
 

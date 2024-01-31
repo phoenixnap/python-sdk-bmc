@@ -107,15 +107,10 @@ class StorageNetwork(BaseModel):
             "status": obj.get("status"),
             "location": obj.get("location"),
             "networkId": obj.get("networkId"),
+            "ips": obj.get("ips"),
             "createdOn": obj.get("createdOn"),
             "deleteRequestedOn": obj.get("deleteRequestedOn"),
-            # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
-            _items = []
-            if self.volumes:
-                for _item in self.volumes:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['volumes'] = _items
+            "volumes": [Volume.from_dict(_item) for _item in obj.get("volumes")] if obj.get("volumes") is not None else None
         })
         return _obj
 

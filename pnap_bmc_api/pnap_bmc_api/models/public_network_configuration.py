@@ -91,13 +91,7 @@ class PublicNetworkConfiguration(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            # override the default output from pydantic by calling `to_dict()` of each item in public_networks (list)
-            _items = []
-            if self.public_networks:
-                for _item in self.public_networks:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['publicNetworks'] = _items
+            "publicNetworks": [ServerPublicNetwork.from_dict(_item) for _item in obj.get("publicNetworks")] if obj.get("publicNetworks") is not None else None
         })
         return _obj
 

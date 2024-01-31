@@ -87,6 +87,7 @@ class NetworkMembership(BaseModel):
         _obj = cls.model_validate({
             "resourceId": obj.get("resourceId"),
             "resourceType": obj.get("resourceType"),
+            "ips": obj.get("ips")
         })
         return _obj
 

@@ -92,6 +92,7 @@ class OsConfigurationMapEsxi(BaseModel):
         _obj = cls.model_validate({
             "rootPassword": obj.get("rootPassword"),
             "managementUiUrl": obj.get("managementUiUrl"),
+            "managementAccessAllowedIps": obj.get("managementAccessAllowedIps")
         })
         return _obj
 

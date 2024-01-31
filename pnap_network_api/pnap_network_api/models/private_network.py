@@ -119,20 +119,8 @@ class PrivateNetwork(BaseModel):
             "location": obj.get("location"),
             "locationDefault": obj.get("locationDefault"),
             "cidr": obj.get("cidr"),
-            # override the default output from pydantic by calling `to_dict()` of each item in servers (list)
-            _items = []
-            if self.servers:
-                for _item in self.servers:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['servers'] = _items
-            # override the default output from pydantic by calling `to_dict()` of each item in memberships (list)
-            _items = []
-            if self.memberships:
-                for _item in self.memberships:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['memberships'] = _items
+            "servers": [PrivateNetworkServer.from_dict(_item) for _item in obj.get("servers")] if obj.get("servers") is not None else None,
+            "memberships": [NetworkMembership.from_dict(_item) for _item in obj.get("memberships")] if obj.get("memberships") is not None else None,
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn")
         })

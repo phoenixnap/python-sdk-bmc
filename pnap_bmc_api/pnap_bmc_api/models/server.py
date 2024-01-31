@@ -150,18 +150,14 @@ class Server(BaseModel):
             "cpuFrequency": obj.get("cpuFrequency"),
             "ram": obj.get("ram"),
             "storage": obj.get("storage"),
+            "privateIpAddresses": obj.get("privateIpAddresses"),
+            "publicIpAddresses": obj.get("publicIpAddresses"),
             "reservationId": obj.get("reservationId"),
             "pricingModel": obj.get("pricingModel") if obj.get("pricingModel") is not None else 'HOURLY',
             "password": obj.get("password"),
             "networkType": obj.get("networkType") if obj.get("networkType") is not None else 'PUBLIC_AND_PRIVATE',
             "clusterId": obj.get("clusterId"),
-            # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
-            _items = []
-            if self.tags:
-                for _item in self.tags:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['tags'] = _items
+            "tags": [TagAssignment.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None,
             "provisionedOn": obj.get("provisionedOn"),
             "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
             "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,

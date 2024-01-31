@@ -117,13 +117,7 @@ class StorageNetworkVolumeCreate(BaseModel):
             "description": obj.get("description"),
             "pathSuffix": obj.get("pathSuffix"),
             "capacityInGb": obj.get("capacityInGb"),
-            # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
-            _items = []
-            if self.tags:
-                for _item in self.tags:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['tags'] = _items
+            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
         })
         return _obj
 

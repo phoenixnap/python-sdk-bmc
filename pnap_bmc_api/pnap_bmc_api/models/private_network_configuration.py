@@ -95,13 +95,7 @@ class PrivateNetworkConfiguration(BaseModel):
         _obj = cls.model_validate({
             "gatewayAddress": obj.get("gatewayAddress"),
             "configurationType": obj.get("configurationType") if obj.get("configurationType") is not None else 'USE_OR_CREATE_DEFAULT',
-            # override the default output from pydantic by calling `to_dict()` of each item in private_networks (list)
-            _items = []
-            if self.private_networks:
-                for _item in self.private_networks:
-                    if _item:
-                        _items.append(_item.to_dict())
-                _dict['privateNetworks'] = _items
+            "privateNetworks": [ServerPrivateNetwork.from_dict(_item) for _item in obj.get("privateNetworks")] if obj.get("privateNetworks") is not None else None
         })
         return _obj
 
