@@ -70,7 +70,13 @@ jobs:
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/bmc-location/download_spec
       package-name: pnap_location_api
-
+  generate-invoicingapi:
+    needs: prerequisite
+    uses: ./.github/workflows/_generate.yml
+    with:
+      spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/invoicing/download_spec
+      package-name: pnap_invoicing_api    
+  
   # Push generated code
   push-changes:
     name: Push Changes
