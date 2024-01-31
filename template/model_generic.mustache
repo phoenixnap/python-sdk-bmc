@@ -274,6 +274,9 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
             {{#isContainer}}
             {{#isArray}}
             {{#items.isArray}}
+            {{#items.items.isPrimitiveType}}
+            "{{{baseName}}}": obj.get("{{{baseName}}}"){{^-last}},{{/-last}}
+            {{/items.items.isPrimitiveType}}
             {{^items.items.isPrimitiveType}}
             # override the default output from pydantic by calling `to_dict()` of each item in {{{name}}} (list of list)
             _items = []
