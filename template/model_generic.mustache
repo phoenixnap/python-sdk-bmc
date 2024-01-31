@@ -275,16 +275,10 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
             {{#isArray}}
             {{#items.isArray}}
             {{#items.items.isPrimitiveType}}
-            "{{{baseName}}}": [
-                    [{{{items.items.dataType}}}.from_dict(_inner_item) for _inner_item in _item]
-                    for _item in obj.get("{{{baseName}}}")
-                ] if obj.get("{{{baseName}}}") is not None else None{{^-last}},{{/-last}}            {{/items.items.isPrimitiveType}}
-            {{^items.items.isPrimitiveType}}
-            "{{{baseName}}}": [
-                    [{{{items.items.dataType}}}.from_dict(_inner_item) for _inner_item in _item]
-                    for _item in obj.get("{{{baseName}}}")
-                ] if obj.get("{{{baseName}}}") is not None else None{{^-last}},{{/-last}}
+            "{{{baseName}}}": obj.get("{{{baseName}}}"){{^-last}},{{/-last}}
             {{/items.items.isPrimitiveType}}
+            {{^items.items.isPrimitiveType}}
+            "{{{baseName}}}"
             {{/items.isArray}}
             {{^items.isArray}}
             {{^items.isPrimitiveType}}
