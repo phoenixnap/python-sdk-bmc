@@ -5,7 +5,7 @@ description = "Bare Metal Cloud API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+repository = "https://github.com/phoenixnap/python-sdk-bmc"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Bare Metal Cloud API"]
 include = ["pnap_bmc_api/py.typed"]
 
@@ -23,7 +23,7 @@ tox = ">=3.9.0"
 flake8 = ">=4.0.0"
 
 [build-system]
-requires = ["setuptools", "pydantic", "pnap_bmc_api"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.pylint.'MESSAGES CONTROL']
