@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_payments_api"
-version = "1.0.0"
+version = "1.2.3"
 description = "Payments API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
@@ -23,7 +23,7 @@ tox = ">=3.9.0"
 flake8 = ">=4.0.0"
 
 [build-system]
-requires = ["setuptools", "pydantic", "pnap_payments_api"]
+requires = ["setuptools", "pnap_payments_api"]
 build-backend = "setuptools.build_meta"
 
 [tool.pylint.'MESSAGES CONTROL']
