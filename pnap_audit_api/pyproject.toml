@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "pnap_payments_api"
+name = "pnap_audit_api"
 version = "1.0.0"
-description = "Payments API"
+description = "Audit Log API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "Payments API"]
-include = ["pnap_payments_api/py.typed"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "Audit Log API"]
+include = ["pnap_audit_api/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -23,7 +23,7 @@ tox = ">=3.9.0"
 flake8 = ">=4.0.0"
 
 [build-system]
-requires = ["setuptools", "pydantic", "pnap_payments_api"]
+requires = ["setuptools", "pydantic", "pnap_audit_api"]
 build-backend = "setuptools.build_meta"
 
 [tool.pylint.'MESSAGES CONTROL']
