@@ -1,8 +1,5 @@
 # coding: utf-8
 
-import os
-import codecs
-
 """
     Audit Log API
 
@@ -16,7 +13,6 @@ import codecs
 """  # noqa: E501
 
 
-from pnap_audit_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -25,10 +21,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-
 NAME = "pnap-audit-api"
-VERSION = VERSION
-
+VERSION = "1.0.7"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
