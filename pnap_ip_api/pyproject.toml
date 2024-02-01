@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_ip_api"
-version = "1.0.0"
+version = "1.1.6"
 description = "IP Addresses API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
