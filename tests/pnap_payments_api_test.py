@@ -6,7 +6,7 @@ import pnap_payments_api
 from pnap_payments_api.models.transaction import Transaction
 from test_utils import TestUtils
 
-class TestLocationApi(unittest.TestCase):
+class TestPaymentsApi(unittest.TestCase):
     configuration = pnap_payments_api.Configuration(host = "127.0.0.1:1080/payments/v1")
     api_client = pnap_payments_api.ApiClient(configuration)
 
