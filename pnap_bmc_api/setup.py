@@ -15,7 +15,7 @@ import codecs
     Do not edit the class manually.
 """  # noqa: E501
 
-
+from pnap_bmc_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -31,7 +31,6 @@ def get_version():
 	  return fp.read()
 
 NAME = "pnap-bmc-api"
-VERSION = get_version()
 
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
