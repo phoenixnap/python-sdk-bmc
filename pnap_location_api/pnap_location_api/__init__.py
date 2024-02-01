@@ -15,6 +15,8 @@
 """  # noqa: E501
 
 
+__version__ = "1.0.1"
+
 # import apis into sdk package
 from pnap_location_api.api.locations_api import LocationsApi
 
@@ -28,8 +30,6 @@ from pnap_location_api.exceptions import ApiValueError
 from pnap_location_api.exceptions import ApiKeyError
 from pnap_location_api.exceptions import ApiAttributeError
 from pnap_location_api.exceptions import ApiException
-from pnap_location_api.version import VERSION
-
 
 # import models into sdk package
 from pnap_location_api.models.error import Error
@@ -37,5 +37,3 @@ from pnap_location_api.models.location import Location
 from pnap_location_api.models.location_enum import LocationEnum
 from pnap_location_api.models.product_category import ProductCategory
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum
-
-__version__ = VERSION
