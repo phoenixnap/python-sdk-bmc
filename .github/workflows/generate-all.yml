@@ -75,7 +75,13 @@ jobs:
     uses: ./.github/workflows/_generate.yml
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/invoicing/download_spec
-      package-name: pnap_invoicing_api    
+      package-name: pnap_invoicing_api
+  generate-paymentsapi:
+    needs: prerequisite
+    uses: ./.github/workflows/_generate.yml
+    with:
+      spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/payments/download_spec
+      package-name: pnap_payments_api   
   
   # Push generated code
   push-changes:
@@ -91,6 +97,7 @@ jobs:
       - generate-networkstorageapi
       - generate-locationapi
       - generate-invoicingapi
+      - generate-paymentsapi
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
