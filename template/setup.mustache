@@ -5,6 +5,7 @@ import codecs
 
 {{>partial_header}}
 
+from {{{packageName}}}.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -14,13 +15,8 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-def get_version():
-  here = os.path.abspath(os.path.dirname(__file__))
-  with codecs.open(os.path.join(here, './{{{packageName}}}/VERSION')) as fp:
-	  return fp.read()
-
 NAME = "{{{projectName}}}"
-VERSION = get_version()
+VERSION = VERSION
 
 PYTHON_REQUIRES = ">=3.7"
 {{#apiInfo}}
