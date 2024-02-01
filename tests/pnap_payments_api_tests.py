@@ -18,6 +18,10 @@ class TestLocationApi(unittest.TestCase):
         # Asserts a successful result.
         self.assertEqual(202, verifyResult.status_code)
 
+    def tearDown(self):
+        TestUtils.reset_expectations()
+        self.api_client.close()
+
     def test_get_transactions(self):
         # Setting up expectation
         request, response = TestUtils.generate_payloads_from('paymentsapi/transactions_get')
