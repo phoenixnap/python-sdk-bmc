@@ -16,6 +16,7 @@ import codecs
 """  # noqa: E501
 
 
+from pnap_tag_api.version import VERSION
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -25,13 +26,8 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-def get_version():
-  here = os.path.abspath(os.path.dirname(__file__))
-  with codecs.open(os.path.join(here, './pnap_tag_api/VERSION')) as fp:
-	  return fp.read()
-
 NAME = "pnap-tag-api"
-VERSION = get_version()
+VERSION = VERSION
 
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
