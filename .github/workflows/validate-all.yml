@@ -52,6 +52,11 @@ jobs:
     with:
       package-name: pnap_invoicing_api
       test-file: pnap_invoicing_api_test.py
+  build-and-test-paymentsapi:
+    uses: ./.github/workflows/_common.yml
+    with:
+      package-name: pnap_payments_api
+      test-file: pnap_payments_api_test.py
 
   publish-test-results:
     name: Publish Test Results
@@ -65,6 +70,7 @@ jobs:
       - build-and-test-networkstorageapi
       - build-and-test-locationapi
       - build-and-test-invoicingapi
+      - build-and-test-paymentsapi
     runs-on: ubuntu-20.04
     if: always()
     steps:
