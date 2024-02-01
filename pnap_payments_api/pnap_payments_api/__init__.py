@@ -28,6 +28,8 @@ from pnap_payments_api.exceptions import ApiValueError
 from pnap_payments_api.exceptions import ApiKeyError
 from pnap_payments_api.exceptions import ApiAttributeError
 from pnap_payments_api.exceptions import ApiException
+from pnap_payments_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_payments_api.models.card_payment_method_details import CardPaymentMethodDetails
@@ -36,3 +38,5 @@ from pnap_payments_api.models.paginated_response import PaginatedResponse
 from pnap_payments_api.models.paginated_transactions import PaginatedTransactions
 from pnap_payments_api.models.transaction import Transaction
 from pnap_payments_api.models.transaction_metadata import TransactionMetadata
+
+__version__ = VERSION

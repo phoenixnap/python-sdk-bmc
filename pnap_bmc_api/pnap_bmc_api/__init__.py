@@ -30,6 +30,8 @@ from pnap_bmc_api.exceptions import ApiValueError
 from pnap_bmc_api.exceptions import ApiKeyError
 from pnap_bmc_api.exceptions import ApiAttributeError
 from pnap_bmc_api.exceptions import ApiException
+from pnap_bmc_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_bmc_api.models.action_result import ActionResult
@@ -70,3 +72,5 @@ from pnap_bmc_api.models.storage_configuration import StorageConfiguration
 from pnap_bmc_api.models.storage_configuration_root_partition import StorageConfigurationRootPartition
 from pnap_bmc_api.models.tag_assignment import TagAssignment
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest
+
+__version__ = VERSION

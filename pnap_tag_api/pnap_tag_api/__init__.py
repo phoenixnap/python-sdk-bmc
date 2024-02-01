@@ -28,6 +28,8 @@ from pnap_tag_api.exceptions import ApiValueError
 from pnap_tag_api.exceptions import ApiKeyError
 from pnap_tag_api.exceptions import ApiAttributeError
 from pnap_tag_api.exceptions import ApiException
+from pnap_tag_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_tag_api.models.delete_result import DeleteResult
@@ -36,3 +38,5 @@ from pnap_tag_api.models.resource_assignment import ResourceAssignment
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.models.tag_create import TagCreate
 from pnap_tag_api.models.tag_update import TagUpdate
+
+__version__ = VERSION

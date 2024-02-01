@@ -28,6 +28,8 @@ from pnap_network_storage_api.exceptions import ApiValueError
 from pnap_network_storage_api.exceptions import ApiKeyError
 from pnap_network_storage_api.exceptions import ApiAttributeError
 from pnap_network_storage_api.exceptions import ApiException
+from pnap_network_storage_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_network_storage_api.models.error import Error
@@ -47,3 +49,5 @@ from pnap_network_storage_api.models.tag_assignment_request import TagAssignment
 from pnap_network_storage_api.models.volume import Volume
 from pnap_network_storage_api.models.volume_create import VolumeCreate
 from pnap_network_storage_api.models.volume_update import VolumeUpdate
+
+__version__ = VERSION

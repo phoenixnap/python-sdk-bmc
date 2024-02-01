@@ -28,8 +28,12 @@ from pnap_audit_api.exceptions import ApiValueError
 from pnap_audit_api.exceptions import ApiKeyError
 from pnap_audit_api.exceptions import ApiAttributeError
 from pnap_audit_api.exceptions import ApiException
+from pnap_audit_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_audit_api.models.error import Error
 from pnap_audit_api.models.event import Event
 from pnap_audit_api.models.user_info import UserInfo
+
+__version__ = VERSION

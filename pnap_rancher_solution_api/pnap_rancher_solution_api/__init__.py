@@ -28,6 +28,8 @@ from pnap_rancher_solution_api.exceptions import ApiValueError
 from pnap_rancher_solution_api.exceptions import ApiKeyError
 from pnap_rancher_solution_api.exceptions import ApiAttributeError
 from pnap_rancher_solution_api.exceptions import ApiException
+from pnap_rancher_solution_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_rancher_solution_api.models.cluster import Cluster
@@ -40,3 +42,5 @@ from pnap_rancher_solution_api.models.rancher_cluster_config import RancherClust
 from pnap_rancher_solution_api.models.rancher_server_metadata import RancherServerMetadata
 from pnap_rancher_solution_api.models.ssh_config import SshConfig
 from pnap_rancher_solution_api.models.workload_cluster_config import WorkloadClusterConfig
+
+__version__ = VERSION

@@ -29,6 +29,8 @@ from pnap_network_api.exceptions import ApiValueError
 from pnap_network_api.exceptions import ApiKeyError
 from pnap_network_api.exceptions import ApiAttributeError
 from pnap_network_api.exceptions import ApiException
+from pnap_network_api.version import VERSION
+
 
 # import models into sdk package
 from pnap_network_api.models.error import Error
@@ -41,3 +43,5 @@ from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.models.public_network_create import PublicNetworkCreate
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
 from pnap_network_api.models.public_network_modify import PublicNetworkModify
+
+__version__ = VERSION
