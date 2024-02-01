@@ -1,5 +1,7 @@
 #!/bin/bash
 
+filename="$1"
+
 # Define the regex pattern
 regex='VERSION = "(.*)"'
 

@@ -26,7 +26,7 @@ runs:
     - name: Generate API
       shell: bash
       run: |
-        version=$(./extract-version.sh ./${{ inputs.package-name }}/version.py)
+        version=$(./extract-version.sh ./${{ inputs.package-name }}/${{ inputs.package-name }}/version.py)
 
         openapi-generator-cli generate \
         -i ${{ inputs.spec-link }} \
