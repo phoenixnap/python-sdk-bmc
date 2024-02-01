@@ -17,6 +17,8 @@ from {{packageName}}.exceptions import ApiValueError
 from {{packageName}}.exceptions import ApiKeyError
 from {{packageName}}.exceptions import ApiAttributeError
 from {{packageName}}.exceptions import ApiException
+from {{packageName}}.version import VERSION
+
 {{#hasHttpSignatureMethods}}
 from {{packageName}}.signing import HttpSigningConfiguration
 {{/hasHttpSignatureMethods}}
@@ -31,3 +33,5 @@ from {{modelPackage}}.{{classFilename}} import {{classname}}
 
 __import__('sys').setrecursionlimit({{{.}}})
 {{/recursionLimit}}
+
+__version__ = VERSION
