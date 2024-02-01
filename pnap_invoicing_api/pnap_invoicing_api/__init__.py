@@ -15,6 +15,8 @@
 """  # noqa: E501
 
 
+__version__ = "1.0.0"
+
 # import apis into sdk package
 from pnap_invoicing_api.api.invoices_api import InvoicesApi
 
@@ -28,13 +30,9 @@ from pnap_invoicing_api.exceptions import ApiValueError
 from pnap_invoicing_api.exceptions import ApiKeyError
 from pnap_invoicing_api.exceptions import ApiAttributeError
 from pnap_invoicing_api.exceptions import ApiException
-from pnap_invoicing_api.version import VERSION
-
 
 # import models into sdk package
 from pnap_invoicing_api.models.error import Error
 from pnap_invoicing_api.models.invoice import Invoice
 from pnap_invoicing_api.models.paginated_invoices import PaginatedInvoices
 from pnap_invoicing_api.models.paginated_response import PaginatedResponse
-
-__version__ = VERSION

@@ -15,6 +15,8 @@
 """  # noqa: E501
 
 
+__version__ = "1.1.6"
+
 # import apis into sdk package
 from pnap_ip_api.api.ip_blocks_api import IPBlocksApi
 
@@ -28,8 +30,6 @@ from pnap_ip_api.exceptions import ApiValueError
 from pnap_ip_api.exceptions import ApiKeyError
 from pnap_ip_api.exceptions import ApiAttributeError
 from pnap_ip_api.exceptions import ApiException
-from pnap_ip_api.version import VERSION
-
 
 # import models into sdk package
 from pnap_ip_api.models.delete_ip_block_result import DeleteIpBlockResult
@@ -39,5 +39,3 @@ from pnap_ip_api.models.ip_block_create import IpBlockCreate
 from pnap_ip_api.models.ip_block_patch import IpBlockPatch
 from pnap_ip_api.models.tag_assignment import TagAssignment
 from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
-
-__version__ = VERSION

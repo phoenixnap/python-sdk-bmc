@@ -22,8 +22,6 @@ import os
 import re
 import tempfile
 
-from pnap_rancher_solution_api.version import VERSION
-
 from urllib.parse import quote
 from typing import Tuple, Optional, List
 
@@ -89,11 +87,11 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = f"PNAP-python-sdk-bmc/{VERSION}"
+        self.user_agent = f"PNAP-python-sdk-bmc/1.0.7"
         self.client_side_validation = configuration.client_side_validation
 
          # Set default X-Powered-By.
-        self.powered_by = f"PNAP-python-sdk-bmc/{VERSION}"
+        self.powered_by = f"PNAP-python-sdk-bmc/1.0.7"
 
     def __enter__(self):
         return self
