@@ -25,8 +25,8 @@
               "pricingModel": "HOURLY",
               "networkType": "PUBLIC_AND_PRIVATE",
               "tags": [{
-                  "name": "Environment",
-                  "value": "PROD"
+                "name": "Environment",
+                "value": "PROD"
               }],
               "osConfiguration": {
                   "netrisController": {
