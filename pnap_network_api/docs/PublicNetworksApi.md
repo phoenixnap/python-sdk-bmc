@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **public_networks_get**
-> [PublicNetwork] public_networks_get()
+> List[PublicNetwork] public_networks_get(location=location)
 
 List Public Networks.
 
@@ -26,11 +26,12 @@ List all Public Networks owned by account.
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.public_network import PublicNetwork
+from pnap_network_api.models.public_network import PublicNetwork
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -42,38 +43,35 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    location = "PHX" # str | If present will filter the result by the given location of the Public Networks. (optional)
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    location = 'PHX' # str | If present will filter the result by the given location of the Public Networks. (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # List Public Networks.
         api_response = api_instance.public_networks_get(location=location)
+        print("The response of PublicNetworksApi->public_networks_get:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **location** | **str**| If present will filter the result by the given location of the Public Networks. | [optional]
+ **location** | **str**| If present will filter the result by the given location of the Public Networks. | [optional] 
 
 ### Return type
 
-[**[PublicNetwork]**](PublicNetwork.md)
+[**List[PublicNetwork]**](PublicNetwork.md)
 
 ### Authorization
 
@@ -83,7 +81,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -110,10 +107,11 @@ Delete Public Network. The request is accepted only if no resources are members 
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -125,32 +123,29 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Delete a Public Network.
         api_instance.public_networks_network_id_delete(public_network_id)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_delete: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_id** | **str**| The Public Network identifier. |
+ **public_network_id** | **str**| The Public Network identifier. | 
 
 ### Return type
 
@@ -164,7 +159,6 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -192,11 +186,12 @@ Retrieve Public Network Details.
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.public_network import PublicNetwork
+from pnap_network_api.models.public_network import PublicNetwork
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -208,33 +203,31 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Get a Public Network.
         api_response = api_instance.public_networks_network_id_get(public_network_id)
+        print("The response of PublicNetworksApi->public_networks_network_id_get:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_id** | **str**| The Public Network identifier. |
+ **public_network_id** | **str**| The Public Network identifier. | 
 
 ### Return type
 
@@ -249,7 +242,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
@@ -262,7 +254,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **public_networks_network_id_ip_blocks_ip_block_id_delete**
-> str public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id)
+> str public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id, force=force)
 
 Removes the IP Block from the Public Network.
 
@@ -274,10 +266,11 @@ Removes the IP Block from the Public Network.<br> Please ensure that no resource
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -289,46 +282,35 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
-    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
-    force = True # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) if omitted the server will use the default value of False
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
+    ip_block_id = '6047127fed34ecc3ba8402d2' # str | The IP Block identifier.
+    force = False # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) (default to False)
 
-    # example passing only required values which don't have defaults set
-    try:
-        # Removes the IP Block from the Public Network.
-        api_response = api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id)
-        pprint(api_response)
-    except pnap_network_api.ApiException as e:
-        print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_ip_block_id_delete: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Removes the IP Block from the Public Network.
         api_response = api_instance.public_networks_network_id_ip_blocks_ip_block_id_delete(public_network_id, ip_block_id, force=force)
+        print("The response of PublicNetworksApi->public_networks_network_id_ip_blocks_ip_block_id_delete:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_ip_block_id_delete: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_id** | **str**| The Public Network identifier. |
- **ip_block_id** | **str**| The IP Block identifier. |
- **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] if omitted the server will use the default value of False
+ **public_network_id** | **str**| The Public Network identifier. | 
+ **ip_block_id** | **str**| The IP Block identifier. | 
+ **force** | **bool**| Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. | [optional] [default to False]
 
 ### Return type
 
@@ -342,7 +324,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -370,11 +351,12 @@ Adds an IP block to this public network.
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -386,37 +368,33 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
-    public_network_ip_block = PublicNetworkIpBlock(
-        id="60473a6115e34466c9f8f083",
-    ) # PublicNetworkIpBlock | 
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
+    public_network_ip_block = {"id":"60473a6115e34466c9f8f083"} # PublicNetworkIpBlock | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Adds an IP block to this public network.
         api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block)
+        print("The response of PublicNetworksApi->public_networks_network_id_ip_blocks_post:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_ip_blocks_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_id** | **str**| The Public Network identifier. |
- **public_network_ip_block** | [**PublicNetworkIpBlock**](PublicNetworkIpBlock.md)|  |
+ **public_network_id** | **str**| The Public Network identifier. | 
+ **public_network_ip_block** | [**PublicNetworkIpBlock**](PublicNetworkIpBlock.md)|  | 
 
 ### Return type
 
@@ -430,7 +408,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -458,12 +435,13 @@ Update Public Network's Details.
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.public_network_modify import PublicNetworkModify
-from pnap_network_api.model.public_network import PublicNetwork
+from pnap_network_api.models.public_network import PublicNetwork
+from pnap_network_api.models.public_network_modify import PublicNetworkModify
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -475,38 +453,33 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_id = "603f3b2cfcaf050643b89a4b" # str | The Public Network identifier.
-    public_network_modify = PublicNetworkModify(
-        name="Sample Network",
-        description="Further details on the network.",
-    ) # PublicNetworkModify | 
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
+    public_network_modify = {"name":"My public network","description":"The new description of my public network"} # PublicNetworkModify | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Update Public Network's Details.
         api_response = api_instance.public_networks_network_id_patch(public_network_id, public_network_modify)
+        print("The response of PublicNetworksApi->public_networks_network_id_patch:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_network_id_patch: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_id** | **str**| The Public Network identifier. |
- **public_network_modify** | [**PublicNetworkModify**](PublicNetworkModify.md)|  |
+ **public_network_id** | **str**| The Public Network identifier. | 
+ **public_network_modify** | [**PublicNetworkModify**](PublicNetworkModify.md)|  | 
 
 ### Return type
 
@@ -520,7 +493,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -548,12 +520,13 @@ Create a public network.
 
 ```python
 import time
+import os
 import pnap_network_api
-from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.error import Error
-from pnap_network_api.model.public_network_create import PublicNetworkCreate
-from pnap_network_api.model.public_network import PublicNetwork
+from pnap_network_api.models.public_network import PublicNetwork
+from pnap_network_api.models.public_network_create import PublicNetworkCreate
+from pnap_network_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/networks/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_network_api.Configuration(
@@ -565,43 +538,31 @@ configuration = pnap_network_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_network_api.Configuration(
-    host = "https://api.phoenixnap.com/networks/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = public_networks_api.PublicNetworksApi(api_client)
-    public_network_create = PublicNetworkCreate(
-        name="Sample Network",
-        description="Further details on the network.",
-        location="PHX",
-        vlan_id=10,
-        ip_blocks=[
-            PublicNetworkIpBlock(
-                id="60473a6115e34466c9f8f083",
-            ),
-        ],
-    ) # PublicNetworkCreate | 
+    api_instance = pnap_network_api.PublicNetworksApi(api_client)
+    public_network_create = {"name":"Initial public network","location":"PHX"} # PublicNetworkCreate | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Create a public network.
         api_response = api_instance.public_networks_post(public_network_create)
+        print("The response of PublicNetworksApi->public_networks_post:\n")
         pprint(api_response)
-    except pnap_network_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling PublicNetworksApi->public_networks_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_network_create** | [**PublicNetworkCreate**](PublicNetworkCreate.md)|  |
+ **public_network_create** | [**PublicNetworkCreate**](PublicNetworkCreate.md)|  | 
 
 ### Return type
 
@@ -615,7 +576,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 

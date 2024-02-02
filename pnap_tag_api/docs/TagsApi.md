@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **tags_get**
-> [Tag] tags_get()
+> List[Tag] tags_get(name=name)
 
 List tags.
 
@@ -24,11 +24,12 @@ Retrieve all tags belonging to the BMC Account.
 
 ```python
 import time
+import os
 import pnap_tag_api
-from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.tag import Tag
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -40,38 +41,35 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
-    name = "env" # str | Query a tag by its name. (optional)
+    api_instance = pnap_tag_api.TagsApi(api_client)
+    name = 'env' # str | Query a tag by its name. (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # List tags.
         api_response = api_instance.tags_get(name=name)
+        print("The response of TagsApi->tags_get:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling TagsApi->tags_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| Query a tag by its name. | [optional]
+ **name** | **str**| Query a tag by its name. | [optional] 
 
 ### Return type
 
-[**[Tag]**](Tag.md)
+[**List[Tag]**](Tag.md)
 
 ### Authorization
 
@@ -81,7 +79,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -107,12 +104,13 @@ Create a tag with the provided information.
 
 ```python
 import time
+import os
 import pnap_tag_api
-from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.tag_create import TagCreate
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.tag import Tag
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.models.tag_create import TagCreate
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -124,37 +122,31 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
-    tag_create = TagCreate(
-        name="Environment",
-        description="This tag is used for all resources that need to be assigned to an environment.",
-        is_billing_tag=True,
-    ) # TagCreate | The body containing the tag details.
+    api_instance = pnap_tag_api.TagsApi(api_client)
+    tag_create = pnap_tag_api.TagCreate() # TagCreate | The body containing the tag details.
 
-    # example passing only required values which don't have defaults set
     try:
         # Create a Tag.
         api_response = api_instance.tags_post(tag_create)
+        print("The response of TagsApi->tags_post:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling TagsApi->tags_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag_create** | [**TagCreate**](TagCreate.md)| The body containing the tag details. |
+ **tag_create** | [**TagCreate**](TagCreate.md)| The body containing the tag details. | 
 
 ### Return type
 
@@ -168,7 +160,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -196,11 +187,12 @@ Delete the tag with the given ID.
 
 ```python
 import time
+import os
 import pnap_tag_api
-from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.delete_result import DeleteResult
+from pnap_tag_api.models.delete_result import DeleteResult
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -212,33 +204,31 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
-    tag_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The tag's ID.
+    api_instance = pnap_tag_api.TagsApi(api_client)
+    tag_id = 'e6afba51-7de8-4080-83ab-0f915570659c' # str | The tag's ID.
 
-    # example passing only required values which don't have defaults set
     try:
         # Delete a Tag.
         api_response = api_instance.tags_tag_id_delete(tag_id)
+        print("The response of TagsApi->tags_tag_id_delete:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling TagsApi->tags_tag_id_delete: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag_id** | **str**| The tag&#39;s ID. |
+ **tag_id** | **str**| The tag&#39;s ID. | 
 
 ### Return type
 
@@ -252,7 +242,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -278,11 +267,12 @@ Retrieve the tag with the given ID
 
 ```python
 import time
+import os
 import pnap_tag_api
-from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.tag import Tag
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -294,33 +284,31 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
-    tag_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The tag's ID.
+    api_instance = pnap_tag_api.TagsApi(api_client)
+    tag_id = 'e6afba51-7de8-4080-83ab-0f915570659c' # str | The tag's ID.
 
-    # example passing only required values which don't have defaults set
     try:
         # Get a Tag.
         api_response = api_instance.tags_tag_id_get(tag_id)
+        print("The response of TagsApi->tags_tag_id_get:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling TagsApi->tags_tag_id_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag_id** | **str**| The tag&#39;s ID. |
+ **tag_id** | **str**| The tag&#39;s ID. | 
 
 ### Return type
 
@@ -334,7 +322,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -360,12 +347,13 @@ Updates the tag with the given ID.
 
 ```python
 import time
+import os
 import pnap_tag_api
-from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.error import Error
-from pnap_tag_api.model.tag_update import TagUpdate
-from pnap_tag_api.model.tag import Tag
+from pnap_tag_api.models.tag import Tag
+from pnap_tag_api.models.tag_update import TagUpdate
+from pnap_tag_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/tag-manager/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_tag_api.Configuration(
@@ -377,39 +365,33 @@ configuration = pnap_tag_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_tag_api.Configuration(
-    host = "https://api.phoenixnap.com/tag-manager/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_tag_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = tags_api.TagsApi(api_client)
-    tag_id = "e6afba51-7de8-4080-83ab-0f915570659c" # str | The tag's ID.
-    tag_update = TagUpdate(
-        name="Environment",
-        description="This tag is used for all resources that need to be assigned to an environment.",
-        is_billing_tag=True,
-    ) # TagUpdate | The body containing the tag changes.
+    api_instance = pnap_tag_api.TagsApi(api_client)
+    tag_id = 'e6afba51-7de8-4080-83ab-0f915570659c' # str | The tag's ID.
+    tag_update = pnap_tag_api.TagUpdate() # TagUpdate | The body containing the tag changes.
 
-    # example passing only required values which don't have defaults set
     try:
         # Modify a Tag.
         api_response = api_instance.tags_tag_id_patch(tag_id, tag_update)
+        print("The response of TagsApi->tags_tag_id_patch:\n")
         pprint(api_response)
-    except pnap_tag_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling TagsApi->tags_tag_id_patch: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag_id** | **str**| The tag&#39;s ID. |
- **tag_update** | [**TagUpdate**](TagUpdate.md)| The body containing the tag changes. |
+ **tag_id** | **str**| The tag&#39;s ID. | 
+ **tag_update** | [**TagUpdate**](TagUpdate.md)| The body containing the tag changes. | 
 
 ### Return type
 
@@ -423,7 +405,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 

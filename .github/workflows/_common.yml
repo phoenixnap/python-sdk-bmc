@@ -20,7 +20,7 @@ jobs:
         with:
           package-name: ${{ inputs.package-name }}
   test:
-    name: Test ${{ inputs.package-name }}
+    name: Test ${{ inputs.package-name }} py v ${{ matrix.python-version }}
     runs-on: ubuntu-20.04
     needs:
       - lint
@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ '3.6', '3.11' ]
+        python-version: [ '3.7', '3.11' ]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk

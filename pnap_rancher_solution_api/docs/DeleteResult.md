@@ -3,12 +3,29 @@
 Result of a successful delete action.
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** | Solution cluster has been deleted. | 
 **cluster_id** | **str** | The unique identifier of the solution cluster. | 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
+## Example
+
+```python
+from pnap_rancher_solution_api.models.delete_result import DeleteResult
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DeleteResult from a JSON string
+delete_result_instance = DeleteResult.from_json(json)
+# print the JSON string representation of the object
+print DeleteResult.to_json()
+
+# convert the object into a dict
+delete_result_dict = delete_result_instance.to_dict()
+# create an instance of DeleteResult from a dict
+delete_result_form_dict = delete_result.from_dict(delete_result_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

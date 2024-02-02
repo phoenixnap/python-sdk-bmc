@@ -1,0 +1,69 @@
+{
+    "request": {
+        "method": "GET",
+        "path": "/payments/v1/transactions",
+        "queryStringParameters": [
+            {
+                "name": "limit",
+                "values": [
+                    "100"
+                ]
+            },
+            {
+                "name": "offset",
+                "values": [
+                    "0"
+                ]
+            },
+            {
+                "name": "sortDirection",
+                "values": [
+                    "DESC"
+                ]
+            },
+            {
+                "name": "sortField",
+                "values": [
+                    "date"
+                ]
+            },
+            {
+                "name": "from",
+                "values": [
+                    "2022-04-13T00:00:00.000000+0000"
+                ]
+            },
+            {
+                "name": "to",
+                "values": [
+                    "2022-04-13T00:00:00.000000+0000"
+                ]
+            }
+        ]
+    },
+    "response": {
+        "statusCode": 200,
+        "body": {
+            "results": [
+                {
+                    "id": "id",
+                    "status": "SUCCESS",
+                    "amount": 0.0,
+                    "currency": "EUR",
+                    "date": "2022-04-13T00:00:00.000000+0000",
+                    "metadata": {
+                        "invoiceId": "id",
+                        "isAutoCharge": true
+                    },
+                    "cardPaymentMethodDetails": {
+                        "cardType": "MASTERCARD",
+                        "lastFourDigits": "1337"
+                    }
+                }
+            ],
+            "limit": 100,
+            "offset": 0,
+            "total": 40
+        }
+    }
+}

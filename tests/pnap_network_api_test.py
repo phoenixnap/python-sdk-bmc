@@ -7,12 +7,11 @@ from test_utils import TestUtils
 import pnap_network_api
 from pnap_network_api.api import private_networks_api
 from pnap_network_api.api import public_networks_api
-from pnap_network_api.model.private_network_create import PrivateNetworkCreate
-from pnap_network_api.model.private_network_modify import PrivateNetworkModify
-from pnap_network_api.model.public_network_create import PublicNetworkCreate
-from pnap_network_api.model.public_network_modify import PublicNetworkModify
-from pnap_network_api.model.public_network_ip_block import PublicNetworkIpBlock
-from pnap_network_api.model_utils import model_to_dict
+from pnap_network_api.models.private_network_create import PrivateNetworkCreate
+from pnap_network_api.models.private_network_modify import PrivateNetworkModify
+from pnap_network_api.models.public_network_create import PublicNetworkCreate
+from pnap_network_api.models.public_network_modify import PublicNetworkModify
+from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
 
 class TestNetworkApi(unittest.TestCase):
    configuration = pnap_network_api.Configuration(host = "127.0.0.1:1080/networks/v1")
@@ -39,7 +38,7 @@ class TestNetworkApi(unittest.TestCase):
 
     response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
-    self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -56,7 +55,7 @@ class TestNetworkApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -72,7 +71,7 @@ class TestNetworkApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -89,7 +88,7 @@ class TestNetworkApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -117,7 +116,7 @@ class TestNetworkApi(unittest.TestCase):
 
       response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
-      self.assertEqual(response['body'][0], model_to_dict(result[0]))
+      self.assertEqual(response['body'][0], result[0].to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -133,7 +132,7 @@ class TestNetworkApi(unittest.TestCase):
 
       response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-      self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -161,7 +160,7 @@ class TestNetworkApi(unittest.TestCase):
 
       response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-      self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -191,7 +190,7 @@ class TestNetworkApi(unittest.TestCase):
 
       result = api_instance.public_networks_network_id_ip_blocks_post(network_id, public_network_ip_block=public_network_ip_block)
 
-      self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -208,11 +207,9 @@ class TestNetworkApi(unittest.TestCase):
 
       response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-      self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
-
-   
 
    def tearDown(self):
     TestUtils.reset_expectations()

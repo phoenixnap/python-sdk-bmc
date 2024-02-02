@@ -6,7 +6,6 @@ from test_utils import TestUtils
 
 import pnap_audit_api
 from pnap_audit_api.api import events_api
-from pnap_audit_api.model_utils import model_to_dict
 
 class  TestAuditApi(unittest.TestCase):
   configuration = pnap_audit_api.Configuration(host = "127.0.0.1:1080/audit/v1")
@@ -31,7 +30,7 @@ class  TestAuditApi(unittest.TestCase):
     opts = TestUtils.generate_query_params(request)
 
     # Changing key from `_from` to 'from'
-    opts['_from'] = opts.pop('from')
+    opts['var_from'] = opts.pop('from')
     opts['limit'] = int(opts['limit'])
     
     result = api_instance.events_get(**opts)
@@ -39,7 +38,7 @@ class  TestAuditApi(unittest.TestCase):
     # Parsing time for comparison
     response['body'][0]['timestamp'] = parse(response['body'][0]['timestamp'])
 
-    self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 

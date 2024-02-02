@@ -5,9 +5,8 @@ from test_utils import TestUtils
 
 import pnap_tag_api
 from pnap_tag_api.api import tags_api
-from pnap_tag_api.model.tag_create import TagCreate
-from pnap_tag_api.model.tag_update import TagUpdate
-from pnap_tag_api.model_utils import model_to_dict
+from pnap_tag_api.models.tag_create import TagCreate
+from pnap_tag_api.models.tag_update import TagUpdate
 
 class TestTagApi(unittest.TestCase):
    configuration = pnap_tag_api.Configuration(host = "127.0.0.1:1080/tag-manager/v1")
@@ -32,7 +31,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_get(**opts)
 
-    self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -46,7 +45,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_post(tag_create)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -60,7 +59,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_get(tag_id)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -75,7 +74,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_patch(tag_id, tag_update)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -89,7 +88,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_delete(tag_id)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once (expectation_id)
 
