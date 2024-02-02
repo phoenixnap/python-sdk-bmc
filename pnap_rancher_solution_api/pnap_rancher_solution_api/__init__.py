@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.7"
+__version__ = "2.0.0"
 
 # import apis into sdk package
 from pnap_rancher_solution_api.api.clusters_api import ClustersApi
