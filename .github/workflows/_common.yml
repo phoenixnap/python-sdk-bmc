@@ -20,7 +20,7 @@ jobs:
         with:
           package-name: ${{ inputs.package-name }}
   test:
-    name: Test ${{ inputs.package-name }}
+    name: Test ${{ inputs.package-name }} py v ${{ matrix.python-version }}
     runs-on: ubuntu-20.04
     needs:
       - lint
