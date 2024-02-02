@@ -31,7 +31,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_get(**opts)
 
-    # self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -45,7 +45,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_post(tag_create)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -59,7 +59,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_get(tag_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -74,7 +74,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_patch(tag_id, tag_update)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -88,7 +88,7 @@ class TestTagApi(unittest.TestCase):
 
     result = api_instance.tags_tag_id_delete(tag_id)
 
-    # self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once (expectation_id)
 
