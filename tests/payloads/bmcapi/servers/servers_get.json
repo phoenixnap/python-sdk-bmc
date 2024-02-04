@@ -129,7 +129,9 @@
                   "raid": "RAID_0",
                   "size": 5
                 }
-              }
+              },
+              "supersededBy": "64a539b8d9c2c9ba8424ca31",
+              "supersedes": "64a539b8d9c2c9ba8424ca31"
           }
       ]
   }

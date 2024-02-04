@@ -26,6 +26,7 @@
           "1.1.1.2"
         ],
         "createdOn": "2021-04-27T16:24:57Z",
+        "deleteRequestedOn": "2021-04-27T16:24:57Z",
         "volumes": [
           {
             "id": "fakeVolumeId",
@@ -37,6 +38,7 @@
             "protocol": "NFS",
             "status": "READY",
             "createdOn": "2021-04-27T16:24:57Z",
+            "deleteRequestedOn": "2021-04-27T16:24:57Z",
             "permissions": {
               "nfs": {
                 "readWrite": [],
