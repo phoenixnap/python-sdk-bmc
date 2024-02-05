@@ -32,11 +32,11 @@ class PaginatedInvoices(BaseModel):
     """
     PaginatedInvoices
     """ # noqa: E501
-    results: List[Invoice]
     limit: StrictInt = Field(description="Maximum number of items in the page (actual returned length can be less).")
     offset: StrictInt = Field(description="The number of returned items skipped.")
     total: StrictInt = Field(description="The total number of records available for retrieval.")
-    __properties: ClassVar[List[str]] = ["limit", "offset", "total"]
+    results: List[Invoice]
+    __properties: ClassVar[List[str]] = ["limit", "offset", "total", "results"]
 
     model_config = {
         "populate_by_name": True,
@@ -75,6 +75,13 @@ class PaginatedInvoices(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
@@ -87,10 +94,10 @@ class PaginatedInvoices(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [Invoice.from_dict(_item) for _item in obj.get("results")] if obj.get("results") is not None else None,
             "limit": obj.get("limit"),
             "offset": obj.get("offset"),
-            "total": obj.get("total")
+            "total": obj.get("total"),
+            "results": [Invoice.from_dict(_item) for _item in obj.get("results")] if obj.get("results") is not None else None
         })
         return _obj
 
