@@ -20,6 +20,20 @@ runs:
     - name: Install openapi-generator-cli
       shell: bash
       run: npm install -g @openapitools/openapi-generator-cli
+    - name: Cleanup existing files
+      shell: bash
+      run: |
+        echo "Moving version.py file out..."
+        mv ./${{ inputs.package-name }}/${{ inputs.package-name }}/version.py ./version.py
+
+        echo "Cleaning up ${{ inputs.package-name }}..."
+        rm -rf ./${{ inputs.package-name }}/*
+
+        echo "Re-creating folder inside ${{ inputs.package-name }}..."
+        mkdir ./${{ inputs.package-name }}/${{ inputs.package-name }}
+
+        echo "Moving version.py file back in..."
+        mv ./version.py ./${{ inputs.package-name }}/${{ inputs.package-name }}/version.py
     - name: Download spec files
       shell: bash
       run: wget ${{ inputs.spec-link }} -O ./${{ inputs.package-name }}/${{ inputs.package-name }}.spec.yaml

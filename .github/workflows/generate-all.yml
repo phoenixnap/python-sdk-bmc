@@ -103,6 +103,18 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
+      - name: Clean up modules
+        run: |
+          rm -rf ./pnap_audit_api \
+           ./pnap_bmc_api \
+           ./pnap_ip_api \
+           ./pnap_location_api \
+           ./pnap_network_api \
+           ./pnap_network_storage_api \
+           ./pnap_rancher_solution_api \
+           ./pnap_tag_api \
+           ./pnap_payment_api \
+           ./pnap_invoice_api
       - name: Download Artifacts
         uses: actions/download-artifact@v3
       - name: Move spec files
