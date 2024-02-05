@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.0"
+__version__ = "2.0.1-SNAPSHOT"
 
 # import apis into sdk package
 from pnap_network_storage_api.api.storage_networks_api import StorageNetworksApi
