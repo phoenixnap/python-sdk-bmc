@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "pnap_ip_api"
+version = "2.0.0"
+description = "IP Addresses API"
+authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+repository = "https://github.com/phoenixnap/python-sdk-bmc"
+keywords = ["OpenAPI", "OpenAPI-Generator", "IP Addresses API"]
+include = ["pnap_ip_api/py.typed"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+urllib3 = ">= 1.25.3"
+python-dateutil = ">=2.8.2"
+pydantic = ">=2"
+typing-extensions = ">=4.7.1"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=7.2.1"
+tox = ">=3.9.0"
+flake8 = ">=4.0.0"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pylint.'MESSAGES CONTROL']
+extension-pkg-whitelist = "pydantic"

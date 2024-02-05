@@ -5,8 +5,8 @@ from test_utils import TestUtils
 
 import pnap_rancher_solution_api
 from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.cluster import Cluster
-from pnap_rancher_solution_api.model_utils import model_to_dict
+from pnap_rancher_solution_api.models.cluster import Cluster
+from pnap_rancher_solution_api.models.delete_result import DeleteResult
 
 class  TestAuditApi(unittest.TestCase):
   configuration = pnap_rancher_solution_api.Configuration(host = "127.0.0.1:1080/solutions/rancher/v1beta")
@@ -31,7 +31,10 @@ class  TestAuditApi(unittest.TestCase):
     
     result = api_instance.clusters_get()
 
-    self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    result_dict = Cluster.from_dict(result[0])
+    response_dict = Cluster.from_dict(response['body'][0])
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -42,11 +45,14 @@ class  TestAuditApi(unittest.TestCase):
     
     # Creating new instance
     api_instance = clusters_api.ClustersApi(self.api_client)
-    cluster = Cluster._from_openapi_data(**TestUtils.extract_request_body(request))
+    cluster = TestUtils.extract_request_body(request)
     
     result = api_instance.clusters_post(cluster=cluster)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    result_dict = Cluster.from_dict(result)
+    response_dict = Cluster.from_dict(response['body'])
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -61,7 +67,10 @@ class  TestAuditApi(unittest.TestCase):
     
     result = api_instance.clusters_id_get(id)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    result_dict = Cluster.from_dict(result)
+    response_dict = Cluster.from_dict(response['body'])
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
@@ -76,7 +85,7 @@ class  TestAuditApi(unittest.TestCase):
     
     result = api_instance.clusters_id_delete(id)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 

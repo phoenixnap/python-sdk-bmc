@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **clusters_get**
-> [Cluster] clusters_get()
+> List[Cluster] clusters_get()
 
 Cluster list.
 
@@ -23,11 +23,12 @@ Cluster list.
 
 ```python
 import time
+import os
 import pnap_rancher_solution_api
-from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.cluster import Cluster
-from pnap_rancher_solution_api.model.error import Error
+from pnap_rancher_solution_api.models.cluster import Cluster
+from pnap_rancher_solution_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
@@ -39,33 +40,31 @@ configuration = pnap_rancher_solution_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = clusters_api.ClustersApi(api_client)
+    api_instance = pnap_rancher_solution_api.ClustersApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         # Cluster list.
         api_response = api_instance.clusters_get()
+        print("The response of ClustersApi->clusters_get:\n")
         pprint(api_response)
-    except pnap_rancher_solution_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling ClustersApi->clusters_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**[Cluster]**](Cluster.md)
+[**List[Cluster]**](Cluster.md)
 
 ### Authorization
 
@@ -75,7 +74,6 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -101,11 +99,12 @@ Delete a cluster.
 
 ```python
 import time
+import os
 import pnap_rancher_solution_api
-from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.delete_result import DeleteResult
-from pnap_rancher_solution_api.model.error import Error
+from pnap_rancher_solution_api.models.delete_result import DeleteResult
+from pnap_rancher_solution_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
@@ -117,33 +116,31 @@ configuration = pnap_rancher_solution_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = clusters_api.ClustersApi(api_client)
-    id = "123" # str | The Cluster identifier.
+    api_instance = pnap_rancher_solution_api.ClustersApi(api_client)
+    id = '123' # str | The Cluster identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Delete a cluster.
         api_response = api_instance.clusters_id_delete(id)
+        print("The response of ClustersApi->clusters_id_delete:\n")
         pprint(api_response)
-    except pnap_rancher_solution_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling ClustersApi->clusters_id_delete: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The Cluster identifier. |
+ **id** | **str**| The Cluster identifier. | 
 
 ### Return type
 
@@ -157,7 +154,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -183,11 +179,12 @@ Retrieve a Cluster
 
 ```python
 import time
+import os
 import pnap_rancher_solution_api
-from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.cluster import Cluster
-from pnap_rancher_solution_api.model.error import Error
+from pnap_rancher_solution_api.models.cluster import Cluster
+from pnap_rancher_solution_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
@@ -199,33 +196,31 @@ configuration = pnap_rancher_solution_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = clusters_api.ClustersApi(api_client)
-    id = "123" # str | The Cluster identifier.
+    api_instance = pnap_rancher_solution_api.ClustersApi(api_client)
+    id = '123' # str | The Cluster identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Retrieve a Cluster
         api_response = api_instance.clusters_id_get(id)
+        print("The response of ClustersApi->clusters_id_get:\n")
         pprint(api_response)
-    except pnap_rancher_solution_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling ClustersApi->clusters_id_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The Cluster identifier. |
+ **id** | **str**| The Cluster identifier. | 
 
 ### Return type
 
@@ -240,7 +235,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
@@ -253,7 +247,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clusters_post**
-> Cluster clusters_post()
+> Cluster clusters_post(cluster)
 
 Create a Rancher Server Deployment.
 
@@ -265,11 +259,12 @@ Create a Rancher Server Deployment as described in <a href='https://rancher.com/
 
 ```python
 import time
+import os
 import pnap_rancher_solution_api
-from pnap_rancher_solution_api.api import clusters_api
-from pnap_rancher_solution_api.model.cluster import Cluster
-from pnap_rancher_solution_api.model.error import Error
+from pnap_rancher_solution_api.models.cluster import Cluster
+from pnap_rancher_solution_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
@@ -281,48 +276,31 @@ configuration = pnap_rancher_solution_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_rancher_solution_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = clusters_api.ClustersApi(api_client)
-    cluster = Cluster(
-        name="Rancher Management Cluster",
-        description="My first Rancher Server Cluster.",
-        location="PHX",
-        node_pools=[
-            NodePool(
-                name="Rancher Server node pool.",
-                node_count=1,
-                server_type="s0.d1.small",
-                ssh_config=NodePoolSshConfig(None),
-            ),
-        ],
-        configuration=ClusterConfiguration(None),
-        workload_configuration=ClusterWorkloadConfiguration(None),
-    ) # Cluster |  (optional)
+    api_instance = pnap_rancher_solution_api.ClustersApi(api_client)
+    cluster = {"location":"PHX"} # Cluster | 
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create a Rancher Server Deployment.
-        api_response = api_instance.clusters_post(cluster=cluster)
+        api_response = api_instance.clusters_post(cluster)
+        print("The response of ClustersApi->clusters_post:\n")
         pprint(api_response)
-    except pnap_rancher_solution_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling ClustersApi->clusters_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster** | [**Cluster**](Cluster.md)|  | [optional]
+ **cluster** | [**Cluster**](Cluster.md)|  | 
 
 ### Return type
 
@@ -336,7 +314,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 

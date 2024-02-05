@@ -16,13 +16,9 @@
                         "rdpAllowedIps": [ "172.217.22.14" ]
                     },
                     "esxi": {
-                        "rootPassword": "MyP@ssw0rd_01",
-                        "managementUiUrl": "https://172.217.22.14",
                         "managementAccessAllowedIps": [ "172.217.22.14" ]
                     },
                     "proxmox": {
-                        "rootPassword": "MyP@ssw0rd_01",
-                        "managementUiUrl": "https://172.217.22.14",
                         "managementAccessAllowedIps": [ "172.217.22.14" ]
                     }
                 }

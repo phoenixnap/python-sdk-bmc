@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **ip_blocks_get**
-> [IpBlock] ip_blocks_get()
+> List[IpBlock] ip_blocks_get(tag=tag)
 
 List IP Blocks.
 
@@ -25,11 +25,12 @@ List all IP Blocks.
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -41,38 +42,35 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    tag = ["env.dev","loc.phx"] # [str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    tag = ['[\"env.dev\",\"loc.phx\"]'] # List[str] | List of tags, in the form tagName.tagValue, to filter by. (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # List IP Blocks.
         api_response = api_instance.ip_blocks_get(tag=tag)
+        print("The response of IPBlocksApi->ip_blocks_get:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag** | **[str]**| List of tags, in the form tagName.tagValue, to filter by. | [optional]
+ **tag** | [**List[str]**](str.md)| List of tags, in the form tagName.tagValue, to filter by. | [optional] 
 
 ### Return type
 
-[**[IpBlock]**](IpBlock.md)
+[**List[IpBlock]**](IpBlock.md)
 
 ### Authorization
 
@@ -82,7 +80,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -108,11 +105,12 @@ Delete an IP Block. An IP Block can only be deleted if not assigned to any resou
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.delete_ip_block_result import DeleteIpBlockResult
-from pnap_ip_api.model.error import Error
+from pnap_ip_api.models.delete_ip_block_result import DeleteIpBlockResult
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -124,33 +122,31 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    ip_block_id = '6047127fed34ecc3ba8402d2' # str | The IP Block identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Delete IP Block.
         api_response = api_instance.ip_blocks_ip_block_id_delete(ip_block_id)
+        print("The response of IPBlocksApi->ip_blocks_ip_block_id_delete:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_delete: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_id** | **str**| The IP Block identifier. |
+ **ip_block_id** | **str**| The IP Block identifier. | 
 
 ### Return type
 
@@ -164,7 +160,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -190,11 +185,12 @@ Get IP Block.
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -206,33 +202,31 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    ip_block_id = '6047127fed34ecc3ba8402d2' # str | The IP Block identifier.
 
-    # example passing only required values which don't have defaults set
     try:
         # Get IP Block.
         api_response = api_instance.ip_blocks_ip_block_id_get(ip_block_id)
+        print("The response of IPBlocksApi->ip_blocks_ip_block_id_get:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_get: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_id** | **str**| The IP Block identifier. |
+ **ip_block_id** | **str**| The IP Block identifier. | 
 
 ### Return type
 
@@ -247,7 +241,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
@@ -260,7 +253,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_ip_block_id_patch**
-> IpBlock ip_blocks_ip_block_id_patch(ip_block_id)
+> IpBlock ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch)
 
 Update IP block.
 
@@ -272,12 +265,13 @@ Update IP Block's details.
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.ip_block_patch import IpBlockPatch
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.models.ip_block_patch import IpBlockPatch
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -289,46 +283,33 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
-    ip_block_patch = IpBlockPatch(
-        description="Ip Block allocation.",
-    ) # IpBlockPatch |  (optional)
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    ip_block_id = '6047127fed34ecc3ba8402d2' # str | The IP Block identifier.
+    ip_block_patch = {"description":"Ip Block description"} # IpBlockPatch | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Update IP block.
-        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id)
+        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch)
+        print("The response of IPBlocksApi->ip_blocks_ip_block_id_patch:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
-        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_patch: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update IP block.
-        api_response = api_instance.ip_blocks_ip_block_id_patch(ip_block_id, ip_block_patch=ip_block_patch)
-        pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_patch: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_id** | **str**| The IP Block identifier. |
- **ip_block_patch** | [**IpBlockPatch**](IpBlockPatch.md)|  | [optional]
+ **ip_block_id** | **str**| The IP Block identifier. | 
+ **ip_block_patch** | [**IpBlockPatch**](IpBlockPatch.md)|  | 
 
 ### Return type
 
@@ -342,7 +323,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -358,7 +338,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_ip_block_id_tags_put**
-> IpBlock ip_blocks_ip_block_id_tags_put(ip_block_id)
+> IpBlock ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request)
 
 Overwrite tags assigned for IP Block.
 
@@ -370,12 +350,13 @@ Overwrites tags assigned for IP Block and unassigns any tags not part of the req
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
-from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -387,49 +368,33 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    ip_block_id = "6047127fed34ecc3ba8402d2" # str | The IP Block identifier.
-    tag_assignment_request = [
-        TagAssignmentRequest(
-            name="Environment",
-            value="PROD",
-        ),
-    ] # [TagAssignmentRequest] |  (optional)
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    ip_block_id = '6047127fed34ecc3ba8402d2' # str | The IP Block identifier.
+    tag_assignment_request = [pnap_ip_api.TagAssignmentRequest()] # List[TagAssignmentRequest] | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Overwrite tags assigned for IP Block.
-        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id)
+        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request)
+        print("The response of IPBlocksApi->ip_blocks_ip_block_id_tags_put:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
-        print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Overwrite tags assigned for IP Block.
-        api_response = api_instance.ip_blocks_ip_block_id_tags_put(ip_block_id, tag_assignment_request=tag_assignment_request)
-        pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_ip_block_id_tags_put: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_id** | **str**| The IP Block identifier. |
- **tag_assignment_request** | [**[TagAssignmentRequest]**](TagAssignmentRequest.md)|  | [optional]
+ **ip_block_id** | **str**| The IP Block identifier. | 
+ **tag_assignment_request** | [**List[TagAssignmentRequest]**](TagAssignmentRequest.md)|  | 
 
 ### Return type
 
@@ -443,7 +408,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -458,7 +422,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ip_blocks_post**
-> IpBlock ip_blocks_post()
+> IpBlock ip_blocks_post(ip_block_create)
 
 Create an IP Block.
 
@@ -470,12 +434,13 @@ Request an IP Block. An IP Block is a set of contiguous IPs that can be assigned
 
 ```python
 import time
+import os
 import pnap_ip_api
-from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.ip_block_create import IpBlockCreate
-from pnap_ip_api.model.error import Error
-from pnap_ip_api.model.ip_block import IpBlock
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.models.ip_block_create import IpBlockCreate
+from pnap_ip_api.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to https://api.phoenixnap.com/ips/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_ip_api.Configuration(
@@ -487,44 +452,31 @@ configuration = pnap_ip_api.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: OAuth2
-configuration = pnap_ip_api.Configuration(
-    host = "https://api.phoenixnap.com/ips/v1"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ip_blocks_api.IPBlocksApi(api_client)
-    ip_block_create = IpBlockCreate(
-        location="PHX",
-        cidr_block_size="/30",
-        description="IP Block #1 used for publicly accessing server #1.",
-        tags=[
-            TagAssignmentRequest(
-                name="Environment",
-                value="PROD",
-            ),
-        ],
-    ) # IpBlockCreate |  (optional)
+    api_instance = pnap_ip_api.IPBlocksApi(api_client)
+    ip_block_create = {"cidrBlockSize":"/28","location":"PHX","description":"IP Block #1 used for publicly accessing server #1."} # IpBlockCreate | 
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Create an IP Block.
-        api_response = api_instance.ip_blocks_post(ip_block_create=ip_block_create)
+        api_response = api_instance.ip_blocks_post(ip_block_create)
+        print("The response of IPBlocksApi->ip_blocks_post:\n")
         pprint(api_response)
-    except pnap_ip_api.ApiException as e:
+    except Exception as e:
         print("Exception when calling IPBlocksApi->ip_blocks_post: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ip_block_create** | [**IpBlockCreate**](IpBlockCreate.md)|  | [optional]
+ **ip_block_create** | [**IpBlockCreate**](IpBlockCreate.md)|  | 
 
 ### Return type
 
@@ -539,7 +491,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
@@ -548,7 +499,7 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**406** | No server available of type server.type. |  -  |
+**406** | No IP Blocks available of provided cidr block size. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

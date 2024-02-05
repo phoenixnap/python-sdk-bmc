@@ -18,14 +18,13 @@
             "json": {
                 "id": "60473a6115e34466c9f8f083",
                 "ips": [ "10.1.1.1" ],
-                "dhcp": false,
-                "statusDescription": "assigned"
+                "dhcp": false
             },
             "matchType": "STRICT"
         }
     },
     "response": {
-        "statusCode": 200,
+        "statusCode": 202,
         "body": {
             "id": "603f3b2cfcaf050643b89a4b",
             "ips": [ "10.1.1.1" ],

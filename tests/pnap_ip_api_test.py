@@ -6,12 +6,10 @@ from test_utils import TestUtils
 
 import pnap_ip_api
 from pnap_ip_api.api import ip_blocks_api
-from pnap_ip_api.model.ip_block import IpBlock
-from pnap_ip_api.model.ip_block_create import IpBlockCreate
-from pnap_ip_api.model.ip_block_patch import IpBlockPatch
-from pnap_ip_api.model.tag_assignment_request import TagAssignmentRequest
-from pnap_ip_api.model_utils import model_to_dict
-
+from pnap_ip_api.models.ip_block import IpBlock
+from pnap_ip_api.models.ip_block_create import IpBlockCreate
+from pnap_ip_api.models.ip_block_patch import IpBlockPatch
+from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
 
 class TestIpApi(unittest.TestCase):
    configuration = pnap_ip_api.Configuration(host = "127.0.0.1:1080/ips/v1")
@@ -38,7 +36,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
 
-    self.assertEqual(response['body'][0], model_to_dict(result[0]))
+    self.assertEqual(response['body'][0], result[0].to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -57,7 +55,7 @@ class TestIpApi(unittest.TestCase):
 
       response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-      self.assertEqual(response['body'], model_to_dict(result))
+      self.assertEqual(response['body'], result.to_dict())
 
       self.verify_called_once(expectation_id)
 
@@ -73,7 +71,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -91,7 +89,7 @@ class TestIpApi(unittest.TestCase):
 
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation_id)
 
@@ -105,7 +103,7 @@ class TestIpApi(unittest.TestCase):
 
     result = api_instance.ip_blocks_ip_block_id_delete(ip_block_id)
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation)
 
@@ -123,7 +121,7 @@ class TestIpApi(unittest.TestCase):
     # Parsing time for comparison
     response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-    self.assertEqual(response['body'], model_to_dict(result))
+    self.assertEqual(response['body'], result.to_dict())
 
     self.verify_called_once(expectation)
 

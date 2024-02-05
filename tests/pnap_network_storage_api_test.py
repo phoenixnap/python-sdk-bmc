@@ -6,12 +6,11 @@ from test_utils import TestUtils
 
 import pnap_network_storage_api
 from pnap_network_storage_api.api import storage_networks_api
-from pnap_network_storage_api.model_utils import model_to_dict
-from pnap_network_storage_api.model.storage_network_create import StorageNetworkCreate
-from pnap_network_storage_api.model.volume_create import VolumeCreate
-from pnap_network_storage_api.model.storage_network_volume_create import StorageNetworkVolumeCreate
-from pnap_network_storage_api.model.volume_update import VolumeUpdate
-from pnap_network_storage_api.model.storage_network_update import StorageNetworkUpdate
+from pnap_network_storage_api.models.storage_network_create import StorageNetworkCreate
+from pnap_network_storage_api.models.volume_create import VolumeCreate
+from pnap_network_storage_api.models.storage_network_volume_create import StorageNetworkVolumeCreate
+from pnap_network_storage_api.models.volume_update import VolumeUpdate
+from pnap_network_storage_api.models.storage_network_update import StorageNetworkUpdate
 
 class TestIpApi(unittest.TestCase):
 	configuration = pnap_network_storage_api.Configuration(host = "127.0.0.1:1080/network-storage/v1")
@@ -41,9 +40,11 @@ class TestIpApi(unittest.TestCase):
 		result = api_instance.storage_networks_get(**opts)
 
 		response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
+		response['body'][0]['deleteRequestedOn'] = parse(response['body'][0]['deleteRequestedOn'])
 		response['body'][0]['volumes'][0]['createdOn'] = parse(response['body'][0]['volumes'][0]['createdOn'])
+		response['body'][0]['volumes'][0]['deleteRequestedOn'] = parse(response['body'][0]['volumes'][0]['deleteRequestedOn'])
 
-		self.assertEqual(response['body'][0], model_to_dict(result[0]))
+		self.assertEqual(response['body'][0], result[0].to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -54,14 +55,16 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 
 		result = api_instance.storage_networks_id_get(storage_network_id)
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
+		response['body']['deleteRequestedOn'] = parse(response['body']['deleteRequestedOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
+		response['body']['volumes'][0]['deleteRequestedOn'] = parse(response['body']['volumes'][0]['deleteRequestedOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -81,7 +84,7 @@ class TestIpApi(unittest.TestCase):
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -92,13 +95,14 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 
 		result = api_instance.storage_networks_storage_network_id_volumes_get(storage_network_id)
 
 		response['body'][0]['createdOn'] = parse(response['body'][0]['createdOn'])
+		response['body'][0]['deleteRequestedOn'] = parse(response['body'][0]['deleteRequestedOn'])
 
-		self.assertEqual(response['body'][0], model_to_dict(result[0]))
+		self.assertEqual(response['body'][0], result[0].to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -109,14 +113,15 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 		volume_id = TestUtils.extract_id_from(request, "volumeId")
 
 		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_get(storage_network_id, volume_id)
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
+		response['body']['deleteRequestedOn'] = parse(response['body']['deleteRequestedOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -127,11 +132,9 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 
 		result = api_instance.storage_networks_id_delete(storage_network_id)
-
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
 		self.verify_called_once(expectation_id)
 
@@ -142,15 +145,17 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 		storage_network_update = StorageNetworkUpdate(**TestUtils.extract_request_body(request))
 
 		result = api_instance.storage_networks_id_patch(storage_network_id, storage_network_update=storage_network_update)
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 		response['body']['volumes'][0]['createdOn'] = parse(response['body']['volumes'][0]['createdOn'])
+		response['body']['deleteRequestedOn'] = parse(response['body']['deleteRequestedOn'])
+		response['body']['volumes'][0]['deleteRequestedOn'] = parse(response['body']['volumes'][0]['deleteRequestedOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -160,7 +165,7 @@ class TestIpApi(unittest.TestCase):
 		expectation_id = TestUtils.setup_expectation(request, response, 1)
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 
 		volume_create = VolumeCreate(**TestUtils.convert_camel_to_snake_case(request))
 
@@ -168,7 +173,7 @@ class TestIpApi(unittest.TestCase):
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -179,7 +184,7 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 		volume_id = TestUtils.extract_id_from(request, "volumeId")
 
 		volume_update = VolumeUpdate(**TestUtils.extract_request_body(request))
@@ -187,8 +192,9 @@ class TestIpApi(unittest.TestCase):
 		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_patch(storage_network_id, volume_id, volume_update=volume_update)
 
 		response['body']['createdOn'] = parse(response['body']['createdOn'])
+		response['body']['deleteRequestedOn'] = parse(response['body']['deleteRequestedOn'])
 
-		self.assertEqual(response['body'], model_to_dict(result))
+		self.assertEqual(response['body'], result.to_dict())
 
 		self.verify_called_once(expectation_id)
 
@@ -199,12 +205,10 @@ class TestIpApi(unittest.TestCase):
 
 		api_instance = storage_networks_api.StorageNetworksApi(self.api_client)
 
-		storage_network_id = TestUtils.extract_id_from(request, "storageNetworkId")
+		storage_network_id = TestUtils.extract_id_from(request, "storageId")
 		volume_id = TestUtils.extract_id_from(request, "volumeId")
 
 		result = api_instance.storage_networks_storage_network_id_volumes_volume_id_delete(storage_network_id, volume_id)
-
-		# self.assertEqual(response['body'][0], model_to_dict(result[0]))
 
 		self.verify_called_once(expectation_id)	
 
