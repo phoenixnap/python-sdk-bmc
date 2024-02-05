@@ -25,6 +25,7 @@ from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.models.reset_result import ResetResult
+from pnap_bmc_api.models.server_provision import ServerProvision
 
 class  TestBmcApi(unittest.TestCase):
   configuration = pnap_bmc_api.Configuration(host = "127.0.0.1:1080/bmc/v1")
@@ -290,6 +291,25 @@ class  TestBmcApi(unittest.TestCase):
     result = api_instance.servers_server_id_actions_deprovision_post(server_id, relinquish_ip_block=relinquish_ip_block)
 
     self.assertEqual(response['body'], result)
+
+    self.verify_called_once(expectation_id)
+
+  def test_server_provision(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_action_provision')
+    expectation_id = TestUtils.setup_expectation(request, response, 1)
+    
+    api_instance = servers_api.ServersApi(self.api_client)
+    server_id = TestUtils.extract_id_from(request)
+    server_provision = ServerProvision(**TestUtils.extract_request_body(request))
+    opts = TestUtils.generate_query_params(request)['force']
+
+    result = api_instance.servers_server_id_actions_provision_post(server_id, server_provision=server_provision, force=bool(opts))
+
+    response_dict = Server.from_dict(response['body'])
+    result_dict = Server.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 
