@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_payments_api"
-version = "1.0.1"
+version = "1.0.1-SNAPSHOT"
 description = "Payments API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
