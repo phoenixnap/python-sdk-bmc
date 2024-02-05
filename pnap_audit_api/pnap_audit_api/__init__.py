@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.1-SNAPSHOT"
+__version__ = "2.0.0"
 
 # import apis into sdk package
 from pnap_audit_api.api.events_api import EventsApi
