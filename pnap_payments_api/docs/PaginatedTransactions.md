@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List[Transaction]**](Transaction.md) |  | 
 **limit** | **int** | Maximum number of items in the page (actual returned length can be less). | 
 **offset** | **int** | The number of returned items skipped. | 
 **total** | **int** | The total number of records available for retrieval. | 
+**results** | [**List[Transaction]**](Transaction.md) |  | 
 
 ## Example
 

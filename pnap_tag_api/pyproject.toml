@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_tag_api"
-version = "1.0.7"
+version = "2.0.0"
 description = "Tags API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
