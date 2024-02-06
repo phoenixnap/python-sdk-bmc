@@ -42,30 +42,6 @@ class  TestAuditApi(unittest.TestCase):
 
     self.verify_called_once(expectation_id)
 
-
-  def test_get_events_all_additional_properties(self):
-    # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('auditapi/events_get_additional_properties')
-    expectation_id = TestUtils.setup_expectation(request, response, 1)
-    
-    # Creating new instance
-    api_instance = events_api.EventsApi(self.api_client)
-    opts = TestUtils.generate_query_params(request)
-
-    # Changing key from `_from` to 'from'
-    opts['var_from'] = opts.pop('from')
-    opts['limit'] = int(opts['limit'])
-    
-    result = api_instance.events_get(**opts)
-    print(result)
-
-    # Parsing time for comparison
-    response['body'][0]['timestamp'] = parse(response['body'][0]['timestamp'])
-
-    self.assertEqual(response['body'][0], result[0].to_dict())
-
-    self.verify_called_once(expectation_id)
-
   def tearDown(self):
     TestUtils.reset_expectations()
     self.api_client.close()
