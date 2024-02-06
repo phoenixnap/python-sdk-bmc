@@ -20,7 +20,7 @@ class  TestMisc(unittest.TestCase):
 
   def test_get_events_all_additional_properties(self):
     # Setting up expectation
-    request, response = TestUtils.generate_payloads_from('auditapi/events_get_additional_properties')
+    request, response = TestUtils.generate_payloads_from('misc/events_get_additional_properties')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
     
     # Creating new instance
