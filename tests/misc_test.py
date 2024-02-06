@@ -32,7 +32,6 @@ class  TestMisc(unittest.TestCase):
     opts['limit'] = int(opts['limit'])
     
     result = api_instance.events_get(**opts)
-    print(result)
 
     # Parsing time for comparison
     response['body'][0]['timestamp'] = parse(response['body'][0]['timestamp'])
