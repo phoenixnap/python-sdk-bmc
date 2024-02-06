@@ -1,0 +1,32 @@
+name: (abstract) - Test
+
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        required: true
+        type: string
+      test-file:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: Test ${{ inputs.module-name }} py v ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    services:
+      mockserver:
+        image: mockserver/mockserver:5.15.0
+        ports:
+          - 1080:1080
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.7', '3.12' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/composite/test-sdk
+        with:
+          package-under-test: ./${{ inputs.package-name }}
+          python-version: ${{ matrix.python-version }}
+          test-dir: tests
