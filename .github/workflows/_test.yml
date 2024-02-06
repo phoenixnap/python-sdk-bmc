@@ -27,8 +27,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/composite/test-sdk
         with:
-          package-under-test: ./${{ inputs.package-name }}
-          test-dir: tests
           test-file: ${{ inputs.test-file }}
-          test-report-dir: tests/test-reports
-          python-version: ${{ matrix.python-version }}
+          package-name: ${{ inputs.package-name }}
