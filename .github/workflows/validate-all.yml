@@ -65,6 +65,7 @@ jobs:
       test-dir: tests
       test-file: misc_test.py
       test-report-dir: tests/test-reports
+      package-name: pnap_audit_api
 
   publish-test-results:
     name: Publish Test Results
