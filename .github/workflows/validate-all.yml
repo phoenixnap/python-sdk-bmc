@@ -92,6 +92,7 @@ jobs:
       - build-and-test-locationapi
       - build-and-test-invoicingapi
       - build-and-test-paymentsapi
+      - run-generic-tests
     runs-on: ubuntu-20.04
     if: always()
     steps:
