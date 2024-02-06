@@ -36,6 +36,7 @@ class OsConfigurationMap(BaseModel):
     windows: Optional[OsConfigurationWindows] = None
     esxi: Optional[OsConfigurationMapEsxi] = None
     proxmox: Optional[OsConfigurationMapProxmox] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["windows", "esxi", "proxmox"]
 
     model_config = {
@@ -68,10 +69,12 @@ class OsConfigurationMap(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -84,6 +87,11 @@ class OsConfigurationMap(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of proxmox
         if self.proxmox:
             _dict['proxmox'] = self.proxmox.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -100,6 +108,11 @@ class OsConfigurationMap(BaseModel):
             "esxi": OsConfigurationMapEsxi.from_dict(obj.get("esxi")) if obj.get("esxi") is not None else None,
             "proxmox": OsConfigurationMapProxmox.from_dict(obj.get("proxmox")) if obj.get("proxmox") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

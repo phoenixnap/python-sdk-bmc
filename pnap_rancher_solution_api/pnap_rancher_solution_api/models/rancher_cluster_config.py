@@ -39,6 +39,7 @@ class RancherClusterConfig(BaseModel):
     node_taint: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.", alias="nodeTaint")
     cluster_domain: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `cluster-domain`. Cluster Domain.", alias="clusterDomain")
     certificates: Optional[RancherClusterCertificates] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["token", "tlsSan", "etcdSnapshotScheduleCron", "etcdSnapshotRetention", "nodeTaint", "clusterDomain", "certificates"]
 
     model_config = {
@@ -71,16 +72,23 @@ class RancherClusterConfig(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of certificates
         if self.certificates:
             _dict['certificates'] = self.certificates.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -101,6 +109,11 @@ class RancherClusterConfig(BaseModel):
             "clusterDomain": obj.get("clusterDomain"),
             "certificates": RancherClusterCertificates.from_dict(obj.get("certificates")) if obj.get("certificates") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -46,6 +46,7 @@ class PrivateNetwork(BaseModel):
     memberships: List[NetworkMembership] = Field(description="A list of resources that are members of this private network.")
     status: StrictStr = Field(description="The status of the private network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
     created_on: datetime = Field(description="Date and time when this private network was created.", alias="createdOn")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "vlanId", "type", "location", "locationDefault", "cidr", "servers", "memberships", "status", "createdOn"]
 
     model_config = {
@@ -78,10 +79,12 @@ class PrivateNetwork(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -99,6 +102,11 @@ class PrivateNetwork(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['memberships'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -124,6 +132,11 @@ class PrivateNetwork(BaseModel):
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

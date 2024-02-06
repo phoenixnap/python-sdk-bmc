@@ -32,6 +32,7 @@ class ServerNetworkUpdate(BaseModel):
     Update network details of bare metal server.
     """ # noqa: E501
     ips: Optional[List[StrictStr]] = Field(default=None, description="List of IPs to be associated to the server.<br> Valid IP formats are single IPv4 addresses or IPv4 ranges. IPs must be within the network's range.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. <li> Assign one or more IP addresses which are already configured on other resource(s) in network. <li> Assign IP addresses which are considered as reserved in network.</ul>")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["ips"]
 
     model_config = {
@@ -64,13 +65,20 @@ class ServerNetworkUpdate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -85,6 +93,11 @@ class ServerNetworkUpdate(BaseModel):
         _obj = cls.model_validate({
             "ips": obj.get("ips")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

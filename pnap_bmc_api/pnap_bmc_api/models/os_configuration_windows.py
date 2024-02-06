@@ -33,6 +33,7 @@ class OsConfigurationWindows(BaseModel):
     Windows OS configuration properties.
     """ # noqa: E501
     rdp_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed for RDP access to Windows OS. Supported in single IP, CIDR and range format. When undefined, RDP is disabled. To allow RDP access from any IP use 0.0.0.0/0. This will only be returned in response to provisioning a server.", alias="rdpAllowedIps")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["rdpAllowedIps"]
 
     model_config = {
@@ -65,13 +66,20 @@ class OsConfigurationWindows(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -86,6 +94,11 @@ class OsConfigurationWindows(BaseModel):
         _obj = cls.model_validate({
             "rdpAllowedIps": obj.get("rdpAllowedIps")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

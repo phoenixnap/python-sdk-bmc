@@ -63,6 +63,7 @@ class Server(BaseModel):
     storage_configuration: StorageConfiguration = Field(alias="storageConfiguration")
     superseded_by: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server to which the reservation has been transferred.", alias="supersededBy")
     supersedes: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server from which the reservation has been transferred.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "status", "hostname", "description", "os", "type", "location", "cpu", "cpuCount", "coresPerCpu", "cpuFrequency", "ram", "storage", "privateIpAddresses", "publicIpAddresses", "reservationId", "pricingModel", "password", "networkType", "clusterId", "tags", "provisionedOn", "osConfiguration", "networkConfiguration", "storageConfiguration", "supersededBy", "supersedes"]
 
     @field_validator('hostname')
@@ -102,10 +103,12 @@ class Server(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -125,6 +128,11 @@ class Server(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of storage_configuration
         if self.storage_configuration:
             _dict['storageConfiguration'] = self.storage_configuration.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -165,6 +173,11 @@ class Server(BaseModel):
             "supersededBy": obj.get("supersededBy"),
             "supersedes": obj.get("supersedes")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

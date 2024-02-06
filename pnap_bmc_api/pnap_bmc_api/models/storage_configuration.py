@@ -33,6 +33,7 @@ class StorageConfiguration(BaseModel):
     Storage configuration.
     """ # noqa: E501
     root_partition: Optional[StorageConfigurationRootPartition] = Field(default=None, alias="rootPartition")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["rootPartition"]
 
     model_config = {
@@ -65,16 +66,23 @@ class StorageConfiguration(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of root_partition
         if self.root_partition:
             _dict['rootPartition'] = self.root_partition.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class StorageConfiguration(BaseModel):
         _obj = cls.model_validate({
             "rootPartition": StorageConfigurationRootPartition.from_dict(obj.get("rootPartition")) if obj.get("rootPartition") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

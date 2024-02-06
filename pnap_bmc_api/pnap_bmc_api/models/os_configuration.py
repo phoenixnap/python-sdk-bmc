@@ -44,6 +44,7 @@ class OsConfiguration(BaseModel):
     management_access_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.", alias="managementAccessAllowedIps")
     install_os_to_ram: Optional[StrictBool] = Field(default=False, description="If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the <a href='https://phoenixnap.com/kb/bmc-custom-os' target='_blank'>instructions</a> on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy.", alias="installOsToRam")
     cloud_init: Optional[OsConfigurationCloudInit] = Field(default=None, alias="cloudInit")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "cloudInit"]
 
     model_config = {
@@ -78,12 +79,14 @@ class OsConfiguration(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "root_password",
                 "management_ui_url",
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -99,6 +102,11 @@ class OsConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cloud_init
         if self.cloud_init:
             _dict['cloudInit'] = self.cloud_init.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -120,6 +128,11 @@ class OsConfiguration(BaseModel):
             "installOsToRam": obj.get("installOsToRam") if obj.get("installOsToRam") is not None else False,
             "cloudInit": OsConfigurationCloudInit.from_dict(obj.get("cloudInit")) if obj.get("cloudInit") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

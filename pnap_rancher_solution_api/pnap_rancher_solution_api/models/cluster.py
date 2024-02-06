@@ -46,6 +46,7 @@ class Cluster(BaseModel):
     metadata: Optional[RancherServerMetadata] = None
     workload_configuration: Optional[WorkloadClusterConfig] = Field(default=None, alias="workloadConfiguration")
     status_description: Optional[StrictStr] = Field(default=None, description="(Read-Only) The cluster status", alias="statusDescription")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "location", "initialClusterVersion", "nodePools", "configuration", "metadata", "workloadConfiguration", "statusDescription"]
 
     model_config = {
@@ -82,6 +83,7 @@ class Cluster(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
@@ -90,6 +92,7 @@ class Cluster(BaseModel):
                 "initial_cluster_version",
                 "metadata",
                 "status_description",
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -109,6 +112,11 @@ class Cluster(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of workload_configuration
         if self.workload_configuration:
             _dict['workloadConfiguration'] = self.workload_configuration.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -132,6 +140,11 @@ class Cluster(BaseModel):
             "workloadConfiguration": WorkloadClusterConfig.from_dict(obj.get("workloadConfiguration")) if obj.get("workloadConfiguration") is not None else None,
             "statusDescription": obj.get("statusDescription")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

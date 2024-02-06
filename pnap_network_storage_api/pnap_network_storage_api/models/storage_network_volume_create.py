@@ -38,6 +38,7 @@ class StorageNetworkVolumeCreate(BaseModel):
     path_suffix: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=27)]] = Field(default=None, description="Last part of volume's path.", alias="pathSuffix")
     capacity_in_gb: Annotated[int, Field(strict=True, ge=1000)] = Field(description="Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.", alias="capacityInGb")
     tags: Optional[List[TagAssignmentRequest]] = Field(default=None, description="Tags to set to the resource. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "pathSuffix", "capacityInGb", "tags"]
 
     @field_validator('name')
@@ -87,10 +88,12 @@ class StorageNetworkVolumeCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -101,6 +104,11 @@ class StorageNetworkVolumeCreate(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['tags'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -119,6 +127,11 @@ class StorageNetworkVolumeCreate(BaseModel):
             "capacityInGb": obj.get("capacityInGb"),
             "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

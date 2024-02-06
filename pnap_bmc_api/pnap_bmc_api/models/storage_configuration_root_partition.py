@@ -33,6 +33,7 @@ class StorageConfigurationRootPartition(BaseModel):
     """ # noqa: E501
     raid: Optional[StrictStr] = Field(default='NO_RAID', description="Software RAID configuration. The following RAID options are available: NO_RAID, RAID_0, RAID_1.")
     size: Optional[StrictInt] = Field(default=-1, description="The size of the root partition in GB. -1 to use all available space.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["raid", "size"]
 
     model_config = {
@@ -65,13 +66,20 @@ class StorageConfigurationRootPartition(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -87,6 +95,11 @@ class StorageConfigurationRootPartition(BaseModel):
             "raid": obj.get("raid") if obj.get("raid") is not None else 'NO_RAID',
             "size": obj.get("size") if obj.get("size") is not None else -1
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
