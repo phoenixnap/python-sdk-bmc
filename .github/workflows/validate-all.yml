@@ -61,10 +61,7 @@ jobs:
   run-generic-tests:
     uses: ./github/workflows/_test.yml
     with:
-      package-under-test: ./pnap_audit_api
-      test-dir: tests
       test-file: misc_test.py
-      test-report-dir: tests/test-reports
       package-name: pnap_audit_api
 
   publish-test-results:
