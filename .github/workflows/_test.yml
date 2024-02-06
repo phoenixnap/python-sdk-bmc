@@ -12,7 +12,7 @@ on:
 
 jobs:
   test:
-    name: Test ${{ inputs.module-name }} py v ${{ matrix.python-version }}
+    name: Test ${{ inputs.package-name }} py v ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     services:
       mockserver:
