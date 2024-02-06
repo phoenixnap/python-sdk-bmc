@@ -34,6 +34,7 @@ class NetworkMembership(BaseModel):
     resource_id: StrictStr = Field(description="The resource identifier.", alias="resourceId")
     resource_type: StrictStr = Field(description="The resource's type.", alias="resourceType")
     ips: List[StrictStr] = Field(description="List of IPs associated to the resource.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["resourceId", "resourceType", "ips"]
 
     model_config = {
@@ -66,13 +67,20 @@ class NetworkMembership(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class NetworkMembership(BaseModel):
             "resourceType": obj.get("resourceType"),
             "ips": obj.get("ips")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

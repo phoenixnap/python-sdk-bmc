@@ -33,6 +33,7 @@ class ServerIpBlock(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="The IP block's ID.")
     vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this IP block has been configured within the network switch.", alias="vlanId")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "vlanId"]
 
     model_config = {
@@ -66,14 +67,21 @@ class ServerIpBlock(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "vlan_id",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class ServerIpBlock(BaseModel):
             "id": obj.get("id"),
             "vlanId": obj.get("vlanId")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

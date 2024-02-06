@@ -33,6 +33,7 @@ class Error(BaseModel):
     """ # noqa: E501
     message: StrictStr = Field(description="The description detailing the cause of the error code.")
     validation_errors: Optional[List[StrictStr]] = Field(default=None, description="Validation errors, if any.", alias="validationErrors")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["message", "validationErrors"]
 
     model_config = {
@@ -67,15 +68,22 @@ class Error(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "message",
                 "validation_errors",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -91,6 +99,11 @@ class Error(BaseModel):
             "message": obj.get("message"),
             "validationErrors": obj.get("validationErrors")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

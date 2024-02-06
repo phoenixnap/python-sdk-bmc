@@ -34,6 +34,7 @@ class UserInfo(BaseModel):
     account_id: StrictStr = Field(description="The BMC account ID", alias="accountId")
     client_id: Optional[StrictStr] = Field(default=None, description="The client ID of the application", alias="clientId")
     username: StrictStr = Field(description="The logged in user or owner of the client application")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["accountId", "clientId", "username"]
 
     model_config = {
@@ -66,13 +67,20 @@ class UserInfo(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class UserInfo(BaseModel):
             "clientId": obj.get("clientId"),
             "username": obj.get("username")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

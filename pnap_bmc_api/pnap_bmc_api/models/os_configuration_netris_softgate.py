@@ -36,6 +36,7 @@ class OsConfigurationNetrisSoftgate(BaseModel):
     controller_address: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="(Write-only) IP address or hostname through which to reach the Netris Controller.", alias="controllerAddress")
     controller_version: Optional[StrictStr] = Field(default=None, description="(Write-only) The version of the Netris Controller to connect to.", alias="controllerVersion")
     controller_auth_key: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="(Write-only) The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller.", alias="controllerAuthKey")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hostOs", "controllerAddress", "controllerVersion", "controllerAuthKey"]
 
     @field_validator('controller_address')
@@ -89,14 +90,21 @@ class OsConfigurationNetrisSoftgate(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "host_os",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -114,6 +122,11 @@ class OsConfigurationNetrisSoftgate(BaseModel):
             "controllerVersion": obj.get("controllerVersion"),
             "controllerAuthKey": obj.get("controllerAuthKey")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -36,6 +36,7 @@ class Location(BaseModel):
     location: LocationEnum
     location_description: Optional[StrictStr] = Field(default=None, alias="locationDescription")
     product_categories: Optional[List[ProductCategory]] = Field(default=None, alias="productCategories")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["location", "locationDescription", "productCategories"]
 
     model_config = {
@@ -68,10 +69,12 @@ class Location(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -82,6 +85,11 @@ class Location(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['productCategories'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -98,6 +106,11 @@ class Location(BaseModel):
             "locationDescription": obj.get("locationDescription"),
             "productCategories": [ProductCategory.from_dict(_item) for _item in obj.get("productCategories")] if obj.get("productCategories") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
