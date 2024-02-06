@@ -75,7 +75,7 @@ jobs:
         with:
           package-under-test: ./pnap_audit_api
           test-dir: tests
-          test-file: MiscTest
+          test-file: TestMisc
           test-report-dir: tests/test-reports
           python-version: ${{ matrix.python-version }}
 
