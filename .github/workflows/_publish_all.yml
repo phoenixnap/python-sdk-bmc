@@ -124,3 +124,14 @@ jobs:
     with:
       dry_run: ${{ inputs.dry_run }}
       package_to_publish: pnap_invoicing_api
+
+  publish-billing-api:
+    name: Publish Billing API
+    needs:
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      package_to_publish: pnap_billing_api
