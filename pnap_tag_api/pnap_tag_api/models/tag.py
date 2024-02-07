@@ -39,6 +39,7 @@ class Tag(BaseModel):
     is_billing_tag: StrictBool = Field(description="Whether or not to show the tag as part of billing and invoices.", alias="isBillingTag")
     resource_assignments: Optional[List[ResourceAssignment]] = Field(default=None, description="The tag's assigned resources.", alias="resourceAssignments")
     created_by: Optional[StrictStr] = Field(default='USER', description="The tag's creator.", alias="createdBy")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "values", "description", "isBillingTag", "resourceAssignments", "createdBy"]
 
     @field_validator('created_by')
@@ -81,10 +82,12 @@ class Tag(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -95,6 +98,11 @@ class Tag(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['resourceAssignments'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -115,6 +123,11 @@ class Tag(BaseModel):
             "resourceAssignments": [ResourceAssignment.from_dict(_item) for _item in obj.get("resourceAssignments")] if obj.get("resourceAssignments") is not None else None,
             "createdBy": obj.get("createdBy") if obj.get("createdBy") is not None else 'USER'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

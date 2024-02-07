@@ -58,6 +58,14 @@ jobs:
       package-name: pnap_payments_api
       test-file: pnap_payments_api_test.py
 
+  run-generic-tests:
+    uses: ./.github/workflows/_test.yml
+    with:
+      test-dir: tests
+      test-file: misc_test.py
+      test-report-dir: tests/test-reports
+      package-name: pnap_audit_api
+
   publish-test-results:
     name: Publish Test Results
     needs:
@@ -71,6 +79,7 @@ jobs:
       - build-and-test-locationapi
       - build-and-test-invoicingapi
       - build-and-test-paymentsapi
+      - run-generic-tests
     runs-on: ubuntu-20.04
     if: always()
     steps:

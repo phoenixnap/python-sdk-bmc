@@ -41,6 +41,7 @@ class Quota(BaseModel):
     unit: StrictStr = Field(description="Unit of the quota type. Supported values are 'COUNT' and 'GB'.")
     used: Annotated[int, Field(strict=True, ge=0)] = Field(description="The quota used expressed as a number.")
     quota_edit_limit_request_details: List[QuotaEditLimitRequestDetails] = Field(alias="quotaEditLimitRequestDetails")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "status", "limit", "unit", "used", "quotaEditLimitRequestDetails"]
 
     @field_validator('status')
@@ -81,11 +82,13 @@ class Quota(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "quota_edit_limit_request_details",
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -96,6 +99,11 @@ class Quota(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['quotaEditLimitRequestDetails'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -117,6 +125,11 @@ class Quota(BaseModel):
             "used": obj.get("used"),
             "quotaEditLimitRequestDetails": [QuotaEditLimitRequestDetails.from_dict(_item) for _item in obj.get("quotaEditLimitRequestDetails")] if obj.get("quotaEditLimitRequestDetails") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

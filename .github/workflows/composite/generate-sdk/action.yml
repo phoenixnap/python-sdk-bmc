@@ -20,6 +20,8 @@ runs:
     - name: Install openapi-generator-cli
       shell: bash
       run: npm install -g @openapitools/openapi-generator-cli
+      # First part of the cleanup - makes sure obsolete files get deleted.
+      # Everything else will be re-generated.
     - name: Cleanup existing files
       shell: bash
       run: |
@@ -47,7 +49,8 @@ runs:
         -c openapi-generator-config.yaml \
         -o=${{ inputs.package-name }} \
         --additional-properties packageName=${{ inputs.package-name }} \
-        --additional-properties packageVersion=$version
+        --additional-properties packageVersion=$version \
+        --additional-properties disallowAdditionalPropertiesIfNotPresent=false
     - name: Upload Artifacts
       uses: actions/upload-artifact@v3
       with:

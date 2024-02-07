@@ -34,6 +34,7 @@ class OsConfigurationNetrisController(BaseModel):
     host_os: Optional[StrictStr] = Field(default=None, description="(Read-only) Host OS on which the Netris Controller is installed.", alias="hostOs")
     netris_web_console_url: Optional[StrictStr] = Field(default=None, description="(Read-only) The URL for the Netris Controller web console. It will only be returned in response to provisioning a server.", alias="netrisWebConsoleUrl")
     netris_user_password: Optional[StrictStr] = Field(default=None, description="(Read-only) Auto-generated password set for user 'netris' in the web console.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.", alias="netrisUserPassword")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hostOs", "netrisWebConsoleUrl", "netrisUserPassword"]
 
     model_config = {
@@ -69,6 +70,7 @@ class OsConfigurationNetrisController(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
@@ -76,9 +78,15 @@ class OsConfigurationNetrisController(BaseModel):
                 "host_os",
                 "netris_web_console_url",
                 "netris_user_password",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -95,6 +103,11 @@ class OsConfigurationNetrisController(BaseModel):
             "netrisWebConsoleUrl": obj.get("netrisWebConsoleUrl"),
             "netrisUserPassword": obj.get("netrisUserPassword")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -32,6 +32,7 @@ class RelinquishIpBlock(BaseModel):
     Object used to determine whether to relinquish ownership of the IP block upon server deletion.
     """ # noqa: E501
     delete_ip_blocks: Optional[StrictBool] = Field(default=False, description="Determines whether the IP blocks assigned to the server should be deleted or not.", alias="deleteIpBlocks")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["deleteIpBlocks"]
 
     model_config = {
@@ -64,13 +65,20 @@ class RelinquishIpBlock(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -85,6 +93,11 @@ class RelinquishIpBlock(BaseModel):
         _obj = cls.model_validate({
             "deleteIpBlocks": obj.get("deleteIpBlocks") if obj.get("deleteIpBlocks") is not None else False
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

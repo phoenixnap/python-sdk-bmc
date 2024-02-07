@@ -33,6 +33,7 @@ class DeleteSshKeyResult(BaseModel):
     """ # noqa: E501
     result: StrictStr = Field(description="Resource has been deleted.")
     ssh_key_id: StrictStr = Field(description="The unique identifier of the deleted resource.", alias="sshKeyId")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["result", "sshKeyId"]
 
     model_config = {
@@ -65,13 +66,20 @@ class DeleteSshKeyResult(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -87,6 +95,11 @@ class DeleteSshKeyResult(BaseModel):
             "result": obj.get("result"),
             "sshKeyId": obj.get("sshKeyId")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -35,6 +35,7 @@ class PrivateNetworkConfiguration(BaseModel):
     gateway_address: Optional[StrictStr] = Field(default=None, description="Deprecated in favour of a common gateway address across all networks available under NetworkConfiguration.<br> The address of the gateway assigned / to assign to the server.<br> When used as part of request body, IP address has to be part of private network assigned to this server.<br> Gateway address also has to be assigned on an already deployed resource unless the `force` query parameter is true.", alias="gatewayAddress")
     configuration_type: Optional[StrictStr] = Field(default='USE_OR_CREATE_DEFAULT', description="(Write-only) Determines the approach for configuring private network(s) for the server being provisioned. Currently this field should be set to `USE_OR_CREATE_DEFAULT`, `USER_DEFINED` or `NONE`.", alias="configurationType")
     private_networks: Optional[List[ServerPrivateNetwork]] = Field(default=None, description="The list of private networks this server is member of. When this field is part of request body, it'll be used to specify the private networks to assign to this server upon provisioning. Used alongside the `USER_DEFINED` configurationType.", alias="privateNetworks")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["gatewayAddress", "configurationType", "privateNetworks"]
 
     model_config = {
@@ -67,10 +68,12 @@ class PrivateNetworkConfiguration(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -81,6 +84,11 @@ class PrivateNetworkConfiguration(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['privateNetworks'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -97,6 +105,11 @@ class PrivateNetworkConfiguration(BaseModel):
             "configurationType": obj.get("configurationType") if obj.get("configurationType") is not None else 'USE_OR_CREATE_DEFAULT',
             "privateNetworks": [ServerPrivateNetwork.from_dict(_item) for _item in obj.get("privateNetworks")] if obj.get("privateNetworks") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

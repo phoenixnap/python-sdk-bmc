@@ -38,6 +38,7 @@ class NetworkConfiguration(BaseModel):
     private_network_configuration: Optional[PrivateNetworkConfiguration] = Field(default=None, alias="privateNetworkConfiguration")
     ip_blocks_configuration: Optional[IpBlocksConfiguration] = Field(default=None, alias="ipBlocksConfiguration")
     public_network_configuration: Optional[PublicNetworkConfiguration] = Field(default=None, alias="publicNetworkConfiguration")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["gatewayAddress", "privateNetworkConfiguration", "ipBlocksConfiguration", "publicNetworkConfiguration"]
 
     model_config = {
@@ -70,10 +71,12 @@ class NetworkConfiguration(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -86,6 +89,11 @@ class NetworkConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of public_network_configuration
         if self.public_network_configuration:
             _dict['publicNetworkConfiguration'] = self.public_network_configuration.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -103,6 +111,11 @@ class NetworkConfiguration(BaseModel):
             "ipBlocksConfiguration": IpBlocksConfiguration.from_dict(obj.get("ipBlocksConfiguration")) if obj.get("ipBlocksConfiguration") is not None else None,
             "publicNetworkConfiguration": PublicNetworkConfiguration.from_dict(obj.get("publicNetworkConfiguration")) if obj.get("publicNetworkConfiguration") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

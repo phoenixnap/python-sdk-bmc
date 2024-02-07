@@ -36,6 +36,7 @@ class ServerPrivateNetwork(BaseModel):
     ips: Optional[Annotated[List[StrictStr], Field(max_length=256)]] = Field(default=None, description="IPs to configure/configured on the server.<br> Valid IP formats are single IPv4 addresses or IPv4 ranges. IPs must be within the network's range. Should be null or empty list if DHCP is true. <br> If field is undefined and DHCP is false, next available IP in network will be automatically allocated.<br> If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network. <li> Assign IP addresses which are considered as reserved in network.</ul>")
     dhcp: Optional[StrictBool] = Field(default=False, description="Determines whether DHCP is enabled for this server. Should be false if any IPs are provided. Not supported for Proxmox OS.")
     status_description: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the network.", alias="statusDescription")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "ips", "dhcp", "statusDescription"]
 
     model_config = {
@@ -69,14 +70,21 @@ class ServerPrivateNetwork(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "status_description",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class ServerPrivateNetwork(BaseModel):
             "dhcp": obj.get("dhcp") if obj.get("dhcp") is not None else False,
             "statusDescription": obj.get("statusDescription")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

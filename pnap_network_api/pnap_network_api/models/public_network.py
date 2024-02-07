@@ -43,6 +43,7 @@ class PublicNetwork(BaseModel):
     status: StrictStr = Field(description="The status of the public network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
     created_on: datetime = Field(description="Date and time when this public network was created.", alias="createdOn")
     ip_blocks: List[PublicNetworkIpBlock] = Field(description="A list of IP Blocks that are associated with this public network.", alias="ipBlocks")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "vlanId", "memberships", "name", "location", "description", "status", "createdOn", "ipBlocks"]
 
     model_config = {
@@ -75,10 +76,12 @@ class PublicNetwork(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -96,6 +99,11 @@ class PublicNetwork(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['ipBlocks'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -118,6 +126,11 @@ class PublicNetwork(BaseModel):
             "createdOn": obj.get("createdOn"),
             "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

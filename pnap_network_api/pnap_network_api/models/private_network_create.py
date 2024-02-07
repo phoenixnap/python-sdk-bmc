@@ -38,6 +38,7 @@ class PrivateNetworkCreate(BaseModel):
     location_default: Optional[StrictBool] = Field(default=False, description="Identifies network as the default private network for the specified location.", alias="locationDefault")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     cidr: Optional[StrictStr] = Field(default=None, description="IP range associated with this private network in CIDR notation.<br> Setting the `force` query parameter to `true` allows you to skip assigning a specific IP range to network.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "location", "locationDefault", "vlanId", "cidr"]
 
     @field_validator('name')
@@ -77,13 +78,20 @@ class PrivateNetworkCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -103,6 +111,11 @@ class PrivateNetworkCreate(BaseModel):
             "vlanId": obj.get("vlanId"),
             "cidr": obj.get("cidr")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

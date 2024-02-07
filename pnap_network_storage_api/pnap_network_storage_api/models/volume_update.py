@@ -38,6 +38,7 @@ class VolumeUpdate(BaseModel):
     capacity_in_gb: Optional[Annotated[int, Field(strict=True, ge=2000)]] = Field(default=None, description="Capacity of Volume in GB. Currently only whole numbers and multiples of 1000GB are supported.", alias="capacityInGb")
     path_suffix: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=27)]] = Field(default=None, description="Last part of volume's path.", alias="pathSuffix")
     permissions: Optional[PermissionsUpdate] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "capacityInGb", "pathSuffix", "permissions"]
 
     @field_validator('name')
@@ -90,16 +91,23 @@ class VolumeUpdate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of permissions
         if self.permissions:
             _dict['permissions'] = self.permissions.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -118,6 +126,11 @@ class VolumeUpdate(BaseModel):
             "pathSuffix": obj.get("pathSuffix"),
             "permissions": PermissionsUpdate.from_dict(obj.get("permissions")) if obj.get("permissions") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

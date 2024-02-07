@@ -38,6 +38,7 @@ class PublicNetworkCreate(BaseModel):
     location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     ip_blocks: Optional[Annotated[List[PublicNetworkIpBlock], Field(max_length=10)]] = Field(default=None, description="A list of IP Blocks that will be associated with this public network.", alias="ipBlocks")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "location", "vlanId", "ipBlocks"]
 
     @field_validator('name')
@@ -77,10 +78,12 @@ class PublicNetworkCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -91,6 +94,11 @@ class PublicNetworkCreate(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['ipBlocks'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -109,6 +117,11 @@ class PublicNetworkCreate(BaseModel):
             "vlanId": obj.get("vlanId"),
             "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

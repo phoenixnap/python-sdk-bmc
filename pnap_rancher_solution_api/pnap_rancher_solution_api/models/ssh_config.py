@@ -34,6 +34,7 @@ class SshConfig(BaseModel):
     install_default_keys: Optional[StrictBool] = Field(default=True, description="Define whether public keys marked as default should be installed on this node. These are public keys that were already recorded on this system. Use <a href='https://developers.phoenixnap.com/docs/bmc/1/routes/ssh-keys/get' target='_blank'>GET /ssh-keys</a> to retrieve a list of possible values.", alias="installDefaultKeys")
     keys: Optional[List[StrictStr]] = Field(default=None, description="List of public SSH keys.")
     key_ids: Optional[List[StrictStr]] = Field(default=None, description="List of public SSH key identifiers. These are public keys that were already recorded on this system. Use <a href='https://developers.phoenixnap.com/docs/bmc/1/routes/ssh-keys/get' target='_blank'>GET /ssh-keys</a> to retrieve a list of possible values.", alias="keyIds")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["installDefaultKeys", "keys", "keyIds"]
 
     model_config = {
@@ -66,13 +67,20 @@ class SshConfig(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class SshConfig(BaseModel):
             "keys": obj.get("keys"),
             "keyIds": obj.get("keyIds")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
