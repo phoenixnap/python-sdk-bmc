@@ -24,7 +24,6 @@ jobs:
       - lint
     uses: ./.github/workflows/_test.yml
     with:
-      package-under-test: ./${{ inputs.package-name }}
       test-dir: tests
       test-file: ${{ inputs.test-file }}
       test-report-dir: tests/test-reports
