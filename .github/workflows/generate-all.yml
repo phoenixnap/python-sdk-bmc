@@ -82,7 +82,7 @@ jobs:
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/payments/download_spec
       package-name: pnap_payments_api
-   generate-billingapi:
+  generate-billingapi:
     needs: prerequisite
     uses: ./.github/workflows/_generate.yml
     with:
