@@ -82,7 +82,12 @@ jobs:
     with:
       spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/payments/download_spec
       package-name: pnap_payments_api
-  
+   generate-billingapi:
+    needs: prerequisite
+    uses: ./.github/workflows/_generate.yml
+    with:
+      spec-link: https://developers.phoenixnap.com/portals/api/sites/phoenixnap-prod-developerportal/liveportal/apis/bmc-billing/download_spec
+      package-name: pnap_billing_api 
   # Push generated code
   push-changes:
     name: Push Changes
@@ -98,6 +103,7 @@ jobs:
       - generate-locationapi
       - generate-invoicingapi
       - generate-paymentsapi
+      - generate-billingapi
     outputs:
       CHANGES_FOUND: ${{ steps.commit-step.outputs.CHANGES_FOUND }}
     steps:
@@ -118,7 +124,8 @@ jobs:
            ./pnap_rancher_solution_api \
            ./pnap_tag_api \
            ./pnap_payment_api \
-           ./pnap_invoice_api
+           ./pnap_invoice_api \
+           ./pnap_billing_api
       - name: Download Artifacts
         uses: actions/download-artifact@v3
       - name: Move spec files
