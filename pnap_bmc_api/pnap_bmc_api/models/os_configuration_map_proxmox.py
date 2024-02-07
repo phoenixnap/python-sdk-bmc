@@ -35,6 +35,7 @@ class OsConfigurationMapProxmox(BaseModel):
     root_password: Optional[StrictStr] = Field(default=None, description="(Read-only) Password set for user root on a Proxmox server which will only be returned in response to provisioning a server.", alias="rootPassword")
     management_ui_url: Optional[StrictStr] = Field(default=None, description="(Read-only) The URL of the management UI which will only be returned in response to provisioning a server.", alias="managementUiUrl")
     management_access_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.", alias="managementAccessAllowedIps")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["rootPassword", "managementUiUrl", "managementAccessAllowedIps"]
 
     model_config = {
@@ -69,15 +70,22 @@ class OsConfigurationMapProxmox(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "root_password",
                 "management_ui_url",
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class OsConfigurationMapProxmox(BaseModel):
             "managementUiUrl": obj.get("managementUiUrl"),
             "managementAccessAllowedIps": obj.get("managementAccessAllowedIps")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

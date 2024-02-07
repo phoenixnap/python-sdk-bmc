@@ -33,6 +33,7 @@ class PublicNetworkConfiguration(BaseModel):
     Public network details of bare metal server.
     """ # noqa: E501
     public_networks: Optional[List[ServerPublicNetwork]] = Field(default=None, description="The list of public networks this server is member of. When this field is part of request body, it'll be used to specify the public networks to assign to this server upon provisioning.", alias="publicNetworks")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["publicNetworks"]
 
     model_config = {
@@ -65,10 +66,12 @@ class PublicNetworkConfiguration(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -79,6 +82,11 @@ class PublicNetworkConfiguration(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['publicNetworks'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -93,6 +101,11 @@ class PublicNetworkConfiguration(BaseModel):
         _obj = cls.model_validate({
             "publicNetworks": [ServerPublicNetwork.from_dict(_item) for _item in obj.get("publicNetworks")] if obj.get("publicNetworks") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

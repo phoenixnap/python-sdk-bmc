@@ -35,6 +35,7 @@ class ResetResult(BaseModel):
     result: StrictStr = Field(description="Message describing the reset result.")
     password: Optional[StrictStr] = Field(default=None, description="Password set for user Admin on Windows server or user root on ESXi server.")
     os_configuration: Optional[OsConfigurationMap] = Field(default=None, alias="osConfiguration")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["result", "password", "osConfiguration"]
 
     model_config = {
@@ -67,16 +68,23 @@ class ResetResult(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of os_configuration
         if self.os_configuration:
             _dict['osConfiguration'] = self.os_configuration.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -93,6 +101,11 @@ class ResetResult(BaseModel):
             "password": obj.get("password"),
             "osConfiguration": OsConfigurationMap.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

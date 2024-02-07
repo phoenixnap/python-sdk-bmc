@@ -34,6 +34,7 @@ class SshKeyUpdate(BaseModel):
     """ # noqa: E501
     default: StrictBool = Field(description="Keys marked as default are always included on server creation and reset unless toggled off in creation/reset request.")
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="SSH key name that can represent the key as an alternative to its ID.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["default", "name"]
 
     @field_validator('name')
@@ -73,13 +74,20 @@ class SshKeyUpdate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -95,6 +103,11 @@ class SshKeyUpdate(BaseModel):
             "default": obj.get("default"),
             "name": obj.get("name")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

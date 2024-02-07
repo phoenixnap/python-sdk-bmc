@@ -32,6 +32,7 @@ class OsConfigurationCloudInit(BaseModel):
     Cloud-init configuration details.
     """ # noqa: E501
     user_data: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, description="(Write-only) User data for the <a href='https://cloudinit.readthedocs.io/en/latest/' target='_blank'>cloud-init</a> configuration in base64 encoding. NoCloud format is supported. Follow the <a href='https://phoenixnap.com/kb/bmc-cloud-init' target='_blank'>instructions</a> on how to provision a server using cloud-init. Only ubuntu/bionic, ubuntu/focal and ubuntu/jammy are supported. User data will not be stored and cannot be retrieved once you deploy the server. Copy and save it for future reference.", alias="userData")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["userData"]
 
     model_config = {
@@ -64,13 +65,20 @@ class OsConfigurationCloudInit(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -85,6 +93,11 @@ class OsConfigurationCloudInit(BaseModel):
         _obj = cls.model_validate({
             "userData": obj.get("userData")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -43,6 +43,7 @@ class StorageNetwork(BaseModel):
     created_on: Optional[datetime] = Field(default=None, description="Date and time when this storage network was created.", alias="createdOn")
     delete_requested_on: Optional[datetime] = Field(default=None, description="Date and time of the initial request for storage network deletion.", alias="deleteRequestedOn")
     volumes: Optional[List[Volume]] = Field(default=None, description="Volume for a storage network.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "status", "location", "networkId", "ips", "createdOn", "deleteRequestedOn", "volumes"]
 
     model_config = {
@@ -75,10 +76,12 @@ class StorageNetwork(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
@@ -89,6 +92,11 @@ class StorageNetwork(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['volumes'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -112,6 +120,11 @@ class StorageNetwork(BaseModel):
             "deleteRequestedOn": obj.get("deleteRequestedOn"),
             "volumes": [Volume.from_dict(_item) for _item in obj.get("volumes")] if obj.get("volumes") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -38,6 +38,7 @@ class SshKey(BaseModel):
     fingerprint: StrictStr = Field(description="SSH key auto-generated SHA-256 fingerprint.")
     created_on: datetime = Field(description="Date and time of creation.", alias="createdOn")
     last_updated_on: datetime = Field(description="Date and time of last update.", alias="lastUpdatedOn")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "default", "name", "key", "fingerprint", "createdOn", "lastUpdatedOn"]
 
     model_config = {
@@ -70,13 +71,20 @@ class SshKey(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
+                "additional_properties",
             },
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -97,6 +105,11 @@ class SshKey(BaseModel):
             "createdOn": obj.get("createdOn"),
             "lastUpdatedOn": obj.get("lastUpdatedOn")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
