@@ -9,6 +9,12 @@ on:
       test-file:
         required: true
         type: string
+      test-dir:
+        required: true
+        type: string
+      test-report-dir:
+        required: true
+        type: string
 
 jobs:
   lint:
@@ -20,25 +26,12 @@ jobs:
         with:
           package-name: ${{ inputs.package-name }}
   test:
-    name: Test ${{ inputs.package-name }} py v ${{ matrix.python-version }}
-    runs-on: ubuntu-20.04
     needs:
       - lint
-    services:
-      mockserver:
-        image: mockserver/mockserver:5.15.0
-        ports:
-          - 1080:1080
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [ '3.7', '3.12' ]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/composite/test-sdk
-        with:
-          package-under-test: ./${{ inputs.package-name }}
-          test-dir: tests
-          test-file: ${{ inputs.test-file }}
-          test-report-dir: tests/test-reports
-          python-version: ${{ matrix.python-version }}
+    uses: ./.github/workflows/_test.yml
+    with:
+      package-under-test: ./${{ inputs.package-name }}
+      test-dir: tests
+      test-file: ${{ inputs.test-file }}
+      test-report-dir: tests/test-reports
+      python-version: ${{ matrix.python-version }}
