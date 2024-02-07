@@ -28,3 +28,4 @@ jobs:
       test-dir: tests
       test-file: ${{ inputs.test-file }}
       test-report-dir: tests/test-reports
+      package-name: ${{ inputs.package-name }}
