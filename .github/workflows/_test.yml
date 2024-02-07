@@ -9,6 +9,12 @@ on:
       test-file:
         required: true
         type: string
+      test-dir:
+        required: true
+        type: string
+      test-report-dir:
+        required: true
+        type: string
 
 jobs:
   test:
