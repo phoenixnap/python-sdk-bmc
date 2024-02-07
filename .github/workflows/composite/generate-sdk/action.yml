@@ -50,7 +50,8 @@ runs:
         -o=${{ inputs.package-name }} \
         --additional-properties packageName=${{ inputs.package-name }} \
         --additional-properties packageVersion=$version \
-        --additional-properties disallowAdditionalPropertiesIfNotPresent=false
+        --additional-properties disallowAdditionalPropertiesIfNotPresent=false \
+        --additional-properties legacyDiscriminatorBehavior=false
     - name: Upload Artifacts
       uses: actions/upload-artifact@v3
       with:
