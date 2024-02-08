@@ -5,10 +5,116 @@ on:
     types: [published]
 
 jobs:
-  publish:
-    name: Publish all SDKs
-    uses: ./.github/workflows/_publish_all.yml
-    secrets: 
+  validate-all:
+    name: Validate all modules
+    uses: ./.github/workflows/validate-all.yml
+
+  publish-audit-api:
+    name: Publish Audit API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
       PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
     with:
       dry_run: false
+      package_to_publish: pnap_audit_api
+
+  publish-bmc-api:
+    name: Publish BMC API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_bmc_api
+
+  publish-ip-api:
+    name: Publish IP API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_ip_api
+
+  publish-network-api:
+    name: Publish Network API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_network_api
+
+  publish-network-storage-api:
+    name: Publish Network Storage API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_network_storage_api
+
+  publish-rancher-solution-api:
+    name: Publish Rancher Solution API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_rancher_solution_api
+
+  publish-tag-api:
+    name: Publish Tag API
+    needs: 
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_tag_api
+
+  publish-location-api:
+    name: Publish Location API
+    needs:
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_location_api
+
+  publish-payments-api:
+    name: Publish Payments API
+    needs:
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_payments_api
+
+  publish-invoicing-api:
+    name: Publish Invoicing API
+    needs:
+      - validate-all
+    uses: ./.github/workflows/_publish.yml
+    secrets:
+      PYPI_API_KEY: ${{ secrets.PYPI_API_KEY }}
+    with:
+      dry_run: false
+      package_to_publish: pnap_invoicing_api
