@@ -82,8 +82,8 @@ class ApiClient:
         self.user_agent = f"PNAP-python-sdk-bmc/{{{packageVersion}}}"
         self.client_side_validation = configuration.client_side_validation
 
-         # Set default X-Powered-By.
-        self.powered_by = f"PNAP-python-sdk-bmc/{{{packageVersion}}}"
+        # Set default X-Powered-By.
+        self.powered_by = f"PNAP-python-sdk-bmc/{{{packageName}}}/{{{packageVersion}}}"
 
 {{#asyncio}}
     async def __aenter__(self):
