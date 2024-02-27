@@ -91,7 +91,7 @@ class ApiClient:
         self.client_side_validation = configuration.client_side_validation
 
          # Set default X-Powered-By.
-        self.powered_by = f"PNAP-python-sdk-bmc/2.0.2.dev"
+        self.powered_by = f"PNAP-python-sdk-bmc/pnap_network_storage_api/2.0.2.dev"
 
     def __enter__(self):
         return self
