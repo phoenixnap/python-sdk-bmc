@@ -34,8 +34,8 @@ class RancherClusterConfig(BaseModel):
     """ # noqa: E501
     token: Optional[StrictStr] = Field(default=None, description="Shared secret used to join a server or agent to a cluster.")
     tls_san: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `tls-san`. Add additional hostname or IP as a Subject Alternative Name in the TLS cert.", alias="tlsSan")
-    etcd_snapshot_schedule_cron: Optional[StrictStr] = Field(default='0 0,12 * * *', description="This maps to ranchers `etcd.dev-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours ‘0 */5 * * *’. Default: at 12 am/pm", alias="etcdSnapshotScheduleCron")
-    etcd_snapshot_retention: Optional[StrictInt] = Field(default=5, description="This maps to ranchers `etcd.dev-retention`. Number of snapshots to retain.", alias="etcdSnapshotRetention")
+    etcd_snapshot_schedule_cron: Optional[StrictStr] = Field(default='0 0,12 * * *', description="This maps to ranchers `etcd-snapshot-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours ‘0 */5 * * *’. Default: at 12 am/pm", alias="etcdSnapshotScheduleCron")
+    etcd_snapshot_retention: Optional[StrictInt] = Field(default=5, description="This maps to ranchers `etcd-snapshot-retention`. Number of snapshots to retain.", alias="etcdSnapshotRetention")
     node_taint: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.", alias="nodeTaint")
     cluster_domain: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `cluster-domain`. Cluster Domain.", alias="clusterDomain")
     certificates: Optional[RancherClusterCertificates] = None
