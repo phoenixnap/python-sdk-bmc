@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.3"
+__version__ = "2.0.2-SNAPSHOT"
 
 # import apis into sdk package
 from pnap_bmc_api.api.quotas_api import QuotasApi
