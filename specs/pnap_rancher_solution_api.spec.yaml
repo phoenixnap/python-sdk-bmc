@@ -341,12 +341,12 @@ components:
           type: string
           example: mydomain.com
         etcdSnapshotScheduleCron:
-          description: 'This maps to ranchers `etcd-snapshot-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours ‘0 */5 * * *’. Default: at 12 am/pm'
+          description: 'This maps to ranchers `etcd.dev-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours ‘0 */5 * * *’. Default: at 12 am/pm'
           type: string
           default: 0 0,12 * * *
           example: 0 0,12 * * *
         etcdSnapshotRetention:
-          description: This maps to ranchers `etcd-snapshot-retention`. Number of snapshots to retain.
+          description: This maps to ranchers `etcd.dev-retention`. Number of snapshots to retain.
           type: integer
           default: 5
           example: 5

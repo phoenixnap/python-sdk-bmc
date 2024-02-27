@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_bmc_api"
-version = "2.0.2-SNAPSHOT"
+version = "2.0.2.dev"
 description = "Bare Metal Cloud API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
