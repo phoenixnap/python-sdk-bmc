@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
 from typing_extensions import Annotated
+from pnap_bmc_api.models.esxi_os_configuration import EsxiOsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit
 from pnap_bmc_api.models.os_configuration_netris_controller import OsConfigurationNetrisController
 from pnap_bmc_api.models.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
@@ -43,9 +44,10 @@ class OsConfiguration(BaseModel):
     management_ui_url: Optional[StrictStr] = Field(default=None, description="(Read-only) The URL of the management UI which will only be returned in response to provisioning a server.", alias="managementUiUrl")
     management_access_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server.", alias="managementAccessAllowedIps")
     install_os_to_ram: Optional[StrictBool] = Field(default=False, description="If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the <a href='https://phoenixnap.com/kb/bmc-custom-os' target='_blank'>instructions</a> on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy.", alias="installOsToRam")
+    esxi: Optional[EsxiOsConfiguration] = None
     cloud_init: Optional[OsConfigurationCloudInit] = Field(default=None, alias="cloudInit")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "cloudInit"]
+    __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "esxi", "cloudInit"]
 
     model_config = {
         "populate_by_name": True,
@@ -99,6 +101,9 @@ class OsConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of windows
         if self.windows:
             _dict['windows'] = self.windows.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of esxi
+        if self.esxi:
+            _dict['esxi'] = self.esxi.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cloud_init
         if self.cloud_init:
             _dict['cloudInit'] = self.cloud_init.to_dict()
@@ -126,6 +131,7 @@ class OsConfiguration(BaseModel):
             "managementUiUrl": obj.get("managementUiUrl"),
             "managementAccessAllowedIps": obj.get("managementAccessAllowedIps"),
             "installOsToRam": obj.get("installOsToRam") if obj.get("installOsToRam") is not None else False,
+            "esxi": EsxiOsConfiguration.from_dict(obj.get("esxi")) if obj.get("esxi") is not None else None,
             "cloudInit": OsConfigurationCloudInit.from_dict(obj.get("cloudInit")) if obj.get("cloudInit") is not None else None
         })
         # store additional fields in additional_properties

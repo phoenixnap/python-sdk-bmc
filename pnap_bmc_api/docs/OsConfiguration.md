@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **management_ui_url** | **str** | (Read-only) The URL of the management UI which will only be returned in response to provisioning a server. | [optional] [readonly] 
 **management_access_allowed_ips** | **List[str]** | List of IPs allowed to access the Management UI. Supported in single IP, CIDR and range format. When undefined, Management UI is disabled. This will only be returned in response to provisioning a server. | [optional] 
 **install_os_to_ram** | **bool** | If true, OS will be installed to and booted from the server&#39;s RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the &lt;a href&#x3D;&#39;https://phoenixnap.com/kb/bmc-custom-os&#39; target&#x3D;&#39;_blank&#39;&gt;instructions&lt;/a&gt; on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy. | [optional] [default to False]
+**esxi** | [**EsxiOsConfiguration**](EsxiOsConfiguration.md) |  | [optional] 
 **cloud_init** | [**OsConfigurationCloudInit**](OsConfigurationCloudInit.md) |  | [optional] 
 
 ## Example
