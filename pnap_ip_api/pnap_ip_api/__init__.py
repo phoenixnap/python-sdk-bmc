@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.2.dev"
+__version__ = "2.0.2"
 
 # import apis into sdk package
 from pnap_ip_api.api.ip_blocks_api import IPBlocksApi
