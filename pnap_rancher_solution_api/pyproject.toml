@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_rancher_solution_api"
-version = "2.0.1"
+version = "2.0.2"
 description = "Rancher Solution API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"

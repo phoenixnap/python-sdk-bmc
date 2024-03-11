@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.1"
+__version__ = "2.1.0"
 
 # import apis into sdk package
 from pnap_bmc_api.api.quotas_api import QuotasApi
@@ -38,6 +38,8 @@ from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.models.delete_result import DeleteResult
 from pnap_bmc_api.models.delete_ssh_key_result import DeleteSshKeyResult
 from pnap_bmc_api.models.error import Error
+from pnap_bmc_api.models.esxi_datastore_configuration import EsxiDatastoreConfiguration
+from pnap_bmc_api.models.esxi_os_configuration import EsxiOsConfiguration
 from pnap_bmc_api.models.ip_blocks_configuration import IpBlocksConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
