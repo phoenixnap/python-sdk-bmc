@@ -31,7 +31,7 @@ class OsConfigurationCloudInit(BaseModel):
     """
     Cloud-init configuration details.
     """ # noqa: E501
-    user_data: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, description="(Write-only) User data for the <a href='https://cloudinit.readthedocs.io/en/latest/' target='_blank'>cloud-init</a> configuration in base64 encoding. NoCloud format is supported. Follow the <a href='https://phoenixnap.com/kb/bmc-cloud-init' target='_blank'>instructions</a> on how to provision a server using cloud-init. Only ubuntu/bionic, ubuntu/focal and ubuntu/jammy are supported. User data will not be stored and cannot be retrieved once you deploy the server. Copy and save it for future reference.", alias="userData")
+    user_data: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, description="(Write-only) User data for the <a href='https://cloudinit.readthedocs.io/en/latest/' target='_blank'>cloud-init</a> configuration in base64 encoding. NoCloud format is supported. Follow the <a href='https://phoenixnap.com/kb/bmc-cloud-init' target='_blank'>instructions</a> on how to provision a server using cloud-init. Only ubuntu/bionic, ubuntu/focal, ubuntu/jammy, debian/bullseye, debian/bookworm, centos/centos7, centos/centos8, almalinux/almalinux8, almalinux/almalinux9, rockylinux/rockylinux8, rockylinux/rockylinux9 and virtuozzo/virtuozzo7 are supported. User data will not be stored and cannot be retrieved once you deploy the server. Copy and save it for future reference.", alias="userData")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["userData"]
 
