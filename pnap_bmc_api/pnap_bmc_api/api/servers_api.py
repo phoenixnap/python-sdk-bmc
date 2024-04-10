@@ -4469,7 +4469,6 @@ class ServersApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -4545,7 +4544,6 @@ class ServersApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -4621,7 +4619,6 @@ class ServersApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(

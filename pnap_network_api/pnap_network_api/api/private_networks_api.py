@@ -651,7 +651,6 @@ class PrivateNetworksApi:
             '200': "PrivateNetwork",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -722,7 +721,6 @@ class PrivateNetworksApi:
             '200': "PrivateNetwork",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -793,7 +791,6 @@ class PrivateNetworksApi:
             '200': "PrivateNetwork",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -926,7 +923,6 @@ class PrivateNetworksApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1002,7 +998,6 @@ class PrivateNetworksApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1078,7 +1073,6 @@ class PrivateNetworksApi:
             '400': "Error",
             '401': "Error",
             '403': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
