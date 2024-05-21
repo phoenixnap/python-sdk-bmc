@@ -6,6 +6,7 @@ docs/DeleteSshKeyResult.md
 docs/Error.md
 docs/EsxiDatastoreConfiguration.md
 docs/EsxiOsConfiguration.md
+docs/GpuConfiguration.md
 docs/IpBlocksConfiguration.md
 docs/NetworkConfiguration.md
 docs/OsConfiguration.md
@@ -59,6 +60,7 @@ pnap_bmc_api/models/delete_ssh_key_result.py
 pnap_bmc_api/models/error.py
 pnap_bmc_api/models/esxi_datastore_configuration.py
 pnap_bmc_api/models/esxi_os_configuration.py
+pnap_bmc_api/models/gpu_configuration.py
 pnap_bmc_api/models/ip_blocks_configuration.py
 pnap_bmc_api/models/network_configuration.py
 pnap_bmc_api/models/os_configuration.py

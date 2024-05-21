@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictStr, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
+from pnap_bmc_api.models.gpu_configuration import GpuConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.storage_configuration import StorageConfiguration
@@ -61,10 +62,11 @@ class Server(BaseModel):
     os_configuration: Optional[OsConfiguration] = Field(default=None, alias="osConfiguration")
     network_configuration: NetworkConfiguration = Field(alias="networkConfiguration")
     storage_configuration: StorageConfiguration = Field(alias="storageConfiguration")
+    gpu_configuration: Optional[GpuConfiguration] = Field(default=None, alias="gpuConfiguration")
     superseded_by: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server to which the reservation has been transferred.", alias="supersededBy")
     supersedes: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server from which the reservation has been transferred.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "status", "hostname", "description", "os", "type", "location", "cpu", "cpuCount", "coresPerCpu", "cpuFrequency", "ram", "storage", "privateIpAddresses", "publicIpAddresses", "reservationId", "pricingModel", "password", "networkType", "clusterId", "tags", "provisionedOn", "osConfiguration", "networkConfiguration", "storageConfiguration", "supersededBy", "supersedes"]
+    __properties: ClassVar[List[str]] = ["id", "status", "hostname", "description", "os", "type", "location", "cpu", "cpuCount", "coresPerCpu", "cpuFrequency", "ram", "storage", "privateIpAddresses", "publicIpAddresses", "reservationId", "pricingModel", "password", "networkType", "clusterId", "tags", "provisionedOn", "osConfiguration", "networkConfiguration", "storageConfiguration", "gpuConfiguration", "supersededBy", "supersedes"]
 
     @field_validator('hostname')
     def hostname_validate_regular_expression(cls, value):
@@ -128,6 +130,9 @@ class Server(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of storage_configuration
         if self.storage_configuration:
             _dict['storageConfiguration'] = self.storage_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of gpu_configuration
+        if self.gpu_configuration:
+            _dict['gpuConfiguration'] = self.gpu_configuration.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -170,6 +175,7 @@ class Server(BaseModel):
             "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
             "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,
             "storageConfiguration": StorageConfiguration.from_dict(obj.get("storageConfiguration")) if obj.get("storageConfiguration") is not None else None,
+            "gpuConfiguration": GpuConfiguration.from_dict(obj.get("gpuConfiguration")) if obj.get("gpuConfiguration") is not None else None,
             "supersededBy": obj.get("supersededBy"),
             "supersedes": obj.get("supersedes")
         })

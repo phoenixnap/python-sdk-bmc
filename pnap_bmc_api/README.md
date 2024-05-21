@@ -150,6 +150,7 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [EsxiDatastoreConfiguration](docs/EsxiDatastoreConfiguration.md)
  - [EsxiOsConfiguration](docs/EsxiOsConfiguration.md)
+ - [GpuConfiguration](docs/GpuConfiguration.md)
  - [IpBlocksConfiguration](docs/IpBlocksConfiguration.md)
  - [NetworkConfiguration](docs/NetworkConfiguration.md)
  - [OsConfiguration](docs/OsConfiguration.md)

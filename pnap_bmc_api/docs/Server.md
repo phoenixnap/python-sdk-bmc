@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **os_configuration** | [**OsConfiguration**](OsConfiguration.md) |  | [optional] 
 **network_configuration** | [**NetworkConfiguration**](NetworkConfiguration.md) |  | 
 **storage_configuration** | [**StorageConfiguration**](StorageConfiguration.md) |  | 
+**gpu_configuration** | [**GpuConfiguration**](GpuConfiguration.md) |  | [optional] 
 **superseded_by** | **str** | Unique identifier of the server to which the reservation has been transferred. | [optional] 
 **supersedes** | **str** | Unique identifier of the server from which the reservation has been transferred. | [optional] 
 

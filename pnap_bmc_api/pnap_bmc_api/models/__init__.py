@@ -21,6 +21,7 @@ from pnap_bmc_api.models.delete_ssh_key_result import DeleteSshKeyResult
 from pnap_bmc_api.models.error import Error
 from pnap_bmc_api.models.esxi_datastore_configuration import EsxiDatastoreConfiguration
 from pnap_bmc_api.models.esxi_os_configuration import EsxiOsConfiguration
+from pnap_bmc_api.models.gpu_configuration import GpuConfiguration
 from pnap_bmc_api.models.ip_blocks_configuration import IpBlocksConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
