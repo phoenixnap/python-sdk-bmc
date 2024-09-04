@@ -18,36 +18,36 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
+
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, StrictInt, StrictStr, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
-from pnap_network_api.models.network_membership import NetworkMembership
-from pnap_network_api.models.private_network_server import PrivateNetworkServer
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class PrivateNetwork(BaseModel):
+class BgpPeerGroupCreate(BaseModel):
     """
-    Private Network details.
+    Create a BGP Peer Group.
     """ # noqa: E501
-    id: StrictStr = Field(description="The private network identifier.")
-    name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this private network.")
-    description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this private network.")
-    vlan_id: StrictInt = Field(description="The VLAN of this private network.", alias="vlanId")
-    type: StrictStr = Field(description="The type of the private network.")
-    location: StrictStr = Field(description="The location of this private network.")
-    location_default: StrictBool = Field(description="Identifies network as the default private network for the specified location.", alias="locationDefault")
-    cidr: Optional[StrictStr] = Field(default=None, description="IP range associated with this private network in CIDR notation.")
-    servers: List[PrivateNetworkServer]
-    memberships: List[NetworkMembership] = Field(description="A list of resources that are members of this private network.")
-    status: StrictStr = Field(description="The status of the private network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
-    created_on: datetime = Field(description="Date and time when this private network was created.", alias="createdOn")
+    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    asn: StrictInt = Field(description="The BGP Peer Group ASN.")
+    password: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=32)]] = Field(default=None, description="The BGP Peer Group password.")
+    advertised_routes: StrictStr = Field(description="The Advertised routes for the BGP Peer Group. Can have one of the following values: `DEFAULT` and `NONE`.", alias="advertisedRoutes")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "vlanId", "type", "location", "locationDefault", "cidr", "servers", "memberships", "status", "createdOn"]
+    __properties: ClassVar[List[str]] = ["location", "asn", "password", "advertisedRoutes"]
+
+    @field_validator('password')
+    def password_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-zA-Z0-9!@#$%^&*()\-|\[\]{}=;:<>,.]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9!@#$%^&*()\-|\[\]{}=;:<>,.]+$/")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -67,7 +67,7 @@ class PrivateNetwork(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of PrivateNetwork from a JSON string"""
+        """Create an instance of BgpPeerGroupCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,20 +88,6 @@ class PrivateNetwork(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in servers (list)
-        _items = []
-        if self.servers:
-            for _item in self.servers:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['servers'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in memberships (list)
-        _items = []
-        if self.memberships:
-            for _item in self.memberships:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['memberships'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -111,7 +97,7 @@ class PrivateNetwork(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of PrivateNetwork from a dict"""
+        """Create an instance of BgpPeerGroupCreate from a dict"""
         if obj is None:
             return None
 
@@ -119,18 +105,10 @@ class PrivateNetwork(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "description": obj.get("description"),
-            "vlanId": obj.get("vlanId"),
-            "type": obj.get("type"),
             "location": obj.get("location"),
-            "locationDefault": obj.get("locationDefault"),
-            "cidr": obj.get("cidr"),
-            "servers": [PrivateNetworkServer.from_dict(_item) for _item in obj.get("servers")] if obj.get("servers") is not None else None,
-            "memberships": [NetworkMembership.from_dict(_item) for _item in obj.get("memberships")] if obj.get("memberships") is not None else None,
-            "status": obj.get("status"),
-            "createdOn": obj.get("createdOn")
+            "asn": obj.get("asn") if obj.get("asn") is not None else 65401,
+            "password": obj.get("password"),
+            "advertisedRoutes": obj.get("advertisedRoutes") if obj.get("advertisedRoutes") is not None else 'NONE'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
