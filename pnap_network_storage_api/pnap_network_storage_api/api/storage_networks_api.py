@@ -2635,7 +2635,7 @@ class StorageNetworksApi:
     ) -> Volume:
         """Update a storage network's volume details.
 
-        Update a storage network's volume details.
+        Update a storage network's volume details. Volume's capacity requested cannot be less than or equal to current volume's capacity.
 
         :param storage_id: ID of the storage. (required)
         :type storage_id: str
@@ -2717,7 +2717,7 @@ class StorageNetworksApi:
     ) -> ApiResponse[Volume]:
         """Update a storage network's volume details.
 
-        Update a storage network's volume details.
+        Update a storage network's volume details. Volume's capacity requested cannot be less than or equal to current volume's capacity.
 
         :param storage_id: ID of the storage. (required)
         :type storage_id: str
@@ -2799,7 +2799,7 @@ class StorageNetworksApi:
     ) -> RESTResponseType:
         """Update a storage network's volume details.
 
-        Update a storage network's volume details.
+        Update a storage network's volume details. Volume's capacity requested cannot be less than or equal to current volume's capacity.
 
         :param storage_id: ID of the storage. (required)
         :type storage_id: str
