@@ -6,8 +6,8 @@ Result of a successful delete action.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | **str** | IP Block has been deleted. | 
-**ip_block_id** | **str** | The unique identifier of the IP Block. | 
+**result** | **str** | IP Block has been deleted. | [optional] 
+**ip_block_id** | **str** | The unique identifier of the IP Block. | [optional] 
 
 ## Example
 

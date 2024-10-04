@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from pydantic import Field
 try:
@@ -31,8 +31,8 @@ class DeleteIpBlockResult(BaseModel):
     """
     Result of a successful delete action.
     """ # noqa: E501
-    result: StrictStr = Field(description="IP Block has been deleted.")
-    ip_block_id: StrictStr = Field(description="The unique identifier of the IP Block.", alias="ipBlockId")
+    result: Optional[StrictStr] = Field(default=None, description="IP Block has been deleted.")
+    ip_block_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the IP Block.", alias="ipBlockId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["result", "ipBlockId"]
 

@@ -6,17 +6,18 @@ IP Block Details.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | IP Block identifier. | 
-**location** | **str** | IP Block location ID. Currently this field should be set to &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60;, &#x60;SEA&#x60; or &#x60;AUS&#x60;. | 
-**cidr_block_size** | **str** | CIDR IP Block Size. Currently this field should be set to either &#x60;/31&#x60;, &#x60;/30&#x60;, &#x60;/29&#x60;, &#x60;/28&#x60;, &#x60;/27&#x60;, &#x60;/26&#x60;, &#x60;/25&#x60;, &#x60;/24&#x60;, &#x60;/23&#x60; or &#x60;/22&#x60;. | 
-**cidr** | **str** | The IP Block in CIDR notation. | 
-**status** | **str** | The status of the IP Block. Can have one of the following values: &#x60;creating&#x60; , &#x60;assigning&#x60; , &#x60;error assigning&#x60; , &#x60;assigned&#x60; , &#x60;unassigning&#x60; , &#x60;error unassigning&#x60; or &#x60;unassigned&#x60;. | 
+**id** | **str** | IP Block identifier. | [optional] 
+**location** | **str** | IP Block location ID. Currently this field should be set to &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60;, &#x60;SEA&#x60; or &#x60;AUS&#x60;. | [optional] 
+**cidr_block_size** | **str** | CIDR IP Block Size. Currently this field should be set to either &#x60;/31&#x60;, &#x60;/30&#x60;, &#x60;/29&#x60;, &#x60;/28&#x60;, &#x60;/27&#x60;, &#x60;/26&#x60;, &#x60;/25&#x60;, &#x60;/24&#x60;, &#x60;/23&#x60; or &#x60;/22&#x60;. | [optional] 
+**cidr** | **str** | The IP Block in CIDR notation. | [optional] 
+**ip_version** | **str** | The IP Version of the block. | [optional] 
+**status** | **str** | The status of the IP Block. Can have one of the following values: &#x60;creating&#x60; , &#x60;assigning&#x60; , &#x60;error assigning&#x60; , &#x60;assigned&#x60; , &#x60;unassigning&#x60; , &#x60;error unassigning&#x60; or &#x60;unassigned&#x60;. | [optional] 
 **assigned_resource_id** | **str** | ID of the resource assigned to the IP Block. | [optional] 
 **assigned_resource_type** | **str** | Type of the resource assigned to the IP Block. | [optional] 
 **description** | **str** | The description of the IP Block. | [optional] 
 **tags** | [**List[TagAssignment]**](TagAssignment.md) | The tags assigned if any. | [optional] 
-**is_bring_your_own** | **bool** | True if the IP block is a &#x60;bring your own&#x60; block. | 
-**created_on** | **datetime** | Date and time when the IP block was created. | 
+**is_bring_your_own** | **bool** | True if the IP block is a &#x60;bring your own&#x60; block. | [optional] 
+**created_on** | **datetime** | Date and time when the IP block was created. | [optional] 
 
 ## Example
 
