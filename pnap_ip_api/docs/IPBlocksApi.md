@@ -458,7 +458,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with pnap_ip_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_ip_api.IPBlocksApi(api_client)
-    ip_block_create = {"cidrBlockSize":"/28","location":"PHX","description":"IP Block #1 used for publicly accessing server #1."} # IpBlockCreate | 
+    ip_block_create = {"cidrBlockSize":"/24","location":"PHX"} # IpBlockCreate | 
 
     try:
         # Create an IP Block.
