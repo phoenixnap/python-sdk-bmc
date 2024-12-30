@@ -35,7 +35,7 @@ class BgpPeerGroup(BaseModel):
     The Border Gateway Protocol (BGP) Peer Group.
     """ # noqa: E501
     id: StrictStr = Field(description="The unique identifier of the BGP Peer Group.")
-    status: StrictStr = Field(description="The BGP Peer Group status. Can have one of the following values: `PENDING`, `BUSY`, `READY`, `ERROR`, `PENDING_DELETION` and `DELETING`.")
+    status: StrictStr = Field(description="The BGP Peer Group status. Can have one of the following values: `PENDING`, `ON_HOLD`, `BUSY`, `READY`, `ERROR`, `PENDING_DELETION` and `DELETING`.")
     location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
     ipv4_prefixes: List[BgpIPv4Prefix] = Field(description="The List of the BGP Peer Group IPv4 prefixes.", alias="ipv4Prefixes")
     target_asn_details: AsnDetails = Field(alias="targetAsnDetails")
