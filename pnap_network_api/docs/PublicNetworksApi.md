@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **public_networks_network_id_ip_blocks_post**
-> PublicNetworkIpBlock public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block)
+> PublicNetworkIpBlock public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block_create)
 
 Adds an IP block to this public network.
 
@@ -354,6 +354,7 @@ import time
 import os
 import pnap_network_api
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
 from pnap_network_api.rest import ApiException
 from pprint import pprint
 
@@ -375,11 +376,11 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_network_api.PublicNetworksApi(api_client)
     public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
-    public_network_ip_block = {"id":"60473a6115e34466c9f8f083"} # PublicNetworkIpBlock | 
+    public_network_ip_block_create = {"id":"60473a6115e34466c9f8f083"} # PublicNetworkIpBlockCreate | 
 
     try:
         # Adds an IP block to this public network.
-        api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block)
+        api_response = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block_create)
         print("The response of PublicNetworksApi->public_networks_network_id_ip_blocks_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -394,7 +395,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_network_id** | **str**| The Public Network identifier. | 
- **public_network_ip_block** | [**PublicNetworkIpBlock**](PublicNetworkIpBlock.md)|  | 
+ **public_network_ip_block_create** | [**PublicNetworkIpBlockCreate**](PublicNetworkIpBlockCreate.md)|  | 
 
 ### Return type
 

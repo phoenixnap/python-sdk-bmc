@@ -148,6 +148,7 @@ Class | Method | HTTP request | Description
  - [PublicNetwork](docs/PublicNetwork.md)
  - [PublicNetworkCreate](docs/PublicNetworkCreate.md)
  - [PublicNetworkIpBlock](docs/PublicNetworkIpBlock.md)
+ - [PublicNetworkIpBlockCreate](docs/PublicNetworkIpBlockCreate.md)
  - [PublicNetworkModify](docs/PublicNetworkModify.md)
 
 

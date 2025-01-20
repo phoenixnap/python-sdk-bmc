@@ -29,4 +29,5 @@ from pnap_network_api.models.private_network_server import PrivateNetworkServer
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.models.public_network_create import PublicNetworkCreate
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
 from pnap_network_api.models.public_network_modify import PublicNetworkModify

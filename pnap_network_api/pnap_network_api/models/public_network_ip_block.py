@@ -32,8 +32,10 @@ class PublicNetworkIpBlock(BaseModel):
     The assigned IP block to the Public Network.
     """ # noqa: E501
     id: StrictStr = Field(description="The IP Block identifier.")
+    cidr: StrictStr = Field(description="The CIDR notation of the IP block.")
+    used_ips_count: StrictStr = Field(description="The number of IPs used in the IP block.", alias="usedIpsCount")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id"]
+    __properties: ClassVar[List[str]] = ["id", "cidr", "usedIpsCount"]
 
     model_config = {
         "populate_by_name": True,
@@ -91,7 +93,9 @@ class PublicNetworkIpBlock(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id")
+            "id": obj.get("id"),
+            "cidr": obj.get("cidr"),
+            "usedIpsCount": obj.get("usedIpsCount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

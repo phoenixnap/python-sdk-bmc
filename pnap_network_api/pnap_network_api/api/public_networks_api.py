@@ -33,6 +33,7 @@ from typing import List, Optional
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.models.public_network_create import PublicNetworkCreate
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
 from pnap_network_api.models.public_network_modify import PublicNetworkModify
 
 from pnap_network_api.api_client import ApiClient
@@ -1174,7 +1175,7 @@ class PublicNetworksApi:
     def public_networks_network_id_ip_blocks_post(
         self,
         public_network_id: Annotated[StrictStr, Field(description="The Public Network identifier.")],
-        public_network_ip_block: PublicNetworkIpBlock,
+        public_network_ip_block_create: PublicNetworkIpBlockCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1194,8 +1195,8 @@ class PublicNetworksApi:
 
         :param public_network_id: The Public Network identifier. (required)
         :type public_network_id: str
-        :param public_network_ip_block: (required)
-        :type public_network_ip_block: PublicNetworkIpBlock
+        :param public_network_ip_block_create: (required)
+        :type public_network_ip_block_create: PublicNetworkIpBlockCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1220,7 +1221,7 @@ class PublicNetworksApi:
 
         _param = self._public_networks_network_id_ip_blocks_post_serialize(
             public_network_id=public_network_id,
-            public_network_ip_block=public_network_ip_block,
+            public_network_ip_block_create=public_network_ip_block_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1250,7 +1251,7 @@ class PublicNetworksApi:
     def public_networks_network_id_ip_blocks_post_with_http_info(
         self,
         public_network_id: Annotated[StrictStr, Field(description="The Public Network identifier.")],
-        public_network_ip_block: PublicNetworkIpBlock,
+        public_network_ip_block_create: PublicNetworkIpBlockCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,8 +1271,8 @@ class PublicNetworksApi:
 
         :param public_network_id: The Public Network identifier. (required)
         :type public_network_id: str
-        :param public_network_ip_block: (required)
-        :type public_network_ip_block: PublicNetworkIpBlock
+        :param public_network_ip_block_create: (required)
+        :type public_network_ip_block_create: PublicNetworkIpBlockCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1296,7 +1297,7 @@ class PublicNetworksApi:
 
         _param = self._public_networks_network_id_ip_blocks_post_serialize(
             public_network_id=public_network_id,
-            public_network_ip_block=public_network_ip_block,
+            public_network_ip_block_create=public_network_ip_block_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1326,7 +1327,7 @@ class PublicNetworksApi:
     def public_networks_network_id_ip_blocks_post_without_preload_content(
         self,
         public_network_id: Annotated[StrictStr, Field(description="The Public Network identifier.")],
-        public_network_ip_block: PublicNetworkIpBlock,
+        public_network_ip_block_create: PublicNetworkIpBlockCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1346,8 +1347,8 @@ class PublicNetworksApi:
 
         :param public_network_id: The Public Network identifier. (required)
         :type public_network_id: str
-        :param public_network_ip_block: (required)
-        :type public_network_ip_block: PublicNetworkIpBlock
+        :param public_network_ip_block_create: (required)
+        :type public_network_ip_block_create: PublicNetworkIpBlockCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1372,7 +1373,7 @@ class PublicNetworksApi:
 
         _param = self._public_networks_network_id_ip_blocks_post_serialize(
             public_network_id=public_network_id,
-            public_network_ip_block=public_network_ip_block,
+            public_network_ip_block_create=public_network_ip_block_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1397,7 +1398,7 @@ class PublicNetworksApi:
     def _public_networks_network_id_ip_blocks_post_serialize(
         self,
         public_network_id,
-        public_network_ip_block,
+        public_network_ip_block_create,
         _request_auth,
         _content_type,
         _headers,
@@ -1423,8 +1424,8 @@ class PublicNetworksApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if public_network_ip_block is not None:
-            _body_params = public_network_ip_block
+        if public_network_ip_block_create is not None:
+            _body_params = public_network_ip_block_create
 
 
         # set the HTTP header `Accept`
