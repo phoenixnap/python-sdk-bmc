@@ -1,6 +1,6 @@
 # RelinquishIpBlock
 
-Object used to determine whether to relinquish ownership of the IP block upon server deletion.
+Object used to determine whether to relinquish ownership of the IP block upon unassignment from server or server deletion.
 
 ## Properties
 
