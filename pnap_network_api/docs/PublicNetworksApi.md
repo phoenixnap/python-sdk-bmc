@@ -461,7 +461,7 @@ with pnap_network_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_network_api.PublicNetworksApi(api_client)
     public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
-    public_network_modify = {"name":"My public network","description":"The new description of my public network"} # PublicNetworkModify | 
+    public_network_modify = {"name":"My public network","description":"The new description of my public network","raEnabled":false} # PublicNetworkModify | 
 
     try:
         # Update Public Network's Details.
@@ -500,6 +500,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Network successfully updated. |  -  |
+**202** | Network update has been accepted. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

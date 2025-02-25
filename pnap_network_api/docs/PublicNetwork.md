@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **status** | **str** | The status of the public network. Can have one of the following values: &#x60;BUSY&#x60;, &#x60;READY&#x60;, &#x60;DELETING&#x60; or &#x60;ERROR&#x60;. | 
 **created_on** | **datetime** | Date and time when this public network was created. | 
 **ip_blocks** | [**List[PublicNetworkIpBlock]**](PublicNetworkIpBlock.md) | A list of IP Blocks that are associated with this public network. | 
+**ra_enabled** | **bool** | Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks. | [optional] 
 
 ## Example
 

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, StrictBool, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
 try:
@@ -34,8 +34,9 @@ class PublicNetworkModify(BaseModel):
     """ # noqa: E501
     name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="A friendly name given to the network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network")
+    ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "description"]
+    __properties: ClassVar[List[str]] = ["name", "description", "raEnabled"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -104,7 +105,8 @@ class PublicNetworkModify(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

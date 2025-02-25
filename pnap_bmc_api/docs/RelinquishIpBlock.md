@@ -1,12 +1,12 @@
 # RelinquishIpBlock
 
-Object used to determine whether to relinquish ownership of the IP block upon unassignment from server or server deletion.
+Object used to determine whether to relinquish ownership of the IP blocks upon unassignment from server or server deletion.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_ip_blocks** | **bool** | Determines whether the IP blocks assigned to the server should be deleted or not. | [optional] [default to False]
+**delete_ip_blocks** | **bool** | Determines whether the IPv4 and IPv6 blocks assigned to the server should be deleted or not. | [optional] [default to False]
 
 ## Example
 

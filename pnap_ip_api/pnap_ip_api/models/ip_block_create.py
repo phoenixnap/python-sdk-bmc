@@ -34,8 +34,8 @@ class IpBlockCreate(BaseModel):
     IP Block Request.
     """ # noqa: E501
     location: StrictStr = Field(description="IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.")
-    cidr_block_size: StrictStr = Field(description="CIDR IP Block Size. V4 supported sizes: [`/31`, `/30`, `/29` or `/28`]. For a larger Block Size contact support.", alias="cidrBlockSize")
-    ip_version: Optional[StrictStr] = Field(default='V4', description="IP Version. This field should be set to `V4`", alias="ipVersion")
+    cidr_block_size: StrictStr = Field(description="CIDR IP Block Size. V4 supported sizes: [`/31`, `/30`, `/29` or `/28`]. V6 supported sizes: [`/64`]. For a larger Block Size contact support.", alias="cidrBlockSize")
+    ip_version: Optional[StrictStr] = Field(default='V4', description="IP Version. This field should be set to `V4` or `V6`", alias="ipVersion")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of the IP Block.")
     tags: Optional[List[TagAssignmentRequest]] = Field(default=None, description="Tags to set to the ip-block. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).")
     additional_properties: Dict[str, Any] = {}

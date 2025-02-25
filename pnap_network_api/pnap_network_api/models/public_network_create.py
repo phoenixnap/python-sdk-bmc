@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr, field_validator
+from pydantic import BaseModel, StrictBool, StrictStr, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
@@ -37,9 +37,10 @@ class PublicNetworkCreate(BaseModel):
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network.")
     location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
-    ip_blocks: Optional[Annotated[List[PublicNetworkIpBlockCreate], Field(max_length=10)]] = Field(default=None, description="A list of IP Blocks that will be associated with this public network.", alias="ipBlocks")
+    ip_blocks: Optional[Annotated[List[PublicNetworkIpBlockCreate], Field(max_length=11)]] = Field(default=None, description="A list of IP Blocks that will be associated with this public network. Supported maximum of 10 IPv4 Blocks and 1 IPv6 Block.", alias="ipBlocks")
+    ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "description", "location", "vlanId", "ipBlocks"]
+    __properties: ClassVar[List[str]] = ["name", "description", "location", "vlanId", "ipBlocks", "raEnabled"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -115,7 +116,8 @@ class PublicNetworkCreate(BaseModel):
             "description": obj.get("description"),
             "location": obj.get("location"),
             "vlanId": obj.get("vlanId"),
-            "ipBlocks": [PublicNetworkIpBlockCreate.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
+            "ipBlocks": [PublicNetworkIpBlockCreate.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None,
+            "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

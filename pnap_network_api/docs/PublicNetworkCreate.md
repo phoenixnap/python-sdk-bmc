@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **description** | **str** | The description of this public network. | [optional] 
 **location** | **str** | The location of this public network. Supported values are &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60;, &#x60;SEA&#x60; and &#x60;AUS&#x60;. | 
 **vlan_id** | **int** | The VLAN that will be assigned to this network. | [optional] 
-**ip_blocks** | [**List[PublicNetworkIpBlockCreate]**](PublicNetworkIpBlockCreate.md) | A list of IP Blocks that will be associated with this public network. | [optional] 
+**ip_blocks** | [**List[PublicNetworkIpBlockCreate]**](PublicNetworkIpBlockCreate.md) | A list of IP Blocks that will be associated with this public network. Supported maximum of 10 IPv4 Blocks and 1 IPv6 Block. | [optional] 
+**ra_enabled** | **bool** | Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks. | [optional] 
 
 ## Example
 

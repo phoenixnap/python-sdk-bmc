@@ -1531,6 +1531,7 @@ class PublicNetworksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PublicNetwork",
+            '202': "PublicNetwork",
             '400': "Error",
             '401': "Error",
             '403': "Error",
@@ -1607,6 +1608,7 @@ class PublicNetworksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PublicNetwork",
+            '202': "PublicNetwork",
             '400': "Error",
             '401': "Error",
             '403': "Error",
@@ -1683,6 +1685,7 @@ class PublicNetworksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PublicNetwork",
+            '202': "PublicNetwork",
             '400': "Error",
             '401': "Error",
             '403': "Error",
