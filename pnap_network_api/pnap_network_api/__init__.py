@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.3.dev"
+__version__ = "2.1.0"
 
 # import apis into sdk package
 from pnap_network_api.api.bgp_peer_groups_api import BGPPeerGroupsApi
