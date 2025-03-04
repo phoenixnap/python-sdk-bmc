@@ -1,4 +1,7 @@
 import unittest
+from pnap_network_api.api.bgp_peer_groups_api import BGPPeerGroupsApi
+from pnap_network_api.models.bgp_peer_group_create import BgpPeerGroupCreate
+from pnap_network_api.models.bgp_peer_group_patch import BgpPeerGroupPatch
 import xmlrunner
 from dateutil.parser import parse
 
@@ -209,6 +212,75 @@ class TestNetworkApi(unittest.TestCase):
 
       self.assertEqual(response['body'], result.to_dict())
 
+      self.verify_called_once(expectation_id)
+
+   def test_get_bgp_peer_groups(self):
+         # Setting up expectation
+         request, response = TestUtils.generate_payloads_from('networkapi/bgp_peer_groups_get')
+         expectation_id = TestUtils.setup_expectation(request, response, 1)
+         
+         api_instance = pnap_network_api.BGPPeerGroupsApi(self.api_client)
+         opts = TestUtils.generate_query_params(request)
+         
+         result = api_instance.bgp_peer_groups_get(**opts)
+         
+         self.assertEqual(response['body'][0], result[0].to_dict())
+
+         self.verify_called_once(expectation_id)
+    
+   def test_post_bgp_peer_groups(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/bgp_peer_groups_post')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = pnap_network_api.BGPPeerGroupsApi(self.api_client)
+      bgp_peer_groups_post = BgpPeerGroupCreate(**TestUtils.extract_request_body(request))
+      
+      result = api_instance.bgp_peer_groups_post(bgp_peer_groups_post)
+      
+      self.assertEqual(response['body'], result.to_dict())
+      self.verify_called_once(expectation_id)
+   
+   def test_get_bgp_peer_group_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/bgp_peer_groups_get_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = pnap_network_api.BGPPeerGroupsApi(self.api_client)
+      bgp_peer_group_id = TestUtils.extract_id_from(request)
+      
+      result = api_instance.bgp_peer_groups_peer_group_id_get(bgp_peer_group_id)
+      
+      self.assertEqual(response['body'], result.to_dict())
+      self.verify_called_once(expectation_id)
+   
+   def test_patch_bgp_peer_group_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/bgp_peer_groups_patch_by_id')
+
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = pnap_network_api.BGPPeerGroupsApi(self.api_client)
+
+      bgp_peer_group_id = TestUtils.extract_id_from(request)
+      bgp_peer_group_patch = BgpPeerGroupPatch(**TestUtils.extract_request_body(request))
+
+      result = api_instance.bgp_peer_groups_peer_group_id_patch(bgp_peer_group_id, bgp_peer_group_patch=bgp_peer_group_patch)
+
+      self.assertEqual(response['body'], result.to_dict())
+      self.verify_called_once(expectation_id)
+   
+   def test_delete_bgp_peer_group_by_id(self):
+      # Setting up expectation
+      request, response = TestUtils.generate_payloads_from('networkapi/bgp_peer_groups_delete_by_id')
+      expectation_id = TestUtils.setup_expectation(request, response, 1)
+      
+      api_instance = pnap_network_api.BGPPeerGroupsApi(self.api_client)
+      network_id = TestUtils.extract_id_from(request)
+      
+      result = api_instance.bgp_peer_groups_peer_group_id_delete(network_id)
+      
+      self.assertIsNone(result)
       self.verify_called_once(expectation_id)
 
    def tearDown(self):
