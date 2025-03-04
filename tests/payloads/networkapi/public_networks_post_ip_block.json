@@ -18,7 +18,9 @@
   "response": {
     "statusCode": 202,
     "body": {
-      "id": "60473a6115e34466c9f8f083"
+      "id": "60473a6115e34466c9f8f083",
+      "cidr": "10.111.14.0/29",
+      "usedIpsCount": "3"
     }
   }
 }

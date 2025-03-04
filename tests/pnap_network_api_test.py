@@ -11,7 +11,7 @@ from pnap_network_api.models.private_network_create import PrivateNetworkCreate
 from pnap_network_api.models.private_network_modify import PrivateNetworkModify
 from pnap_network_api.models.public_network_create import PublicNetworkCreate
 from pnap_network_api.models.public_network_modify import PublicNetworkModify
-from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
+from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
 
 class TestNetworkApi(unittest.TestCase):
    configuration = pnap_network_api.Configuration(host = "127.0.0.1:1080/networks/v1")
@@ -185,10 +185,10 @@ class TestNetworkApi(unittest.TestCase):
       expectation_id = TestUtils.setup_expectation(request, response, 1)
       
       api_instance = public_networks_api.PublicNetworksApi(self.api_client)
-      network_id = TestUtils.extract_id_from(request)
-      public_network_ip_block = PublicNetworkIpBlock(**TestUtils.extract_request_body(request))
+      public_network_id = TestUtils.extract_id_from(request)
+      public_network_ip_block_create = PublicNetworkIpBlockCreate(**TestUtils.extract_request_body(request))
 
-      result = api_instance.public_networks_network_id_ip_blocks_post(network_id, public_network_ip_block=public_network_ip_block)
+      result = api_instance.public_networks_network_id_ip_blocks_post(public_network_id, public_network_ip_block_create=public_network_ip_block_create)
 
       self.assertEqual(response['body'], result.to_dict())
 
