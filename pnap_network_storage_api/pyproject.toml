@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_network_storage_api"
-version = "2.0.3"
+version = "2.0.4.dev"
 description = "Network Storage API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
