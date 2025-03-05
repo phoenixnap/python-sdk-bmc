@@ -18,7 +18,7 @@
       }
     },
     "response": {
-      "statusCode": 200,
+      "statusCode": 202,
       "body": {
         "id": "604724a5a807f2d3be8660c7",
         "status": "PENDING",
@@ -45,7 +45,7 @@
           "verificationReason": "reason"
         },
         "password": "password",
-        "advertisedRoutes": "/route",
+        "advertisedRoutes": "DEFAULT",
         "rpkiRoaOriginAsn": 7131072,
         "eBgpMultiHop": 8,
         "peeringLoopbacksV4": [

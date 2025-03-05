@@ -265,7 +265,7 @@ class TestNetworkApi(unittest.TestCase):
       bgp_peer_group_id = TestUtils.extract_id_from(request)
       bgp_peer_group_patch = BgpPeerGroupPatch(**TestUtils.extract_request_body(request))
 
-      result = api_instance.bgp_peer_groups_peer_group_id_patch(bgp_peer_group_id, bgp_peer_group_patch=bgp_peer_group_patch)
+      result = api_instance.bgp_peer_groups_peer_group_id_patch(bgp_peer_group_id, bgp_peer_group_patch)
 
       self.assertEqual(response['body'], result.to_dict())
       self.verify_called_once(expectation_id)
