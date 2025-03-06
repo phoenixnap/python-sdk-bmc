@@ -3,7 +3,7 @@
 """
     Networks API
 
-    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a> and <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
+    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a>,  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a> and <a href='https://phoenixnap.com/kb/border-gateway-protocol-bmc' target='_blank'>border gateway protocol peer groups</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
 
     The version of the OpenAPI document: 1.0
     Contact: support@phoenixnap.com
@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, StrictBool, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
 try:
@@ -34,8 +34,9 @@ class PublicNetworkModify(BaseModel):
     """ # noqa: E501
     name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="A friendly name given to the network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network")
+    ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "description"]
+    __properties: ClassVar[List[str]] = ["name", "description", "raEnabled"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -104,7 +105,8 @@ class PublicNetworkModify(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

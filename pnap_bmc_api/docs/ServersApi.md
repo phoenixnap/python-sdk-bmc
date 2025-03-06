@@ -1200,7 +1200,7 @@ Name | Type | Description  | Notes
 
 Assign IP Block to Server.
 
-Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/configure-server-with-public-ip-block#ftoc-heading-2' target='_blank'>here</a>.
+Adds an IP block to this server. <b>No actual configuration is performed on the operating system.</b> BMC configures exclusively the networking devices in the datacenter infrastructure. Manual network configuration changes in the operating system of this server are required.  A server can have at most one IPv4 block and one IPv6 block assigned simultaneously. Assigning IPv6 to server is only supported post-provision. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/configure-server-with-public-ip-block#ftoc-heading-2' target='_blank'>here</a>.
 
 ### Example
 
@@ -1359,7 +1359,6 @@ Name | Type | Description  | Notes
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**404** | The request failed since the resource could not been found. |  -  |
 **500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1660,7 +1659,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     api_instance = pnap_bmc_api.ServersApi(api_client)
     server_id = '60473a6115e34466c9f8f083' # str | The server's ID.
     public_network_id = '603f3b2cfcaf050643b89a4b' # str | The Public Network identifier.
-    server_network_update = {"ips":["182.16.0.146","182.16.0.147"]} # ServerNetworkUpdate | 
+    server_network_update = {"ips":["182.16.0.146","182.16.0.147","2001:db8::b"]} # ServerNetworkUpdate | 
     force = False # bool | Query parameter controlling advanced features availability. Currently applicable for networking. It is advised to use with caution since it might lead to unhealthy setups. (optional) (default to False)
 
     try:

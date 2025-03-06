@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictStr, field_validator
 from pydantic import Field
 from typing_extensions import Annotated
+from pnap_bmc_api.models.gpu_configuration import GpuConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.storage_configuration import StorageConfiguration
@@ -40,8 +41,8 @@ class Server(BaseModel):
     status: StrictStr = Field(description="The status of the server. Can have one of the following values: `creating` , `powered-on` , `powered-off` , `rebooting` , `resetting` , `deleting` , `reserved` , `error` or `reinstating`.")
     hostname: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="Hostname of server.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="Description of server.")
-    os: Optional[StrictStr] = Field(default=None, description="The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `windows/srv2022std`, `windows/srv2022dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `almalinux/almalinux9`, `rockylinux/rockylinux9`, `debian/bullseye`, `debian/bookworm`, `proxmox/bullseye`, `proxmox/proxmox8`, `netris/controller`, `netris/softgate_1g`, `netris/softgate_10g` or `netris/softgate_25g`.")
-    type: StrictStr = Field(description="Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.xlarge`, `d2.m2.xxlarge`, `d2.m3.xlarge`, `d2.m4.xlarge`, `d2.m5.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge`, `a1.c5.large`, `d3.s5.xlarge`, `d3.m4.xxlarge`, `d3.m5.xxlarge`,  `d3.m6.xxlarge`, `s3.c3.medium`, `s3.c3.large`, `d3.c4.medium`, `d3.c5.medium` or `d3.c6.medium`.")
+    os: Optional[StrictStr] = Field(default=None, description="The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `ubuntu/jammy+pytorch`, `ubuntu/noble`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `windows/srv2022std`, `windows/srv2022dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `almalinux/almalinux9`, `rockylinux/rockylinux9`, `virtuozzo/virtuozzo7`, `oraclelinux/oraclelinux9`, `debian/bullseye`, `debian/bookworm`, `proxmox/bullseye`, `proxmox/proxmox8`, `netris/controller`, `netris/softgate_1g`, `netris/softgate_10g` or `netris/softgate_25g`.")
+    type: StrictStr = Field(description="Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.xlarge`, `d2.m2.xxlarge`, `d2.m3.xlarge`, `d2.m4.xlarge`, `d2.m5.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge`, `a1.c5.large`, `a1.c5.xlarge`, `d3.s5.xlarge`, `d3.m4.xxlarge`, `d3.m5.xxlarge`,  `d3.m6.xxlarge`, `s3.c3.medium`, `s3.c3.large`, `d3.c4.medium`, `d3.c5.medium`, `d3.c6.medium`, `d3.c1.large`, `d3.c2.large`, `d3.c3.large`, `d3.m1.xlarge`, `d3.m2.xlarge`, `d3.m3.xlarge`, `d3.g2.c1.xlarge`, `d3.g2.c2.xlarge`, `d3.g2.c3.xlarge`, s4.x6.c6.large or s4.x6.m6.xlarge.")
     location: StrictStr = Field(description="Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.")
     cpu: StrictStr = Field(description="A description of the machine CPU.")
     cpu_count: Annotated[int, Field(strict=True, ge=1)] = Field(description="The number of CPUs available in the system.", alias="cpuCount")
@@ -61,10 +62,11 @@ class Server(BaseModel):
     os_configuration: Optional[OsConfiguration] = Field(default=None, alias="osConfiguration")
     network_configuration: NetworkConfiguration = Field(alias="networkConfiguration")
     storage_configuration: StorageConfiguration = Field(alias="storageConfiguration")
+    gpu_configuration: Optional[GpuConfiguration] = Field(default=None, alias="gpuConfiguration")
     superseded_by: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server to which the reservation has been transferred.", alias="supersededBy")
     supersedes: Optional[StrictStr] = Field(default=None, description="Unique identifier of the server from which the reservation has been transferred.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "status", "hostname", "description", "os", "type", "location", "cpu", "cpuCount", "coresPerCpu", "cpuFrequency", "ram", "storage", "privateIpAddresses", "publicIpAddresses", "reservationId", "pricingModel", "password", "networkType", "clusterId", "tags", "provisionedOn", "osConfiguration", "networkConfiguration", "storageConfiguration", "supersededBy", "supersedes"]
+    __properties: ClassVar[List[str]] = ["id", "status", "hostname", "description", "os", "type", "location", "cpu", "cpuCount", "coresPerCpu", "cpuFrequency", "ram", "storage", "privateIpAddresses", "publicIpAddresses", "reservationId", "pricingModel", "password", "networkType", "clusterId", "tags", "provisionedOn", "osConfiguration", "networkConfiguration", "storageConfiguration", "gpuConfiguration", "supersededBy", "supersedes"]
 
     @field_validator('hostname')
     def hostname_validate_regular_expression(cls, value):
@@ -128,6 +130,9 @@ class Server(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of storage_configuration
         if self.storage_configuration:
             _dict['storageConfiguration'] = self.storage_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of gpu_configuration
+        if self.gpu_configuration:
+            _dict['gpuConfiguration'] = self.gpu_configuration.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -170,6 +175,7 @@ class Server(BaseModel):
             "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
             "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,
             "storageConfiguration": StorageConfiguration.from_dict(obj.get("storageConfiguration")) if obj.get("storageConfiguration") is not None else None,
+            "gpuConfiguration": GpuConfiguration.from_dict(obj.get("gpuConfiguration")) if obj.get("gpuConfiguration") is not None else None,
             "supersededBy": obj.get("supersededBy"),
             "supersedes": obj.get("supersedes")
         })

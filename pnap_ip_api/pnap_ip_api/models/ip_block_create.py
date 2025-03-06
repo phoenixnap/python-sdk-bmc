@@ -34,11 +34,12 @@ class IpBlockCreate(BaseModel):
     IP Block Request.
     """ # noqa: E501
     location: StrictStr = Field(description="IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.")
-    cidr_block_size: StrictStr = Field(description="CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29` or `/28`. For a larger Block Size contact support.", alias="cidrBlockSize")
+    cidr_block_size: StrictStr = Field(description="CIDR IP Block Size. V4 supported sizes: [`/31`, `/30`, `/29` or `/28`]. V6 supported sizes: [`/64`]. For a larger Block Size contact support.", alias="cidrBlockSize")
+    ip_version: Optional[StrictStr] = Field(default='V4', description="IP Version. This field should be set to `V4` or `V6`", alias="ipVersion")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of the IP Block.")
     tags: Optional[List[TagAssignmentRequest]] = Field(default=None, description="Tags to set to the ip-block. To create a new tag or list all the existing tags that you can use, refer to [Tags API](https://developers.phoenixnap.com/docs/tags/1/overview).")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["location", "cidrBlockSize", "description", "tags"]
+    __properties: ClassVar[List[str]] = ["location", "cidrBlockSize", "ipVersion", "description", "tags"]
 
     model_config = {
         "populate_by_name": True,
@@ -105,6 +106,7 @@ class IpBlockCreate(BaseModel):
         _obj = cls.model_validate({
             "location": obj.get("location"),
             "cidrBlockSize": obj.get("cidrBlockSize"),
+            "ipVersion": obj.get("ipVersion") if obj.get("ipVersion") is not None else 'V4',
             "description": obj.get("description"),
             "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
         })

@@ -7,6 +7,8 @@ The assigned IP block to the Public Network.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The IP Block identifier. | 
+**cidr** | **str** | The CIDR notation of the IP block. | 
+**used_ips_count** | **str** | The number of IPs used in the IP block. | 
 
 ## Example
 

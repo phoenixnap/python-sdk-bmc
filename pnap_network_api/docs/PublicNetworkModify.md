@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | A friendly name given to the network. This name should be unique. | [optional] 
 **description** | **str** | The description of this public network | [optional] 
+**ra_enabled** | **bool** | Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks. | [optional] 
 
 ## Example
 

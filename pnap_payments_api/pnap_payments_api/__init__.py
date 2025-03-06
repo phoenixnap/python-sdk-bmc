@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 # import apis into sdk package
 from pnap_payments_api.api.transactions_api import TransactionsApi

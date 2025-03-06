@@ -3,7 +3,7 @@
 """
     Networks API
 
-    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a> and <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
+    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a>,  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a> and <a href='https://phoenixnap.com/kb/border-gateway-protocol-bmc' target='_blank'>border gateway protocol peer groups</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
 
     The version of the OpenAPI document: 1.0
     Contact: support@phoenixnap.com
@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.network_membership import NetworkMembership
@@ -43,8 +43,9 @@ class PublicNetwork(BaseModel):
     status: StrictStr = Field(description="The status of the public network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
     created_on: datetime = Field(description="Date and time when this public network was created.", alias="createdOn")
     ip_blocks: List[PublicNetworkIpBlock] = Field(description="A list of IP Blocks that are associated with this public network.", alias="ipBlocks")
+    ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "vlanId", "memberships", "name", "location", "description", "status", "createdOn", "ipBlocks"]
+    __properties: ClassVar[List[str]] = ["id", "vlanId", "memberships", "name", "location", "description", "status", "createdOn", "ipBlocks", "raEnabled"]
 
     model_config = {
         "populate_by_name": True,
@@ -124,7 +125,8 @@ class PublicNetwork(BaseModel):
             "description": obj.get("description"),
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn"),
-            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None
+            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None,
+            "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

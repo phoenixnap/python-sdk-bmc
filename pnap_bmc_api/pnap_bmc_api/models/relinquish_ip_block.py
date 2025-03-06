@@ -29,9 +29,9 @@ except ImportError:
 
 class RelinquishIpBlock(BaseModel):
     """
-    Object used to determine whether to relinquish ownership of the IP block upon server deletion.
+    Object used to determine whether to relinquish ownership of the IP blocks upon unassignment from server or server deletion.
     """ # noqa: E501
-    delete_ip_blocks: Optional[StrictBool] = Field(default=False, description="Determines whether the IP blocks assigned to the server should be deleted or not.", alias="deleteIpBlocks")
+    delete_ip_blocks: Optional[StrictBool] = Field(default=False, description="Determines whether the IPv4 and IPv6 blocks assigned to the server should be deleted or not.", alias="deleteIpBlocks")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["deleteIpBlocks"]
 

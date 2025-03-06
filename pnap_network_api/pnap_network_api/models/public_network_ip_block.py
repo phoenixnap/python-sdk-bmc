@@ -3,7 +3,7 @@
 """
     Networks API
 
-    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a> and <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
+    Create, list, edit and delete public/private networks with the Network API. Use public networks to place multiple  servers on the same network or VLAN. Assign new servers with IP addresses from the same CIDR range. Use private  networks to avoid unnecessary egress data charges. Model your networks according to your business needs.<br> <br> <span class='pnap-api-knowledge-base-link'> Helpful knowledge base articles are available for  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#multi-private-backend-network-api' target='_blank'>multi-private backend networks</a>,  <a href='https://phoenixnap.com/kb/bmc-server-management-via-api#ftoc-heading-15' target='_blank'>public networks</a> and <a href='https://phoenixnap.com/kb/border-gateway-protocol-bmc' target='_blank'>border gateway protocol peer groups</a>. </span><br> <br> <b>All URLs are relative to (https://api.phoenixnap.com/networks/v1/)</b> 
 
     The version of the OpenAPI document: 1.0
     Contact: support@phoenixnap.com
@@ -32,8 +32,10 @@ class PublicNetworkIpBlock(BaseModel):
     The assigned IP block to the Public Network.
     """ # noqa: E501
     id: StrictStr = Field(description="The IP Block identifier.")
+    cidr: StrictStr = Field(description="The CIDR notation of the IP block.")
+    used_ips_count: StrictStr = Field(description="The number of IPs used in the IP block.", alias="usedIpsCount")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id"]
+    __properties: ClassVar[List[str]] = ["id", "cidr", "usedIpsCount"]
 
     model_config = {
         "populate_by_name": True,
@@ -91,7 +93,9 @@ class PublicNetworkIpBlock(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id")
+            "id": obj.get("id"),
+            "cidr": obj.get("cidr"),
+            "usedIpsCount": obj.get("usedIpsCount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
