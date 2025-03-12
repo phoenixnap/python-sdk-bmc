@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.4"
+__version__ = "2.0.5.dev"
 
 # import apis into sdk package
 from pnap_tag_api.api.tags_api import TagsApi

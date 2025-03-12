@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.4"
+__version__ = "1.0.5.dev"
 
 # import apis into sdk package
 from pnap_invoicing_api.api.invoices_api import InvoicesApi

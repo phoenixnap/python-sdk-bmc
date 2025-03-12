@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pnap_audit_api"
-version = "2.0.4"
+version = "2.0.5.dev"
 description = "Audit Log API"
 authors = ["PhoenixNAP Team <support@phoenixnap.com>"]
 license = "Apache 2.0"
