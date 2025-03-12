@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "pnap-audit-api"
+NAME = "pnap_audit_api"
 VERSION = "2.0.4.dev"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [

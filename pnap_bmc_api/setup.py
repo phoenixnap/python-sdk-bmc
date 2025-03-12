@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "pnap-bmc-api"
+NAME = "pnap_bmc_api"
 VERSION = "2.2.1.dev"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [

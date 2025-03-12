@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "pnap-payments-api"
+NAME = "pnap_payments_api"
 VERSION = "1.0.4.dev"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [

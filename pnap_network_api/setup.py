@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "pnap-network-api"
+NAME = "pnap_network_api"
 VERSION = "3.0.1.dev"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
