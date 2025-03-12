@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.4.dev"
+__version__ = "2.0.4"
 
 # import apis into sdk package
 from pnap_location_api.api.locations_api import LocationsApi
