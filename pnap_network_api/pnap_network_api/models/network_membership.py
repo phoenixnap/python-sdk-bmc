@@ -32,7 +32,7 @@ class NetworkMembership(BaseModel):
     Resource details linked to the Network.
     """ # noqa: E501
     resource_id: StrictStr = Field(description="The resource identifier.", alias="resourceId")
-    resource_type: StrictStr = Field(description="The resource's type.", alias="resourceType")
+    resource_type: StrictStr = Field(description="The resource's type. Can have one of the following values: `server`, `storage` or `virtual`.", alias="resourceType")
     ips: List[StrictStr] = Field(description="List of IPs associated to the resource.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["resourceId", "resourceType", "ips"]

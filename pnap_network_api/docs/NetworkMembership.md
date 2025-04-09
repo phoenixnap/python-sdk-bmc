@@ -7,7 +7,7 @@ Resource details linked to the Network.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resource_id** | **str** | The resource identifier. | 
-**resource_type** | **str** | The resource&#39;s type. | 
+**resource_type** | **str** | The resource&#39;s type. Can have one of the following values: &#x60;server&#x60;, &#x60;storage&#x60; or &#x60;virtual&#x60;. | 
 **ips** | **List[str]** | List of IPs associated to the resource. | 
 
 ## Example
