@@ -19,7 +19,7 @@ on:
 jobs:
   test:
     name: Test ${{ inputs.package-name }} py v ${{ matrix.python-version }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     services:
       mockserver:
         image: mockserver/mockserver:5.15.0
