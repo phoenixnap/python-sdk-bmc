@@ -38,7 +38,7 @@ class PublicNetwork(BaseModel):
     vlan_id: StrictInt = Field(description="The VLAN of this public network.", alias="vlanId")
     memberships: List[NetworkMembership] = Field(description="A list of resources that are members of this public network.")
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this public network.")
-    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network.")
     status: StrictStr = Field(description="The status of the public network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
     created_on: datetime = Field(description="Date and time when this public network was created.", alias="createdOn")

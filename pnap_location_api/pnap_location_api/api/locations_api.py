@@ -29,8 +29,8 @@ from typing_extensions import Annotated
 from typing import List, Optional
 
 from pnap_location_api.models.location import Location
-from pnap_location_api.models.location_enum import LocationEnum
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum
+from pnap_location_api.models.product_location_enum import ProductLocationEnum
 
 from pnap_location_api.api_client import ApiClient
 from pnap_location_api.api_response import ApiResponse
@@ -53,7 +53,7 @@ class LocationsApi:
     @validate_call
     def get_locations(
         self,
-        location: Annotated[Optional[LocationEnum], Field(description="Location of interest")] = None,
+        location: Annotated[Optional[ProductLocationEnum], Field(description="Location of interest")] = None,
         product_category: Annotated[Optional[ProductCategoryEnum], Field(description="Product category of interest")] = None,
         _request_timeout: Union[
             None,
@@ -73,7 +73,7 @@ class LocationsApi:
         Retrieve the locations info.
 
         :param location: Location of interest
-        :type location: LocationEnum
+        :type location: ProductLocationEnum
         :param product_category: Product category of interest
         :type product_category: ProductCategoryEnum
         :param _request_timeout: timeout setting for this request. If one
@@ -126,7 +126,7 @@ class LocationsApi:
     @validate_call
     def get_locations_with_http_info(
         self,
-        location: Annotated[Optional[LocationEnum], Field(description="Location of interest")] = None,
+        location: Annotated[Optional[ProductLocationEnum], Field(description="Location of interest")] = None,
         product_category: Annotated[Optional[ProductCategoryEnum], Field(description="Product category of interest")] = None,
         _request_timeout: Union[
             None,
@@ -146,7 +146,7 @@ class LocationsApi:
         Retrieve the locations info.
 
         :param location: Location of interest
-        :type location: LocationEnum
+        :type location: ProductLocationEnum
         :param product_category: Product category of interest
         :type product_category: ProductCategoryEnum
         :param _request_timeout: timeout setting for this request. If one
@@ -199,7 +199,7 @@ class LocationsApi:
     @validate_call
     def get_locations_without_preload_content(
         self,
-        location: Annotated[Optional[LocationEnum], Field(description="Location of interest")] = None,
+        location: Annotated[Optional[ProductLocationEnum], Field(description="Location of interest")] = None,
         product_category: Annotated[Optional[ProductCategoryEnum], Field(description="Product category of interest")] = None,
         _request_timeout: Union[
             None,
@@ -219,7 +219,7 @@ class LocationsApi:
         Retrieve the locations info.
 
         :param location: Location of interest
-        :type location: LocationEnum
+        :type location: ProductLocationEnum
         :param product_category: Product category of interest
         :type product_category: ProductCategoryEnum
         :param _request_timeout: timeout setting for this request. If one

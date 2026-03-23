@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from pydantic import Field
 from typing_extensions import Annotated
 try:
@@ -36,8 +36,9 @@ class ServerPrivateNetwork(BaseModel):
     ips: Optional[Annotated[List[StrictStr], Field(max_length=256)]] = Field(default=None, description="IPs to configure/configured on the server.<br> Valid IP formats are single IPv4 addresses or IPv4 ranges. IPs must be within the network's range. Should be null or empty list if DHCP is true. <br> If field is undefined and DHCP is false, next available IP in network will be automatically allocated.<br> If the network contains a membership of type 'storage', the first twelve IPs are already reserved by BMC and not usable.<br> Setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network. <li> Assign IP addresses which are considered as reserved in network.</ul>")
     dhcp: Optional[StrictBool] = Field(default=False, description="Determines whether DHCP is enabled for this server.<br> The following restrictions apply when enabling DHCP:<ul> <li> DHCP support is limited to servers configured exclusively with private networks (PRIVATE_ONLY). <li> DHCP value needs to be consistent across all server-configured private networks.  <li> The server does not support manual gateway address configuration. <li> Private IP addresses for network cannot be specified.</ul> Note: Not supported on Proxmox OS.")
     status_description: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the network.", alias="statusDescription")
+    vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this network has been configured within the network switch.", alias="vlanId")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "ips", "dhcp", "statusDescription"]
+    __properties: ClassVar[List[str]] = ["id", "ips", "dhcp", "statusDescription", "vlanId"]
 
     model_config = {
         "populate_by_name": True,
@@ -70,12 +71,14 @@ class ServerPrivateNetwork(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "status_description",
+                "vlan_id",
                 "additional_properties",
             },
             exclude_none=True,
@@ -100,7 +103,8 @@ class ServerPrivateNetwork(BaseModel):
             "id": obj.get("id"),
             "ips": obj.get("ips"),
             "dhcp": obj.get("dhcp") if obj.get("dhcp") is not None else False,
-            "statusDescription": obj.get("statusDescription")
+            "statusDescription": obj.get("statusDescription"),
+            "vlanId": obj.get("vlanId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

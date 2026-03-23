@@ -1,6 +1,6 @@
 # BgpIPv4Prefix
 
-The BGP IPv4 Prefix.
+The BGP IPv4 Prefix. Deprecated in favour of generic BgpIpPrefix.
 
 ## Properties
 

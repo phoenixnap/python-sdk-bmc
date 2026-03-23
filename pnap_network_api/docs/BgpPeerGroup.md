@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The unique identifier of the BGP Peer Group. | 
 **status** | **str** | The BGP Peer Group status. Can have one of the following values: &#x60;PENDING&#x60;, &#x60;ON_HOLD&#x60;, &#x60;BUSY&#x60;, &#x60;READY&#x60;, &#x60;ERROR&#x60;, &#x60;PENDING_DELETION&#x60; and &#x60;DELETING&#x60;. | 
-**location** | **str** | The BGP Peer Group location. Can have one of the following values: &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60;, &#x60;SEA&#x60; and &#x60;AUS&#x60;. | 
-**ipv4_prefixes** | [**List[BgpIPv4Prefix]**](BgpIPv4Prefix.md) | The List of the BGP Peer Group IPv4 prefixes. | 
+**location** | **str** | The BGP Peer Group location. Can have one of the following values: &#x60;PHX&#x60;, &#x60;ASH&#x60;, &#x60;SGP&#x60;, &#x60;NLD&#x60;, &#x60;CHI&#x60; and &#x60;SEA&#x60;. | 
+**ipv4_prefixes** | [**List[BgpIPv4Prefix]**](BgpIPv4Prefix.md) | The List of the BGP Peer Group IPv4 prefixes. Deprecated in favour of generic ipPrefixes. | 
+**ip_prefixes** | [**List[BgpIpPrefix]**](BgpIpPrefix.md) | The List of the BGP Peer Group IP prefixes. | 
 **target_asn_details** | [**AsnDetails**](AsnDetails.md) |  | 
 **active_asn_details** | [**AsnDetails**](AsnDetails.md) |  | [optional] 
 **password** | **str** | The BGP Peer Group password. | 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **rpki_roa_origin_asn** | **int** | The RPKI ROA Origin ASN of the BGP Peer Group based on location. | 
 **e_bgp_multi_hop** | **int** | The eBGP Multi-hop of the BGP Peer Group. | 
 **peering_loopbacks_v4** | **List[str]** | The IPv4 Peering Loopback addresses of the BGP Peer Group. Valid IP formats are IPv4 addresses. | 
+**peering_loopbacks_v6** | **List[str]** | The IPv6 Peering Loopback addresses of the BGP Peer Group. Valid IP formats are IPv6 addresses. | 
 **keep_alive_timer_seconds** | **int** | The Keep Alive Timer in seconds of the BGP Peer Group. | 
 **hold_timer_seconds** | **int** | The Hold Timer in seconds of the BGP Peer Group. | 
 **created_on** | **str** | Date and time of creation. | [optional] 

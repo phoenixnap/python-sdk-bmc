@@ -34,7 +34,7 @@ class PrivateNetworkCreate(BaseModel):
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this private network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this private network.")
-    location: StrictStr = Field(description="The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     location_default: Optional[StrictBool] = Field(default=False, description="Identifies network as the default private network for the specified location.", alias="locationDefault")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     cidr: Optional[StrictStr] = Field(default=None, description="IP range associated with this private network in CIDR notation.<br> Setting the `force` query parameter to `true` allows you to skip assigning a specific IP range to network.")

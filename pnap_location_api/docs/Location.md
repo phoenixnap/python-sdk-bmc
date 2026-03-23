@@ -6,7 +6,7 @@ Location resource
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**location** | [**LocationEnum**](LocationEnum.md) |  | 
+**location** | [**ProductLocationEnum**](ProductLocationEnum.md) |  | 
 **location_description** | **str** |  | [optional] 
 **product_categories** | [**List[ProductCategory]**](ProductCategory.md) |  | [optional] 
 

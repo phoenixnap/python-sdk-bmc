@@ -36,6 +36,7 @@ from pnap_network_api.exceptions import ApiException
 # import models into sdk package
 from pnap_network_api.models.asn_details import AsnDetails
 from pnap_network_api.models.bgp_ipv4_prefix import BgpIPv4Prefix
+from pnap_network_api.models.bgp_ip_prefix import BgpIpPrefix
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.models.bgp_peer_group_create import BgpPeerGroupCreate
 from pnap_network_api.models.bgp_peer_group_patch import BgpPeerGroupPatch

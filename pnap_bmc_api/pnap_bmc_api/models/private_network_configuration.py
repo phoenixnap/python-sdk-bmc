@@ -34,7 +34,7 @@ class PrivateNetworkConfiguration(BaseModel):
     """ # noqa: E501
     gateway_address: Optional[StrictStr] = Field(default=None, description="Deprecated in favour of a common gateway address across all networks available under NetworkConfiguration.<br> The address of the gateway assigned / to assign to the server.<br> When used as part of request body, IP address has to be part of private network assigned to this server.<br> Gateway address also has to be assigned on an already deployed resource unless the `force` query parameter is true.", alias="gatewayAddress")
     configuration_type: Optional[StrictStr] = Field(default='USE_OR_CREATE_DEFAULT', description="(Write-only) Determines the approach for configuring private network(s) for the server being provisioned. Currently this field should be set to `USE_OR_CREATE_DEFAULT`, `USER_DEFINED` or `NONE`.", alias="configurationType")
-    private_networks: Optional[List[ServerPrivateNetwork]] = Field(default=None, description="The list of private networks this server is member of. When this field is part of request body, it'll be used to specify the private networks to assign to this server upon provisioning. Used alongside the `USER_DEFINED` configurationType.", alias="privateNetworks")
+    private_networks: Optional[List[ServerPrivateNetwork]] = Field(default=None, description="The list of private networks this server belongs to. If this field is part of a request body, it will be used for specifying the private networks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType.", alias="privateNetworks")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["gatewayAddress", "configurationType", "privateNetworks"]
 

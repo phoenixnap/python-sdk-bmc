@@ -34,6 +34,6 @@ from pnap_location_api.exceptions import ApiException
 # import models into sdk package
 from pnap_location_api.models.error import Error
 from pnap_location_api.models.location import Location
-from pnap_location_api.models.location_enum import LocationEnum
 from pnap_location_api.models.product_category import ProductCategory
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum
+from pnap_location_api.models.product_location_enum import ProductLocationEnum

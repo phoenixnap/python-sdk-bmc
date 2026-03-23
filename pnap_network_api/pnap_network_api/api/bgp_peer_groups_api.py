@@ -379,6 +379,7 @@ class BGPPeerGroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BgpPeerGroup",
+            '204': None,
             '400': "Error",
             '401': "Error",
             '403': "Error",
@@ -451,6 +452,7 @@ class BGPPeerGroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BgpPeerGroup",
+            '204': None,
             '400': "Error",
             '401': "Error",
             '403': "Error",
@@ -523,6 +525,7 @@ class BGPPeerGroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BgpPeerGroup",
+            '204': None,
             '400': "Error",
             '401': "Error",
             '403': "Error",

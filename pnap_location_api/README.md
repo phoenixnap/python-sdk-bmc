@@ -59,7 +59,7 @@ configuration = pnap_location_api.Configuration(
 with pnap_location_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_location_api.LocationsApi(api_client)
-    location = pnap_location_api.LocationEnum() # LocationEnum | Location of interest (optional)
+    location = pnap_location_api.ProductLocationEnum() # ProductLocationEnum | Location of interest (optional)
     product_category = pnap_location_api.ProductCategoryEnum() # ProductCategoryEnum | Product category of interest (optional)
 
     try:
@@ -103,9 +103,9 @@ Class | Method | HTTP request | Description
 
  - [Error](docs/Error.md)
  - [Location](docs/Location.md)
- - [LocationEnum](docs/LocationEnum.md)
  - [ProductCategory](docs/ProductCategory.md)
  - [ProductCategoryEnum](docs/ProductCategoryEnum.md)
+ - [ProductLocationEnum](docs/ProductLocationEnum.md)
 
 
 <a id="documentation-for-authorization"></a>

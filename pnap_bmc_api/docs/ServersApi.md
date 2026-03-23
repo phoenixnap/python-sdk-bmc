@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**servers_server_id_actions_reserve_post**](ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
 [**servers_server_id_actions_reset_post**](ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
 [**servers_server_id_actions_shutdown_post**](ServersApi.md#servers_server_id_actions_shutdown_post) | **POST** /servers/{serverId}/actions/shutdown | Shutdown server.
+[**servers_server_id_actions_transfer_reservation**](ServersApi.md#servers_server_id_actions_transfer_reservation) | **POST** /servers/{serverId}/actions/transfer-reservation | Transfer server reservation.
 [**servers_server_id_delete**](ServersApi.md#servers_server_id_delete) | **DELETE** /servers/{serverId} | Delete server.
 [**servers_server_id_get**](ServersApi.md#servers_server_id_get) | **GET** /servers/{serverId} | Get server.
 [**servers_server_id_ip_blocks_ip_block_id_delete**](ServersApi.md#servers_server_id_ip_blocks_ip_block_id_delete) | **DELETE** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks/{ipBlockId} | Unassign IP Block from Server.
@@ -939,6 +940,91 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Shutting down server. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_actions_transfer_reservation**
+> Server servers_server_id_actions_transfer_reservation(server_id, reservation_transfer_details)
+
+Transfer server reservation.
+
+Transfer server reservation. An active (READY) reservation can be transferred from a server in ERROR or RESERVED status to another HOURLY provisioned server of the same location and type.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import time
+import os
+import pnap_bmc_api
+from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
+from pnap_bmc_api.models.server import Server
+from pnap_bmc_api.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = pnap_bmc_api.ServersApi(api_client)
+    server_id = '60473a6115e34466c9f8f083' # str | The server's ID.
+    reservation_transfer_details = {"targetServerId":"54a21648dasda4s9843a17"} # ReservationTransferDetails | 
+
+    try:
+        # Transfer server reservation.
+        api_response = api_instance.servers_server_id_actions_transfer_reservation(server_id, reservation_transfer_details)
+        print("The response of ServersApi->servers_server_id_actions_transfer_reservation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServersApi->servers_server_id_actions_transfer_reservation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. | 
+ **reservation_transfer_details** | [**ReservationTransferDetails**](ReservationTransferDetails.md)|  | 
+
+### Return type
+
+[**Server**](Server.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The server reservation has been successfully transferred. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

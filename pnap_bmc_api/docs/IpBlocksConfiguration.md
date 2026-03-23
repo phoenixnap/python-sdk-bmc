@@ -7,7 +7,7 @@ The IP blocks to assign to this server. <b>This is an exclusive allocation</b>, 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **configuration_type** | **str** | (Write-only) Determines the approach for configuring IP blocks for the server being provisioned. If PURCHASE_NEW is selected, the smallest supported range, depending on the operating system, is allocated to the server. | [optional] [default to 'PURCHASE_NEW']
-**ip_blocks** | [**List[ServerIpBlock]**](ServerIpBlock.md) | Used to specify the previously purchased IP blocks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType. | [optional] 
+**ip_blocks** | [**List[ServerIpBlock]**](ServerIpBlock.md) | Used for specifying the previously purchased IPv4 blocks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType. | [optional] 
 
 ## Example
 

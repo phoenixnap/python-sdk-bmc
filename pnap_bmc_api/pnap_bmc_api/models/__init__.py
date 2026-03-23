@@ -38,6 +38,7 @@ from pnap_bmc_api.models.quota import Quota
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitRequestDetails
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
+from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
 from pnap_bmc_api.models.reset_result import ResetResult
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_create import ServerCreate

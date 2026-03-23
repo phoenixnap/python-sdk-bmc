@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
 *ServersApi* | [**servers_server_id_actions_reserve_post**](docs/ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
 *ServersApi* | [**servers_server_id_actions_reset_post**](docs/ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
 *ServersApi* | [**servers_server_id_actions_shutdown_post**](docs/ServersApi.md#servers_server_id_actions_shutdown_post) | **POST** /servers/{serverId}/actions/shutdown | Shutdown server.
+*ServersApi* | [**servers_server_id_actions_transfer_reservation**](docs/ServersApi.md#servers_server_id_actions_transfer_reservation) | **POST** /servers/{serverId}/actions/transfer-reservation | Transfer server reservation.
 *ServersApi* | [**servers_server_id_delete**](docs/ServersApi.md#servers_server_id_delete) | **DELETE** /servers/{serverId} | Delete server.
 *ServersApi* | [**servers_server_id_get**](docs/ServersApi.md#servers_server_id_get) | **GET** /servers/{serverId} | Get server.
 *ServersApi* | [**servers_server_id_ip_blocks_ip_block_id_delete**](docs/ServersApi.md#servers_server_id_ip_blocks_ip_block_id_delete) | **DELETE** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks/{ipBlockId} | Unassign IP Block from Server.
@@ -167,6 +168,7 @@ Class | Method | HTTP request | Description
  - [QuotaEditLimitRequest](docs/QuotaEditLimitRequest.md)
  - [QuotaEditLimitRequestDetails](docs/QuotaEditLimitRequestDetails.md)
  - [RelinquishIpBlock](docs/RelinquishIpBlock.md)
+ - [ReservationTransferDetails](docs/ReservationTransferDetails.md)
  - [ResetResult](docs/ResetResult.md)
  - [Server](docs/Server.md)
  - [ServerCreate](docs/ServerCreate.md)

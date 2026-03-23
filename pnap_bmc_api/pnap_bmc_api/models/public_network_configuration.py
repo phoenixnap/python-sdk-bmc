@@ -32,7 +32,7 @@ class PublicNetworkConfiguration(BaseModel):
     """
     Public network details of bare metal server.
     """ # noqa: E501
-    public_networks: Optional[List[ServerPublicNetwork]] = Field(default=None, description="The list of public networks this server is member of. When this field is part of request body, it'll be used to specify the public networks to assign to this server upon provisioning.", alias="publicNetworks")
+    public_networks: Optional[List[ServerPublicNetwork]] = Field(default=None, description="The list of public networks this server belongs to. If this field is part of a request body, it will be used for specifying the public networks to assign to this server on provision. Only IPv4 addresses can be specified.", alias="publicNetworks")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["publicNetworks"]
 
