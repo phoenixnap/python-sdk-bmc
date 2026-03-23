@@ -18,19 +18,15 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_rancher_solution_api.models.node_pool import NodePool
 from pnap_rancher_solution_api.models.rancher_cluster_config import RancherClusterConfig
 from pnap_rancher_solution_api.models.rancher_server_metadata import RancherServerMetadata
 from pnap_rancher_solution_api.models.workload_cluster_config import WorkloadClusterConfig
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Cluster(BaseModel):
     """
@@ -49,11 +45,11 @@ class Cluster(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "location", "initialClusterVersion", "nodePools", "configuration", "metadata", "workloadConfiguration", "statusDescription"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -66,7 +62,7 @@ class Cluster(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Cluster from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -85,23 +81,25 @@ class Cluster(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "id",
+            "initial_cluster_version",
+            "metadata",
+            "status_description",
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "id",
-                "initial_cluster_version",
-                "metadata",
-                "status_description",
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in node_pools (list)
         _items = []
         if self.node_pools:
-            for _item in self.node_pools:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_node_pools in self.node_pools:
+                if _item_node_pools:
+                    _items.append(_item_node_pools.to_dict())
             _dict['nodePools'] = _items
         # override the default output from pydantic by calling `to_dict()` of configuration
         if self.configuration:
@@ -120,7 +118,7 @@ class Cluster(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Cluster from a dict"""
         if obj is None:
             return None
@@ -134,10 +132,10 @@ class Cluster(BaseModel):
             "description": obj.get("description"),
             "location": obj.get("location"),
             "initialClusterVersion": obj.get("initialClusterVersion"),
-            "nodePools": [NodePool.from_dict(_item) for _item in obj.get("nodePools")] if obj.get("nodePools") is not None else None,
-            "configuration": RancherClusterConfig.from_dict(obj.get("configuration")) if obj.get("configuration") is not None else None,
-            "metadata": RancherServerMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
-            "workloadConfiguration": WorkloadClusterConfig.from_dict(obj.get("workloadConfiguration")) if obj.get("workloadConfiguration") is not None else None,
+            "nodePools": [NodePool.from_dict(_item) for _item in obj["nodePools"]] if obj.get("nodePools") is not None else None,
+            "configuration": RancherClusterConfig.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None,
+            "metadata": RancherServerMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
+            "workloadConfiguration": WorkloadClusterConfig.from_dict(obj["workloadConfiguration"]) if obj.get("workloadConfiguration") is not None else None,
             "statusDescription": obj.get("statusDescription")
         })
         # store additional fields in additional_properties

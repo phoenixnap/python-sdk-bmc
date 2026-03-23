@@ -18,15 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
 from pnap_tag_api.models.resource_assignment import ResourceAssignment
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Tag(BaseModel):
     """
@@ -48,15 +44,15 @@ class Tag(BaseModel):
         if value is None:
             return value
 
-        if value not in ('USER', 'SYSTEM'):
+        if value not in set(['USER', 'SYSTEM']):
             raise ValueError("must be one of enum values ('USER', 'SYSTEM')")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -69,7 +65,7 @@ class Tag(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Tag from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -84,19 +80,21 @@ class Tag(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in resource_assignments (list)
         _items = []
         if self.resource_assignments:
-            for _item in self.resource_assignments:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_resource_assignments in self.resource_assignments:
+                if _item_resource_assignments:
+                    _items.append(_item_resource_assignments.to_dict())
             _dict['resourceAssignments'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -106,7 +104,7 @@ class Tag(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Tag from a dict"""
         if obj is None:
             return None
@@ -120,7 +118,7 @@ class Tag(BaseModel):
             "values": obj.get("values"),
             "description": obj.get("description"),
             "isBillingTag": obj.get("isBillingTag"),
-            "resourceAssignments": [ResourceAssignment.from_dict(_item) for _item in obj.get("resourceAssignments")] if obj.get("resourceAssignments") is not None else None,
+            "resourceAssignments": [ResourceAssignment.from_dict(_item) for _item in obj["resourceAssignments"]] if obj.get("resourceAssignments") is not None else None,
             "createdBy": obj.get("createdBy") if obj.get("createdBy") is not None else 'USER'
         })
         # store additional fields in additional_properties

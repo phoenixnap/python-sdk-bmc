@@ -18,18 +18,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.asn_details import AsnDetails
 from pnap_network_api.models.bgp_ip_prefix import BgpIpPrefix
 from pnap_network_api.models.bgp_ipv4_prefix import BgpIPv4Prefix
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class BgpPeerGroup(BaseModel):
     """
@@ -62,11 +58,11 @@ class BgpPeerGroup(BaseModel):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9!@#$%^&*()\-|\[\]{}=;:<>,.]+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -79,7 +75,7 @@ class BgpPeerGroup(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of BgpPeerGroup from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -94,26 +90,28 @@ class BgpPeerGroup(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in ipv4_prefixes (list)
         _items = []
         if self.ipv4_prefixes:
-            for _item in self.ipv4_prefixes:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ipv4_prefixes in self.ipv4_prefixes:
+                if _item_ipv4_prefixes:
+                    _items.append(_item_ipv4_prefixes.to_dict())
             _dict['ipv4Prefixes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ip_prefixes (list)
         _items = []
         if self.ip_prefixes:
-            for _item in self.ip_prefixes:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ip_prefixes in self.ip_prefixes:
+                if _item_ip_prefixes:
+                    _items.append(_item_ip_prefixes.to_dict())
             _dict['ipPrefixes'] = _items
         # override the default output from pydantic by calling `to_dict()` of target_asn_details
         if self.target_asn_details:
@@ -129,7 +127,7 @@ class BgpPeerGroup(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of BgpPeerGroup from a dict"""
         if obj is None:
             return None
@@ -141,10 +139,10 @@ class BgpPeerGroup(BaseModel):
             "id": obj.get("id"),
             "status": obj.get("status"),
             "location": obj.get("location"),
-            "ipv4Prefixes": [BgpIPv4Prefix.from_dict(_item) for _item in obj.get("ipv4Prefixes")] if obj.get("ipv4Prefixes") is not None else None,
-            "ipPrefixes": [BgpIpPrefix.from_dict(_item) for _item in obj.get("ipPrefixes")] if obj.get("ipPrefixes") is not None else None,
-            "targetAsnDetails": AsnDetails.from_dict(obj.get("targetAsnDetails")) if obj.get("targetAsnDetails") is not None else None,
-            "activeAsnDetails": AsnDetails.from_dict(obj.get("activeAsnDetails")) if obj.get("activeAsnDetails") is not None else None,
+            "ipv4Prefixes": [BgpIPv4Prefix.from_dict(_item) for _item in obj["ipv4Prefixes"]] if obj.get("ipv4Prefixes") is not None else None,
+            "ipPrefixes": [BgpIpPrefix.from_dict(_item) for _item in obj["ipPrefixes"]] if obj.get("ipPrefixes") is not None else None,
+            "targetAsnDetails": AsnDetails.from_dict(obj["targetAsnDetails"]) if obj.get("targetAsnDetails") is not None else None,
+            "activeAsnDetails": AsnDetails.from_dict(obj["activeAsnDetails"]) if obj.get("activeAsnDetails") is not None else None,
             "password": obj.get("password"),
             "advertisedRoutes": obj.get("advertisedRoutes"),
             "rpkiRoaOriginAsn": obj.get("rpkiRoaOriginAsn"),

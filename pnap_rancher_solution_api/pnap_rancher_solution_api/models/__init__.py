@@ -13,7 +13,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_rancher_solution_api.models.cluster import Cluster
 from pnap_rancher_solution_api.models.delete_result import DeleteResult
@@ -25,3 +24,4 @@ from pnap_rancher_solution_api.models.rancher_cluster_config import RancherClust
 from pnap_rancher_solution_api.models.rancher_server_metadata import RancherServerMetadata
 from pnap_rancher_solution_api.models.ssh_config import SshConfig
 from pnap_rancher_solution_api.models.workload_cluster_config import WorkloadClusterConfig
+

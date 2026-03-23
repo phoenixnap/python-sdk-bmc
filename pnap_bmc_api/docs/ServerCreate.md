@@ -32,12 +32,12 @@ json = "{}"
 # create an instance of ServerCreate from a JSON string
 server_create_instance = ServerCreate.from_json(json)
 # print the JSON string representation of the object
-print ServerCreate.to_json()
+print(ServerCreate.to_json())
 
 # convert the object into a dict
 server_create_dict = server_create_instance.to_dict()
 # create an instance of ServerCreate from a dict
-server_create_form_dict = server_create.from_dict(server_create_dict)
+server_create_from_dict = ServerCreate.from_dict(server_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

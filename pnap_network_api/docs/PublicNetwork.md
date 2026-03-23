@@ -27,12 +27,12 @@ json = "{}"
 # create an instance of PublicNetwork from a JSON string
 public_network_instance = PublicNetwork.from_json(json)
 # print the JSON string representation of the object
-print PublicNetwork.to_json()
+print(PublicNetwork.to_json())
 
 # convert the object into a dict
 public_network_dict = public_network_instance.to_dict()
 # create an instance of PublicNetwork from a dict
-public_network_form_dict = public_network.from_dict(public_network_dict)
+public_network_from_dict = PublicNetwork.from_dict(public_network_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

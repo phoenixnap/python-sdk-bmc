@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of RancherServerMetadata from a JSON string
 rancher_server_metadata_instance = RancherServerMetadata.from_json(json)
 # print the JSON string representation of the object
-print RancherServerMetadata.to_json()
+print(RancherServerMetadata.to_json())
 
 # convert the object into a dict
 rancher_server_metadata_dict = rancher_server_metadata_instance.to_dict()
 # create an instance of RancherServerMetadata from a dict
-rancher_server_metadata_form_dict = rancher_server_metadata.from_dict(rancher_server_metadata_dict)
+rancher_server_metadata_from_dict = RancherServerMetadata.from_dict(rancher_server_metadata_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

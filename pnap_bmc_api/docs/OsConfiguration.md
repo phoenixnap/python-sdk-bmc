@@ -26,12 +26,12 @@ json = "{}"
 # create an instance of OsConfiguration from a JSON string
 os_configuration_instance = OsConfiguration.from_json(json)
 # print the JSON string representation of the object
-print OsConfiguration.to_json()
+print(OsConfiguration.to_json())
 
 # convert the object into a dict
 os_configuration_dict = os_configuration_instance.to_dict()
 # create an instance of OsConfiguration from a dict
-os_configuration_form_dict = os_configuration.from_dict(os_configuration_dict)
+os_configuration_from_dict = OsConfiguration.from_dict(os_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

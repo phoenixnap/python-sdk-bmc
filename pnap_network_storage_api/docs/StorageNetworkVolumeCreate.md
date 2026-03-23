@@ -22,12 +22,12 @@ json = "{}"
 # create an instance of StorageNetworkVolumeCreate from a JSON string
 storage_network_volume_create_instance = StorageNetworkVolumeCreate.from_json(json)
 # print the JSON string representation of the object
-print StorageNetworkVolumeCreate.to_json()
+print(StorageNetworkVolumeCreate.to_json())
 
 # convert the object into a dict
 storage_network_volume_create_dict = storage_network_volume_create_instance.to_dict()
 # create an instance of StorageNetworkVolumeCreate from a dict
-storage_network_volume_create_form_dict = storage_network_volume_create.from_dict(storage_network_volume_create_dict)
+storage_network_volume_create_from_dict = StorageNetworkVolumeCreate.from_dict(storage_network_volume_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -19,15 +19,12 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
-from pydantic import Field
 from pnap_payments_api.models.card_payment_method_details import CardPaymentMethodDetails
 from pnap_payments_api.models.transaction_metadata import TransactionMetadata
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Transaction(BaseModel):
     """
@@ -44,11 +41,11 @@ class Transaction(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "status", "details", "amount", "currency", "date", "metadata", "cardPaymentMethodDetails"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -61,7 +58,7 @@ class Transaction(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Transaction from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -76,11 +73,13 @@ class Transaction(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of metadata
@@ -97,7 +96,7 @@ class Transaction(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Transaction from a dict"""
         if obj is None:
             return None
@@ -112,8 +111,8 @@ class Transaction(BaseModel):
             "amount": obj.get("amount"),
             "currency": obj.get("currency"),
             "date": obj.get("date"),
-            "metadata": TransactionMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
-            "cardPaymentMethodDetails": CardPaymentMethodDetails.from_dict(obj.get("cardPaymentMethodDetails")) if obj.get("cardPaymentMethodDetails") is not None else None
+            "metadata": TransactionMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
+            "cardPaymentMethodDetails": CardPaymentMethodDetails.from_dict(obj["cardPaymentMethodDetails"]) if obj.get("cardPaymentMethodDetails") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

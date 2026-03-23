@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of PrivateNetworkConfiguration from a JSON string
 private_network_configuration_instance = PrivateNetworkConfiguration.from_json(json)
 # print the JSON string representation of the object
-print PrivateNetworkConfiguration.to_json()
+print(PrivateNetworkConfiguration.to_json())
 
 # convert the object into a dict
 private_network_configuration_dict = private_network_configuration_instance.to_dict()
 # create an instance of PrivateNetworkConfiguration from a dict
-private_network_configuration_form_dict = private_network_configuration.from_dict(private_network_configuration_dict)
+private_network_configuration_from_dict = PrivateNetworkConfiguration.from_dict(private_network_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

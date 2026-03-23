@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of TagAssignmentRequest from a JSON string
 tag_assignment_request_instance = TagAssignmentRequest.from_json(json)
 # print the JSON string representation of the object
-print TagAssignmentRequest.to_json()
+print(TagAssignmentRequest.to_json())
 
 # convert the object into a dict
 tag_assignment_request_dict = tag_assignment_request_instance.to_dict()
 # create an instance of TagAssignmentRequest from a dict
-tag_assignment_request_form_dict = tag_assignment_request.from_dict(tag_assignment_request_dict)
+tag_assignment_request_from_dict = TagAssignmentRequest.from_dict(tag_assignment_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

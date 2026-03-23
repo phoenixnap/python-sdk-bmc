@@ -10,7 +10,7 @@ For more information, please visit [https://phoenixnap.com](https://phoenixnap.c
 
 ## Requirements.
 
-Python 3.7+
+Python 3.9+
 
 ## Installation & Usage
 ### pip install
@@ -52,7 +52,6 @@ from pprint import pprint
 configuration = pnap_location_api.Configuration(
     host = "https://api.phoenixnap.com/location-api/v1"
 )
-
 
 
 # Enter a context with an instance of the API client
@@ -117,4 +116,3 @@ Endpoints do not require authorization.
 ## Author
 
 support@phoenixnap.com
-

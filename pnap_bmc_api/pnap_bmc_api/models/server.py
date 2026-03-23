@@ -19,19 +19,16 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_bmc_api.models.gpu_configuration import GpuConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.storage_configuration import StorageConfiguration
 from pnap_bmc_api.models.tag_assignment import TagAssignment
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Server(BaseModel):
     """
@@ -75,11 +72,11 @@ class Server(BaseModel):
             raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9().-])+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -92,7 +89,7 @@ class Server(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Server from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -107,19 +104,21 @@ class Server(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # override the default output from pydantic by calling `to_dict()` of os_configuration
         if self.os_configuration:
@@ -141,7 +140,7 @@ class Server(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Server from a dict"""
         if obj is None:
             return None
@@ -170,12 +169,12 @@ class Server(BaseModel):
             "password": obj.get("password"),
             "networkType": obj.get("networkType") if obj.get("networkType") is not None else 'PUBLIC_AND_PRIVATE',
             "clusterId": obj.get("clusterId"),
-            "tags": [TagAssignment.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None,
+            "tags": [TagAssignment.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "provisionedOn": obj.get("provisionedOn"),
-            "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
-            "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,
-            "storageConfiguration": StorageConfiguration.from_dict(obj.get("storageConfiguration")) if obj.get("storageConfiguration") is not None else None,
-            "gpuConfiguration": GpuConfiguration.from_dict(obj.get("gpuConfiguration")) if obj.get("gpuConfiguration") is not None else None,
+            "osConfiguration": OsConfiguration.from_dict(obj["osConfiguration"]) if obj.get("osConfiguration") is not None else None,
+            "networkConfiguration": NetworkConfiguration.from_dict(obj["networkConfiguration"]) if obj.get("networkConfiguration") is not None else None,
+            "storageConfiguration": StorageConfiguration.from_dict(obj["storageConfiguration"]) if obj.get("storageConfiguration") is not None else None,
+            "gpuConfiguration": GpuConfiguration.from_dict(obj["gpuConfiguration"]) if obj.get("gpuConfiguration") is not None else None,
             "supersededBy": obj.get("supersededBy"),
             "supersedes": obj.get("supersedes")
         })

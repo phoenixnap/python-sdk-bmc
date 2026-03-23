@@ -25,8 +25,6 @@ List all Public Networks owned by account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.rest import ApiException
@@ -106,8 +104,6 @@ Delete Public Network. The request is accepted only if no resources are members 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.rest import ApiException
 from pprint import pprint
@@ -185,8 +181,6 @@ Retrieve Public Network Details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.rest import ApiException
@@ -265,8 +259,6 @@ Removes the IP Block from the Public Network.<br> Please ensure that no resource
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.rest import ApiException
 from pprint import pprint
@@ -350,8 +342,6 @@ Adds an IP block to this public network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
 from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
@@ -435,8 +425,6 @@ Update Public Network's Details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.models.public_network_modify import PublicNetworkModify
@@ -521,8 +509,6 @@ Create a public network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.public_network import PublicNetwork
 from pnap_network_api.models.public_network_create import PublicNetworkCreate

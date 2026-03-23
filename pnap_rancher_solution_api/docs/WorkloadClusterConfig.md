@@ -21,12 +21,12 @@ json = "{}"
 # create an instance of WorkloadClusterConfig from a JSON string
 workload_cluster_config_instance = WorkloadClusterConfig.from_json(json)
 # print the JSON string representation of the object
-print WorkloadClusterConfig.to_json()
+print(WorkloadClusterConfig.to_json())
 
 # convert the object into a dict
 workload_cluster_config_dict = workload_cluster_config_instance.to_dict()
 # create an instance of WorkloadClusterConfig from a dict
-workload_cluster_config_form_dict = workload_cluster_config.from_dict(workload_cluster_config_dict)
+workload_cluster_config_from_dict = WorkloadClusterConfig.from_dict(workload_cluster_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

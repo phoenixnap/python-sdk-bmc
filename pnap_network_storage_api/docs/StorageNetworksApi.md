@@ -29,8 +29,6 @@ List all storage networks.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.storage_network import StorageNetwork
 from pnap_network_storage_api.rest import ApiException
@@ -110,8 +108,6 @@ Delete a storage network and its volume. A storage network can only be removed i
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.rest import ApiException
 from pprint import pprint
@@ -190,8 +186,6 @@ Get storage network details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.storage_network import StorageNetwork
 from pnap_network_storage_api.rest import ApiException
@@ -270,8 +264,6 @@ Update storage network details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.storage_network import StorageNetwork
 from pnap_network_storage_api.models.storage_network_update import StorageNetworkUpdate
@@ -354,8 +346,6 @@ Create a storage network and volume.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.storage_network import StorageNetwork
 from pnap_network_storage_api.models.storage_network_create import StorageNetworkCreate
@@ -437,8 +427,6 @@ Display one or more volumes belonging to a storage network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.volume import Volume
 from pnap_network_storage_api.rest import ApiException
@@ -519,8 +507,6 @@ Create a volume belonging to a storage network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.volume import Volume
 from pnap_network_storage_api.models.volume_create import VolumeCreate
@@ -605,8 +591,6 @@ Delete a Storage Network's Volume
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.rest import ApiException
 from pprint import pprint
@@ -686,8 +670,6 @@ Get a storage network's volume details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.volume import Volume
 from pnap_network_storage_api.rest import ApiException
@@ -768,8 +750,6 @@ Update a storage network's volume details. Volume's capacity requested cannot be
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.volume import Volume
 from pnap_network_storage_api.models.volume_update import VolumeUpdate
@@ -857,8 +837,6 @@ Overwrites tags assigned for the volume.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_storage_api
 from pnap_network_storage_api.models.tag_assignment_request import TagAssignmentRequest
 from pnap_network_storage_api.models.volume import Volume

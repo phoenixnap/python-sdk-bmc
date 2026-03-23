@@ -19,7 +19,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python 3.7+
+Python 3.9+
 
 ## Installation & Usage
 ### pip install
@@ -68,7 +68,6 @@ configuration = pnap_ip_api.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
-
 
 # Enter a context with an instance of the API client
 with pnap_ip_api.ApiClient(configuration) as api_client:
@@ -148,4 +147,3 @@ Authentication schemes defined for the API:
 ## Author
 
 support@phoenixnap.com
-

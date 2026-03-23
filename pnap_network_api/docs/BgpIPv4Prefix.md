@@ -22,12 +22,12 @@ json = "{}"
 # create an instance of BgpIPv4Prefix from a JSON string
 bgp_ipv4_prefix_instance = BgpIPv4Prefix.from_json(json)
 # print the JSON string representation of the object
-print BgpIPv4Prefix.to_json()
+print(BgpIPv4Prefix.to_json())
 
 # convert the object into a dict
 bgp_ipv4_prefix_dict = bgp_ipv4_prefix_instance.to_dict()
 # create an instance of BgpIPv4Prefix from a dict
-bgp_ipv4_prefix_form_dict = bgp_ipv4_prefix.from_dict(bgp_ipv4_prefix_dict)
+bgp_ipv4_prefix_from_dict = BgpIPv4Prefix.from_dict(bgp_ipv4_prefix_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

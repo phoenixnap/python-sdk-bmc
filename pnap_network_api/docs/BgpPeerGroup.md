@@ -34,12 +34,12 @@ json = "{}"
 # create an instance of BgpPeerGroup from a JSON string
 bgp_peer_group_instance = BgpPeerGroup.from_json(json)
 # print the JSON string representation of the object
-print BgpPeerGroup.to_json()
+print(BgpPeerGroup.to_json())
 
 # convert the object into a dict
 bgp_peer_group_dict = bgp_peer_group_instance.to_dict()
 # create an instance of BgpPeerGroup from a dict
-bgp_peer_group_form_dict = bgp_peer_group.from_dict(bgp_peer_group_dict)
+bgp_peer_group_from_dict = BgpPeerGroup.from_dict(bgp_peer_group_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

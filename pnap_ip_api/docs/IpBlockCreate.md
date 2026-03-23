@@ -22,12 +22,12 @@ json = "{}"
 # create an instance of IpBlockCreate from a JSON string
 ip_block_create_instance = IpBlockCreate.from_json(json)
 # print the JSON string representation of the object
-print IpBlockCreate.to_json()
+print(IpBlockCreate.to_json())
 
 # convert the object into a dict
 ip_block_create_dict = ip_block_create_instance.to_dict()
 # create an instance of IpBlockCreate from a dict
-ip_block_create_form_dict = ip_block_create.from_dict(ip_block_create_dict)
+ip_block_create_from_dict = IpBlockCreate.from_dict(ip_block_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

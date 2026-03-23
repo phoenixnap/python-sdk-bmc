@@ -11,7 +11,7 @@ For more information, please visit [https://phoenixnap.com/](https://phoenixnap.
 
 ## Requirements.
 
-Python 3.7+
+Python 3.9+
 
 ## Installation & Usage
 ### pip install
@@ -61,7 +61,6 @@ configuration = pnap_invoicing_api.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
-
 # Enter a context with an instance of the API client
 with pnap_invoicing_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -72,8 +71,8 @@ with pnap_invoicing_api.ApiClient(configuration) as api_client:
     sent_on_to = '2022-04-13T00:00:00.000Z' # datetime | Maximum value to filter invoices by sent on date. (optional)
     limit = 100 # int | The limit of the number of results returned. The number of records returned may be smaller than the limit. (optional) (default to 100)
     offset = 0 # int | The number of items to skip in the results. (optional) (default to 0)
-    sort_field = 'sentOn' # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by number. (optional) (default to 'sentOn')
-    sort_direction = 'DESC' # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to 'DESC')
+    sort_field = sentOn # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by number. (optional) (default to sentOn)
+    sort_direction = DESC # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to DESC)
 
     try:
         # List invoices.
@@ -142,4 +141,3 @@ Authentication schemes defined for the API:
 ## Author
 
 support@phoenixnap.com
-

@@ -22,8 +22,6 @@ Cluster list.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_rancher_solution_api
 from pnap_rancher_solution_api.models.cluster import Cluster
 from pnap_rancher_solution_api.rest import ApiException
@@ -98,8 +96,6 @@ Delete a cluster.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_rancher_solution_api
 from pnap_rancher_solution_api.models.delete_result import DeleteResult
 from pnap_rancher_solution_api.rest import ApiException
@@ -178,8 +174,6 @@ Retrieve a Cluster
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_rancher_solution_api
 from pnap_rancher_solution_api.models.cluster import Cluster
 from pnap_rancher_solution_api.rest import ApiException
@@ -251,15 +245,15 @@ Name | Type | Description  | Notes
 
 Create a Rancher Server Deployment.
 
-Create a Rancher Server Deployment as described in <a href='https://ranchermanager.docs.rancher.com/reference-guides/rancher-manager-architecture' target='_blank'>Rancher Docs Architecture</a>. Rancher Server allows the creation, import and management of multiple Downstream User Kubernetes Clusters. <b>This is not a Downstream User Cluster</b>. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/bmc-rancher-workload-cluster#ftoc-heading-5' target='_blank'>here</a>. 
+Create a Rancher Server Deployment as described in <a href='https://ranchermanager.docs.rancher.com/reference-guides/rancher-manager-architecture' target='_blank'>Rancher Docs Architecture</a>. Rancher Server allows the creation, import and management of multiple Downstream User Kubernetes Clusters.
+<b>This is not a Downstream User Cluster</b>. Knowledge base article to help you can be found <a href='https://phoenixnap.com/kb/bmc-rancher-workload-cluster#ftoc-heading-5' target='_blank'>here</a>.
+
 
 ### Example
 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_rancher_solution_api
 from pnap_rancher_solution_api.models.cluster import Cluster
 from pnap_rancher_solution_api.rest import ApiException

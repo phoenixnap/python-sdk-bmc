@@ -23,12 +23,12 @@ json = "{}"
 # create an instance of PublicNetworkCreate from a JSON string
 public_network_create_instance = PublicNetworkCreate.from_json(json)
 # print the JSON string representation of the object
-print PublicNetworkCreate.to_json()
+print(PublicNetworkCreate.to_json())
 
 # convert the object into a dict
 public_network_create_dict = public_network_create_instance.to_dict()
 # create an instance of PublicNetworkCreate from a dict
-public_network_create_form_dict = public_network_create.from_dict(public_network_create_dict)
+public_network_create_from_dict = PublicNetworkCreate.from_dict(public_network_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

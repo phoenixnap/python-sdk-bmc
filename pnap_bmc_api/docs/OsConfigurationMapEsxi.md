@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of OsConfigurationMapEsxi from a JSON string
 os_configuration_map_esxi_instance = OsConfigurationMapEsxi.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationMapEsxi.to_json()
+print(OsConfigurationMapEsxi.to_json())
 
 # convert the object into a dict
 os_configuration_map_esxi_dict = os_configuration_map_esxi_instance.to_dict()
 # create an instance of OsConfigurationMapEsxi from a dict
-os_configuration_map_esxi_form_dict = os_configuration_map_esxi.from_dict(os_configuration_map_esxi_dict)
+os_configuration_map_esxi_from_dict = OsConfigurationMapEsxi.from_dict(os_configuration_map_esxi_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

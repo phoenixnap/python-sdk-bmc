@@ -21,12 +21,12 @@ json = "{}"
 # create an instance of OsConfigurationNetrisSoftgate from a JSON string
 os_configuration_netris_softgate_instance = OsConfigurationNetrisSoftgate.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationNetrisSoftgate.to_json()
+print(OsConfigurationNetrisSoftgate.to_json())
 
 # convert the object into a dict
 os_configuration_netris_softgate_dict = os_configuration_netris_softgate_instance.to_dict()
 # create an instance of OsConfigurationNetrisSoftgate from a dict
-os_configuration_netris_softgate_form_dict = os_configuration_netris_softgate.from_dict(os_configuration_netris_softgate_dict)
+os_configuration_netris_softgate_from_dict = OsConfigurationNetrisSoftgate.from_dict(os_configuration_netris_softgate_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

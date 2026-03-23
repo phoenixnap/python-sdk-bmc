@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of ResourceAssignment from a JSON string
 resource_assignment_instance = ResourceAssignment.from_json(json)
 # print the JSON string representation of the object
-print ResourceAssignment.to_json()
+print(ResourceAssignment.to_json())
 
 # convert the object into a dict
 resource_assignment_dict = resource_assignment_instance.to_dict()
 # create an instance of ResourceAssignment from a dict
-resource_assignment_form_dict = resource_assignment.from_dict(resource_assignment_dict)
+resource_assignment_from_dict = ResourceAssignment.from_dict(resource_assignment_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

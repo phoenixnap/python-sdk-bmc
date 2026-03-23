@@ -23,12 +23,12 @@ json = "{}"
 # create an instance of PrivateNetworkCreate from a JSON string
 private_network_create_instance = PrivateNetworkCreate.from_json(json)
 # print the JSON string representation of the object
-print PrivateNetworkCreate.to_json()
+print(PrivateNetworkCreate.to_json())
 
 # convert the object into a dict
 private_network_create_dict = private_network_create_instance.to_dict()
 # create an instance of PrivateNetworkCreate from a dict
-private_network_create_form_dict = private_network_create.from_dict(private_network_create_dict)
+private_network_create_from_dict = PrivateNetworkCreate.from_dict(private_network_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

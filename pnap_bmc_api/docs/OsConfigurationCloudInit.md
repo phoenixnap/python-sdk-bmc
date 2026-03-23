@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of OsConfigurationCloudInit from a JSON string
 os_configuration_cloud_init_instance = OsConfigurationCloudInit.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationCloudInit.to_json()
+print(OsConfigurationCloudInit.to_json())
 
 # convert the object into a dict
 os_configuration_cloud_init_dict = os_configuration_cloud_init_instance.to_dict()
 # create an instance of OsConfigurationCloudInit from a dict
-os_configuration_cloud_init_form_dict = os_configuration_cloud_init.from_dict(os_configuration_cloud_init_dict)
+os_configuration_cloud_init_from_dict = OsConfigurationCloudInit.from_dict(os_configuration_cloud_init_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

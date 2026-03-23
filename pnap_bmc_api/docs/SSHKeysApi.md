@@ -23,8 +23,6 @@ List all SSH Keys.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.rest import ApiException
@@ -99,8 +97,6 @@ Create an SSH Key. SSH Keys created can be used for server creation and reset fu
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.models.ssh_key_create import SshKeyCreate
@@ -182,8 +178,6 @@ Delete an SSH Key.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.delete_ssh_key_result import DeleteSshKeyResult
 from pnap_bmc_api.rest import ApiException
@@ -263,8 +257,6 @@ Get SSH Key details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.rest import ApiException
@@ -344,8 +336,6 @@ Edit SSH Key details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.models.ssh_key_update import SshKeyUpdate

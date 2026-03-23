@@ -21,12 +21,12 @@ json = "{}"
 # create an instance of AsnDetails from a JSON string
 asn_details_instance = AsnDetails.from_json(json)
 # print the JSON string representation of the object
-print AsnDetails.to_json()
+print(AsnDetails.to_json())
 
 # convert the object into a dict
 asn_details_dict = asn_details_instance.to_dict()
 # create an instance of AsnDetails from a dict
-asn_details_form_dict = asn_details.from_dict(asn_details_dict)
+asn_details_from_dict = AsnDetails.from_dict(asn_details_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

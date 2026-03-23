@@ -23,8 +23,6 @@ List all BGP Peer Groups owned by account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -104,8 +102,6 @@ Deletes BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -187,8 +183,6 @@ Retrieves BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -268,8 +262,6 @@ Modifies BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.models.bgp_peer_group_patch import BgpPeerGroupPatch
@@ -353,8 +345,6 @@ Create a BGP Peer Group.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.models.bgp_peer_group_create import BgpPeerGroupCreate

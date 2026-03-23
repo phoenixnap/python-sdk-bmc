@@ -13,8 +13,8 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_audit_api.models.error import Error
 from pnap_audit_api.models.event import Event
 from pnap_audit_api.models.user_info import UserInfo
+

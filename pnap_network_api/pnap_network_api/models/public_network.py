@@ -19,16 +19,13 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.network_membership import NetworkMembership
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PublicNetwork(BaseModel):
     """
@@ -47,11 +44,11 @@ class PublicNetwork(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "vlanId", "memberships", "name", "location", "description", "status", "createdOn", "ipBlocks", "raEnabled"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -64,7 +61,7 @@ class PublicNetwork(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PublicNetwork from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -79,26 +76,28 @@ class PublicNetwork(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in memberships (list)
         _items = []
         if self.memberships:
-            for _item in self.memberships:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_memberships in self.memberships:
+                if _item_memberships:
+                    _items.append(_item_memberships.to_dict())
             _dict['memberships'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ip_blocks (list)
         _items = []
         if self.ip_blocks:
-            for _item in self.ip_blocks:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ip_blocks in self.ip_blocks:
+                if _item_ip_blocks:
+                    _items.append(_item_ip_blocks.to_dict())
             _dict['ipBlocks'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -108,7 +107,7 @@ class PublicNetwork(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PublicNetwork from a dict"""
         if obj is None:
             return None
@@ -119,13 +118,13 @@ class PublicNetwork(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "vlanId": obj.get("vlanId"),
-            "memberships": [NetworkMembership.from_dict(_item) for _item in obj.get("memberships")] if obj.get("memberships") is not None else None,
+            "memberships": [NetworkMembership.from_dict(_item) for _item in obj["memberships"]] if obj.get("memberships") is not None else None,
             "name": obj.get("name"),
             "location": obj.get("location"),
             "description": obj.get("description"),
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn"),
-            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None,
+            "ipBlocks": [PublicNetworkIpBlock.from_dict(_item) for _item in obj["ipBlocks"]] if obj.get("ipBlocks") is not None else None,
             "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties

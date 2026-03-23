@@ -18,8 +18,6 @@ Retrieve the locations info.
 
 
 ```python
-import time
-import os
 import pnap_location_api
 from pnap_location_api.models.location import Location
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum

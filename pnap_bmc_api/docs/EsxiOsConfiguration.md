@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of EsxiOsConfiguration from a JSON string
 esxi_os_configuration_instance = EsxiOsConfiguration.from_json(json)
 # print the JSON string representation of the object
-print EsxiOsConfiguration.to_json()
+print(EsxiOsConfiguration.to_json())
 
 # convert the object into a dict
 esxi_os_configuration_dict = esxi_os_configuration_instance.to_dict()
 # create an instance of EsxiOsConfiguration from a dict
-esxi_os_configuration_form_dict = esxi_os_configuration.from_dict(esxi_os_configuration_dict)
+esxi_os_configuration_from_dict = EsxiOsConfiguration.from_dict(esxi_os_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

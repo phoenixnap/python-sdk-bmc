@@ -20,8 +20,6 @@ Get transaction details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_payments_api
 from pnap_payments_api.models.transaction import Transaction
 from pnap_payments_api.rest import ApiException
@@ -100,8 +98,6 @@ A paginated list of client's transactions.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_payments_api
 from pnap_payments_api.models.paginated_transactions import PaginatedTransactions
 from pnap_payments_api.rest import ApiException
@@ -126,8 +122,8 @@ with pnap_payments_api.ApiClient(configuration) as api_client:
     api_instance = pnap_payments_api.TransactionsApi(api_client)
     limit = 100 # int | The limit of the number of results returned. The number of records returned may be smaller than the limit. (optional) (default to 100)
     offset = 0 # int | The number of items to skip in the results. (optional) (default to 0)
-    sort_direction = 'DESC' # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to 'DESC')
-    sort_field = 'date' # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by date. (optional) (default to 'date')
+    sort_direction = DESC # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to DESC)
+    sort_field = date # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by date. (optional) (default to date)
     var_from = '2021-04-27T16:24:57.123Z' # datetime | From the date and time (inclusive) to filter transactions by. (optional)
     to = '2021-04-29T16:24:57.123Z' # datetime | To the date and time (inclusive) to filter transactions by. (optional)
 
@@ -149,8 +145,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The limit of the number of results returned. The number of records returned may be smaller than the limit. | [optional] [default to 100]
  **offset** | **int**| The number of items to skip in the results. | [optional] [default to 0]
- **sort_direction** | **str**| Sort Given Field depending on the desired direction. Default sorting is descending. | [optional] [default to &#39;DESC&#39;]
- **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by date. | [optional] [default to &#39;date&#39;]
+ **sort_direction** | **str**| Sort Given Field depending on the desired direction. Default sorting is descending. | [optional] [default to DESC]
+ **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by date. | [optional] [default to date]
  **var_from** | **datetime**| From the date and time (inclusive) to filter transactions by. | [optional] 
  **to** | **datetime**| To the date and time (inclusive) to filter transactions by. | [optional] 
 

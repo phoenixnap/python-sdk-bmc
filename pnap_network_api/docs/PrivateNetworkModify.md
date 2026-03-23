@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of PrivateNetworkModify from a JSON string
 private_network_modify_instance = PrivateNetworkModify.from_json(json)
 # print the JSON string representation of the object
-print PrivateNetworkModify.to_json()
+print(PrivateNetworkModify.to_json())
 
 # convert the object into a dict
 private_network_modify_dict = private_network_modify_instance.to_dict()
 # create an instance of PrivateNetworkModify from a dict
-private_network_modify_form_dict = private_network_modify.from_dict(private_network_modify_dict)
+private_network_modify_from_dict = PrivateNetworkModify.from_dict(private_network_modify_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

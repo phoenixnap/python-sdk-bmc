@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of PublicNetworkModify from a JSON string
 public_network_modify_instance = PublicNetworkModify.from_json(json)
 # print the JSON string representation of the object
-print PublicNetworkModify.to_json()
+print(PublicNetworkModify.to_json())
 
 # convert the object into a dict
 public_network_modify_dict = public_network_modify_instance.to_dict()
 # create an instance of PublicNetworkModify from a dict
-public_network_modify_form_dict = public_network_modify.from_dict(public_network_modify_dict)
+public_network_modify_from_dict = PublicNetworkModify.from_dict(public_network_modify_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

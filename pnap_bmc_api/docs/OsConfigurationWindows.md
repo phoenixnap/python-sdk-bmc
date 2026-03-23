@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of OsConfigurationWindows from a JSON string
 os_configuration_windows_instance = OsConfigurationWindows.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationWindows.to_json()
+print(OsConfigurationWindows.to_json())
 
 # convert the object into a dict
 os_configuration_windows_dict = os_configuration_windows_instance.to_dict()
 # create an instance of OsConfigurationWindows from a dict
-os_configuration_windows_form_dict = os_configuration_windows.from_dict(os_configuration_windows_dict)
+os_configuration_windows_from_dict = OsConfigurationWindows.from_dict(os_configuration_windows_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,16 +18,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_storage_api.models.permissions_update import PermissionsUpdate
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class VolumeUpdate(BaseModel):
     """
@@ -61,11 +57,11 @@ class VolumeUpdate(BaseModel):
             raise ValueError(r"must validate the regular expression /^(\/[\w-]+)+$|^$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -78,7 +74,7 @@ class VolumeUpdate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of VolumeUpdate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -93,11 +89,13 @@ class VolumeUpdate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of permissions
@@ -111,7 +109,7 @@ class VolumeUpdate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of VolumeUpdate from a dict"""
         if obj is None:
             return None
@@ -124,7 +122,7 @@ class VolumeUpdate(BaseModel):
             "description": obj.get("description"),
             "capacityInGb": obj.get("capacityInGb"),
             "pathSuffix": obj.get("pathSuffix"),
-            "permissions": PermissionsUpdate.from_dict(obj.get("permissions")) if obj.get("permissions") is not None else None
+            "permissions": PermissionsUpdate.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

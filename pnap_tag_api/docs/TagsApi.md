@@ -23,8 +23,6 @@ Retrieve all tags belonging to the BMC Account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_tag_api
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.rest import ApiException
@@ -103,8 +101,6 @@ Create a tag with the provided information.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_tag_api
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.models.tag_create import TagCreate
@@ -186,8 +182,6 @@ Delete the tag with the given ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_tag_api
 from pnap_tag_api.models.delete_result import DeleteResult
 from pnap_tag_api.rest import ApiException
@@ -266,8 +260,6 @@ Retrieve the tag with the given ID
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_tag_api
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.rest import ApiException
@@ -346,8 +338,6 @@ Updates the tag with the given ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_tag_api
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.models.tag_update import TagUpdate

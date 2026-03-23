@@ -41,8 +41,6 @@ Removes the server from private network. <b>No actual configuration is performed
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.rest import ApiException
 from pprint import pprint
@@ -124,8 +122,6 @@ List all servers owned by account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.rest import ApiException
@@ -204,8 +200,6 @@ Create (request) a new server for the account. Server DNS will be configured to 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_create import ServerCreate
@@ -290,8 +284,6 @@ Deprovision the server. Supports advanced deprovision configuration.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.rest import ApiException
@@ -374,8 +366,6 @@ Power off specific server.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.rest import ApiException
@@ -456,8 +446,6 @@ Power on specific server.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.rest import ApiException
@@ -538,8 +526,6 @@ Provision reserved server. Server DNS will be configured to access Google's publ
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_provision import ServerProvision
@@ -626,8 +612,6 @@ Reboot specific server.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.rest import ApiException
@@ -708,8 +692,6 @@ Reserve specific server.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_reserve import ServerReserve
@@ -793,8 +775,6 @@ Deprecated: Reset specific server. Reset only supports network configurations of
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.reset_result import ResetResult
 from pnap_bmc_api.models.server_reset import ServerReset
@@ -878,8 +858,6 @@ Shut down specific server.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.rest import ApiException
@@ -960,8 +938,6 @@ Transfer server reservation. An active (READY) reservation can be transferred fr
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
 from pnap_bmc_api.models.server import Server
@@ -1045,8 +1021,6 @@ Deprovision specific server. Any IP blocks assigned to this server will also be 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.delete_result import DeleteResult
 from pnap_bmc_api.rest import ApiException
@@ -1126,8 +1100,6 @@ Get server properties.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.rest import ApiException
@@ -1207,8 +1179,6 @@ Removes the IP block from the server. <b>No actual configuration is performed on
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.rest import ApiException
@@ -1293,8 +1263,6 @@ Adds an IP block to this server. <b>No actual configuration is performed on the 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server_ip_block import ServerIpBlock
 from pnap_bmc_api.rest import ApiException
@@ -1377,8 +1345,6 @@ Any changes to the hostname or description using the BMC API will reflect solely
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_patch import ServerPatch
@@ -1461,8 +1427,6 @@ IP address changes intended to keep the BMC data up to date with server's operat
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server_network_update import ServerNetworkUpdate
 from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
@@ -1550,8 +1514,6 @@ Adds the server to a private network. <b>No actual configuration is performed on
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
 from pnap_bmc_api.rest import ApiException
@@ -1635,8 +1597,6 @@ Removes the server from the Public Network. <b>No actual configuration is perfor
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.rest import ApiException
 from pprint import pprint
@@ -1718,8 +1678,6 @@ IP address changes intended to keep the BMC data up to date with server's operat
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server_network_update import ServerNetworkUpdate
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
@@ -1807,8 +1765,6 @@ Adds the server to a Public Network. <b>No actual configuration is performed on 
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.rest import ApiException
@@ -1893,8 +1849,6 @@ Overwrites tags assigned for Server and unassigns any tags not part of the reque
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest

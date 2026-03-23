@@ -18,15 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from pydantic import Field
 from pnap_bmc_api.models.storage_configuration_root_partition import StorageConfigurationRootPartition
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class StorageConfiguration(BaseModel):
     """
@@ -36,11 +32,11 @@ class StorageConfiguration(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["rootPartition"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -53,7 +49,7 @@ class StorageConfiguration(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of StorageConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -68,11 +64,13 @@ class StorageConfiguration(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of root_partition
@@ -86,7 +84,7 @@ class StorageConfiguration(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of StorageConfiguration from a dict"""
         if obj is None:
             return None
@@ -95,7 +93,7 @@ class StorageConfiguration(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "rootPartition": StorageConfigurationRootPartition.from_dict(obj.get("rootPartition")) if obj.get("rootPartition") is not None else None
+            "rootPartition": StorageConfigurationRootPartition.from_dict(obj["rootPartition"]) if obj.get("rootPartition") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

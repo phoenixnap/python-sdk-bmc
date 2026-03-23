@@ -22,12 +22,12 @@ json = "{}"
 # create an instance of ServerPrivateNetwork from a JSON string
 server_private_network_instance = ServerPrivateNetwork.from_json(json)
 # print the JSON string representation of the object
-print ServerPrivateNetwork.to_json()
+print(ServerPrivateNetwork.to_json())
 
 # convert the object into a dict
 server_private_network_dict = server_private_network_instance.to_dict()
 # create an instance of ServerPrivateNetwork from a dict
-server_private_network_form_dict = server_private_network.from_dict(server_private_network_dict)
+server_private_network_from_dict = ServerPrivateNetwork.from_dict(server_private_network_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

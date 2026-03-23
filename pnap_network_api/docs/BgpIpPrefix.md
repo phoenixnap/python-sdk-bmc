@@ -21,12 +21,12 @@ json = "{}"
 # create an instance of BgpIpPrefix from a JSON string
 bgp_ip_prefix_instance = BgpIpPrefix.from_json(json)
 # print the JSON string representation of the object
-print BgpIpPrefix.to_json()
+print(BgpIpPrefix.to_json())
 
 # convert the object into a dict
 bgp_ip_prefix_dict = bgp_ip_prefix_instance.to_dict()
 # create an instance of BgpIpPrefix from a dict
-bgp_ip_prefix_form_dict = bgp_ip_prefix.from_dict(bgp_ip_prefix_dict)
+bgp_ip_prefix_from_dict = BgpIpPrefix.from_dict(bgp_ip_prefix_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

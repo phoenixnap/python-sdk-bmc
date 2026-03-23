@@ -28,12 +28,12 @@ json = "{}"
 # create an instance of ServerProvision from a JSON string
 server_provision_instance = ServerProvision.from_json(json)
 # print the JSON string representation of the object
-print ServerProvision.to_json()
+print(ServerProvision.to_json())
 
 # convert the object into a dict
 server_provision_dict = server_provision_instance.to_dict()
 # create an instance of ServerProvision from a dict
-server_provision_form_dict = server_provision.from_dict(server_provision_dict)
+server_provision_from_dict = ServerProvision.from_dict(server_provision_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

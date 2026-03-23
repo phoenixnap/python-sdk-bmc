@@ -24,8 +24,6 @@ List all IP Blocks.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.ip_block import IpBlock
 from pnap_ip_api.rest import ApiException
@@ -104,8 +102,6 @@ Delete an IP Block. An IP Block can only be deleted if not assigned to any resou
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.delete_ip_block_result import DeleteIpBlockResult
 from pnap_ip_api.rest import ApiException
@@ -184,8 +180,6 @@ Get IP Block.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.ip_block import IpBlock
 from pnap_ip_api.rest import ApiException
@@ -264,8 +258,6 @@ Update IP Block's details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.ip_block import IpBlock
 from pnap_ip_api.models.ip_block_patch import IpBlockPatch
@@ -349,8 +341,6 @@ Overwrites tags assigned for IP Block and unassigns any tags not part of the req
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.ip_block import IpBlock
 from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
@@ -433,8 +423,6 @@ Request an IP Block. An IP Block is a set of contiguous IPs that can be assigned
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_ip_api
 from pnap_ip_api.models.ip_block import IpBlock
 from pnap_ip_api.models.ip_block_create import IpBlockCreate

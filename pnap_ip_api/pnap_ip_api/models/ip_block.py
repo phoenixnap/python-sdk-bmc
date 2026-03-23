@@ -19,15 +19,12 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_ip_api.models.tag_assignment import TagAssignment
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class IpBlock(BaseModel):
     """
@@ -50,11 +47,11 @@ class IpBlock(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "location", "cidrBlockSize", "cidr", "ipVersion", "status", "parentIpBlockAllocationId", "assignedResourceId", "assignedResourceType", "description", "tags", "isSystemManaged", "isBringYourOwn", "createdOn"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -67,7 +64,7 @@ class IpBlock(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of IpBlock from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -82,19 +79,21 @@ class IpBlock(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -104,7 +103,7 @@ class IpBlock(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of IpBlock from a dict"""
         if obj is None:
             return None
@@ -123,7 +122,7 @@ class IpBlock(BaseModel):
             "assignedResourceId": obj.get("assignedResourceId"),
             "assignedResourceType": obj.get("assignedResourceType"),
             "description": obj.get("description"),
-            "tags": [TagAssignment.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None,
+            "tags": [TagAssignment.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "isSystemManaged": obj.get("isSystemManaged"),
             "isBringYourOwn": obj.get("isBringYourOwn"),
             "createdOn": obj.get("createdOn")

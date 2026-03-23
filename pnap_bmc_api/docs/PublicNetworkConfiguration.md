@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of PublicNetworkConfiguration from a JSON string
 public_network_configuration_instance = PublicNetworkConfiguration.from_json(json)
 # print the JSON string representation of the object
-print PublicNetworkConfiguration.to_json()
+print(PublicNetworkConfiguration.to_json())
 
 # convert the object into a dict
 public_network_configuration_dict = public_network_configuration_instance.to_dict()
 # create an instance of PublicNetworkConfiguration from a dict
-public_network_configuration_form_dict = public_network_configuration.from_dict(public_network_configuration_dict)
+public_network_configuration_from_dict = PublicNetworkConfiguration.from_dict(public_network_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

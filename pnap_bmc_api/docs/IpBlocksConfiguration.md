@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of IpBlocksConfiguration from a JSON string
 ip_blocks_configuration_instance = IpBlocksConfiguration.from_json(json)
 # print the JSON string representation of the object
-print IpBlocksConfiguration.to_json()
+print(IpBlocksConfiguration.to_json())
 
 # convert the object into a dict
 ip_blocks_configuration_dict = ip_blocks_configuration_instance.to_dict()
 # create an instance of IpBlocksConfiguration from a dict
-ip_blocks_configuration_form_dict = ip_blocks_configuration.from_dict(ip_blocks_configuration_dict)
+ip_blocks_configuration_from_dict = IpBlocksConfiguration.from_dict(ip_blocks_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

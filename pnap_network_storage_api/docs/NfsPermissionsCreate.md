@@ -22,12 +22,12 @@ json = "{}"
 # create an instance of NfsPermissionsCreate from a JSON string
 nfs_permissions_create_instance = NfsPermissionsCreate.from_json(json)
 # print the JSON string representation of the object
-print NfsPermissionsCreate.to_json()
+print(NfsPermissionsCreate.to_json())
 
 # convert the object into a dict
 nfs_permissions_create_dict = nfs_permissions_create_instance.to_dict()
 # create an instance of NfsPermissionsCreate from a dict
-nfs_permissions_create_form_dict = nfs_permissions_create.from_dict(nfs_permissions_create_dict)
+nfs_permissions_create_from_dict = NfsPermissionsCreate.from_dict(nfs_permissions_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

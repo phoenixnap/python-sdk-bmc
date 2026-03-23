@@ -13,9 +13,9 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_invoicing_api.models.error import Error
 from pnap_invoicing_api.models.invoice import Invoice
 from pnap_invoicing_api.models.paginated_invoices import PaginatedInvoices
 from pnap_invoicing_api.models.paginated_response import PaginatedResponse
+

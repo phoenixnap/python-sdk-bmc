@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of BgpPeerGroupPatch from a JSON string
 bgp_peer_group_patch_instance = BgpPeerGroupPatch.from_json(json)
 # print the JSON string representation of the object
-print BgpPeerGroupPatch.to_json()
+print(BgpPeerGroupPatch.to_json())
 
 # convert the object into a dict
 bgp_peer_group_patch_dict = bgp_peer_group_patch_instance.to_dict()
 # create an instance of BgpPeerGroupPatch from a dict
-bgp_peer_group_patch_form_dict = bgp_peer_group_patch.from_dict(bgp_peer_group_patch_dict)
+bgp_peer_group_patch_from_dict = BgpPeerGroupPatch.from_dict(bgp_peer_group_patch_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

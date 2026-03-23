@@ -18,16 +18,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_storage_api.models.tag_assignment_request import TagAssignmentRequest
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class StorageNetworkVolumeCreate(BaseModel):
     """
@@ -58,11 +54,11 @@ class StorageNetworkVolumeCreate(BaseModel):
             raise ValueError(r"must validate the regular expression /^(\/[\w-]+)+$|^$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -75,7 +71,7 @@ class StorageNetworkVolumeCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of StorageNetworkVolumeCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -90,19 +86,21 @@ class StorageNetworkVolumeCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -112,7 +110,7 @@ class StorageNetworkVolumeCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of StorageNetworkVolumeCreate from a dict"""
         if obj is None:
             return None
@@ -125,7 +123,7 @@ class StorageNetworkVolumeCreate(BaseModel):
             "description": obj.get("description"),
             "pathSuffix": obj.get("pathSuffix"),
             "capacityInGb": obj.get("capacityInGb"),
-            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
+            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

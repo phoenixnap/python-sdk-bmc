@@ -19,16 +19,13 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr
-from pydantic import Field
 from pnap_network_storage_api.models.permissions import Permissions
 from pnap_network_storage_api.models.status import Status
 from pnap_network_storage_api.models.tag_assignment import TagAssignment
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Volume(BaseModel):
     """
@@ -50,11 +47,11 @@ class Volume(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "path", "pathSuffix", "capacityInGb", "usedCapacityInGb", "protocol", "status", "createdOn", "deleteRequestedOn", "permissions", "tags"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -67,7 +64,7 @@ class Volume(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Volume from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -82,11 +79,13 @@ class Volume(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of permissions
@@ -95,9 +94,9 @@ class Volume(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -107,7 +106,7 @@ class Volume(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Volume from a dict"""
         if obj is None:
             return None
@@ -127,8 +126,8 @@ class Volume(BaseModel):
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn"),
             "deleteRequestedOn": obj.get("deleteRequestedOn"),
-            "permissions": Permissions.from_dict(obj.get("permissions")) if obj.get("permissions") is not None else None,
-            "tags": [TagAssignment.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
+            "permissions": Permissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
+            "tags": [TagAssignment.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

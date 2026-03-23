@@ -22,8 +22,6 @@ List invoices.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_invoicing_api
 from pnap_invoicing_api.models.paginated_invoices import PaginatedInvoices
 from pnap_invoicing_api.rest import ApiException
@@ -52,8 +50,8 @@ with pnap_invoicing_api.ApiClient(configuration) as api_client:
     sent_on_to = '2022-04-13T00:00:00.000Z' # datetime | Maximum value to filter invoices by sent on date. (optional)
     limit = 100 # int | The limit of the number of results returned. The number of records returned may be smaller than the limit. (optional) (default to 100)
     offset = 0 # int | The number of items to skip in the results. (optional) (default to 0)
-    sort_field = 'sentOn' # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by number. (optional) (default to 'sentOn')
-    sort_direction = 'DESC' # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to 'DESC')
+    sort_field = sentOn # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by number. (optional) (default to sentOn)
+    sort_direction = DESC # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to DESC)
 
     try:
         # List invoices.
@@ -77,8 +75,8 @@ Name | Type | Description  | Notes
  **sent_on_to** | **datetime**| Maximum value to filter invoices by sent on date. | [optional] 
  **limit** | **int**| The limit of the number of results returned. The number of records returned may be smaller than the limit. | [optional] [default to 100]
  **offset** | **int**| The number of items to skip in the results. | [optional] [default to 0]
- **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by number. | [optional] [default to &#39;sentOn&#39;]
- **sort_direction** | **str**| Sort Given Field depending on the desired direction. Default sorting is descending. | [optional] [default to &#39;DESC&#39;]
+ **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by number. | [optional] [default to sentOn]
+ **sort_direction** | **str**| Sort Given Field depending on the desired direction. Default sorting is descending. | [optional] [default to DESC]
 
 ### Return type
 
@@ -117,8 +115,6 @@ Generate invoice details as PDF.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_invoicing_api
 from pnap_invoicing_api.rest import ApiException
 from pprint import pprint
@@ -196,8 +192,6 @@ Get invoice details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_invoicing_api
 from pnap_invoicing_api.models.invoice import Invoice
 from pnap_invoicing_api.rest import ApiException
@@ -276,8 +270,6 @@ Manually pay an invoice.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_invoicing_api
 from pnap_invoicing_api.rest import ApiException
 from pprint import pprint
