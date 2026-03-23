@@ -40,9 +40,16 @@ Then import the package:
 import pnap_location_api
 ```
 
+### Tests
+
+Execute `pytest` to run the tests.
+
+## Getting Started
+
+Please follow the [installation procedure](#installation--usage) and then run the following:
+
 ```python
 
-import time
 import pnap_location_api
 from pnap_location_api.rest import ApiException
 from pprint import pprint
@@ -52,6 +59,7 @@ from pprint import pprint
 configuration = pnap_location_api.Configuration(
     host = "https://api.phoenixnap.com/location-api/v1"
 )
+
 
 
 # Enter a context with an instance of the API client
