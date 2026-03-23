@@ -100,6 +100,7 @@ keycloakOpenId =  KeycloakOpenID(server_url=serverUrl,
                         client_secret_key=clientSecret)
 
 ACCESS_TOKEN = keycloakOpenId.token(grant_type=grantType)['access_token']
+```
 
 
 ## Documentation for API Endpoints
