@@ -7,7 +7,6 @@ authors = [
 ]
 license = { text = "Apache 2.0" }
 readme = "README.md"
-repository = "https://github.com/phoenixnap/python-sdk-bmc"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Payments API"]
 requires-python = ">=3.9"
 
