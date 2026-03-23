@@ -7,6 +7,7 @@ Windows OS configuration properties.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rdp_allowed_ips** | **List[str]** | List of IPs allowed for RDP access to Windows OS. Supported in single IP, CIDR and range format. When undefined, RDP is disabled. To allow RDP access from any IP use 0.0.0.0/0. This will only be returned in response to provisioning a server. | [optional] 
+**bring_your_own_license** | **bool** | Use a Bring Your Own (BYO) Windows license.  If true, the server is provisioned in trial mode, and you must activate your own license.  If false (default), the server includes a managed Windows license billed by the platform.  | [optional] [default to False]
 
 ## Example
 

@@ -19,23 +19,21 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
-from typing_extensions import Annotated
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class OsConfigurationWindows(BaseModel):
+class ReservationTransferDetails(BaseModel):
     """
-    Windows OS configuration properties.
+    Reservation transfer details.
     """ # noqa: E501
-    rdp_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed for RDP access to Windows OS. Supported in single IP, CIDR and range format. When undefined, RDP is disabled. To allow RDP access from any IP use 0.0.0.0/0. This will only be returned in response to provisioning a server.", alias="rdpAllowedIps")
-    bring_your_own_license: Optional[StrictBool] = Field(default=False, description="Use a Bring Your Own (BYO) Windows license.  If true, the server is provisioned in trial mode, and you must activate your own license.  If false (default), the server includes a managed Windows license billed by the platform. ", alias="bringYourOwnLicense")
+    target_server_id: StrictStr = Field(description="ID of target server to transfer reservation to.", alias="targetServerId")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["rdpAllowedIps", "bringYourOwnLicense"]
+    __properties: ClassVar[List[str]] = ["targetServerId"]
 
     model_config = {
         "populate_by_name": True,
@@ -55,7 +53,7 @@ class OsConfigurationWindows(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of OsConfigurationWindows from a JSON string"""
+        """Create an instance of ReservationTransferDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -85,7 +83,7 @@ class OsConfigurationWindows(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of OsConfigurationWindows from a dict"""
+        """Create an instance of ReservationTransferDetails from a dict"""
         if obj is None:
             return None
 
@@ -93,8 +91,7 @@ class OsConfigurationWindows(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "rdpAllowedIps": obj.get("rdpAllowedIps"),
-            "bringYourOwnLicense": obj.get("bringYourOwnLicense") if obj.get("bringYourOwnLicense") is not None else False
+            "targetServerId": obj.get("targetServerId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -32,7 +32,7 @@ class BgpPeerGroupCreate(BaseModel):
     """
     Create a BGP Peer Group.
     """ # noqa: E501
-    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     asn: StrictInt = Field(description="The BGP Peer Group ASN.")
     password: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=32)]] = Field(default=None, description="The BGP Peer Group password.")
     advertised_routes: StrictStr = Field(description="The Advertised routes for the BGP Peer Group. Can have one of the following values: `DEFAULT` and `NONE`.", alias="advertisedRoutes")

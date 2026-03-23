@@ -35,7 +35,7 @@ class PublicNetworkCreate(BaseModel):
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this public network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network.")
-    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     ip_blocks: Optional[Annotated[List[PublicNetworkIpBlockCreate], Field(max_length=11)]] = Field(default=None, description="A list of IP Blocks that will be associated with this public network. Supported maximum of 10 IPv4 Blocks and 1 IPv6 Block.", alias="ipBlocks")
     ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")

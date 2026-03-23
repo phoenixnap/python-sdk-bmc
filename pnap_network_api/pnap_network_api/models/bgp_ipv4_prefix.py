@@ -30,7 +30,7 @@ except ImportError:
 
 class BgpIPv4Prefix(BaseModel):
     """
-    The BGP IPv4 Prefix.
+    The BGP IPv4 Prefix. Deprecated in favour of generic BgpIpPrefix.
     """ # noqa: E501
     ipv4_allocation_id: StrictStr = Field(description="IPv4 allocation ID.", alias="ipv4AllocationId")
     cidr: Annotated[str, Field(strict=True)] = Field(description="The IP block in CIDR format.")

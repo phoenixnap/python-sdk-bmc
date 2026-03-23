@@ -22,8 +22,8 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from pydantic import Field
-from pnap_location_api.models.location_enum import LocationEnum
 from pnap_location_api.models.product_category import ProductCategory
+from pnap_location_api.models.product_location_enum import ProductLocationEnum
 try:
     from typing import Self
 except ImportError:
@@ -33,7 +33,7 @@ class Location(BaseModel):
     """
     Location resource
     """ # noqa: E501
-    location: LocationEnum
+    location: ProductLocationEnum
     location_description: Optional[StrictStr] = Field(default=None, alias="locationDescription")
     product_categories: Optional[List[ProductCategory]] = Field(default=None, alias="productCategories")
     additional_properties: Dict[str, Any] = {}
