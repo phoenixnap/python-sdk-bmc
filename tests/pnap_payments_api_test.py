@@ -20,7 +20,6 @@ class TestPaymentsApi(unittest.TestCase):
 
     def tearDown(self):
         TestUtils.reset_expectations()
-        self.api_client.close()
 
     def test_get_transactions(self):
         # Setting up expectation

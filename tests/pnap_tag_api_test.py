@@ -94,7 +94,6 @@ class TestTagApi(unittest.TestCase):
 
    def tearDown(self):
     TestUtils.reset_expectations()
-    self.api_client.close()
 
 if __name__ == '__main__':
    TestUtils.reset_mockserver()
