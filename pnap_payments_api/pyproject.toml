@@ -1,6 +1,6 @@
 [project]
 name = "pnap_payments_api"
-version = "1.0.5.dev"
+version = "1.0.5"
 description = "Payments API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},

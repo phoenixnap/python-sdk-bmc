@@ -1,6 +1,6 @@
 [project]
 name = "pnap_bmc_api"
-version = "2.2.2.dev"
+version = "2.3.0"
 description = "Bare Metal Cloud API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},
