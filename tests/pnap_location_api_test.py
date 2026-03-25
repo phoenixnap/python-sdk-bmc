@@ -3,7 +3,7 @@ import xmlrunner
 from dateutil.parser import parse
 import pnap_location_api
 from pnap_location_api.api import locations_api
-from pnap_location_api.models.location_enum import LocationEnum
+from pnap_location_api.models.product_location_enum import ProductLocationEnum
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum
 from test_utils import TestUtils
 
@@ -30,7 +30,7 @@ class TestLocationApi(unittest.TestCase):
         opts = TestUtils.generate_query_params(request)
 
         # Changing values to be enums
-        opts['location'] = LocationEnum(opts['location'])
+        opts['location'] = ProductLocationEnum(opts['location'])
         opts['product_category'] = ProductCategoryEnum(opts['productCategory'])
         del opts['productCategory']
 
