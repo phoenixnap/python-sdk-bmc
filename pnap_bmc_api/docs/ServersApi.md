@@ -144,7 +144,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_bmc_api.ServersApi(api_client)
-    tag = ['env.dev'] # List[str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
+    tag = ['[\"env.dev\"]'] # List[str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
 
     try:
         # List servers.
