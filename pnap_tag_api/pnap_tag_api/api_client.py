@@ -91,11 +91,11 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = f"PNAP-python-sdk-bmc/pnap_tag_api/2.0.5"
+        self.user_agent = f"PNAP-python-sdk-bmc/pnap_tag_api/2.0.6.dev"
         self.client_side_validation = configuration.client_side_validation
 
          # Set default X-Powered-By.
-        self.powered_by = f"PNAP-python-sdk-bmc/pnap_tag_api/2.0.5"
+        self.powered_by = f"PNAP-python-sdk-bmc/pnap_tag_api/2.0.6.dev"
 
     def __enter__(self):
         return self
