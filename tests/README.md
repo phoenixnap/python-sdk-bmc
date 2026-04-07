@@ -38,3 +38,15 @@ Once this is done, you can then run the respective test script:
 ```sh
 python pnap_network_api_test.py
 ```
+
+### Using .venv
+If you're using an immutable system, such as *NixOS*, then you'll likely want to use a **virtual environment**.
+
+This can be easily done by doing the following:
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+The first command creates the virtual environment, and the second command activates it for the current shell. Once done, you can follow the
+instructions above as normal.

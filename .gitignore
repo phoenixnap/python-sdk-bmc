@@ -2,3 +2,4 @@ Test Results/
 **/test-reports/
 __pycache__
 *.egg-info
+.venv/
