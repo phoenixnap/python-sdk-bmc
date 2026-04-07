@@ -18,17 +18,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.asn_details import AsnDetails
+from pnap_network_api.models.bgp_ip_prefix import BgpIpPrefix
 from pnap_network_api.models.bgp_ipv4_prefix import BgpIPv4Prefix
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class BgpPeerGroup(BaseModel):
     """
@@ -36,8 +33,9 @@ class BgpPeerGroup(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="The unique identifier of the BGP Peer Group.")
     status: StrictStr = Field(description="The BGP Peer Group status. Can have one of the following values: `PENDING`, `ON_HOLD`, `BUSY`, `READY`, `ERROR`, `PENDING_DELETION` and `DELETING`.")
-    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
-    ipv4_prefixes: List[BgpIPv4Prefix] = Field(description="The List of the BGP Peer Group IPv4 prefixes.", alias="ipv4Prefixes")
+    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
+    ipv4_prefixes: List[BgpIPv4Prefix] = Field(description="The List of the BGP Peer Group IPv4 prefixes. Deprecated in favour of generic ipPrefixes.", alias="ipv4Prefixes")
+    ip_prefixes: List[BgpIpPrefix] = Field(description="The List of the BGP Peer Group IP prefixes.", alias="ipPrefixes")
     target_asn_details: AsnDetails = Field(alias="targetAsnDetails")
     active_asn_details: Optional[AsnDetails] = Field(default=None, alias="activeAsnDetails")
     password: Annotated[str, Field(min_length=8, strict=True, max_length=32)] = Field(description="The BGP Peer Group password.")
@@ -45,12 +43,13 @@ class BgpPeerGroup(BaseModel):
     rpki_roa_origin_asn: StrictInt = Field(description="The RPKI ROA Origin ASN of the BGP Peer Group based on location.", alias="rpkiRoaOriginAsn")
     e_bgp_multi_hop: StrictInt = Field(description="The eBGP Multi-hop of the BGP Peer Group.", alias="eBgpMultiHop")
     peering_loopbacks_v4: List[Annotated[str, Field(strict=True)]] = Field(description="The IPv4 Peering Loopback addresses of the BGP Peer Group. Valid IP formats are IPv4 addresses.", alias="peeringLoopbacksV4")
+    peering_loopbacks_v6: List[StrictStr] = Field(description="The IPv6 Peering Loopback addresses of the BGP Peer Group. Valid IP formats are IPv6 addresses.", alias="peeringLoopbacksV6")
     keep_alive_timer_seconds: StrictInt = Field(description="The Keep Alive Timer in seconds of the BGP Peer Group.", alias="keepAliveTimerSeconds")
     hold_timer_seconds: StrictInt = Field(description="The Hold Timer in seconds of the BGP Peer Group.", alias="holdTimerSeconds")
     created_on: Optional[StrictStr] = Field(default=None, description="Date and time of creation.", alias="createdOn")
     last_updated_on: Optional[StrictStr] = Field(default=None, description="Date and time of last update.", alias="lastUpdatedOn")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "status", "location", "ipv4Prefixes", "targetAsnDetails", "activeAsnDetails", "password", "advertisedRoutes", "rpkiRoaOriginAsn", "eBgpMultiHop", "peeringLoopbacksV4", "keepAliveTimerSeconds", "holdTimerSeconds", "createdOn", "lastUpdatedOn"]
+    __properties: ClassVar[List[str]] = ["id", "status", "location", "ipv4Prefixes", "ipPrefixes", "targetAsnDetails", "activeAsnDetails", "password", "advertisedRoutes", "rpkiRoaOriginAsn", "eBgpMultiHop", "peeringLoopbacksV4", "peeringLoopbacksV6", "keepAliveTimerSeconds", "holdTimerSeconds", "createdOn", "lastUpdatedOn"]
 
     @field_validator('password')
     def password_validate_regular_expression(cls, value):
@@ -59,11 +58,11 @@ class BgpPeerGroup(BaseModel):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9!@#$%^&*()\-|\[\]{}=;:<>,.]+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -76,7 +75,7 @@ class BgpPeerGroup(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of BgpPeerGroup from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -91,20 +90,29 @@ class BgpPeerGroup(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in ipv4_prefixes (list)
         _items = []
         if self.ipv4_prefixes:
-            for _item in self.ipv4_prefixes:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ipv4_prefixes in self.ipv4_prefixes:
+                if _item_ipv4_prefixes:
+                    _items.append(_item_ipv4_prefixes.to_dict())
             _dict['ipv4Prefixes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in ip_prefixes (list)
+        _items = []
+        if self.ip_prefixes:
+            for _item_ip_prefixes in self.ip_prefixes:
+                if _item_ip_prefixes:
+                    _items.append(_item_ip_prefixes.to_dict())
+            _dict['ipPrefixes'] = _items
         # override the default output from pydantic by calling `to_dict()` of target_asn_details
         if self.target_asn_details:
             _dict['targetAsnDetails'] = self.target_asn_details.to_dict()
@@ -119,7 +127,7 @@ class BgpPeerGroup(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of BgpPeerGroup from a dict"""
         if obj is None:
             return None
@@ -131,14 +139,16 @@ class BgpPeerGroup(BaseModel):
             "id": obj.get("id"),
             "status": obj.get("status"),
             "location": obj.get("location"),
-            "ipv4Prefixes": [BgpIPv4Prefix.from_dict(_item) for _item in obj.get("ipv4Prefixes")] if obj.get("ipv4Prefixes") is not None else None,
-            "targetAsnDetails": AsnDetails.from_dict(obj.get("targetAsnDetails")) if obj.get("targetAsnDetails") is not None else None,
-            "activeAsnDetails": AsnDetails.from_dict(obj.get("activeAsnDetails")) if obj.get("activeAsnDetails") is not None else None,
+            "ipv4Prefixes": [BgpIPv4Prefix.from_dict(_item) for _item in obj["ipv4Prefixes"]] if obj.get("ipv4Prefixes") is not None else None,
+            "ipPrefixes": [BgpIpPrefix.from_dict(_item) for _item in obj["ipPrefixes"]] if obj.get("ipPrefixes") is not None else None,
+            "targetAsnDetails": AsnDetails.from_dict(obj["targetAsnDetails"]) if obj.get("targetAsnDetails") is not None else None,
+            "activeAsnDetails": AsnDetails.from_dict(obj["activeAsnDetails"]) if obj.get("activeAsnDetails") is not None else None,
             "password": obj.get("password"),
             "advertisedRoutes": obj.get("advertisedRoutes"),
             "rpkiRoaOriginAsn": obj.get("rpkiRoaOriginAsn"),
             "eBgpMultiHop": obj.get("eBgpMultiHop"),
             "peeringLoopbacksV4": obj.get("peeringLoopbacksV4"),
+            "peeringLoopbacksV6": obj.get("peeringLoopbacksV6"),
             "keepAliveTimerSeconds": obj.get("keepAliveTimerSeconds"),
             "holdTimerSeconds": obj.get("holdTimerSeconds"),
             "createdOn": obj.get("createdOn"),

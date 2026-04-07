@@ -18,19 +18,15 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.storage_configuration import StorageConfiguration
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class ServerCreate(BaseModel):
     """
@@ -38,9 +34,9 @@ class ServerCreate(BaseModel):
     """ # noqa: E501
     hostname: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="Hostname of server.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="Description of server.")
-    os: StrictStr = Field(description="The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `ubuntu/jammy+pytorch`, `ubuntu/noble`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `windows/srv2022std`, `windows/srv2022dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `almalinux/almalinux9`, `rockylinux/rockylinux9`, `virtuozzo/virtuozzo7`, `oraclelinux/oraclelinux9`, `debian/bullseye`, `debian/bookworm`, `proxmox/bullseye`, `proxmox/proxmox8`, `netris/controller`, `netris/softgate_1g`, `netris/softgate_10g` or `netris/softgate_25g`.")
-    type: StrictStr = Field(description="Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c1.small`, `d1.c2.small`, `d1.c3.small`, `d1.c4.small`, `d1.c1.medium`, `d1.c2.medium`, `d1.c3.medium`, `d1.c4.medium`, `d1.c1.large`, `d1.c2.large`, `d1.c3.large`, `d1.c4.large`, `d1.m1.medium`, `d1.m2.medium`, `d1.m3.medium`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.xlarge`, `d2.m2.xxlarge`, `d2.m3.xlarge`, `d2.m4.xlarge`, `d2.m5.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge`, `a1.c5.large`, `a1.c5.xlarge`, `d3.s5.xlarge`, `d3.m4.xxlarge`, `d3.m5.xxlarge`, `d3.m6.xxlarge`, `s3.c3.medium`, `s3.c3.large`, `d3.c4.medium`, `d3.c5.medium`, `d3.c6.medium`, `d3.c1.large`, `d3.c2.large`, `d3.c3.large`, `d3.m1.xlarge`, `d3.m2.xlarge`, `d3.m3.xlarge`, `d3.g2.c1.xlarge`, `d3.g2.c2.xlarge`, `d3.g2.c3.xlarge`, s4.x6.c6.large or s4.x6.m6.xlarge.")
-    location: StrictStr = Field(description="Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.")
+    os: StrictStr = Field(description="The server’s OS ID used when the server was created. Currently this field should be set to either `ubuntu/bionic`, `ubuntu/focal`, `ubuntu/jammy`, `ubuntu/jammy+pytorch`, `ubuntu/noble`, `centos/centos7`, `centos/centos8`, `windows/srv2019std`, `windows/srv2019dc`, `windows/srv2022std`, `windows/srv2022dc`, `windows/srv2025std`, `windows/srv2025dc`, `esxi/esxi70`, `esxi/esxi80`, `almalinux/almalinux8`, `rockylinux/rockylinux8`, `almalinux/almalinux9`, `rockylinux/rockylinux9`, `virtuozzo/virtuozzo7`, `oraclelinux/oraclelinux9`, `debian/bullseye`, `debian/bookworm`, `debian/trixie`, `proxmox/bullseye`, `proxmox/proxmox8`, `proxmox/proxmox9`, `netris/controller`, `netris/softgate_1g`, `netris/softgate_10g` or `netris/softgate_25g`.")
+    type: StrictStr = Field(description="Server type ID. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `d1.c4.small`, `d1.c4.medium`, `d1.c4.large`, `d1.m4.medium`, `d2.c1.medium`, `d2.c2.medium`, `d2.c3.medium`, `d2.c4.medium`, `d2.c5.medium`, `d2.c1.large`, `d2.c2.large`, `d2.c3.large`, `d2.c4.large`, `d2.c5.large`, `d2.m1.xlarge`, `d2.m2.xxlarge`, `d2.m3.xlarge`, `d2.m4.xlarge`, `d2.m5.xlarge`, `d2.c4.db1.pliops1`, `d3.m4.xlarge`, `d3.m5.xlarge`, `d3.m6.xlarge`, `a1.c5.large`, `a1.c5.xlarge`, `d3.s5.xlarge`, `d3.m4.xxlarge`, `d3.m5.xxlarge`, `d3.m6.xxlarge`, `s3.c3.medium`, `s3.c3.large`, `d3.c4.medium`, `d3.c5.medium`, `d3.c6.medium`, `d3.c1.large`, `d3.c2.large`, `d3.c3.large`, `d3.m1.xlarge`, `d3.m2.xlarge`, `d3.m3.xlarge`, `d3.g2.c1.xlarge`, `d3.g2.c2.xlarge`, `d3.g2.c3.xlarge`,`d3.g3.c2.medium`, `s4.x6.c6.large`, `s4.x6.m6.xlarge`, `s5.x6.c3.medium`, `s5.x6.c3.large`, `s5.x6.c8.medium`, `s5.x6.c9.medium`, `s5.x6.c8.large`, `s5.x6.c9.large`, `s5.x6.m8.xlarge`, `s5.x6.m9.xlarge`, `s4.c3.medium`, `s4.c6.medium`, `s4.c6.large`, `s4.c6.xlarge`, `s4.s2.large`, `a2.c9.large` or `a2.c9.xlarge`.")
+    location: StrictStr = Field(description="Server location ID. Cannot be changed once a server is created. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI` or `SEA`.")
     install_default_ssh_keys: Optional[StrictBool] = Field(default=True, description="Whether or not to install SSH keys marked as default in addition to any SSH keys specified in this request.", alias="installDefaultSshKeys")
     ssh_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of SSH keys that will be installed on the server.", alias="sshKeys")
     ssh_key_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of SSH key IDs that will be installed on the server in addition to any SSH keys specified in this request.", alias="sshKeyIds")
@@ -61,11 +57,11 @@ class ServerCreate(BaseModel):
             raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9().-])+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -78,7 +74,7 @@ class ServerCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of ServerCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -93,11 +89,13 @@ class ServerCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of os_configuration
@@ -106,9 +104,9 @@ class ServerCreate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # override the default output from pydantic by calling `to_dict()` of network_configuration
         if self.network_configuration:
@@ -124,7 +122,7 @@ class ServerCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of ServerCreate from a dict"""
         if obj is None:
             return None
@@ -144,10 +142,10 @@ class ServerCreate(BaseModel):
             "reservationId": obj.get("reservationId"),
             "pricingModel": obj.get("pricingModel") if obj.get("pricingModel") is not None else 'HOURLY',
             "networkType": obj.get("networkType") if obj.get("networkType") is not None else 'PUBLIC_AND_PRIVATE',
-            "osConfiguration": OsConfiguration.from_dict(obj.get("osConfiguration")) if obj.get("osConfiguration") is not None else None,
-            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None,
-            "networkConfiguration": NetworkConfiguration.from_dict(obj.get("networkConfiguration")) if obj.get("networkConfiguration") is not None else None,
-            "storageConfiguration": StorageConfiguration.from_dict(obj.get("storageConfiguration")) if obj.get("storageConfiguration") is not None else None
+            "osConfiguration": OsConfiguration.from_dict(obj["osConfiguration"]) if obj.get("osConfiguration") is not None else None,
+            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
+            "networkConfiguration": NetworkConfiguration.from_dict(obj["networkConfiguration"]) if obj.get("networkConfiguration") is not None else None,
+            "storageConfiguration": StorageConfiguration.from_dict(obj["storageConfiguration"]) if obj.get("storageConfiguration") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

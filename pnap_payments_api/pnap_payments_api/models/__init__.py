@@ -13,7 +13,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_payments_api.models.card_payment_method_details import CardPaymentMethodDetails
 from pnap_payments_api.models.error import Error
@@ -21,3 +20,4 @@ from pnap_payments_api.models.paginated_response import PaginatedResponse
 from pnap_payments_api.models.paginated_transactions import PaginatedTransactions
 from pnap_payments_api.models.transaction import Transaction
 from pnap_payments_api.models.transaction_metadata import TransactionMetadata
+

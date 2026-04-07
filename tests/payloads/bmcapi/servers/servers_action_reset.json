@@ -13,7 +13,8 @@
                 "sshKeyIds": [ "5fa942e71c16abcfbead275f" ],
                 "osConfiguration": {
                     "windows": {
-                        "rdpAllowedIps": [ "172.217.22.14" ]
+                        "rdpAllowedIps": [ "172.217.22.14" ],
+                        "bringYourOwnLicense": false
                     },
                     "esxi": {
                         "managementAccessAllowedIps": [ "172.217.22.14" ]
@@ -33,7 +34,8 @@
             "password" : "MyP@ssw0rd_01",
             "osConfiguration" : {
                 "windows": {
-                    "rdpAllowedIps": [ "172.217.22.14" ]
+                    "rdpAllowedIps": [ "172.217.22.14" ],
+                    "bringYourOwnLicense": false
                 },
                 "esxi": {
                     "rootPassword": "MyP@ssw0rd_01",

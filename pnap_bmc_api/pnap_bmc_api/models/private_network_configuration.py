@@ -18,15 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PrivateNetworkConfiguration(BaseModel):
     """
@@ -34,15 +30,15 @@ class PrivateNetworkConfiguration(BaseModel):
     """ # noqa: E501
     gateway_address: Optional[StrictStr] = Field(default=None, description="Deprecated in favour of a common gateway address across all networks available under NetworkConfiguration.<br> The address of the gateway assigned / to assign to the server.<br> When used as part of request body, IP address has to be part of private network assigned to this server.<br> Gateway address also has to be assigned on an already deployed resource unless the `force` query parameter is true.", alias="gatewayAddress")
     configuration_type: Optional[StrictStr] = Field(default='USE_OR_CREATE_DEFAULT', description="(Write-only) Determines the approach for configuring private network(s) for the server being provisioned. Currently this field should be set to `USE_OR_CREATE_DEFAULT`, `USER_DEFINED` or `NONE`.", alias="configurationType")
-    private_networks: Optional[List[ServerPrivateNetwork]] = Field(default=None, description="The list of private networks this server is member of. When this field is part of request body, it'll be used to specify the private networks to assign to this server upon provisioning. Used alongside the `USER_DEFINED` configurationType.", alias="privateNetworks")
+    private_networks: Optional[List[ServerPrivateNetwork]] = Field(default=None, description="The list of private networks this server belongs to. If this field is part of a request body, it will be used for specifying the private networks to assign to this server upon provisioning. Used alongside the USER_DEFINED configurationType.", alias="privateNetworks")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["gatewayAddress", "configurationType", "privateNetworks"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -55,7 +51,7 @@ class PrivateNetworkConfiguration(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PrivateNetworkConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -70,19 +66,21 @@ class PrivateNetworkConfiguration(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in private_networks (list)
         _items = []
         if self.private_networks:
-            for _item in self.private_networks:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_private_networks in self.private_networks:
+                if _item_private_networks:
+                    _items.append(_item_private_networks.to_dict())
             _dict['privateNetworks'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -92,7 +90,7 @@ class PrivateNetworkConfiguration(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PrivateNetworkConfiguration from a dict"""
         if obj is None:
             return None
@@ -103,7 +101,7 @@ class PrivateNetworkConfiguration(BaseModel):
         _obj = cls.model_validate({
             "gatewayAddress": obj.get("gatewayAddress"),
             "configurationType": obj.get("configurationType") if obj.get("configurationType") is not None else 'USE_OR_CREATE_DEFAULT',
-            "privateNetworks": [ServerPrivateNetwork.from_dict(_item) for _item in obj.get("privateNetworks")] if obj.get("privateNetworks") is not None else None
+            "privateNetworks": [ServerPrivateNetwork.from_dict(_item) for _item in obj["privateNetworks"]] if obj.get("privateNetworks") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

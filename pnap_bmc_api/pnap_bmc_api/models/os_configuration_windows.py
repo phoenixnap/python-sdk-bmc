@@ -18,29 +18,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class OsConfigurationWindows(BaseModel):
     """
     Windows OS configuration properties.
     """ # noqa: E501
     rdp_allowed_ips: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="List of IPs allowed for RDP access to Windows OS. Supported in single IP, CIDR and range format. When undefined, RDP is disabled. To allow RDP access from any IP use 0.0.0.0/0. This will only be returned in response to provisioning a server.", alias="rdpAllowedIps")
+    bring_your_own_license: Optional[StrictBool] = Field(default=False, description="Use a Bring Your Own (BYO) Windows license.  If true, the server is provisioned in trial mode, and you must activate your own license.  If false (default), the server includes a managed Windows license billed by the platform. ", alias="bringYourOwnLicense")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["rdpAllowedIps"]
+    __properties: ClassVar[List[str]] = ["rdpAllowedIps", "bringYourOwnLicense"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -53,7 +50,7 @@ class OsConfigurationWindows(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of OsConfigurationWindows from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -68,11 +65,13 @@ class OsConfigurationWindows(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # puts key-value pairs in additional_properties in the top level
@@ -83,7 +82,7 @@ class OsConfigurationWindows(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of OsConfigurationWindows from a dict"""
         if obj is None:
             return None
@@ -92,7 +91,8 @@ class OsConfigurationWindows(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "rdpAllowedIps": obj.get("rdpAllowedIps")
+            "rdpAllowedIps": obj.get("rdpAllowedIps"),
+            "bringYourOwnLicense": obj.get("bringYourOwnLicense") if obj.get("bringYourOwnLicense") is not None else False
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

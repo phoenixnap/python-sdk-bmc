@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of RelinquishIpBlock from a JSON string
 relinquish_ip_block_instance = RelinquishIpBlock.from_json(json)
 # print the JSON string representation of the object
-print RelinquishIpBlock.to_json()
+print(RelinquishIpBlock.to_json())
 
 # convert the object into a dict
 relinquish_ip_block_dict = relinquish_ip_block_instance.to_dict()
 # create an instance of RelinquishIpBlock from a dict
-relinquish_ip_block_form_dict = relinquish_ip_block.from_dict(relinquish_ip_block_dict)
+relinquish_ip_block_from_dict = RelinquishIpBlock.from_dict(relinquish_ip_block_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

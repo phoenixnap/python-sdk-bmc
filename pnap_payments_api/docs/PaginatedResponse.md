@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of PaginatedResponse from a JSON string
 paginated_response_instance = PaginatedResponse.from_json(json)
 # print the JSON string representation of the object
-print PaginatedResponse.to_json()
+print(PaginatedResponse.to_json())
 
 # convert the object into a dict
 paginated_response_dict = paginated_response_instance.to_dict()
 # create an instance of PaginatedResponse from a dict
-paginated_response_form_dict = paginated_response.from_dict(paginated_response_dict)
+paginated_response_from_dict = PaginatedResponse.from_dict(paginated_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of RancherClusterCertificates from a JSON string
 rancher_cluster_certificates_instance = RancherClusterCertificates.from_json(json)
 # print the JSON string representation of the object
-print RancherClusterCertificates.to_json()
+print(RancherClusterCertificates.to_json())
 
 # convert the object into a dict
 rancher_cluster_certificates_dict = rancher_cluster_certificates_instance.to_dict()
 # create an instance of RancherClusterCertificates from a dict
-rancher_cluster_certificates_form_dict = rancher_cluster_certificates.from_dict(rancher_cluster_certificates_dict)
+rancher_cluster_certificates_from_dict = RancherClusterCertificates.from_dict(rancher_cluster_certificates_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

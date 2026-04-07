@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of PermissionsCreate from a JSON string
 permissions_create_instance = PermissionsCreate.from_json(json)
 # print the JSON string representation of the object
-print PermissionsCreate.to_json()
+print(PermissionsCreate.to_json())
 
 # convert the object into a dict
 permissions_create_dict = permissions_create_instance.to_dict()
 # create an instance of PermissionsCreate from a dict
-permissions_create_form_dict = permissions_create.from_dict(permissions_create_dict)
+permissions_create_from_dict = PermissionsCreate.from_dict(permissions_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of ServerPatch from a JSON string
 server_patch_instance = ServerPatch.from_json(json)
 # print the JSON string representation of the object
-print ServerPatch.to_json()
+print(ServerPatch.to_json())
 
 # convert the object into a dict
 server_patch_dict = server_patch_instance.to_dict()
 # create an instance of ServerPatch from a dict
-server_patch_form_dict = server_patch.from_dict(server_patch_dict)
+server_patch_from_dict = ServerPatch.from_dict(server_patch_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

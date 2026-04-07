@@ -18,15 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PrivateNetworkCreate(BaseModel):
     """
@@ -34,7 +30,7 @@ class PrivateNetworkCreate(BaseModel):
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this private network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this private network.")
-    location: StrictStr = Field(description="The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The location of this private network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     location_default: Optional[StrictBool] = Field(default=False, description="Identifies network as the default private network for the specified location.", alias="locationDefault")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     cidr: Optional[StrictStr] = Field(default=None, description="IP range associated with this private network in CIDR notation.<br> Setting the `force` query parameter to `true` allows you to skip assigning a specific IP range to network.")
@@ -48,11 +44,11 @@ class PrivateNetworkCreate(BaseModel):
             raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -65,7 +61,7 @@ class PrivateNetworkCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PrivateNetworkCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -80,11 +76,13 @@ class PrivateNetworkCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # puts key-value pairs in additional_properties in the top level
@@ -95,7 +93,7 @@ class PrivateNetworkCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PrivateNetworkCreate from a dict"""
         if obj is None:
             return None

@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of CardPaymentMethodDetails from a JSON string
 card_payment_method_details_instance = CardPaymentMethodDetails.from_json(json)
 # print the JSON string representation of the object
-print CardPaymentMethodDetails.to_json()
+print(CardPaymentMethodDetails.to_json())
 
 # convert the object into a dict
 card_payment_method_details_dict = card_payment_method_details_instance.to_dict()
 # create an instance of CardPaymentMethodDetails from a dict
-card_payment_method_details_form_dict = card_payment_method_details.from_dict(card_payment_method_details_dict)
+card_payment_method_details_from_dict = CardPaymentMethodDetails.from_dict(card_payment_method_details_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

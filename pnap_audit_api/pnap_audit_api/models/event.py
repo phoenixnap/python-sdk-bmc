@@ -19,14 +19,11 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from pnap_audit_api.models.user_info import UserInfo
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Event(BaseModel):
     """
@@ -38,11 +35,11 @@ class Event(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "timestamp", "userInfo"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -55,7 +52,7 @@ class Event(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Event from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -70,11 +67,13 @@ class Event(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of user_info
@@ -88,7 +87,7 @@ class Event(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Event from a dict"""
         if obj is None:
             return None
@@ -99,7 +98,7 @@ class Event(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "timestamp": obj.get("timestamp"),
-            "userInfo": UserInfo.from_dict(obj.get("userInfo")) if obj.get("userInfo") is not None else None
+            "userInfo": UserInfo.from_dict(obj["userInfo"]) if obj.get("userInfo") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

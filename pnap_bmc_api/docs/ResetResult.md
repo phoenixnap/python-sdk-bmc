@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of ResetResult from a JSON string
 reset_result_instance = ResetResult.from_json(json)
 # print the JSON string representation of the object
-print ResetResult.to_json()
+print(ResetResult.to_json())
 
 # convert the object into a dict
 reset_result_dict = reset_result_instance.to_dict()
 # create an instance of ResetResult from a dict
-reset_result_form_dict = reset_result.from_dict(reset_result_dict)
+reset_result_from_dict = ResetResult.from_dict(reset_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

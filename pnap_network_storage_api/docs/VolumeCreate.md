@@ -23,12 +23,12 @@ json = "{}"
 # create an instance of VolumeCreate from a JSON string
 volume_create_instance = VolumeCreate.from_json(json)
 # print the JSON string representation of the object
-print VolumeCreate.to_json()
+print(VolumeCreate.to_json())
 
 # convert the object into a dict
 volume_create_dict = volume_create_instance.to_dict()
 # create an instance of VolumeCreate from a dict
-volume_create_form_dict = volume_create.from_dict(volume_create_dict)
+volume_create_from_dict = VolumeCreate.from_dict(volume_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

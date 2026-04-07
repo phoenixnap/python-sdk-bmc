@@ -19,8 +19,6 @@ Retrieves the event logs for given time period. All date & times are in UTC.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_audit_api
 from pnap_audit_api.models.event import Event
 from pnap_audit_api.rest import ApiException
@@ -46,7 +44,7 @@ with pnap_audit_api.ApiClient(configuration) as api_client:
     var_from = '2021-04-27T16:24:57.123Z' # datetime | From the date and time (inclusive) to filter event log records by. (optional)
     to = '2021-04-29T16:24:57.123Z' # datetime | To the date and time (inclusive) to filter event log records by. (optional)
     limit = 10 # int | Limit the number of records returned. (optional)
-    order = 'ASC' # str | Ordering of the event's time. SortBy can be introduced later on. (optional) (default to 'ASC')
+    order = ASC # str | Ordering of the event's time. SortBy can be introduced later on. (optional) (default to ASC)
     username = 'johnd@phoenixnap.com' # str | The username that did the actions. (optional)
     verb = 'verb_example' # str | The HTTP verb corresponding to the action. (optional)
     uri = '/ams/v1/clients/12345' # str | The request uri. (optional)
@@ -70,7 +68,7 @@ Name | Type | Description  | Notes
  **var_from** | **datetime**| From the date and time (inclusive) to filter event log records by. | [optional] 
  **to** | **datetime**| To the date and time (inclusive) to filter event log records by. | [optional] 
  **limit** | **int**| Limit the number of records returned. | [optional] 
- **order** | **str**| Ordering of the event&#39;s time. SortBy can be introduced later on. | [optional] [default to &#39;ASC&#39;]
+ **order** | **str**| Ordering of the event&#39;s time. SortBy can be introduced later on. | [optional] [default to ASC]
  **username** | **str**| The username that did the actions. | [optional] 
  **verb** | **str**| The HTTP verb corresponding to the action. | [optional] 
  **uri** | **str**| The request uri. | [optional] 

@@ -18,12 +18,10 @@ Retrieve the locations info.
 
 
 ```python
-import time
-import os
 import pnap_location_api
 from pnap_location_api.models.location import Location
-from pnap_location_api.models.location_enum import LocationEnum
 from pnap_location_api.models.product_category_enum import ProductCategoryEnum
+from pnap_location_api.models.product_location_enum import ProductLocationEnum
 from pnap_location_api.rest import ApiException
 from pprint import pprint
 
@@ -38,7 +36,7 @@ configuration = pnap_location_api.Configuration(
 with pnap_location_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_location_api.LocationsApi(api_client)
-    location = pnap_location_api.LocationEnum() # LocationEnum | Location of interest (optional)
+    location = pnap_location_api.ProductLocationEnum() # ProductLocationEnum | Location of interest (optional)
     product_category = pnap_location_api.ProductCategoryEnum() # ProductCategoryEnum | Product category of interest (optional)
 
     try:
@@ -57,7 +55,7 @@ with pnap_location_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **location** | [**LocationEnum**](.md)| Location of interest | [optional] 
+ **location** | [**ProductLocationEnum**](.md)| Location of interest | [optional] 
  **product_category** | [**ProductCategoryEnum**](.md)| Product category of interest | [optional] 
 
 ### Return type

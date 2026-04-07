@@ -18,16 +18,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
 from pnap_bmc_api.models.os_configuration_map_esxi import OsConfigurationMapEsxi
 from pnap_bmc_api.models.os_configuration_map_proxmox import OsConfigurationMapProxmox
 from pnap_bmc_api.models.os_configuration_windows import OsConfigurationWindows
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class OsConfigurationMap(BaseModel):
     """
@@ -39,11 +36,11 @@ class OsConfigurationMap(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["windows", "esxi", "proxmox"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -56,7 +53,7 @@ class OsConfigurationMap(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of OsConfigurationMap from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -71,11 +68,13 @@ class OsConfigurationMap(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of windows
@@ -95,7 +94,7 @@ class OsConfigurationMap(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of OsConfigurationMap from a dict"""
         if obj is None:
             return None
@@ -104,9 +103,9 @@ class OsConfigurationMap(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "windows": OsConfigurationWindows.from_dict(obj.get("windows")) if obj.get("windows") is not None else None,
-            "esxi": OsConfigurationMapEsxi.from_dict(obj.get("esxi")) if obj.get("esxi") is not None else None,
-            "proxmox": OsConfigurationMapProxmox.from_dict(obj.get("proxmox")) if obj.get("proxmox") is not None else None
+            "windows": OsConfigurationWindows.from_dict(obj["windows"]) if obj.get("windows") is not None else None,
+            "esxi": OsConfigurationMapEsxi.from_dict(obj["esxi"]) if obj.get("esxi") is not None else None,
+            "proxmox": OsConfigurationMapProxmox.from_dict(obj["proxmox"]) if obj.get("proxmox") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of DeleteSshKeyResult from a JSON string
 delete_ssh_key_result_instance = DeleteSshKeyResult.from_json(json)
 # print the JSON string representation of the object
-print DeleteSshKeyResult.to_json()
+print(DeleteSshKeyResult.to_json())
 
 # convert the object into a dict
 delete_ssh_key_result_dict = delete_ssh_key_result_instance.to_dict()
 # create an instance of DeleteSshKeyResult from a dict
-delete_ssh_key_result_form_dict = delete_ssh_key_result.from_dict(delete_ssh_key_result_dict)
+delete_ssh_key_result_from_dict = DeleteSshKeyResult.from_dict(delete_ssh_key_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

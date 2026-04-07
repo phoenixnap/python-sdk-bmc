@@ -15,21 +15,13 @@
 
 from __future__ import annotations
 import json
-import pprint
-import re  # noqa: F401
 from enum import Enum
+from typing_extensions import Self
 
 
-
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
-
-
-class LocationEnum(str, Enum):
+class ProductLocationEnum(str, Enum):
     """
-    The location code.
+    This enum is used <b>only in product-related schemas</b> and contains <b>only currently active and supported locations</b>. Deprecated or retired locations are intentionally excluded and will not appear in create/update operations. Historical data in other API responses may still reference deprecated locations, but those values are not part of this enum. 
     """
 
     """
@@ -41,11 +33,10 @@ class LocationEnum(str, Enum):
     SGP = 'SGP'
     CHI = 'CHI'
     SEA = 'SEA'
-    AUS = 'AUS'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of LocationEnum from a JSON string"""
+        """Create an instance of ProductLocationEnum from a JSON string"""
         return cls(json.loads(json_str))
 
 

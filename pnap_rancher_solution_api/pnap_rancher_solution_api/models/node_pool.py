@@ -18,17 +18,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_rancher_solution_api.models.node import Node
 from pnap_rancher_solution_api.models.ssh_config import SshConfig
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class NodePool(BaseModel):
     """
@@ -52,11 +48,11 @@ class NodePool(BaseModel):
             raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9().-])+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -69,7 +65,7 @@ class NodePool(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of NodePool from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -85,12 +81,14 @@ class NodePool(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "nodes",
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "nodes",
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of ssh_config
@@ -99,9 +97,9 @@ class NodePool(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in nodes (list)
         _items = []
         if self.nodes:
-            for _item in self.nodes:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_nodes in self.nodes:
+                if _item_nodes:
+                    _items.append(_item_nodes.to_dict())
             _dict['nodes'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -111,7 +109,7 @@ class NodePool(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of NodePool from a dict"""
         if obj is None:
             return None
@@ -123,8 +121,8 @@ class NodePool(BaseModel):
             "name": obj.get("name"),
             "nodeCount": obj.get("nodeCount"),
             "serverType": obj.get("serverType") if obj.get("serverType") is not None else 's0.d1.small',
-            "sshConfig": SshConfig.from_dict(obj.get("sshConfig")) if obj.get("sshConfig") is not None else None,
-            "nodes": [Node.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None
+            "sshConfig": SshConfig.from_dict(obj["sshConfig"]) if obj.get("sshConfig") is not None else None,
+            "nodes": [Node.from_dict(_item) for _item in obj["nodes"]] if obj.get("nodes") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

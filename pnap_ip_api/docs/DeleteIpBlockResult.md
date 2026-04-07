@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of DeleteIpBlockResult from a JSON string
 delete_ip_block_result_instance = DeleteIpBlockResult.from_json(json)
 # print the JSON string representation of the object
-print DeleteIpBlockResult.to_json()
+print(DeleteIpBlockResult.to_json())
 
 # convert the object into a dict
 delete_ip_block_result_dict = delete_ip_block_result_instance.to_dict()
 # create an instance of DeleteIpBlockResult from a dict
-delete_ip_block_result_form_dict = delete_ip_block_result.from_dict(delete_ip_block_result_dict)
+delete_ip_block_result_from_dict = DeleteIpBlockResult.from_dict(delete_ip_block_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

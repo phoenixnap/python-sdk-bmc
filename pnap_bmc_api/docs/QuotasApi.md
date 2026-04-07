@@ -21,8 +21,6 @@ Get account quota details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.quota import Quota
 from pnap_bmc_api.rest import ApiException
@@ -98,8 +96,6 @@ Sends a request to edit the limit of a quota.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.rest import ApiException
@@ -179,8 +175,6 @@ Get account quota details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_bmc_api
 from pnap_bmc_api.models.quota import Quota
 from pnap_bmc_api.rest import ApiException

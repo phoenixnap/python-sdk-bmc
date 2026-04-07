@@ -18,16 +18,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
-from pydantic import BaseModel, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitRequestDetails
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Quota(BaseModel):
     """
@@ -47,15 +43,15 @@ class Quota(BaseModel):
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('WITHIN_LIMIT', 'OVER_LIMIT', 'ON_LIMIT'):
+        if value not in set(['WITHIN_LIMIT', 'OVER_LIMIT', 'ON_LIMIT']):
             raise ValueError("must be one of enum values ('WITHIN_LIMIT', 'OVER_LIMIT', 'ON_LIMIT')")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -68,7 +64,7 @@ class Quota(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Quota from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -84,20 +80,22 @@ class Quota(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "quota_edit_limit_request_details",
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "quota_edit_limit_request_details",
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in quota_edit_limit_request_details (list)
         _items = []
         if self.quota_edit_limit_request_details:
-            for _item in self.quota_edit_limit_request_details:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_quota_edit_limit_request_details in self.quota_edit_limit_request_details:
+                if _item_quota_edit_limit_request_details:
+                    _items.append(_item_quota_edit_limit_request_details.to_dict())
             _dict['quotaEditLimitRequestDetails'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -107,7 +105,7 @@ class Quota(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Quota from a dict"""
         if obj is None:
             return None
@@ -123,7 +121,7 @@ class Quota(BaseModel):
             "limit": obj.get("limit"),
             "unit": obj.get("unit"),
             "used": obj.get("used"),
-            "quotaEditLimitRequestDetails": [QuotaEditLimitRequestDetails.from_dict(_item) for _item in obj.get("quotaEditLimitRequestDetails")] if obj.get("quotaEditLimitRequestDetails") is not None else None
+            "quotaEditLimitRequestDetails": [QuotaEditLimitRequestDetails.from_dict(_item) for _item in obj["quotaEditLimitRequestDetails"]] if obj.get("quotaEditLimitRequestDetails") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

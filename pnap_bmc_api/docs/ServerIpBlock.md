@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of ServerIpBlock from a JSON string
 server_ip_block_instance = ServerIpBlock.from_json(json)
 # print the JSON string representation of the object
-print ServerIpBlock.to_json()
+print(ServerIpBlock.to_json())
 
 # convert the object into a dict
 server_ip_block_dict = server_ip_block_instance.to_dict()
 # create an instance of ServerIpBlock from a dict
-server_ip_block_form_dict = server_ip_block.from_dict(server_ip_block_dict)
+server_ip_block_from_dict = ServerIpBlock.from_dict(server_ip_block_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

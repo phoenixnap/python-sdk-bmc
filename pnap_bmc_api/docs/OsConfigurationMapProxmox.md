@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of OsConfigurationMapProxmox from a JSON string
 os_configuration_map_proxmox_instance = OsConfigurationMapProxmox.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationMapProxmox.to_json()
+print(OsConfigurationMapProxmox.to_json())
 
 # convert the object into a dict
 os_configuration_map_proxmox_dict = os_configuration_map_proxmox_instance.to_dict()
 # create an instance of OsConfigurationMapProxmox from a dict
-os_configuration_map_proxmox_form_dict = os_configuration_map_proxmox.from_dict(os_configuration_map_proxmox_dict)
+os_configuration_map_proxmox_from_dict = OsConfigurationMapProxmox.from_dict(os_configuration_map_proxmox_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,7 +13,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_tag_api.models.delete_result import DeleteResult
 from pnap_tag_api.models.error import Error
@@ -21,3 +20,4 @@ from pnap_tag_api.models.resource_assignment import ResourceAssignment
 from pnap_tag_api.models.tag import Tag
 from pnap_tag_api.models.tag_create import TagCreate
 from pnap_tag_api.models.tag_update import TagUpdate
+

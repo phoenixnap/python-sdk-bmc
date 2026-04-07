@@ -7,7 +7,7 @@ Resource details linked to the Network.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resource_id** | **str** | The resource identifier. | 
-**resource_type** | **str** | The resource&#39;s type. | 
+**resource_type** | **str** | The resource&#39;s type. Can have one of the following values: &#x60;server&#x60;, &#x60;storage&#x60; or &#x60;virtual&#x60;. | 
 **ips** | **List[str]** | List of IPs associated to the resource. | 
 
 ## Example
@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of NetworkMembership from a JSON string
 network_membership_instance = NetworkMembership.from_json(json)
 # print the JSON string representation of the object
-print NetworkMembership.to_json()
+print(NetworkMembership.to_json())
 
 # convert the object into a dict
 network_membership_dict = network_membership_instance.to_dict()
 # create an instance of NetworkMembership from a dict
-network_membership_form_dict = network_membership.from_dict(network_membership_dict)
+network_membership_from_dict = NetworkMembership.from_dict(network_membership_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,7 +13,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.models.delete_result import DeleteResult
@@ -38,6 +37,7 @@ from pnap_bmc_api.models.quota import Quota
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitRequestDetails
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
+from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
 from pnap_bmc_api.models.reset_result import ResetResult
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_create import ServerCreate
@@ -56,3 +56,4 @@ from pnap_bmc_api.models.storage_configuration import StorageConfiguration
 from pnap_bmc_api.models.storage_configuration_root_partition import StorageConfigurationRootPartition
 from pnap_bmc_api.models.tag_assignment import TagAssignment
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest
+

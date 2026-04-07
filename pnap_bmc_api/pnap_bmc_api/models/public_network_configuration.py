@@ -18,29 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
-from pydantic import Field
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PublicNetworkConfiguration(BaseModel):
     """
     Public network details of bare metal server.
     """ # noqa: E501
-    public_networks: Optional[List[ServerPublicNetwork]] = Field(default=None, description="The list of public networks this server is member of. When this field is part of request body, it'll be used to specify the public networks to assign to this server upon provisioning.", alias="publicNetworks")
+    public_networks: Optional[List[ServerPublicNetwork]] = Field(default=None, description="The list of public networks this server belongs to. If this field is part of a request body, it will be used for specifying the public networks to assign to this server on provision. Only IPv4 addresses can be specified.", alias="publicNetworks")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["publicNetworks"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -53,7 +49,7 @@ class PublicNetworkConfiguration(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PublicNetworkConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -68,19 +64,21 @@ class PublicNetworkConfiguration(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in public_networks (list)
         _items = []
         if self.public_networks:
-            for _item in self.public_networks:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_public_networks in self.public_networks:
+                if _item_public_networks:
+                    _items.append(_item_public_networks.to_dict())
             _dict['publicNetworks'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -90,7 +88,7 @@ class PublicNetworkConfiguration(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PublicNetworkConfiguration from a dict"""
         if obj is None:
             return None
@@ -99,7 +97,7 @@ class PublicNetworkConfiguration(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "publicNetworks": [ServerPublicNetwork.from_dict(_item) for _item in obj.get("publicNetworks")] if obj.get("publicNetworks") is not None else None
+            "publicNetworks": [ServerPublicNetwork.from_dict(_item) for _item in obj["publicNetworks"]] if obj.get("publicNetworks") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

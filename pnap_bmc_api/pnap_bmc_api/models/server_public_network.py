@@ -18,31 +18,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
-from pydantic import Field
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class ServerPublicNetwork(BaseModel):
     """
     Public network details of bare metal server.
     """ # noqa: E501
     id: StrictStr = Field(description="The network identifier.")
-    ips: Optional[List[StrictStr]] = Field(default=None, description="Configurable/configured IPs on the server.<br> At least 1 IP address is required. Valid IP format is single IP addresses. All IPs must be within the network's range.<br> Setting the `computeSlaacIp` field to `true` allows you to provide an empty array of IPs.<br> Additionally, setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>")
+    ips: Optional[List[StrictStr]] = Field(default=None, description="Configurable/configured IPs on the server.<br> At least 1 IP address is required. Valid IP formats include single IP addresses or IP ranges (IPv4 or IPv6). All IPs must be within the network's range.<br> Setting the `computeSlaacIp` field to `true` allows you to provide an empty array of IPs.<br> Additionally, setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>")
     status_description: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the assignment to the network.", alias="statusDescription")
     compute_slaac_ip: Optional[StrictBool] = Field(default=None, description="(Write-only) Requests Stateless Address Autoconfiguration (SLAAC). Applicable for Network which contains IPv6 block(s).", alias="computeSlaacIp")
+    vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this network has been configured within the network switch.", alias="vlanId")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "ips", "statusDescription", "computeSlaacIp"]
+    __properties: ClassVar[List[str]] = ["id", "ips", "statusDescription", "computeSlaacIp", "vlanId"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -55,7 +52,7 @@ class ServerPublicNetwork(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of ServerPublicNetwork from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -69,14 +66,18 @@ class ServerPublicNetwork(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "status_description",
+            "vlan_id",
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "status_description",
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # puts key-value pairs in additional_properties in the top level
@@ -87,7 +88,7 @@ class ServerPublicNetwork(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of ServerPublicNetwork from a dict"""
         if obj is None:
             return None
@@ -99,7 +100,8 @@ class ServerPublicNetwork(BaseModel):
             "id": obj.get("id"),
             "ips": obj.get("ips"),
             "statusDescription": obj.get("statusDescription"),
-            "computeSlaacIp": obj.get("computeSlaacIp")
+            "computeSlaacIp": obj.get("computeSlaacIp"),
+            "vlanId": obj.get("vlanId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

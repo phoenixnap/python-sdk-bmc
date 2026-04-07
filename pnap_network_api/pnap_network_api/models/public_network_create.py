@@ -18,16 +18,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PublicNetworkCreate(BaseModel):
     """
@@ -35,7 +31,7 @@ class PublicNetworkCreate(BaseModel):
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The friendly name of this public network. This name should be unique.")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of this public network.")
-    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The location of this public network. Supported values are `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     vlan_id: Optional[Annotated[int, Field(le=4094, strict=True, ge=2)]] = Field(default=None, description="The VLAN that will be assigned to this network.", alias="vlanId")
     ip_blocks: Optional[Annotated[List[PublicNetworkIpBlockCreate], Field(max_length=11)]] = Field(default=None, description="A list of IP Blocks that will be associated with this public network. Supported maximum of 10 IPv4 Blocks and 1 IPv6 Block.", alias="ipBlocks")
     ra_enabled: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether Router Advertisement is enabled. Only applicable for Network with IPv6 Blocks.", alias="raEnabled")
@@ -49,11 +45,11 @@ class PublicNetworkCreate(BaseModel):
             raise ValueError(r"must validate the regular expression /^(?=.*[a-zA-Z])([a-zA-Z0-9(). -])+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -66,7 +62,7 @@ class PublicNetworkCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PublicNetworkCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -81,19 +77,21 @@ class PublicNetworkCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in ip_blocks (list)
         _items = []
         if self.ip_blocks:
-            for _item in self.ip_blocks:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ip_blocks in self.ip_blocks:
+                if _item_ip_blocks:
+                    _items.append(_item_ip_blocks.to_dict())
             _dict['ipBlocks'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -103,7 +101,7 @@ class PublicNetworkCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PublicNetworkCreate from a dict"""
         if obj is None:
             return None
@@ -116,7 +114,7 @@ class PublicNetworkCreate(BaseModel):
             "description": obj.get("description"),
             "location": obj.get("location"),
             "vlanId": obj.get("vlanId"),
-            "ipBlocks": [PublicNetworkIpBlockCreate.from_dict(_item) for _item in obj.get("ipBlocks")] if obj.get("ipBlocks") is not None else None,
+            "ipBlocks": [PublicNetworkIpBlockCreate.from_dict(_item) for _item in obj["ipBlocks"]] if obj.get("ipBlocks") is not None else None,
             "raEnabled": obj.get("raEnabled")
         })
         # store additional fields in additional_properties

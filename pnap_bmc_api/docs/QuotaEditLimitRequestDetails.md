@@ -19,12 +19,12 @@ json = "{}"
 # create an instance of QuotaEditLimitRequestDetails from a JSON string
 quota_edit_limit_request_details_instance = QuotaEditLimitRequestDetails.from_json(json)
 # print the JSON string representation of the object
-print QuotaEditLimitRequestDetails.to_json()
+print(QuotaEditLimitRequestDetails.to_json())
 
 # convert the object into a dict
 quota_edit_limit_request_details_dict = quota_edit_limit_request_details_instance.to_dict()
 # create an instance of QuotaEditLimitRequestDetails from a dict
-quota_edit_limit_request_details_form_dict = quota_edit_limit_request_details.from_dict(quota_edit_limit_request_details_dict)
+quota_edit_limit_request_details_from_dict = QuotaEditLimitRequestDetails.from_dict(quota_edit_limit_request_details_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of ServerReserve from a JSON string
 server_reserve_instance = ServerReserve.from_json(json)
 # print the JSON string representation of the object
-print ServerReserve.to_json()
+print(ServerReserve.to_json())
 
 # convert the object into a dict
 server_reserve_dict = server_reserve_instance.to_dict()
 # create an instance of ServerReserve from a dict
-server_reserve_form_dict = server_reserve.from_dict(server_reserve_dict)
+server_reserve_from_dict = ServerReserve.from_dict(server_reserve_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

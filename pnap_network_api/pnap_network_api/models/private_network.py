@@ -19,16 +19,13 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_network_api.models.network_membership import NetworkMembership
 from pnap_network_api.models.private_network_server import PrivateNetworkServer
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class PrivateNetwork(BaseModel):
     """
@@ -49,11 +46,11 @@ class PrivateNetwork(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "vlanId", "type", "location", "locationDefault", "cidr", "servers", "memberships", "status", "createdOn"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -66,7 +63,7 @@ class PrivateNetwork(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of PrivateNetwork from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -81,26 +78,28 @@ class PrivateNetwork(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in servers (list)
         _items = []
         if self.servers:
-            for _item in self.servers:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_servers in self.servers:
+                if _item_servers:
+                    _items.append(_item_servers.to_dict())
             _dict['servers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in memberships (list)
         _items = []
         if self.memberships:
-            for _item in self.memberships:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_memberships in self.memberships:
+                if _item_memberships:
+                    _items.append(_item_memberships.to_dict())
             _dict['memberships'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -110,7 +109,7 @@ class PrivateNetwork(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of PrivateNetwork from a dict"""
         if obj is None:
             return None
@@ -127,8 +126,8 @@ class PrivateNetwork(BaseModel):
             "location": obj.get("location"),
             "locationDefault": obj.get("locationDefault"),
             "cidr": obj.get("cidr"),
-            "servers": [PrivateNetworkServer.from_dict(_item) for _item in obj.get("servers")] if obj.get("servers") is not None else None,
-            "memberships": [NetworkMembership.from_dict(_item) for _item in obj.get("memberships")] if obj.get("memberships") is not None else None,
+            "servers": [PrivateNetworkServer.from_dict(_item) for _item in obj["servers"]] if obj.get("servers") is not None else None,
+            "memberships": [NetworkMembership.from_dict(_item) for _item in obj["memberships"]] if obj.get("memberships") is not None else None,
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn")
         })

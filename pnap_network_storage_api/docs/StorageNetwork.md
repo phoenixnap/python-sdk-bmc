@@ -27,12 +27,12 @@ json = "{}"
 # create an instance of StorageNetwork from a JSON string
 storage_network_instance = StorageNetwork.from_json(json)
 # print the JSON string representation of the object
-print StorageNetwork.to_json()
+print(StorageNetwork.to_json())
 
 # convert the object into a dict
 storage_network_dict = storage_network_instance.to_dict()
 # create an instance of StorageNetwork from a dict
-storage_network_form_dict = storage_network.from_dict(storage_network_dict)
+storage_network_from_dict = StorageNetwork.from_dict(storage_network_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

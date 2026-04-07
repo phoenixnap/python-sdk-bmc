@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Audit Log API
 
@@ -13,28 +11,18 @@
 """  # noqa: E501
 
 
-import io
 import warnings
-
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Dict, List, Optional, Tuple, Union, Any
-
-try:
-    from typing import Annotated
-except ImportError:
-    from typing_extensions import Annotated
-
-from pydantic import Field
+from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+
 from datetime import datetime
-
-from pydantic import StrictInt, StrictStr, field_validator
-
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
-
+from typing_extensions import Annotated
 from pnap_audit_api.models.event import Event
 
-from pnap_audit_api.api_client import ApiClient
+from pnap_audit_api.api_client import ApiClient, RequestSerialized
 from pnap_audit_api.api_response import ApiResponse
 from pnap_audit_api.rest import RESTResponseType
 
@@ -349,7 +337,7 @@ class EventsApi:
         _content_type,
         _headers,
         _host_index,
-    ) -> Tuple:
+    ) -> RequestSerialized:
 
         _host = None
 
@@ -360,7 +348,9 @@ class EventsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -417,11 +407,12 @@ class EventsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

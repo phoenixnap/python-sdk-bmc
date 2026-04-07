@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of TagCreate from a JSON string
 tag_create_instance = TagCreate.from_json(json)
 # print the JSON string representation of the object
-print TagCreate.to_json()
+print(TagCreate.to_json())
 
 # convert the object into a dict
 tag_create_dict = tag_create_instance.to_dict()
 # create an instance of TagCreate from a dict
-tag_create_form_dict = tag_create.from_dict(tag_create_dict)
+tag_create_from_dict = TagCreate.from_dict(tag_create_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

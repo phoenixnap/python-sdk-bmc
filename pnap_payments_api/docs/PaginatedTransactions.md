@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of PaginatedTransactions from a JSON string
 paginated_transactions_instance = PaginatedTransactions.from_json(json)
 # print the JSON string representation of the object
-print PaginatedTransactions.to_json()
+print(PaginatedTransactions.to_json())
 
 # convert the object into a dict
 paginated_transactions_dict = paginated_transactions_instance.to_dict()
 # create an instance of PaginatedTransactions from a dict
-paginated_transactions_form_dict = paginated_transactions.from_dict(paginated_transactions_dict)
+paginated_transactions_from_dict = PaginatedTransactions.from_dict(paginated_transactions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

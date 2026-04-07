@@ -18,17 +18,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from pnap_bmc_api.models.ip_blocks_configuration import IpBlocksConfiguration
 from pnap_bmc_api.models.private_network_configuration import PrivateNetworkConfiguration
 from pnap_bmc_api.models.public_network_configuration import PublicNetworkConfiguration
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class NetworkConfiguration(BaseModel):
     """
@@ -41,11 +37,11 @@ class NetworkConfiguration(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["gatewayAddress", "privateNetworkConfiguration", "ipBlocksConfiguration", "publicNetworkConfiguration"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -58,7 +54,7 @@ class NetworkConfiguration(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of NetworkConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -73,11 +69,13 @@ class NetworkConfiguration(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of private_network_configuration
@@ -97,7 +95,7 @@ class NetworkConfiguration(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of NetworkConfiguration from a dict"""
         if obj is None:
             return None
@@ -107,9 +105,9 @@ class NetworkConfiguration(BaseModel):
 
         _obj = cls.model_validate({
             "gatewayAddress": obj.get("gatewayAddress"),
-            "privateNetworkConfiguration": PrivateNetworkConfiguration.from_dict(obj.get("privateNetworkConfiguration")) if obj.get("privateNetworkConfiguration") is not None else None,
-            "ipBlocksConfiguration": IpBlocksConfiguration.from_dict(obj.get("ipBlocksConfiguration")) if obj.get("ipBlocksConfiguration") is not None else None,
-            "publicNetworkConfiguration": PublicNetworkConfiguration.from_dict(obj.get("publicNetworkConfiguration")) if obj.get("publicNetworkConfiguration") is not None else None
+            "privateNetworkConfiguration": PrivateNetworkConfiguration.from_dict(obj["privateNetworkConfiguration"]) if obj.get("privateNetworkConfiguration") is not None else None,
+            "ipBlocksConfiguration": IpBlocksConfiguration.from_dict(obj["ipBlocksConfiguration"]) if obj.get("ipBlocksConfiguration") is not None else None,
+            "publicNetworkConfiguration": PublicNetworkConfiguration.from_dict(obj["publicNetworkConfiguration"]) if obj.get("publicNetworkConfiguration") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

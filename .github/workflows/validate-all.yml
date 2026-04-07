@@ -80,7 +80,7 @@ jobs:
       - build-and-test-invoicingapi
       - build-and-test-paymentsapi
       - run-generic-tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Download Artifacts

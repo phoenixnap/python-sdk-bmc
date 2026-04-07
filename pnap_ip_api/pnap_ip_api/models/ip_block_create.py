@@ -18,22 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_ip_api.models.tag_assignment_request import TagAssignmentRequest
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class IpBlockCreate(BaseModel):
     """
     IP Block Request.
     """ # noqa: E501
-    location: StrictStr = Field(description="IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` or `AUS`.")
+    location: StrictStr = Field(description="IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI` or `SEA`.")
     cidr_block_size: StrictStr = Field(description="CIDR IP Block Size. V4 supported sizes: [`/31`, `/30`, `/29` or `/28`]. V6 supported sizes: [`/64`]. For a larger Block Size contact support.", alias="cidrBlockSize")
     ip_version: Optional[StrictStr] = Field(default='V4', description="IP Version. This field should be set to `V4` or `V6`", alias="ipVersion")
     description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="The description of the IP Block.")
@@ -41,11 +37,11 @@ class IpBlockCreate(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["location", "cidrBlockSize", "ipVersion", "description", "tags"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -58,7 +54,7 @@ class IpBlockCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of IpBlockCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -73,19 +69,21 @@ class IpBlockCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_tags in self.tags:
+                if _item_tags:
+                    _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
@@ -95,7 +93,7 @@ class IpBlockCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of IpBlockCreate from a dict"""
         if obj is None:
             return None
@@ -108,7 +106,7 @@ class IpBlockCreate(BaseModel):
             "cidrBlockSize": obj.get("cidrBlockSize"),
             "ipVersion": obj.get("ipVersion") if obj.get("ipVersion") is not None else 'V4',
             "description": obj.get("description"),
-            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
+            "tags": [TagAssignmentRequest.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

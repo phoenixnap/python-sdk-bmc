@@ -20,12 +20,12 @@ json = "{}"
 # create an instance of OsConfigurationNetrisController from a JSON string
 os_configuration_netris_controller_instance = OsConfigurationNetrisController.from_json(json)
 # print the JSON string representation of the object
-print OsConfigurationNetrisController.to_json()
+print(OsConfigurationNetrisController.to_json())
 
 # convert the object into a dict
 os_configuration_netris_controller_dict = os_configuration_netris_controller_instance.to_dict()
 # create an instance of OsConfigurationNetrisController from a dict
-os_configuration_netris_controller_form_dict = os_configuration_netris_controller.from_dict(os_configuration_netris_controller_dict)
+os_configuration_netris_controller_from_dict = OsConfigurationNetrisController.from_dict(os_configuration_netris_controller_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

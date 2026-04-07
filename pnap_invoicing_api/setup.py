@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Invoicing API
 
@@ -22,11 +20,11 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "pnap_invoicing_api"
-VERSION = "1.0.4"
-PYTHON_REQUIRES = ">=3.7"
+VERSION = "1.0.5"
+PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
-    "python-dateutil",
+    "urllib3 >= 2.1.0, < 3.0.0",
+    "python-dateutil >= 2.8.2",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
 ]

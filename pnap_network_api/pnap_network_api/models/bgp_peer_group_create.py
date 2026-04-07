@@ -18,21 +18,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-from pydantic import Field
 from typing_extensions import Annotated
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class BgpPeerGroupCreate(BaseModel):
     """
     Create a BGP Peer Group.
     """ # noqa: E501
-    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI`, `SEA` and `AUS`.")
+    location: StrictStr = Field(description="The BGP Peer Group location. Can have one of the following values: `PHX`, `ASH`, `SGP`, `NLD`, `CHI` and `SEA`.")
     asn: StrictInt = Field(description="The BGP Peer Group ASN.")
     password: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=32)]] = Field(default=None, description="The BGP Peer Group password.")
     advertised_routes: StrictStr = Field(description="The Advertised routes for the BGP Peer Group. Can have one of the following values: `DEFAULT` and `NONE`.", alias="advertisedRoutes")
@@ -49,11 +45,11 @@ class BgpPeerGroupCreate(BaseModel):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9!@#$%^&*()\-|\[\]{}=;:<>,.]+$/")
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -66,7 +62,7 @@ class BgpPeerGroupCreate(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of BgpPeerGroupCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -81,11 +77,13 @@ class BgpPeerGroupCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # puts key-value pairs in additional_properties in the top level
@@ -96,7 +94,7 @@ class BgpPeerGroupCreate(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of BgpPeerGroupCreate from a dict"""
         if obj is None:
             return None

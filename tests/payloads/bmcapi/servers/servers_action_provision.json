@@ -42,7 +42,8 @@
                             "172.217.22.14",
                             "10.111.14.40/29",
                             "10.111.14.66 - 10.111.14.71"
-                        ]
+                        ],
+                        "bringYourOwnLicense": false
                     },
                     "managementAccessAllowedIps": [
                         "172.217.22.14",
@@ -164,7 +165,8 @@
                         "172.217.22.14",
                         "10.111.14.40/29",
                         "10.111.14.66 - 10.111.14.71"
-                    ]
+                    ],
+                    "bringYourOwnLicense": false
                 },
                 "rootPassword": "MyP@ssw0rd_01",
                 "managementUiUrl": "https://172.217.22.14",

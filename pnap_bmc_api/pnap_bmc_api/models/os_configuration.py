@@ -18,20 +18,16 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr
-from pydantic import Field
 from typing_extensions import Annotated
 from pnap_bmc_api.models.esxi_os_configuration import EsxiOsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit
 from pnap_bmc_api.models.os_configuration_netris_controller import OsConfigurationNetrisController
 from pnap_bmc_api.models.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
 from pnap_bmc_api.models.os_configuration_windows import OsConfigurationWindows
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class OsConfiguration(BaseModel):
     """
@@ -49,11 +45,11 @@ class OsConfiguration(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "esxi", "cloudInit"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -66,7 +62,7 @@ class OsConfiguration(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of OsConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -83,13 +79,15 @@ class OsConfiguration(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
+        excluded_fields: Set[str] = set([
+            "root_password",
+            "management_ui_url",
+            "additional_properties",
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "root_password",
-                "management_ui_url",
-                "additional_properties",
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of netris_controller
@@ -115,7 +113,7 @@ class OsConfiguration(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of OsConfiguration from a dict"""
         if obj is None:
             return None
@@ -124,15 +122,15 @@ class OsConfiguration(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "netrisController": OsConfigurationNetrisController.from_dict(obj.get("netrisController")) if obj.get("netrisController") is not None else None,
-            "netrisSoftgate": OsConfigurationNetrisSoftgate.from_dict(obj.get("netrisSoftgate")) if obj.get("netrisSoftgate") is not None else None,
-            "windows": OsConfigurationWindows.from_dict(obj.get("windows")) if obj.get("windows") is not None else None,
+            "netrisController": OsConfigurationNetrisController.from_dict(obj["netrisController"]) if obj.get("netrisController") is not None else None,
+            "netrisSoftgate": OsConfigurationNetrisSoftgate.from_dict(obj["netrisSoftgate"]) if obj.get("netrisSoftgate") is not None else None,
+            "windows": OsConfigurationWindows.from_dict(obj["windows"]) if obj.get("windows") is not None else None,
             "rootPassword": obj.get("rootPassword"),
             "managementUiUrl": obj.get("managementUiUrl"),
             "managementAccessAllowedIps": obj.get("managementAccessAllowedIps"),
             "installOsToRam": obj.get("installOsToRam") if obj.get("installOsToRam") is not None else False,
-            "esxi": EsxiOsConfiguration.from_dict(obj.get("esxi")) if obj.get("esxi") is not None else None,
-            "cloudInit": OsConfigurationCloudInit.from_dict(obj.get("cloudInit")) if obj.get("cloudInit") is not None else None
+            "esxi": EsxiOsConfiguration.from_dict(obj["esxi"]) if obj.get("esxi") is not None else None,
+            "cloudInit": OsConfigurationCloudInit.from_dict(obj["cloudInit"]) if obj.get("cloudInit") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

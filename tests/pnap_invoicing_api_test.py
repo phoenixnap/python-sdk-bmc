@@ -21,7 +21,6 @@ class TestInvoicingApi(unittest.TestCase):
 
     def tearDown(self):
         TestUtils.reset_expectations()
-        self.api_client.close()
 
     def test_get_invoices(self):
         # Setting up expectation

@@ -23,8 +23,6 @@ List all Private Networks owned by account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.private_network import PrivateNetwork
 from pnap_network_api.rest import ApiException
@@ -104,8 +102,6 @@ Delete Private Network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.rest import ApiException
 from pprint import pprint
@@ -182,8 +178,6 @@ Retrieve Private Network Details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.private_network import PrivateNetwork
 from pnap_network_api.rest import ApiException
@@ -262,8 +256,6 @@ Update Private Network Details.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.private_network import PrivateNetwork
 from pnap_network_api.models.private_network_modify import PrivateNetworkModify
@@ -346,8 +338,6 @@ Create a Private Network.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.private_network import PrivateNetwork
 from pnap_network_api.models.private_network_create import PrivateNetworkCreate

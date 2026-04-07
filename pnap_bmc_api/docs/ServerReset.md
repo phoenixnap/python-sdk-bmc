@@ -21,12 +21,12 @@ json = "{}"
 # create an instance of ServerReset from a JSON string
 server_reset_instance = ServerReset.from_json(json)
 # print the JSON string representation of the object
-print ServerReset.to_json()
+print(ServerReset.to_json())
 
 # convert the object into a dict
 server_reset_dict = server_reset_instance.to_dict()
 # create an instance of ServerReset from a dict
-server_reset_form_dict = server_reset.from_dict(server_reset_dict)
+server_reset_from_dict = ServerReset.from_dict(server_reset_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

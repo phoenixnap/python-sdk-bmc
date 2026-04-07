@@ -15,23 +15,41 @@
 """  # noqa: E501
 
 
-__version__ = "2.0.4"
+__version__ = "2.0.5"
+
+# Define package exports
+__all__ = [
+    "EventsApi",
+    "ApiResponse",
+    "ApiClient",
+    "Configuration",
+    "OpenApiException",
+    "ApiTypeError",
+    "ApiValueError",
+    "ApiKeyError",
+    "ApiAttributeError",
+    "ApiException",
+    "Error",
+    "Event",
+    "UserInfo",
+]
 
 # import apis into sdk package
-from pnap_audit_api.api.events_api import EventsApi
+from pnap_audit_api.api.events_api import EventsApi as EventsApi
 
 # import ApiClient
-from pnap_audit_api.api_response import ApiResponse
-from pnap_audit_api.api_client import ApiClient
-from pnap_audit_api.configuration import Configuration
-from pnap_audit_api.exceptions import OpenApiException
-from pnap_audit_api.exceptions import ApiTypeError
-from pnap_audit_api.exceptions import ApiValueError
-from pnap_audit_api.exceptions import ApiKeyError
-from pnap_audit_api.exceptions import ApiAttributeError
-from pnap_audit_api.exceptions import ApiException
+from pnap_audit_api.api_response import ApiResponse as ApiResponse
+from pnap_audit_api.api_client import ApiClient as ApiClient
+from pnap_audit_api.configuration import Configuration as Configuration
+from pnap_audit_api.exceptions import OpenApiException as OpenApiException
+from pnap_audit_api.exceptions import ApiTypeError as ApiTypeError
+from pnap_audit_api.exceptions import ApiValueError as ApiValueError
+from pnap_audit_api.exceptions import ApiKeyError as ApiKeyError
+from pnap_audit_api.exceptions import ApiAttributeError as ApiAttributeError
+from pnap_audit_api.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from pnap_audit_api.models.error import Error
-from pnap_audit_api.models.event import Event
-from pnap_audit_api.models.user_info import UserInfo
+from pnap_audit_api.models.error import Error as Error
+from pnap_audit_api.models.event import Event as Event
+from pnap_audit_api.models.user_info import UserInfo as UserInfo
+

@@ -23,8 +23,6 @@ List all BGP Peer Groups owned by account.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -104,8 +102,6 @@ Deletes BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -166,6 +162,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | Request to delete BGP Peer Group is accepted. |  -  |
+**204** | The BGP Peer Group has been deleted. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
@@ -186,8 +183,6 @@ Retrieves BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.rest import ApiException
@@ -267,8 +262,6 @@ Modifies BGP Peer Group by ID.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.models.bgp_peer_group_patch import BgpPeerGroupPatch
@@ -352,8 +345,6 @@ Create a BGP Peer Group.
 * OAuth Authentication (OAuth2):
 
 ```python
-import time
-import os
 import pnap_network_api
 from pnap_network_api.models.bgp_peer_group import BgpPeerGroup
 from pnap_network_api.models.bgp_peer_group_create import BgpPeerGroupCreate
