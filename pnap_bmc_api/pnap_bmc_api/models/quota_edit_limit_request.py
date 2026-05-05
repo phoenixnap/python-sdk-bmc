@@ -36,8 +36,8 @@ class QuotaEditLimitRequest(BaseModel):
     @field_validator('reason')
     def reason_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^(?s)(?!\s*$).+", value):
-            raise ValueError(r"must validate the regular expression /^(?s)(?!\s*$).+/")
+        if not re.match(r"^[\s\S]*\S[\s\S]*$", value):
+            raise ValueError(r"must validate the regular expression /^[\s\S]*\S[\s\S]*$/")
         return value
 
     model_config = ConfigDict(
