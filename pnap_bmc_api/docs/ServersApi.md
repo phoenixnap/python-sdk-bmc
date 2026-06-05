@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_get**
-> List[Server] servers_get(tag=tag)
+> List[Server] servers_get(tag=tag, location=location)
 
 List servers.
 
@@ -145,10 +145,11 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_bmc_api.ServersApi(api_client)
     tag = ['[\"env.dev\"]'] # List[str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
+    location = ['[\"PHX\"]'] # List[str] | Filters servers by server location (optional)
 
     try:
         # List servers.
-        api_response = api_instance.servers_get(tag=tag)
+        api_response = api_instance.servers_get(tag=tag, location=location)
         print("The response of ServersApi->servers_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -163,6 +164,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tag** | [**List[str]**](str.md)| A list of query parameters related to tags in the form of tagName.tagValue | [optional] 
+ **location** | [**List[str]**](str.md)| Filters servers by server location | [optional] 
 
 ### Return type
 

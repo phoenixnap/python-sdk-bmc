@@ -349,6 +349,7 @@ class ServersApi:
     def servers_get(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,6 +369,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -392,6 +395,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -419,6 +423,7 @@ class ServersApi:
     def servers_get_with_http_info(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,6 +443,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -462,6 +469,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,6 +497,7 @@ class ServersApi:
     def servers_get_without_preload_content(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -508,6 +517,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -532,6 +543,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -554,6 +566,7 @@ class ServersApi:
     def _servers_get_serialize(
         self,
         tag,
+        location,
         _request_auth,
         _content_type,
         _headers,
@@ -564,6 +577,7 @@ class ServersApi:
 
         _collection_formats: Dict[str, str] = {
             'tag': 'multi',
+            'location': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -580,6 +594,10 @@ class ServersApi:
         if tag is not None:
             
             _query_params.append(('tag', tag))
+            
+        if location is not None:
+            
+            _query_params.append(('location', location))
             
         # process the header parameters
         # process the form parameters
