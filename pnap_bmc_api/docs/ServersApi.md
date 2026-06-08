@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**servers_server_id_get**](ServersApi.md#servers_server_id_get) | **GET** /servers/{serverId} | Get server.
 [**servers_server_id_ip_blocks_ip_block_id_delete**](ServersApi.md#servers_server_id_ip_blocks_ip_block_id_delete) | **DELETE** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks/{ipBlockId} | Unassign IP Block from Server.
 [**servers_server_id_ip_blocks_post**](ServersApi.md#servers_server_id_ip_blocks_post) | **POST** /servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks | Assign IP Block to Server.
+[**servers_server_id_os_configuration_ipxe_put**](ServersApi.md#servers_server_id_os_configuration_ipxe_put) | **PUT** /servers/{serverId}/os-configuration/ipxe | Updates the iPXE OS configuration.
 [**servers_server_id_patch**](ServersApi.md#servers_server_id_patch) | **PATCH** /servers/{serverId} | Patch a Server.
 [**servers_server_id_private_networks_patch**](ServersApi.md#servers_server_id_private_networks_patch) | **PATCH** /servers/{serverId}/network-configuration/private-network-configuration/private-networks/{privateNetworkId} | Updates the server&#39;s private network&#39;s IP addresses
 [**servers_server_id_private_networks_post**](ServersApi.md#servers_server_id_private_networks_post) | **POST** /servers/{serverId}/network-configuration/private-network-configuration/private-networks | Adds the server to a private network.
@@ -603,7 +604,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **servers_server_id_actions_reboot_post**
-> ActionResult servers_server_id_actions_reboot_post(server_id)
+> ActionResult servers_server_id_actions_reboot_post(server_id, reboot_request=reboot_request)
 
 Reboot server.
 
@@ -616,6 +617,7 @@ Reboot specific server.
 ```python
 import pnap_bmc_api
 from pnap_bmc_api.models.action_result import ActionResult
+from pnap_bmc_api.models.reboot_request import RebootRequest
 from pnap_bmc_api.rest import ApiException
 from pprint import pprint
 
@@ -637,10 +639,11 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_bmc_api.ServersApi(api_client)
     server_id = '60473a6115e34466c9f8f083' # str | The server's ID.
+    reboot_request = pnap_bmc_api.RebootRequest() # RebootRequest | Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD). (optional)
 
     try:
         # Reboot server.
-        api_response = api_instance.servers_server_id_actions_reboot_post(server_id)
+        api_response = api_instance.servers_server_id_actions_reboot_post(server_id, reboot_request=reboot_request)
         print("The response of ServersApi->servers_server_id_actions_reboot_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -655,6 +658,7 @@ with pnap_bmc_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **str**| The server&#39;s ID. | 
+ **reboot_request** | [**RebootRequest**](RebootRequest.md)| Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD). | [optional] 
 
 ### Return type
 
@@ -666,7 +670,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1327,6 +1331,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | The specified IP block is being added to the server. |  -  |
+**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
+**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
+**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
+**409** | The resource is in an incompatible state. |  -  |
+**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servers_server_id_os_configuration_ipxe_put**
+> OsConfigurationIPXE servers_server_id_os_configuration_ipxe_put(server_id, os_configuration_ipxe)
+
+Updates the iPXE OS configuration.
+
+Updates the iPXE OS configuration by updating the URL and the native VLAN configuration.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import pnap_bmc_api
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
+from pnap_bmc_api.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = pnap_bmc_api.Configuration(
+    host = "https://api.phoenixnap.com/bmc/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with pnap_bmc_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = pnap_bmc_api.ServersApi(api_client)
+    server_id = '60473a6115e34466c9f8f083' # str | The server's ID.
+    os_configuration_ipxe = {"url":"https://example.com/boot.ipxe","nativeVlanConfiguration":{"vlanId":10,"staticDhcpAddressV4":"185.74.213.56"}} # OsConfigurationIPXE | 
+
+    try:
+        # Updates the iPXE OS configuration.
+        api_response = api_instance.servers_server_id_os_configuration_ipxe_put(server_id, os_configuration_ipxe)
+        print("The response of ServersApi->servers_server_id_os_configuration_ipxe_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServersApi->servers_server_id_os_configuration_ipxe_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **server_id** | **str**| The server&#39;s ID. | 
+ **os_configuration_ipxe** | [**OsConfigurationIPXE**](OsConfigurationIPXE.md)|  | 
+
+### Return type
+
+[**OsConfigurationIPXE**](OsConfigurationIPXE.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated URL in iPXE OS configuration. |  -  |
+**202** | The iPXE OS configuration is being updated. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

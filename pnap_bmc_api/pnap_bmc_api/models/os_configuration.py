@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from pnap_bmc_api.models.esxi_os_configuration import EsxiOsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
 from pnap_bmc_api.models.os_configuration_netris_controller import OsConfigurationNetrisController
 from pnap_bmc_api.models.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
 from pnap_bmc_api.models.os_configuration_windows import OsConfigurationWindows
@@ -42,8 +43,9 @@ class OsConfiguration(BaseModel):
     install_os_to_ram: Optional[StrictBool] = Field(default=False, description="If true, OS will be installed to and booted from the server's RAM. On restart RAM OS will be lost and the server will not be reachable unless a custom bootable OS has been deployed. Follow the <a href='https://phoenixnap.com/kb/bmc-custom-os' target='_blank'>instructions</a> on how to install custom OS on BMC. Only supported for ubuntu/focal and ubuntu/jammy.", alias="installOsToRam")
     esxi: Optional[EsxiOsConfiguration] = None
     cloud_init: Optional[OsConfigurationCloudInit] = Field(default=None, alias="cloudInit")
+    i_pxe: Optional[OsConfigurationIPXE] = Field(default=None, alias="iPXE")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "esxi", "cloudInit"]
+    __properties: ClassVar[List[str]] = ["netrisController", "netrisSoftgate", "windows", "rootPassword", "managementUiUrl", "managementAccessAllowedIps", "installOsToRam", "esxi", "cloudInit", "iPXE"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +107,9 @@ class OsConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cloud_init
         if self.cloud_init:
             _dict['cloudInit'] = self.cloud_init.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of i_pxe
+        if self.i_pxe:
+            _dict['iPXE'] = self.i_pxe.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -130,7 +135,8 @@ class OsConfiguration(BaseModel):
             "managementAccessAllowedIps": obj.get("managementAccessAllowedIps"),
             "installOsToRam": obj.get("installOsToRam") if obj.get("installOsToRam") is not None else False,
             "esxi": EsxiOsConfiguration.from_dict(obj["esxi"]) if obj.get("esxi") is not None else None,
-            "cloudInit": OsConfigurationCloudInit.from_dict(obj["cloudInit"]) if obj.get("cloudInit") is not None else None
+            "cloudInit": OsConfigurationCloudInit.from_dict(obj["cloudInit"]) if obj.get("cloudInit") is not None else None,
+            "iPXE": OsConfigurationIPXE.from_dict(obj["iPXE"]) if obj.get("iPXE") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
