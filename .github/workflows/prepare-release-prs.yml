@@ -20,7 +20,7 @@ name: prepare-release-prs
 #   - Bumps VERSION for every module
 #   - Opens two draft PRs:
 #       PR 1 (release -> master):  clean release versions
-#       PR 2 (release -> develop): release versions + patch+1 -SNAPSHOT
+#       PR 2 (release -> develop): release versions + patch+1 .dev
 #
 # After this workflow completes, a developer must:
 #   1. Update hand-written tests on the release branch to reflect API changes
@@ -139,7 +139,7 @@ jobs:
       #   only level 2              -> patch
       #   new module                -> 1.0.0
       #
-      # Patch bump: -SNAPSHOT is stripped with no increment — the SNAPSHOT version
+      # Patch bump: .dev is stripped with no increment — the SNAPSHOT version
       # already represents the intended next patch number.
       - name: Compute bump type and next version
         id: compute
@@ -214,7 +214,7 @@ jobs:
             TOTAL=$(jq length /tmp/${MODULE}-changelog.json)
 
             if [ "$TOTAL" -eq 0 ]; then
-              echo "_No spec changes detected. Stripping -SNAPSHOT as part of standard release._"
+              echo "_No spec changes detected. Stripping .dev as part of standard release._"
               echo ""
             else
               jq -r 'group_by(.path + .operation) | .[] | "#### " + (.[0].operation | ascii_upcase) + " " + .[0].path + "\n" + (map(if .level == 3 then "- **[SPEC-BREAKING]** " + .text elif .level == 1 then "- **[ADDITION]** " + .text else "- **[CHANGE]** " + .text end) | unique | join("\n")) + "\n"' /tmp/${MODULE}-changelog.json
@@ -246,7 +246,7 @@ jobs:
   #   - Writes the job summary to the Actions UI
   #   - Commits, pushes the release branch, and opens two draft PRs:
   #       PR 1 (release -> master):  clean release versions
-  #       PR 2 (release -> develop): release versions + patch+1 -SNAPSHOT
+  #       PR 2 (release -> develop): release versions + patch+1 .dev
   prepare-release:
     name: Prepare Release
     needs:
@@ -374,7 +374,7 @@ jobs:
             cat /tmp/full-changelog.md
           } >> $GITHUB_STEP_SUMMARY
 
-      # Commit clean release versions (no -SNAPSHOT) and push the release branch.
+      # Commit clean release versions (no .dev) and push the release branch.
       # This is the commit the master PR targets.
       - name: Create release branch and commit VERSION bumps
         run: |
@@ -403,7 +403,7 @@ jobs:
           || echo "PR to master already exists, skipping."
 
       # Add a second commit on the release branch bumping all modules to
-      # patch+1 -SNAPSHOT. When the develop PR merges, develop is immediately
+      # patch+1 .dev. When the develop PR merges, develop is immediately
       # ready for the next development cycle. Must merge master PR first so
       # this snapshot commit never lands on master.
       - name: Prepare snapshot versions for back-merge
