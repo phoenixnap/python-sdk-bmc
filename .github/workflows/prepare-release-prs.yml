@@ -11,7 +11,7 @@ name: prepare-release-prs
 
 # Change these according to the current repo SDK setup
 env:
-  VERSION_FILE: VERSION.py
+  VERSION_FILE: version.py
   SNAPSHOT_SUFFIX: .dev
 
 on:
