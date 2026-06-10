@@ -186,11 +186,11 @@ class  TestBmcApi(unittest.TestCase):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_get')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
-    
+
     api_instance = servers_api.ServersApi(self.api_client)
     opts = TestUtils.generate_query_params(request)
 
-    result = api_instance.servers_get(tag=[opts['tag']])
+    result = api_instance.servers_get(tag=[opts['tag']], location=[opts['location']])
 
     # Parsing time for comparison
     response['body'][0]['provisionedOn'] = parse(response['body'][0]['provisionedOn'])
