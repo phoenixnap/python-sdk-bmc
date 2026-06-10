@@ -1,6 +1,6 @@
 [project]
 name = "pnap_network_storage_api"
-version = "2.0.6.dev"
+version = "2.0.6"
 description = "Network Storage API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},
