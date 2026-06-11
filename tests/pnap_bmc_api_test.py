@@ -20,6 +20,7 @@ from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.models.server_ip_block import ServerIpBlock
 from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
 from pnap_bmc_api.models.tag_assignment_request import TagAssignmentRequest
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.models.server import Server
@@ -185,11 +186,11 @@ class  TestBmcApi(unittest.TestCase):
     # Setting up expectation
     request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_get')
     expectation_id = TestUtils.setup_expectation(request, response, 1)
-    
+
     api_instance = servers_api.ServersApi(self.api_client)
     opts = TestUtils.generate_query_params(request)
 
-    result = api_instance.servers_get(tag=[opts['tag']])
+    result = api_instance.servers_get(tag=[opts['tag']], location=[opts['location']])
 
     # Parsing time for comparison
     response['body'][0]['provisionedOn'] = parse(response['body'][0]['provisionedOn'])
@@ -507,6 +508,25 @@ class  TestBmcApi(unittest.TestCase):
     result = api_instance.servers_server_id_public_networks_delete(server_id, public_network_id)
 
     self.assertEqual(response['body'], result)
+
+    self.verify_called_once(expectation_id)
+
+
+  def test_server_put_os_configuration_ipxe_by_id(self):
+    # Setting up expectation
+    request, response = TestUtils.generate_payloads_from('bmcapi/servers/servers_put_os_configuration_ipxe_by_id')
+    expectation_id = TestUtils.setup_expectation(request, response, 1)
+
+    api_instance = servers_api.ServersApi(self.api_client)
+    server_id = TestUtils.extract_id_from(request)
+    os_configuration_ipxe = OsConfigurationIPXE(**TestUtils.extract_request_body(request))
+
+    result = api_instance.servers_server_id_os_configuration_ipxe_put(server_id, os_configuration_ipxe=os_configuration_ipxe)
+
+    response_dict = OsConfigurationIPXE.from_dict(response['body'])
+    result_dict = OsConfigurationIPXE.from_dict(result)
+
+    self.assertEqual(response_dict, result_dict)
 
     self.verify_called_once(expectation_id)
 

@@ -1,6 +1,6 @@
 [project]
 name = "pnap_ip_api"
-version = "2.2.1.dev"
+version = "2.2.2.dev"
 description = "IP Addresses API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},

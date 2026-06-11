@@ -1,6 +1,6 @@
 [project]
 name = "pnap_location_api"
-version = "3.0.1.dev"
+version = "3.0.2.dev"
 description = "Locations API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},
