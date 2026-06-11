@@ -21,6 +21,8 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from pnap_bmc_api.models.action_result import ActionResult
 from pnap_bmc_api.models.delete_result import DeleteResult
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
+from pnap_bmc_api.models.reboot_request import RebootRequest
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
 from pnap_bmc_api.models.reset_result import ResetResult
@@ -349,6 +351,7 @@ class ServersApi:
     def servers_get(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,6 +371,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -392,6 +397,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -419,6 +425,7 @@ class ServersApi:
     def servers_get_with_http_info(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,6 +445,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -462,6 +471,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,6 +499,7 @@ class ServersApi:
     def servers_get_without_preload_content(
         self,
         tag: Annotated[Optional[List[StrictStr]], Field(description="A list of query parameters related to tags in the form of tagName.tagValue")] = None,
+        location: Annotated[Optional[List[StrictStr]], Field(description="Filters servers by server location")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -508,6 +519,8 @@ class ServersApi:
 
         :param tag: A list of query parameters related to tags in the form of tagName.tagValue
         :type tag: List[str]
+        :param location: Filters servers by server location
+        :type location: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -532,6 +545,7 @@ class ServersApi:
 
         _param = self._servers_get_serialize(
             tag=tag,
+            location=location,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -554,6 +568,7 @@ class ServersApi:
     def _servers_get_serialize(
         self,
         tag,
+        location,
         _request_auth,
         _content_type,
         _headers,
@@ -564,6 +579,7 @@ class ServersApi:
 
         _collection_formats: Dict[str, str] = {
             'tag': 'multi',
+            'location': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -580,6 +596,10 @@ class ServersApi:
         if tag is not None:
             
             _query_params.append(('tag', tag))
+            
+        if location is not None:
+            
+            _query_params.append(('location', location))
             
         # process the header parameters
         # process the form parameters
@@ -2111,6 +2131,7 @@ class ServersApi:
     def servers_server_id_actions_reboot_post(
         self,
         server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        reboot_request: Annotated[Optional[RebootRequest], Field(description="Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2130,6 +2151,8 @@ class ServersApi:
 
         :param server_id: The server's ID. (required)
         :type server_id: str
+        :param reboot_request: Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).
+        :type reboot_request: RebootRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2154,6 +2177,7 @@ class ServersApi:
 
         _param = self._servers_server_id_actions_reboot_post_serialize(
             server_id=server_id,
+            reboot_request=reboot_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2183,6 +2207,7 @@ class ServersApi:
     def servers_server_id_actions_reboot_post_with_http_info(
         self,
         server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        reboot_request: Annotated[Optional[RebootRequest], Field(description="Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2202,6 +2227,8 @@ class ServersApi:
 
         :param server_id: The server's ID. (required)
         :type server_id: str
+        :param reboot_request: Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).
+        :type reboot_request: RebootRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2226,6 +2253,7 @@ class ServersApi:
 
         _param = self._servers_server_id_actions_reboot_post_serialize(
             server_id=server_id,
+            reboot_request=reboot_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2255,6 +2283,7 @@ class ServersApi:
     def servers_server_id_actions_reboot_post_without_preload_content(
         self,
         server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        reboot_request: Annotated[Optional[RebootRequest], Field(description="Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2274,6 +2303,8 @@ class ServersApi:
 
         :param server_id: The server's ID. (required)
         :type server_id: str
+        :param reboot_request: Configuration option to specify the reboot type: STANDARD or IPXE (default: STANDARD).
+        :type reboot_request: RebootRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2298,6 +2329,7 @@ class ServersApi:
 
         _param = self._servers_server_id_actions_reboot_post_serialize(
             server_id=server_id,
+            reboot_request=reboot_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2322,6 +2354,7 @@ class ServersApi:
     def _servers_server_id_actions_reboot_post_serialize(
         self,
         server_id,
+        reboot_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2349,6 +2382,8 @@ class ServersApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if reboot_request is not None:
+            _body_params = reboot_request
 
 
         # set the HTTP header `Accept`
@@ -2359,6 +2394,19 @@ class ServersApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -4731,6 +4779,313 @@ class ServersApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/servers/{serverId}/network-configuration/ip-block-configurations/ip-blocks',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def servers_server_id_os_configuration_ipxe_put(
+        self,
+        server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        os_configuration_ipxe: OsConfigurationIPXE,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OsConfigurationIPXE:
+        """Updates the iPXE OS configuration.
+
+        Updates the iPXE OS configuration by updating the URL and the native VLAN configuration.
+
+        :param server_id: The server's ID. (required)
+        :type server_id: str
+        :param os_configuration_ipxe: (required)
+        :type os_configuration_ipxe: OsConfigurationIPXE
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._servers_server_id_os_configuration_ipxe_put_serialize(
+            server_id=server_id,
+            os_configuration_ipxe=os_configuration_ipxe,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OsConfigurationIPXE",
+            '202': "OsConfigurationIPXE",
+            '400': "Error",
+            '401': "Error",
+            '403': "Error",
+            '409': "Error",
+            '500': "Error",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def servers_server_id_os_configuration_ipxe_put_with_http_info(
+        self,
+        server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        os_configuration_ipxe: OsConfigurationIPXE,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OsConfigurationIPXE]:
+        """Updates the iPXE OS configuration.
+
+        Updates the iPXE OS configuration by updating the URL and the native VLAN configuration.
+
+        :param server_id: The server's ID. (required)
+        :type server_id: str
+        :param os_configuration_ipxe: (required)
+        :type os_configuration_ipxe: OsConfigurationIPXE
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._servers_server_id_os_configuration_ipxe_put_serialize(
+            server_id=server_id,
+            os_configuration_ipxe=os_configuration_ipxe,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OsConfigurationIPXE",
+            '202': "OsConfigurationIPXE",
+            '400': "Error",
+            '401': "Error",
+            '403': "Error",
+            '409': "Error",
+            '500': "Error",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def servers_server_id_os_configuration_ipxe_put_without_preload_content(
+        self,
+        server_id: Annotated[StrictStr, Field(description="The server's ID.")],
+        os_configuration_ipxe: OsConfigurationIPXE,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Updates the iPXE OS configuration.
+
+        Updates the iPXE OS configuration by updating the URL and the native VLAN configuration.
+
+        :param server_id: The server's ID. (required)
+        :type server_id: str
+        :param os_configuration_ipxe: (required)
+        :type os_configuration_ipxe: OsConfigurationIPXE
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._servers_server_id_os_configuration_ipxe_put_serialize(
+            server_id=server_id,
+            os_configuration_ipxe=os_configuration_ipxe,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OsConfigurationIPXE",
+            '202': "OsConfigurationIPXE",
+            '400': "Error",
+            '401': "Error",
+            '403': "Error",
+            '409': "Error",
+            '500': "Error",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _servers_server_id_os_configuration_ipxe_put_serialize(
+        self,
+        server_id,
+        os_configuration_ipxe,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if server_id is not None:
+            _path_params['serverId'] = server_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if os_configuration_ipxe is not None:
+            _body_params = os_configuration_ipxe
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/servers/{serverId}/os-configuration/ipxe',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

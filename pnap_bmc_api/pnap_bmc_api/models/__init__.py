@@ -25,6 +25,8 @@ from pnap_bmc_api.models.ip_blocks_configuration import IpBlocksConfiguration
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
+from pnap_bmc_api.models.os_configuration_ipxe_native_vlan_configuration import OsConfigurationIPXENativeVlanConfiguration
 from pnap_bmc_api.models.os_configuration_map import OsConfigurationMap
 from pnap_bmc_api.models.os_configuration_map_esxi import OsConfigurationMapEsxi
 from pnap_bmc_api.models.os_configuration_map_proxmox import OsConfigurationMapProxmox
@@ -36,6 +38,7 @@ from pnap_bmc_api.models.public_network_configuration import PublicNetworkConfig
 from pnap_bmc_api.models.quota import Quota
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest
 from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitRequestDetails
+from pnap_bmc_api.models.reboot_request import RebootRequest
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
 from pnap_bmc_api.models.reset_result import ResetResult

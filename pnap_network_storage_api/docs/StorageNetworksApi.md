@@ -450,7 +450,7 @@ with pnap_network_storage_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pnap_network_storage_api.StorageNetworksApi(api_client)
     storage_id = '50dc434c-9bba-427b-bcd6-0bdba45c4dd2' # str | ID of the storage.
-    tag = ['env.dev'] # List[str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
+    tag = ['[\"env.dev\"]'] # List[str] | A list of query parameters related to tags in the form of tagName.tagValue (optional)
 
     try:
         # Display one or more volumes belonging to a storage network.

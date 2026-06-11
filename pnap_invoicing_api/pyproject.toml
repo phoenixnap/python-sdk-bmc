@@ -1,6 +1,6 @@
 [project]
 name = "pnap_invoicing_api"
-version = "1.0.5"
+version = "1.0.6"
 description = "Invoicing API"
 authors = [
   {name = "PhoenixNAP Team",email = "support@phoenixnap.com"},

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.3.0"
+__version__ = "2.4.0"
 
 # Define package exports
 __all__ = [
@@ -42,6 +42,8 @@ __all__ = [
     "NetworkConfiguration",
     "OsConfiguration",
     "OsConfigurationCloudInit",
+    "OsConfigurationIPXE",
+    "OsConfigurationIPXENativeVlanConfiguration",
     "OsConfigurationMap",
     "OsConfigurationMapEsxi",
     "OsConfigurationMapProxmox",
@@ -53,6 +55,7 @@ __all__ = [
     "Quota",
     "QuotaEditLimitRequest",
     "QuotaEditLimitRequestDetails",
+    "RebootRequest",
     "RelinquishIpBlock",
     "ReservationTransferDetails",
     "ResetResult",
@@ -103,6 +106,8 @@ from pnap_bmc_api.models.ip_blocks_configuration import IpBlocksConfiguration as
 from pnap_bmc_api.models.network_configuration import NetworkConfiguration as NetworkConfiguration
 from pnap_bmc_api.models.os_configuration import OsConfiguration as OsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit as OsConfigurationCloudInit
+from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE as OsConfigurationIPXE
+from pnap_bmc_api.models.os_configuration_ipxe_native_vlan_configuration import OsConfigurationIPXENativeVlanConfiguration as OsConfigurationIPXENativeVlanConfiguration
 from pnap_bmc_api.models.os_configuration_map import OsConfigurationMap as OsConfigurationMap
 from pnap_bmc_api.models.os_configuration_map_esxi import OsConfigurationMapEsxi as OsConfigurationMapEsxi
 from pnap_bmc_api.models.os_configuration_map_proxmox import OsConfigurationMapProxmox as OsConfigurationMapProxmox
@@ -114,6 +119,7 @@ from pnap_bmc_api.models.public_network_configuration import PublicNetworkConfig
 from pnap_bmc_api.models.quota import Quota as Quota
 from pnap_bmc_api.models.quota_edit_limit_request import QuotaEditLimitRequest as QuotaEditLimitRequest
 from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitRequestDetails as QuotaEditLimitRequestDetails
+from pnap_bmc_api.models.reboot_request import RebootRequest as RebootRequest
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock as RelinquishIpBlock
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails as ReservationTransferDetails
 from pnap_bmc_api.models.reset_result import ResetResult as ResetResult

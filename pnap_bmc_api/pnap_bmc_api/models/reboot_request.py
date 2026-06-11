@@ -18,22 +18,40 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ServerPublicNetwork(BaseModel):
+class RebootRequest(BaseModel):
     """
-    Public network details of bare metal server.
+    RebootRequest
     """ # noqa: E501
-    id: StrictStr = Field(description="The network identifier.")
-    ips: List[StrictStr] = Field(description="Configurable/configured IPs on the server.<br> At least 1 IP address is required. Valid IP formats include single IP addresses or IP ranges (IPv4 or IPv6). All IPs must be within the network's range.<br> Setting the `computeSlaacIp` field to `true` allows you to provide an empty array of IPs.<br> Referencing network as OS native network allows you to provide an empty array of IPs.<br> Additionally, setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>")
-    status_description: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the assignment to the network.", alias="statusDescription")
-    compute_slaac_ip: Optional[StrictBool] = Field(default=None, description="(Write-only) Requests Stateless Address Autoconfiguration (SLAAC). Applicable for Network which contains IPv6 block(s).", alias="computeSlaacIp")
-    vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this network has been configured within the network switch.", alias="vlanId")
+    boot_type: Optional[StrictStr] = Field(default='STANDARD', description="Specifies whether to boot via `IPXE` (requires script) or `STANDARD` (default mechanism, incompatible with `ipxeUrl`).", alias="bootType")
+    ipxe_url: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The URL for the iPXE script, used only with `IPXE` boot type. If provided, it updates and replaces the existing stored URL; if not provided, the existing URL will be used.", alias="ipxeUrl")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "ips", "statusDescription", "computeSlaacIp", "vlanId"]
+    __properties: ClassVar[List[str]] = ["bootType", "ipxeUrl"]
+
+    @field_validator('boot_type')
+    def boot_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['IPXE', 'STANDARD']):
+            raise ValueError("must be one of enum values ('IPXE', 'STANDARD')")
+        return value
+
+    @field_validator('ipxe_url')
+    def ipxe_url_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^https?:\/\/.+$", value):
+            raise ValueError(r"must validate the regular expression /^https?:\/\/.+$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +71,7 @@ class ServerPublicNetwork(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ServerPublicNetwork from a JSON string"""
+        """Create an instance of RebootRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -65,13 +83,9 @@ class ServerPublicNetwork(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "status_description",
-            "vlan_id",
             "additional_properties",
         ])
 
@@ -85,11 +99,16 @@ class ServerPublicNetwork(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if ipxe_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.ipxe_url is None and "ipxe_url" in self.model_fields_set:
+            _dict['ipxeUrl'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ServerPublicNetwork from a dict"""
+        """Create an instance of RebootRequest from a dict"""
         if obj is None:
             return None
 
@@ -97,11 +116,8 @@ class ServerPublicNetwork(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "ips": obj.get("ips"),
-            "statusDescription": obj.get("statusDescription"),
-            "computeSlaacIp": obj.get("computeSlaacIp"),
-            "vlanId": obj.get("vlanId")
+            "bootType": obj.get("bootType") if obj.get("bootType") is not None else 'STANDARD',
+            "ipxeUrl": obj.get("ipxeUrl")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

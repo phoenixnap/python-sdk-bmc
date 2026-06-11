@@ -18,22 +18,41 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ServerPublicNetwork(BaseModel):
+class OsConfigurationIPXENativeVlanConfiguration(BaseModel):
     """
-    Public network details of bare metal server.
+    Specifies the native VLAN configuration for the server.
     """ # noqa: E501
-    id: StrictStr = Field(description="The network identifier.")
-    ips: List[StrictStr] = Field(description="Configurable/configured IPs on the server.<br> At least 1 IP address is required. Valid IP formats include single IP addresses or IP ranges (IPv4 or IPv6). All IPs must be within the network's range.<br> Setting the `computeSlaacIp` field to `true` allows you to provide an empty array of IPs.<br> Referencing network as OS native network allows you to provide an empty array of IPs.<br> Additionally, setting the `force` query parameter to `true` allows you to:<ul> <li> Assign no specific IP addresses by designating an empty array of IPs. Note that at least one IP is required for the gateway address to be selected from this network. <li> Assign one or more IP addresses which are already configured on other resource(s) in network.</ul>")
-    status_description: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the assignment to the network.", alias="statusDescription")
-    compute_slaac_ip: Optional[StrictBool] = Field(default=None, description="(Write-only) Requests Stateless Address Autoconfiguration (SLAAC). Applicable for Network which contains IPv6 block(s).", alias="computeSlaacIp")
-    vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this network has been configured within the network switch.", alias="vlanId")
+    vlan_id: Optional[StrictInt] = Field(default=None, description="The VLAN ID of the network to be used as the native VLAN. The value must reference a public network with IP V4 block(s) or a public IP V4 block network to which the server is (or will be) attached. If omitted during provisioning, the native VLAN is matched to the configured/auto-purchased public IP V4 block. If no public IP block is available, a VLAN ID must be provided. The VLAN ID must belong to one of the public networks for any of the specified servers. During post-provisioning, if Native VLAN is omitted, the server will be configured with no native VLAN. If provided, the VLAN ID must be specified and must belong to any of the existing server public networks or IP block networks attached to the server. ", alias="vlanId")
+    static_dhcp_address_v4: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The static IP V4 address assigned to the server within the native VLAN. This address is set as the DHCP reservation and used for the iPXE boot process.  Value must be an available/unused IP V4 address within the native network usable IP range. If omitted, the first available IP in the native network will be automatically assigned. Therefore, at least one IP must be available within the native network. ", alias="staticDhcpAddressV4")
+    status: Optional[StrictStr] = Field(default=None, description="(Read-only) The status of the native VLAN configuration.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "ips", "statusDescription", "computeSlaacIp", "vlanId"]
+    __properties: ClassVar[List[str]] = ["vlanId", "staticDhcpAddressV4", "status"]
+
+    @field_validator('static_dhcp_address_v4')
+    def static_dhcp_address_v4_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", value):
+            raise ValueError(r"must validate the regular expression /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/")
+        return value
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['in-progress', 'assigned', 'error']):
+            raise ValueError("must be one of enum values ('in-progress', 'assigned', 'error')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +72,7 @@ class ServerPublicNetwork(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ServerPublicNetwork from a JSON string"""
+        """Create an instance of OsConfigurationIPXENativeVlanConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,12 +85,10 @@ class ServerPublicNetwork(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "status_description",
-            "vlan_id",
+            "status",
             "additional_properties",
         ])
 
@@ -89,7 +106,7 @@ class ServerPublicNetwork(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ServerPublicNetwork from a dict"""
+        """Create an instance of OsConfigurationIPXENativeVlanConfiguration from a dict"""
         if obj is None:
             return None
 
@@ -97,11 +114,9 @@ class ServerPublicNetwork(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "ips": obj.get("ips"),
-            "statusDescription": obj.get("statusDescription"),
-            "computeSlaacIp": obj.get("computeSlaacIp"),
-            "vlanId": obj.get("vlanId")
+            "vlanId": obj.get("vlanId"),
+            "staticDhcpAddressV4": obj.get("staticDhcpAddressV4"),
+            "status": obj.get("status")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
