@@ -82,3 +82,11 @@ v2.4.0
 Creating the GitHub release automatically starts the `publish-all-sdks` workflow.
 
 This workflow publishes all SDKs and finalizes the release.
+
+### 8. Confirm release
+
+Confirm that the Python SDK release:
+
+https://pypi.org/
+
+The release is complete once the expected versions are available.
