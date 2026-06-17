@@ -30,7 +30,7 @@ class OsConfigurationNetrisSoftgate(BaseModel):
     """ # noqa: E501
     host_os: Optional[StrictStr] = Field(default=None, description="(Read-only) Host OS on which the Netris Softgate is installed.", alias="hostOs")
     controller_address: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="(Write-only) IP address or hostname through which to reach the Netris Controller.", alias="controllerAddress")
-    controller_version: Optional[StrictStr] = Field(default=None, description="(Write-only) The version of the Netris Controller to connect to.", alias="controllerVersion")
+    controller_version: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="(Write-only) The version of the Netris Controller to connect to.", alias="controllerVersion")
     controller_auth_key: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="(Write-only) The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller.", alias="controllerAuthKey")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hostOs", "controllerAddress", "controllerVersion", "controllerAuthKey"]
@@ -43,6 +43,16 @@ class OsConfigurationNetrisSoftgate(BaseModel):
 
         if not re.match(r"^(?!-)[\w\-]{1,63}(?<!-)(\.(?!-)[\w\-]{1,63}(?<!-))*$", value):
             raise ValueError(r"must validate the regular expression /^(?!-)[\w\-]{1,63}(?<!-)(\.(?!-)[\w\-]{1,63}(?<!-))*$/")
+        return value
+
+    @field_validator('controller_version')
+    def controller_version_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-zA-Z0-9.-]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9.-]+$/")
         return value
 
     @field_validator('controller_auth_key')
