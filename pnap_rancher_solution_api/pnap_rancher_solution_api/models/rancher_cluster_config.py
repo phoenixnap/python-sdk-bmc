@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from pnap_rancher_solution_api.models.rancher_cluster_certificates import RancherClusterCertificates
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,15 +29,65 @@ class RancherClusterConfig(BaseModel):
     """
     (Write-only) Rancher configuration parameters.
     """ # noqa: E501
-    token: Optional[StrictStr] = Field(default=None, description="Shared secret used to join a server or agent to a cluster.")
-    tls_san: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `tls-san`. Add additional hostname or IP as a Subject Alternative Name in the TLS cert.", alias="tlsSan")
-    etcd_snapshot_schedule_cron: Optional[StrictStr] = Field(default='0 0,12 * * *', description="This maps to ranchers `etcd-snapshot-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours ‘0 */5 * * *’. Default: at 12 am/pm", alias="etcdSnapshotScheduleCron")
+    token: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Shared secret used to join a server or agent to a cluster.")
+    tls_san: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="This maps to ranchers `tls-san`. Add additional hostname or IP as a Subject Alternative Name in the TLS cert.", alias="tlsSan")
+    etcd_snapshot_schedule_cron: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default='0 0,12 * * *', description="This maps to ranchers `etcd-snapshot-schedule-cron`. Snapshot interval time in cron spec. eg. every 5 hours '0 */5 * * *'. Default: at 12 am/pm", alias="etcdSnapshotScheduleCron")
     etcd_snapshot_retention: Optional[StrictInt] = Field(default=5, description="This maps to ranchers `etcd-snapshot-retention`. Number of snapshots to retain.", alias="etcdSnapshotRetention")
-    node_taint: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.", alias="nodeTaint")
-    cluster_domain: Optional[StrictStr] = Field(default=None, description="This maps to ranchers `cluster-domain`. Cluster Domain.", alias="clusterDomain")
+    node_taint: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="This maps to ranchers `node-taint`. Registering kubelet with set of taints. By default, server nodes will be schedulable and thus your workloads can get launched on them. If you wish to have a dedicated control plane where no user workloads will run, you can use taints.", alias="nodeTaint")
+    cluster_domain: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="This maps to ranchers `cluster-domain`. Cluster Domain.", alias="clusterDomain")
     certificates: Optional[RancherClusterCertificates] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["token", "tlsSan", "etcdSnapshotScheduleCron", "etcdSnapshotRetention", "nodeTaint", "clusterDomain", "certificates"]
+
+    @field_validator('token')
+    def token_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^K10[0-9a-fA-F]+::.+$", value):
+            raise ValueError(r"must validate the regular expression /^K10[0-9a-fA-F]+::.+$/")
+        return value
+
+    @field_validator('tls_san')
+    def tls_san_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?$/")
+        return value
+
+    @field_validator('etcd_snapshot_schedule_cron')
+    def etcd_snapshot_schedule_cron_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^(@(annually|yearly|monthly|weekly|daily|hourly|reboot)|([0-9*\/,-]+ ){4}[0-9*\/,-]+)$", value):
+            raise ValueError(r"must validate the regular expression /^(@(annually|yearly|monthly|weekly|daily|hourly|reboot)|([0-9*\/,-]+ ){4}[0-9*\/,-]+)$/")
+        return value
+
+    @field_validator('node_taint')
+    def node_taint_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^([a-z0-9]([a-z0-9.-]*[a-z0-9])?\/)?[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?(=[a-zA-Z0-9._-]+)?:(NoSchedule|PreferNoSchedule|NoExecute)$", value):
+            raise ValueError(r"must validate the regular expression /^([a-z0-9]([a-z0-9.-]*[a-z0-9])?\/)?[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?(=[a-zA-Z0-9._-]+)?:(NoSchedule|PreferNoSchedule|NoExecute)$/")
+        return value
+
+    @field_validator('cluster_domain')
+    def cluster_domain_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z]{2,}$", value):
+            raise ValueError(r"must validate the regular expression /^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z]{2,}$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
