@@ -29,7 +29,7 @@ class OsConfigurationNetrisController(BaseModel):
     """ # noqa: E501
     host_os: Optional[StrictStr] = Field(default=None, description="(Read-only) Host OS on which the Netris Controller is installed.", alias="hostOs")
     netris_web_console_url: Optional[StrictStr] = Field(default=None, description="(Read-only) The URL for the Netris Controller web console. It will only be returned in response to provisioning a server.", alias="netrisWebConsoleUrl")
-    netris_user_password: Optional[StrictStr] = Field(default=None, description="(Read-only) Auto-generated password set for user 'netris' in the web console.<br>  The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.", alias="netrisUserPassword")
+    netris_user_password: Optional[StrictStr] = Field(default=None, description="(Read-only) Auto-generated password set for user 'netris' in the web console.<br> The password is not stored and therefore will only be returned in response to provisioning a server. Copy and save it for future reference.", alias="netrisUserPassword")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hostOs", "netrisWebConsoleUrl", "netrisUserPassword"]
 
