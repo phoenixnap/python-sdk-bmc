@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from pnap_bmc_api.models.os_configuration_ipxe_native_vlan_configuration import OsConfigurationIPXENativeVlanConfiguration
@@ -29,17 +29,10 @@ class OsConfigurationIPXE(BaseModel):
     """
     iPXE configuration details. Configures the server to boot using the iPXE network boot firmware with a custom boot script. Only applicable when osName is 'ipxe' and must not be provided for any other OS.
     """ # noqa: E501
-    url: Annotated[str, Field(strict=True)] = Field(description="The URL of the iPXE boot script used to start the server.")
+    url: Annotated[str, Field(strict=True, max_length=1000)] = Field(description="The URL of the iPXE boot script used to start the server.")
     native_vlan_configuration: Optional[OsConfigurationIPXENativeVlanConfiguration] = Field(default=None, alias="nativeVlanConfiguration")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["url", "nativeVlanConfiguration"]
-
-    @field_validator('url')
-    def url_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^https?:\/\/.+$", value):
-            raise ValueError(r"must validate the regular expression /^https?:\/\/.+$/")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
