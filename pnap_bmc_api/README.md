@@ -135,7 +135,6 @@ Class | Method | HTTP request | Description
 *ServersApi* | [**servers_server_id_actions_provision_post**](docs/ServersApi.md#servers_server_id_actions_provision_post) | **POST** /servers/{serverId}/actions/provision | Provision server.
 *ServersApi* | [**servers_server_id_actions_reboot_post**](docs/ServersApi.md#servers_server_id_actions_reboot_post) | **POST** /servers/{serverId}/actions/reboot | Reboot server.
 *ServersApi* | [**servers_server_id_actions_reserve_post**](docs/ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
-*ServersApi* | [**servers_server_id_actions_reset_post**](docs/ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
 *ServersApi* | [**servers_server_id_actions_shutdown_post**](docs/ServersApi.md#servers_server_id_actions_shutdown_post) | **POST** /servers/{serverId}/actions/shutdown | Shutdown server.
 *ServersApi* | [**servers_server_id_actions_transfer_reservation**](docs/ServersApi.md#servers_server_id_actions_transfer_reservation) | **POST** /servers/{serverId}/actions/transfer-reservation | Transfer server reservation.
 *ServersApi* | [**servers_server_id_delete**](docs/ServersApi.md#servers_server_id_delete) | **DELETE** /servers/{serverId} | Delete server.
@@ -167,9 +166,6 @@ Class | Method | HTTP request | Description
  - [OsConfigurationCloudInit](docs/OsConfigurationCloudInit.md)
  - [OsConfigurationIPXE](docs/OsConfigurationIPXE.md)
  - [OsConfigurationIPXENativeVlanConfiguration](docs/OsConfigurationIPXENativeVlanConfiguration.md)
- - [OsConfigurationMap](docs/OsConfigurationMap.md)
- - [OsConfigurationMapEsxi](docs/OsConfigurationMapEsxi.md)
- - [OsConfigurationMapProxmox](docs/OsConfigurationMapProxmox.md)
  - [OsConfigurationNetrisController](docs/OsConfigurationNetrisController.md)
  - [OsConfigurationNetrisSoftgate](docs/OsConfigurationNetrisSoftgate.md)
  - [OsConfigurationWindows](docs/OsConfigurationWindows.md)
@@ -181,7 +177,6 @@ Class | Method | HTTP request | Description
  - [RebootRequest](docs/RebootRequest.md)
  - [RelinquishIpBlock](docs/RelinquishIpBlock.md)
  - [ReservationTransferDetails](docs/ReservationTransferDetails.md)
- - [ResetResult](docs/ResetResult.md)
  - [Server](docs/Server.md)
  - [ServerCreate](docs/ServerCreate.md)
  - [ServerIpBlock](docs/ServerIpBlock.md)
@@ -191,7 +186,6 @@ Class | Method | HTTP request | Description
  - [ServerProvision](docs/ServerProvision.md)
  - [ServerPublicNetwork](docs/ServerPublicNetwork.md)
  - [ServerReserve](docs/ServerReserve.md)
- - [ServerReset](docs/ServerReset.md)
  - [SshKey](docs/SshKey.md)
  - [SshKeyCreate](docs/SshKeyCreate.md)
  - [SshKeyUpdate](docs/SshKeyUpdate.md)

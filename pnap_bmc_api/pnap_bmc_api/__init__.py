@@ -44,9 +44,6 @@ __all__ = [
     "OsConfigurationCloudInit",
     "OsConfigurationIPXE",
     "OsConfigurationIPXENativeVlanConfiguration",
-    "OsConfigurationMap",
-    "OsConfigurationMapEsxi",
-    "OsConfigurationMapProxmox",
     "OsConfigurationNetrisController",
     "OsConfigurationNetrisSoftgate",
     "OsConfigurationWindows",
@@ -58,7 +55,6 @@ __all__ = [
     "RebootRequest",
     "RelinquishIpBlock",
     "ReservationTransferDetails",
-    "ResetResult",
     "Server",
     "ServerCreate",
     "ServerIpBlock",
@@ -68,7 +64,6 @@ __all__ = [
     "ServerProvision",
     "ServerPublicNetwork",
     "ServerReserve",
-    "ServerReset",
     "SshKey",
     "SshKeyCreate",
     "SshKeyUpdate",
@@ -108,9 +103,6 @@ from pnap_bmc_api.models.os_configuration import OsConfiguration as OsConfigurat
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit as OsConfigurationCloudInit
 from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE as OsConfigurationIPXE
 from pnap_bmc_api.models.os_configuration_ipxe_native_vlan_configuration import OsConfigurationIPXENativeVlanConfiguration as OsConfigurationIPXENativeVlanConfiguration
-from pnap_bmc_api.models.os_configuration_map import OsConfigurationMap as OsConfigurationMap
-from pnap_bmc_api.models.os_configuration_map_esxi import OsConfigurationMapEsxi as OsConfigurationMapEsxi
-from pnap_bmc_api.models.os_configuration_map_proxmox import OsConfigurationMapProxmox as OsConfigurationMapProxmox
 from pnap_bmc_api.models.os_configuration_netris_controller import OsConfigurationNetrisController as OsConfigurationNetrisController
 from pnap_bmc_api.models.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate as OsConfigurationNetrisSoftgate
 from pnap_bmc_api.models.os_configuration_windows import OsConfigurationWindows as OsConfigurationWindows
@@ -122,7 +114,6 @@ from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitR
 from pnap_bmc_api.models.reboot_request import RebootRequest as RebootRequest
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock as RelinquishIpBlock
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails as ReservationTransferDetails
-from pnap_bmc_api.models.reset_result import ResetResult as ResetResult
 from pnap_bmc_api.models.server import Server as Server
 from pnap_bmc_api.models.server_create import ServerCreate as ServerCreate
 from pnap_bmc_api.models.server_ip_block import ServerIpBlock as ServerIpBlock
@@ -132,7 +123,6 @@ from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork as S
 from pnap_bmc_api.models.server_provision import ServerProvision as ServerProvision
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork as ServerPublicNetwork
 from pnap_bmc_api.models.server_reserve import ServerReserve as ServerReserve
-from pnap_bmc_api.models.server_reset import ServerReset as ServerReset
 from pnap_bmc_api.models.ssh_key import SshKey as SshKey
 from pnap_bmc_api.models.ssh_key_create import SshKeyCreate as SshKeyCreate
 from pnap_bmc_api.models.ssh_key_update import SshKeyUpdate as SshKeyUpdate

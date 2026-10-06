@@ -13,7 +13,6 @@ Method | HTTP request | Description
 [**servers_server_id_actions_provision_post**](ServersApi.md#servers_server_id_actions_provision_post) | **POST** /servers/{serverId}/actions/provision | Provision server.
 [**servers_server_id_actions_reboot_post**](ServersApi.md#servers_server_id_actions_reboot_post) | **POST** /servers/{serverId}/actions/reboot | Reboot server.
 [**servers_server_id_actions_reserve_post**](ServersApi.md#servers_server_id_actions_reserve_post) | **POST** /servers/{serverId}/actions/reserve | Reserve server.
-[**servers_server_id_actions_reset_post**](ServersApi.md#servers_server_id_actions_reset_post) | **POST** /servers/{serverId}/actions/reset | Reset server.
 [**servers_server_id_actions_shutdown_post**](ServersApi.md#servers_server_id_actions_shutdown_post) | **POST** /servers/{serverId}/actions/shutdown | Shutdown server.
 [**servers_server_id_actions_transfer_reservation**](ServersApi.md#servers_server_id_actions_transfer_reservation) | **POST** /servers/{serverId}/actions/transfer-reservation | Transfer server reservation.
 [**servers_server_id_delete**](ServersApi.md#servers_server_id_delete) | **DELETE** /servers/{serverId} | Delete server.
@@ -761,89 +760,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Reserved server details. |  -  |
-**400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
-**401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
-**403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |
-**409** | The resource is in an incompatible state. |  -  |
-**500** | The server encountered an unexpected condition that prevented it from fulfilling the request. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **servers_server_id_actions_reset_post**
-> ResetResult servers_server_id_actions_reset_post(server_id, server_reset)
-
-Reset server.
-
-Deprecated: Reset specific server. Reset only supports network configurations of type 'private network' or 'IP blocks'. As an alternative, the suggested action is to deprovision the server and provision a new one with the same configuration.
-
-### Example
-
-* OAuth Authentication (OAuth2):
-
-```python
-import pnap_bmc_api
-from pnap_bmc_api.models.reset_result import ResetResult
-from pnap_bmc_api.models.server_reset import ServerReset
-from pnap_bmc_api.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.phoenixnap.com/bmc/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = pnap_bmc_api.Configuration(
-    host = "https://api.phoenixnap.com/bmc/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Enter a context with an instance of the API client
-with pnap_bmc_api.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = pnap_bmc_api.ServersApi(api_client)
-    server_id = '60473a6115e34466c9f8f083' # str | The server's ID.
-    server_reset = {"installDefaultSshKeys":true,"sshKeys":["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF9LdAFElNCi7JoWh6KUcchrJ2Gac1aqGRPpdZNowObpRtmiRCecAMb7bUgNAaNfcmwiQi7tos9TlnFgprIcfMWb8MSs3ABYHmBgqEEt3RWYf0fAc9CsIpJdMCUG28TPGTlRXCEUVNKgLMdcseAlJoGp1CgbHWIN65fB3he3kAZcfpPn5mapV0tsl2p+ZyuAGRYdn5dJv2RZDHUZBkOeUobwsij+weHCKAFmKQKtCP7ybgVHaQjAPrj8MGnk1jBbjDt5ws+Be+9JNjQJee9zCKbAOsIo3i+GcUIkrw5jxPU/RTGlWBcemPaKHdciSzGcjWboapzIy49qypQhZe1U75 user@my_ip"],"sshKeyIds":["5fa54d1e91867c03a0a7b4a4"]} # ServerReset | 
-
-    try:
-        # Reset server.
-        api_response = api_instance.servers_server_id_actions_reset_post(server_id, server_reset)
-        print("The response of ServersApi->servers_server_id_actions_reset_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ServersApi->servers_server_id_actions_reset_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **server_id** | **str**| The server&#39;s ID. | 
- **server_reset** | [**ServerReset**](ServerReset.md)|  | 
-
-### Return type
-
-[**ResetResult**](ResetResult.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Resetting server. |  -  |
 **400** | The request failed due to wrong data. Please check the provided parameters and try again. |  -  |
 **401** | The request failed due to invalid credentials. Please check the provided credentials and try again. |  -  |
 **403** | The request failed since this resource cannot be accessed by the provided credentials. |  -  |

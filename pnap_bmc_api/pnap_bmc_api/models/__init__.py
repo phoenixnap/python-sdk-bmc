@@ -27,9 +27,6 @@ from pnap_bmc_api.models.os_configuration import OsConfiguration
 from pnap_bmc_api.models.os_configuration_cloud_init import OsConfigurationCloudInit
 from pnap_bmc_api.models.os_configuration_ipxe import OsConfigurationIPXE
 from pnap_bmc_api.models.os_configuration_ipxe_native_vlan_configuration import OsConfigurationIPXENativeVlanConfiguration
-from pnap_bmc_api.models.os_configuration_map import OsConfigurationMap
-from pnap_bmc_api.models.os_configuration_map_esxi import OsConfigurationMapEsxi
-from pnap_bmc_api.models.os_configuration_map_proxmox import OsConfigurationMapProxmox
 from pnap_bmc_api.models.os_configuration_netris_controller import OsConfigurationNetrisController
 from pnap_bmc_api.models.os_configuration_netris_softgate import OsConfigurationNetrisSoftgate
 from pnap_bmc_api.models.os_configuration_windows import OsConfigurationWindows
@@ -41,7 +38,6 @@ from pnap_bmc_api.models.quota_edit_limit_request_details import QuotaEditLimitR
 from pnap_bmc_api.models.reboot_request import RebootRequest
 from pnap_bmc_api.models.relinquish_ip_block import RelinquishIpBlock
 from pnap_bmc_api.models.reservation_transfer_details import ReservationTransferDetails
-from pnap_bmc_api.models.reset_result import ResetResult
 from pnap_bmc_api.models.server import Server
 from pnap_bmc_api.models.server_create import ServerCreate
 from pnap_bmc_api.models.server_ip_block import ServerIpBlock
@@ -51,7 +47,6 @@ from pnap_bmc_api.models.server_private_network import ServerPrivateNetwork
 from pnap_bmc_api.models.server_provision import ServerProvision
 from pnap_bmc_api.models.server_public_network import ServerPublicNetwork
 from pnap_bmc_api.models.server_reserve import ServerReserve
-from pnap_bmc_api.models.server_reset import ServerReset
 from pnap_bmc_api.models.ssh_key import SshKey
 from pnap_bmc_api.models.ssh_key_create import SshKeyCreate
 from pnap_bmc_api.models.ssh_key_update import SshKeyUpdate
