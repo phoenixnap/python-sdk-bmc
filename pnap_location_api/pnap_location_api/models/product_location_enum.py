@@ -28,8 +28,11 @@ class ProductLocationEnum(str, Enum):
     allowed enum values
     """
     PHX = 'PHX'
+    PHX4 = 'PHX4'
+    PHX5 = 'PHX5'
     ASH = 'ASH'
     NLD = 'NLD'
+    NLD2 = 'NLD2'
     SGP = 'SGP'
     CHI = 'CHI'
     SEA = 'SEA'

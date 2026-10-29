@@ -6,9 +6,15 @@ This enum is used <b>only in product-related schemas</b> and contains <b>only cu
 
 * `PHX` (value: `'PHX'`)
 
+* `PHX4` (value: `'PHX4'`)
+
+* `PHX5` (value: `'PHX5'`)
+
 * `ASH` (value: `'ASH'`)
 
 * `NLD` (value: `'NLD'`)
+
+* `NLD2` (value: `'NLD2'`)
 
 * `SGP` (value: `'SGP'`)
 
