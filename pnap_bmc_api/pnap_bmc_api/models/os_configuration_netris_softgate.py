@@ -28,10 +28,10 @@ class OsConfigurationNetrisSoftgate(BaseModel):
     """
     Netris Softgate configuration properties. Follow <a href='https://phoenixnap.com/kb/netris-bare-metal-cloud#deploy-netris-softgate' target='_blank'>instructions</a> for retrieving the required details.
     """ # noqa: E501
-    host_os: Optional[StrictStr] = Field(default=None, description="(Read-only) Host OS on which the Netris Softgate is installed.", alias="hostOs")
-    controller_address: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="(Write-only) IP address or hostname through which to reach the Netris Controller.", alias="controllerAddress")
-    controller_version: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="(Write-only) The version of the Netris Controller to connect to.", alias="controllerVersion")
-    controller_auth_key: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="(Write-only) The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller.", alias="controllerAuthKey")
+    host_os: Optional[StrictStr] = Field(default=None, description="Host OS on which the Netris Softgate is installed.", alias="hostOs")
+    controller_address: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="IP address or hostname through which to reach the Netris Controller.", alias="controllerAddress")
+    controller_version: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, description="The version of the Netris Controller to connect to.", alias="controllerVersion")
+    controller_auth_key: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller.", alias="controllerAuthKey")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hostOs", "controllerAddress", "controllerVersion", "controllerAuthKey"]
 

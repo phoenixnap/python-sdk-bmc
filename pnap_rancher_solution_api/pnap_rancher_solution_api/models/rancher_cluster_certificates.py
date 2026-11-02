@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class RancherClusterCertificates(BaseModel):
     """
-    (Write-only) Define the custom SSL certificates to be used instead of defaults.
+    Define the custom SSL certificates to be used instead of defaults.
     """ # noqa: E501
     ca_certificate: Optional[StrictStr] = Field(default=None, description="The SSL CA certificate to be used for rancher admin.", alias="caCertificate")
     certificate: Optional[StrictStr] = Field(default=None, description="The SSL certificate to be used for rancher admin.")

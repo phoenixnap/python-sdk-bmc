@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class SshConfig(BaseModel):
     """
-    (Write-only) Configuration defining which public SSH keys are pre-installed as authorized on the server.
+    Configuration defining which public SSH keys are pre-installed as authorized on the server.
     """ # noqa: E501
     install_default_keys: Optional[StrictBool] = Field(default=True, description="Define whether public keys marked as default should be installed on this node. These are public keys that were already recorded on this system. Use <a href='https://developers.phoenixnap.com/docs/bmc/1/routes/ssh-keys/get' target='_blank'>GET /ssh-keys</a> to retrieve a list of possible values.", alias="installDefaultKeys")
     keys: Optional[List[StrictStr]] = Field(default=None, description="List of public SSH keys.")

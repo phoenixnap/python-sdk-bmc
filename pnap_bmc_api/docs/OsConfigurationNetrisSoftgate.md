@@ -6,10 +6,10 @@ Netris Softgate configuration properties. Follow <a href='https://phoenixnap.com
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**host_os** | **str** | (Read-only) Host OS on which the Netris Softgate is installed. | [optional] [readonly] 
-**controller_address** | **str** | (Write-only) IP address or hostname through which to reach the Netris Controller. | [optional] 
-**controller_version** | **str** | (Write-only) The version of the Netris Controller to connect to. | [optional] 
-**controller_auth_key** | **str** | (Write-only) The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller. | [optional] 
+**host_os** | **str** | Host OS on which the Netris Softgate is installed. | [optional] [readonly] 
+**controller_address** | **str** | IP address or hostname through which to reach the Netris Controller. | [optional] 
+**controller_version** | **str** | The version of the Netris Controller to connect to. | [optional] 
+**controller_auth_key** | **str** | The authentication key of the Netris Controller to connect to. Required for the softgate agent to be able to interact with the Netris Controller. | [optional] 
 
 ## Example
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **node_count** | **int** | Number of configured nodes, currently only node counts of 1 and 3 are possible. | [optional] 
 **server_type** | **str** | Node server type. Cannot be changed once a server is created. Currently this field should be set to either &#x60;s0.d1.small&#x60;, &#x60;s0.d1.medium&#x60;, &#x60;s1.c1.small&#x60;, &#x60;s1.c1.medium&#x60;, &#x60;s1.c2.medium&#x60;, &#x60;s1.c2.large&#x60;, &#x60;s2.c1.small&#x60;, &#x60;s2.c1.medium&#x60;, &#x60;s2.c1.large&#x60;, &#x60;s2.c2.small&#x60;, &#x60;s2.c2.medium&#x60;, &#x60;s2.c2.large&#x60;, &#x60;s1.e1.small&#x60;, &#x60;s1.e1.medium&#x60;, &#x60;s1.e1.large&#x60;. | [optional] [default to 's0.d1.small']
 **ssh_config** | [**SshConfig**](SshConfig.md) |  | [optional] 
-**nodes** | [**List[Node]**](Node.md) | (Read-only) The nodes associated with this node pool. | [optional] [readonly] 
+**nodes** | [**List[Node]**](Node.md) | The nodes associated with this node pool. | [optional] [readonly] 
 
 ## Example
 

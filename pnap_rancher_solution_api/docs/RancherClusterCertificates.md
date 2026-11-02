@@ -1,6 +1,6 @@
 # RancherClusterCertificates
 
-(Write-only) Define the custom SSL certificates to be used instead of defaults.
+Define the custom SSL certificates to be used instead of defaults.
 
 ## Properties
 

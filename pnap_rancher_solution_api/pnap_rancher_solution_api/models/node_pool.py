@@ -34,7 +34,7 @@ class NodePool(BaseModel):
     node_count: Optional[StrictInt] = Field(default=None, description="Number of configured nodes, currently only node counts of 1 and 3 are possible.", alias="nodeCount")
     server_type: Optional[StrictStr] = Field(default='s0.d1.small', description="Node server type. Cannot be changed once a server is created. Currently this field should be set to either `s0.d1.small`, `s0.d1.medium`, `s1.c1.small`, `s1.c1.medium`, `s1.c2.medium`, `s1.c2.large`, `s2.c1.small`, `s2.c1.medium`, `s2.c1.large`, `s2.c2.small`, `s2.c2.medium`, `s2.c2.large`, `s1.e1.small`, `s1.e1.medium`, `s1.e1.large`.", alias="serverType")
     ssh_config: Optional[SshConfig] = Field(default=None, alias="sshConfig")
-    nodes: Optional[List[Node]] = Field(default=None, description="(Read-only) The nodes associated with this node pool.")
+    nodes: Optional[List[Node]] = Field(default=None, description="The nodes associated with this node pool.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "nodeCount", "serverType", "sshConfig", "nodes"]
 

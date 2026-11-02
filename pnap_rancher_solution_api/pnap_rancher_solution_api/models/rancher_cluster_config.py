@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class RancherClusterConfig(BaseModel):
     """
-    (Write-only) Rancher configuration parameters.
+    Rancher configuration parameters.
     """ # noqa: E501
     token: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Shared secret used to join a server or agent to a cluster.")
     tls_san: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="This maps to ranchers `tls-san`. Add additional hostname or IP as a Subject Alternative Name in the TLS cert.", alias="tlsSan")

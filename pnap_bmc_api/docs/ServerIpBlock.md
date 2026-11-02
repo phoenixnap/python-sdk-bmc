@@ -7,7 +7,7 @@ IP block assigned to server
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The IP block&#39;s ID. | 
-**vlan_id** | **int** | (Read-only) The VLAN on which this IP block has been configured within the network switch. | [optional] [readonly] 
+**vlan_id** | **int** | The VLAN on which this IP block has been configured within the network switch. | [optional] [readonly] 
 
 ## Example
 

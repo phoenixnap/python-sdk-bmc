@@ -1,6 +1,6 @@
 # SshConfig
 
-(Write-only) Configuration defining which public SSH keys are pre-installed as authorized on the server.
+Configuration defining which public SSH keys are pre-installed as authorized on the server.
 
 ## Properties
 

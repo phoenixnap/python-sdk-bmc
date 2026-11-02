@@ -28,7 +28,7 @@ class ServerIpBlock(BaseModel):
     IP block assigned to server
     """ # noqa: E501
     id: StrictStr = Field(description="The IP block's ID.")
-    vlan_id: Optional[StrictInt] = Field(default=None, description="(Read-only) The VLAN on which this IP block has been configured within the network switch.", alias="vlanId")
+    vlan_id: Optional[StrictInt] = Field(default=None, description="The VLAN on which this IP block has been configured within the network switch.", alias="vlanId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "vlanId"]
 

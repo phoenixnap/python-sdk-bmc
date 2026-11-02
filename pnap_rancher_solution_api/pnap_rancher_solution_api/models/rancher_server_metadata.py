@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class RancherServerMetadata(BaseModel):
     """
-    (Read Only) Connection parameters to use to connect to the Rancher Server Administrative GUI.
+    Connection parameters to use to connect to the Rancher Server Administrative GUI.
     """ # noqa: E501
     url: Optional[StrictStr] = Field(default=None, description="The Rancher Server URL.")
     username: Optional[StrictStr] = Field(default=None, description="The username to use to login to the Rancher Server. This field is returned only as a response to the create cluster request. Make sure to take note or you will not be able to access the server.")

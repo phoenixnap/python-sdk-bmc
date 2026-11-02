@@ -1,6 +1,6 @@
 # RancherServerMetadata
 
-(Read Only) Connection parameters to use to connect to the Rancher Server Administrative GUI.
+Connection parameters to use to connect to the Rancher Server Administrative GUI.
 
 ## Properties
 

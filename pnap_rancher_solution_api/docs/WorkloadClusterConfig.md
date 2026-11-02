@@ -1,6 +1,6 @@
 # WorkloadClusterConfig
 
-(Write-only) Workload cluster configuration parameters.
+Workload cluster configuration parameters.
 
 ## Properties
 

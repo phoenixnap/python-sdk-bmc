@@ -1,6 +1,6 @@
 # RancherClusterConfig
 
-(Write-only) Rancher configuration parameters.
+Rancher configuration parameters.
 
 ## Properties
 
