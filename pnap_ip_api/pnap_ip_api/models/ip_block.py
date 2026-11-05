@@ -31,7 +31,7 @@ class IpBlock(BaseModel):
     IP Block Details.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="IP Block identifier.")
-    location: Optional[StrictStr] = Field(default=None, description="IP Block location ID. Currently this field should be set to `PHX`, `ASH`, `SGP`, `NLD`, `CHI` or `SEA`.")
+    location: Optional[StrictStr] = Field(default=None, description="IP Block location ID. Currently this field should be set to `PHX`, `PHX4`, `PHX5`, `ASH`, `SGP`, `NLD`, `NLD2`, `CHI` or `SEA`.")
     cidr_block_size: Optional[StrictStr] = Field(default=None, description="CIDR IP Block Size. Currently this field should be set to either `/31`, `/30`, `/29`, `/28`, `/27`, `/26`, `/25`, `/24`, `/23` or `/22`.", alias="cidrBlockSize")
     cidr: Optional[StrictStr] = Field(default=None, description="The IP Block in CIDR notation.")
     ip_version: Optional[StrictStr] = Field(default=None, description="The IP Version of the block.", alias="ipVersion")
