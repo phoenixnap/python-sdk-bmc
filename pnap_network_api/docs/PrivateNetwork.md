@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **cidr** | **str** | IP range associated with this private network in CIDR notation. | [optional] 
 **servers** | [**List[PrivateNetworkServer]**](PrivateNetworkServer.md) |  | 
 **memberships** | [**List[NetworkMembership]**](NetworkMembership.md) | A list of resources that are members of this private network. | 
+**reserved_ips** | [**List[ReservedIp]**](ReservedIp.md) | Reserved IP addresses within this network. | 
 **status** | **str** | The status of the private network. Can have one of the following values: &#x60;BUSY&#x60;, &#x60;READY&#x60;, &#x60;DELETING&#x60; or &#x60;ERROR&#x60;. | 
 **created_on** | **datetime** | Date and time when this private network was created. | 
 

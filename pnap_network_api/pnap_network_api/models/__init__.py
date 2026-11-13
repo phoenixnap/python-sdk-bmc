@@ -31,4 +31,5 @@ from pnap_network_api.models.public_network_create import PublicNetworkCreate
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock
 from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate
 from pnap_network_api.models.public_network_modify import PublicNetworkModify
+from pnap_network_api.models.reserved_ip import ReservedIp
 

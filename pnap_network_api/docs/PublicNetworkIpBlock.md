@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **str** | The IP Block identifier. | 
 **cidr** | **str** | The CIDR notation of the IP block. | 
 **used_ips_count** | **str** | The number of IPs used in the IP block. | 
+**reserved_ips** | [**List[ReservedIp]**](ReservedIp.md) | Reserved IP addresses within this network IP block. | 
 
 ## Example
 

@@ -48,6 +48,7 @@ __all__ = [
     "PublicNetworkIpBlock",
     "PublicNetworkIpBlockCreate",
     "PublicNetworkModify",
+    "ReservedIp",
 ]
 
 # import apis into sdk package
@@ -84,4 +85,5 @@ from pnap_network_api.models.public_network_create import PublicNetworkCreate as
 from pnap_network_api.models.public_network_ip_block import PublicNetworkIpBlock as PublicNetworkIpBlock
 from pnap_network_api.models.public_network_ip_block_create import PublicNetworkIpBlockCreate as PublicNetworkIpBlockCreate
 from pnap_network_api.models.public_network_modify import PublicNetworkModify as PublicNetworkModify
+from pnap_network_api.models.reserved_ip import ReservedIp as ReservedIp
 

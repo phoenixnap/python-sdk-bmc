@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from pnap_network_api.models.network_membership import NetworkMembership
 from pnap_network_api.models.private_network_server import PrivateNetworkServer
+from pnap_network_api.models.reserved_ip import ReservedIp
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,10 +42,11 @@ class PrivateNetwork(BaseModel):
     cidr: Optional[StrictStr] = Field(default=None, description="IP range associated with this private network in CIDR notation.")
     servers: List[PrivateNetworkServer]
     memberships: List[NetworkMembership] = Field(description="A list of resources that are members of this private network.")
+    reserved_ips: List[ReservedIp] = Field(description="Reserved IP addresses within this network.", alias="reservedIps")
     status: StrictStr = Field(description="The status of the private network. Can have one of the following values: `BUSY`, `READY`, `DELETING` or `ERROR`.")
     created_on: datetime = Field(description="Date and time when this private network was created.", alias="createdOn")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "vlanId", "type", "location", "locationDefault", "cidr", "servers", "memberships", "status", "createdOn"]
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "vlanId", "type", "location", "locationDefault", "cidr", "servers", "memberships", "reservedIps", "status", "createdOn"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +103,13 @@ class PrivateNetwork(BaseModel):
                 if _item_memberships:
                     _items.append(_item_memberships.to_dict())
             _dict['memberships'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in reserved_ips (list)
+        _items = []
+        if self.reserved_ips:
+            for _item_reserved_ips in self.reserved_ips:
+                if _item_reserved_ips:
+                    _items.append(_item_reserved_ips.to_dict())
+            _dict['reservedIps'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -128,6 +137,7 @@ class PrivateNetwork(BaseModel):
             "cidr": obj.get("cidr"),
             "servers": [PrivateNetworkServer.from_dict(_item) for _item in obj["servers"]] if obj.get("servers") is not None else None,
             "memberships": [NetworkMembership.from_dict(_item) for _item in obj["memberships"]] if obj.get("memberships") is not None else None,
+            "reservedIps": [ReservedIp.from_dict(_item) for _item in obj["reservedIps"]] if obj.get("reservedIps") is not None else None,
             "status": obj.get("status"),
             "createdOn": obj.get("createdOn")
         })

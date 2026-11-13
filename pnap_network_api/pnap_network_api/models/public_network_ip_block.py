@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from pnap_network_api.models.reserved_ip import ReservedIp
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,9 @@ class PublicNetworkIpBlock(BaseModel):
     id: StrictStr = Field(description="The IP Block identifier.")
     cidr: StrictStr = Field(description="The CIDR notation of the IP block.")
     used_ips_count: StrictStr = Field(description="The number of IPs used in the IP block.", alias="usedIpsCount")
+    reserved_ips: List[ReservedIp] = Field(description="Reserved IP addresses within this network IP block.", alias="reservedIps")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "cidr", "usedIpsCount"]
+    __properties: ClassVar[List[str]] = ["id", "cidr", "usedIpsCount", "reservedIps"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +76,13 @@ class PublicNetworkIpBlock(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in reserved_ips (list)
+        _items = []
+        if self.reserved_ips:
+            for _item_reserved_ips in self.reserved_ips:
+                if _item_reserved_ips:
+                    _items.append(_item_reserved_ips.to_dict())
+            _dict['reservedIps'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -93,7 +102,8 @@ class PublicNetworkIpBlock(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "cidr": obj.get("cidr"),
-            "usedIpsCount": obj.get("usedIpsCount")
+            "usedIpsCount": obj.get("usedIpsCount"),
+            "reservedIps": [ReservedIp.from_dict(_item) for _item in obj["reservedIps"]] if obj.get("reservedIps") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
