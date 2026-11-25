@@ -63,10 +63,10 @@ import pnap_rancher_solution_api
 from pnap_rancher_solution_api.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1beta
+# Defining the host is optional and defaults to https://api.phoenixnap.com/solutions/rancher/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = pnap_rancher_solution_api.Configuration(
-    host = "https://api.phoenixnap.com/solutions/rancher/v1beta"
+    host = "https://api.phoenixnap.com/solutions/rancher/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -113,7 +113,7 @@ ACCESS_TOKEN = keycloakOpenId.token(grant_type=grantType)['access_token']
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.phoenixnap.com/solutions/rancher/v1beta*
+All URIs are relative to *https://api.phoenixnap.com/solutions/rancher/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
