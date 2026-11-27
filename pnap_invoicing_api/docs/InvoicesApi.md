@@ -50,7 +50,7 @@ with pnap_invoicing_api.ApiClient(configuration) as api_client:
     sent_on_to = '2022-04-13T00:00:00.000Z' # datetime | Maximum value to filter invoices by sent on date. (optional)
     limit = 100 # int | The limit of the number of results returned. The number of records returned may be smaller than the limit. (optional) (default to 100)
     offset = 0 # int | The number of items to skip in the results. (optional) (default to 0)
-    sort_field = sentOn # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by number. (optional) (default to sentOn)
+    sort_field = sentOn # str | If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn. (optional) (default to sentOn)
     sort_direction = DESC # str | Sort Given Field depending on the desired direction. Default sorting is descending. (optional) (default to DESC)
 
     try:
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
  **sent_on_to** | **datetime**| Maximum value to filter invoices by sent on date. | [optional] 
  **limit** | **int**| The limit of the number of results returned. The number of records returned may be smaller than the limit. | [optional] [default to 100]
  **offset** | **int**| The number of items to skip in the results. | [optional] [default to 0]
- **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by number. | [optional] [default to sentOn]
+ **sort_field** | **str**| If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn. | [optional] [default to sentOn]
  **sort_direction** | **str**| Sort Given Field depending on the desired direction. Default sorting is descending. | [optional] [default to DESC]
 
 ### Return type

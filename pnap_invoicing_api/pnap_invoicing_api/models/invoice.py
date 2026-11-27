@@ -33,7 +33,7 @@ class Invoice(BaseModel):
     currency: StrictStr = Field(description="The currency of the invoice. Currently, this field should be set to `EUR` or `USD`.")
     amount: Union[StrictFloat, StrictInt] = Field(description="The invoice amount.")
     outstanding_amount: Union[StrictFloat, StrictInt] = Field(description="The invoice outstanding amount.", alias="outstandingAmount")
-    status: StrictStr = Field(description="The status of the invoice. Currently, this field should be set to `PAID`, `OVERDUE`, `PROCESSING_PAYMENT`, or `UNPAID`.")
+    status: StrictStr = Field(description="The status of the invoice. Currently, this field should be set to `PAID`, `OVERDUE`, `PAYMENT_PROCESSING`, or `UNPAID`.")
     sent_on: datetime = Field(description="Date and time when the invoice was sent.", alias="sentOn")
     due_date: datetime = Field(description="Date and time when the invoice payment is due.", alias="dueDate")
     additional_properties: Dict[str, Any] = {}

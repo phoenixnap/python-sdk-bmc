@@ -50,7 +50,7 @@ class InvoicesApi:
         sent_on_to: Annotated[Optional[datetime], Field(description="Maximum value to filter invoices by sent on date.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The limit of the number of results returned. The number of records returned may be smaller than the limit.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="The number of items to skip in the results.")] = None,
-        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by number.")] = None,
+        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.")] = None,
         sort_direction: Annotated[Optional[StrictStr], Field(description="Sort Given Field depending on the desired direction. Default sorting is descending.")] = None,
         _request_timeout: Union[
             None,
@@ -81,7 +81,7 @@ class InvoicesApi:
         :type limit: int
         :param offset: The number of items to skip in the results.
         :type offset: int
-        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by number.
+        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.
         :type sort_field: str
         :param sort_direction: Sort Given Field depending on the desired direction. Default sorting is descending.
         :type sort_direction: str
@@ -149,7 +149,7 @@ class InvoicesApi:
         sent_on_to: Annotated[Optional[datetime], Field(description="Maximum value to filter invoices by sent on date.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The limit of the number of results returned. The number of records returned may be smaller than the limit.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="The number of items to skip in the results.")] = None,
-        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by number.")] = None,
+        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.")] = None,
         sort_direction: Annotated[Optional[StrictStr], Field(description="Sort Given Field depending on the desired direction. Default sorting is descending.")] = None,
         _request_timeout: Union[
             None,
@@ -180,7 +180,7 @@ class InvoicesApi:
         :type limit: int
         :param offset: The number of items to skip in the results.
         :type offset: int
-        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by number.
+        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.
         :type sort_field: str
         :param sort_direction: Sort Given Field depending on the desired direction. Default sorting is descending.
         :type sort_direction: str
@@ -248,7 +248,7 @@ class InvoicesApi:
         sent_on_to: Annotated[Optional[datetime], Field(description="Maximum value to filter invoices by sent on date.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The limit of the number of results returned. The number of records returned may be smaller than the limit.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="The number of items to skip in the results.")] = None,
-        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by number.")] = None,
+        sort_field: Annotated[Optional[StrictStr], Field(description="If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.")] = None,
         sort_direction: Annotated[Optional[StrictStr], Field(description="Sort Given Field depending on the desired direction. Default sorting is descending.")] = None,
         _request_timeout: Union[
             None,
@@ -279,7 +279,7 @@ class InvoicesApi:
         :type limit: int
         :param offset: The number of items to skip in the results.
         :type offset: int
-        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by number.
+        :param sort_field: If a sortField is requested, pagination will be done after sorting. Default sorting is by sentOn.
         :type sort_field: str
         :param sort_direction: Sort Given Field depending on the desired direction. Default sorting is descending.
         :type sort_direction: str
